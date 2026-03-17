@@ -81,8 +81,11 @@ def get_idsc_results():
                 continue
             idsc_home = any(k in home_name.lower() for k in IDSC_KEYWORDS)
             rival = away_name if idsc_home else home_name
-            idsc_score = home.get('score', 0) if idsc_home else away.get('score', 0)
-            rival_score = away.get('score', 0) if idsc_home else home.get('score', 0)
+            idsc_score = int(home.get('score', 0) or 0) if idsc_home else int(away.get('score', 0) or 0)
+            rival_score = int(away.get('score', 0) or 0) if idsc_home else int(home.get('score', 0) or 0)
+            # Filtrar partidos sin resultado real (WO, no jugados)
+            if idsc_score <= 0 and rival_score <= 0:
+                continue
             win = idsc_score > rival_score
             results.append({
                 'rival': rival,
