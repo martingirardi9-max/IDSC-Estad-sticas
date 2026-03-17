@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDSC Oliva — Análisis Estadístico</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1628;--navy2:#0F1E30;--navy3:#162638;--navy4:#1C2F42;--gold:#F5A623;--gold2:#D4891A;--white:#EEF2F7;--muted:#7A8FA6;--green:#2ECC71;--red:#E74C3C;--blue:#3498DB;--purple:#9B59B6;--border:rgba(238,242,247,0.07);--border2:rgba(238,242,247,0.13);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 15% 5%,rgba(245,166,35,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(52,152,219,.05) 0%,transparent 60%);}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,22,40,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:62px;}
+.nav-logo{display:flex;align-items:center;gap:.7rem;cursor:pointer;}
+.nav-escudo{width:38px;height:38px;background:white;border-radius:50%;padding:2px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.nav-escudo img{width:100%;height:100%;object-fit:contain;}
+.nav-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--white);line-height:1.1;}
+.nav-name small{display:block;font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:2px;font-weight:400;}
+.nav-links{display:flex;gap:.2rem;}
+.nav-link{padding:.4rem .85rem;border-radius:8px;font-size:.76rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;border:1px solid transparent;background:none;font-family:'DM Sans',sans-serif;}
+.nav-link:hover{color:var(--white);background:var(--navy3);}
+.nav-link.active{color:var(--gold);background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.2);}
+.nav-season{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);padding:.25rem .7rem;border-radius:20px;letter-spacing:1px;white-space:nowrap;}
+.page{display:none;position:relative;z-index:1;}.page.active{display:block;}
+.hero{padding:4rem 2rem 2rem;text-align:center;max-width:860px;margin:0 auto;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;opacity:0;animation:fadeUp .6s ease forwards .1s;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,8vw,5rem);line-height:.92;letter-spacing:2px;margin-bottom:1rem;opacity:0;animation:fadeUp .6s ease forwards .2s;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{font-size:.95rem;color:var(--muted);line-height:1.75;max-width:480px;margin:0 auto 2rem;opacity:0;animation:fadeUp .6s ease forwards .3s;}
+.hero-cards{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .6s ease forwards .4s;margin-bottom:2rem;}
+.hero-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;cursor:pointer;transition:all .25s;min-width:120px;text-align:center;}
+.hero-card:hover{border-color:rgba(245,166,35,.35);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.35);}
+.hero-card-icon{font-size:1.6rem;margin-bottom:.5rem;}
+.hero-card-label{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.5px;color:var(--white);}
+.hero-card-sub{font-size:.62rem;color:var(--muted);margin-top:.15rem;font-family:'DM Mono',monospace;}
+.playoff-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1100px;margin:0 auto;padding:0 2rem 2rem;opacity:0;animation:fadeUp .6s ease forwards .5s;}
+.po-card{border-radius:16px;padding:1.4rem 1.6rem;position:relative;overflow:hidden;}
+.po-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:.06;}
+.po-card-qualify{background:linear-gradient(135deg,rgba(46,204,113,.12),rgba(46,204,113,.05));border:1px solid rgba(46,204,113,.25);}
+.po-card-qualify::before{background:var(--green);}
+.po-card-qualify .po-label{color:#5DD68A;}.po-card-qualify .po-main{color:#5DD68A;}
+.po-card-rival{background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(245,166,35,.04));border:1px solid rgba(245,166,35,.2);}
+.po-card-rival::before{background:var(--gold);}
+.po-card-rival .po-label{color:var(--gold);}.po-card-rival .po-main{color:var(--gold);}
+.po-card-next{background:linear-gradient(135deg,rgba(52,152,219,.1),rgba(52,152,219,.04));border:1px solid rgba(52,152,219,.22);}
+.po-card-next::before{background:var(--blue);}
+.po-card-next .po-label{color:#5B9BF0;}.po-card-next .po-main{color:#5B9BF0;}
+.po-card-next .po-pos-badge{background:rgba(52,152,219,.15);color:#5B9BF0;border-color:rgba(52,152,219,.25);}
+.po-pos-badge{display:inline-block;background:rgba(245,166,35,.15);color:var(--gold);border:1px solid rgba(245,166,35,.2);border-radius:6px;font-family:'DM Mono',monospace;font-size:.63rem;padding:.2rem .6rem;margin-bottom:.6rem;letter-spacing:1px;}
+.po-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem;}
+.po-main{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;line-height:1;margin-bottom:.3rem;}
+.po-sub{font-size:.78rem;color:var(--muted);line-height:1.5;}
+.po-detail{font-size:.67rem;color:var(--muted);margin-top:.5rem;font-family:'DM Mono',monospace;border-top:1px solid rgba(255,255,255,.06);padding-top:.5rem;}
+.stats-strip{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:1.2rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .6s ease forwards .6s;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:.1rem;}
+.page-header{padding:3rem 2rem 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.page-header .eyebrow{opacity:1;animation:none;}
+.page-header h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);letter-spacing:1.5px;line-height:1;margin-bottom:.5rem;}
+.page-header p{font-size:.88rem;color:var(--muted);max-width:520px;line-height:1.7;}
+.section{max-width:1100px;margin:0 auto;padding:0 2rem 4rem;}
+.section-title{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;}
+.section-title h3{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.5px;}
+.section-line{flex:1;height:1px;background:var(--border);}
+.section-count{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:.6rem;top:0;bottom:0;width:1px;background:var(--border2);}
+.timeline-item{position:relative;margin-bottom:.7rem;opacity:0;animation:fadeUp .5s ease forwards;}
+.timeline-dot{position:absolute;left:-1.95rem;top:1.2rem;width:12px;height:12px;border-radius:50%;border:2px solid var(--navy);transition:all .2s;}
+.dot-done{background:#2ECC71;border-color:#2ECC71;}
+.dot-next{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(245,166,35,.5);}
+.dot-cup{background:#9B59B6;border-color:#9B59B6;}
+.dot-pending{background:var(--navy4);border-color:var(--muted);}
+.timeline-item.is-open .timeline-dot{box-shadow:0 0 10px rgba(245,166,35,.6);}
+.rival-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:.95rem 1.3rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
+.rival-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:0;transition:opacity .2s;}
+.timeline-item[data-status="done"] .rival-card::before{background:#2ECC71;}
+.timeline-item[data-status="next"] .rival-card::before{background:var(--gold);}
+.timeline-item[data-status="cup"] .rival-card::before{background:#9B59B6;}
+.timeline-item[data-status="pending"] .rival-card{opacity:.7;}
+.timeline-item[data-status="pending"] .rival-card:hover{opacity:1;}
+.rival-card:hover,.timeline-item.is-open .rival-card{border-color:rgba(245,166,35,.25);background:var(--navy3);}
+.timeline-item[data-status="pending"] .rival-card:hover{border-color:rgba(122,143,166,.25);}
+.timeline-item.is-open .rival-card{border-radius:14px 14px 0 0;}
+.timeline-item.is-open .rival-card::before,.rival-card:hover::before{opacity:1;}
+.rival-date{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);min-width:2.5rem;text-align:center;line-height:1.3;}
+.rival-date .day{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--white);line-height:1;}
+.rival-divider{width:1px;height:38px;background:var(--border2);flex-shrink:0;}
+.rival-info{flex:1;}
+.rival-name{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;margin-bottom:.12rem;}
+.rival-meta{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.rival-badges{display:flex;gap:.3rem;margin-top:.3rem;flex-wrap:wrap;}
+.badge{font-size:.56rem;padding:.15rem .45rem;border-radius:20px;font-family:'DM Mono',monospace;letter-spacing:.3px;text-transform:uppercase;}
+.badge-done{background:rgba(46,204,113,.12);color:#5DD68A;border:1px solid rgba(46,204,113,.2);}
+.badge-win{background:rgba(46,204,113,.15);color:#4AE382;border:1px solid rgba(46,204,113,.3);font-weight:600;}
+.badge-loss{background:rgba(231,76,60,.12);color:#F1948A;border:1px solid rgba(231,76,60,.2);}
+.badge-next{background:rgba(245,166,35,.15);color:var(--gold);border:1px solid rgba(245,166,35,.3);}
+.badge-future{background:rgba(52,152,219,.12);color:#5B9BF0;border:1px solid rgba(52,152,219,.2);}
+.badge-cup{background:rgba(155,89,182,.15);color:#C39BD3;border:1px solid rgba(155,89,182,.25);}
+.badge-pdf{background:rgba(238,242,247,.06);color:var(--muted);border:1px solid var(--border2);}
+.badge-pending{background:rgba(122,143,166,.1);color:var(--muted);border:1px solid rgba(122,143,166,.2);}
+.badge-sim{background:rgba(52,152,219,.12);color:#5B9BF0;border:1px solid rgba(52,152,219,.25);transition:background .2s;}
+.badge-sim:hover{background:rgba(52,152,219,.22);}
+.badge-loc{background:rgba(238,242,247,.05);color:var(--muted);border:1px solid var(--border);font-size:.53rem;}
+.rival-arrow{color:var(--muted);font-size:.9rem;flex-shrink:0;transition:transform .2s;}
+.timeline-item.is-open .rival-card .rival-arrow{transform:rotate(90deg);color:var(--gold);}
+.rival-detail{display:none;background:var(--navy3);border:1px solid rgba(245,166,35,.12);border-top:none;border-radius:0 0 14px 14px;padding:.9rem 1.3rem;}
+.timeline-item.is-open .rival-detail{display:block;animation:fadeUp .25s ease;}
+.detail-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.7rem;}
+.pending-msg{display:flex;align-items:center;gap:.75rem;background:rgba(122,143,166,.06);border:1px dashed rgba(122,143,166,.2);border-radius:10px;padding:.9rem 1.1rem;}
+.pending-msg-icon{font-size:1.4rem;flex-shrink:0;}
+.pending-msg-text{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.pending-msg-text strong{color:var(--white);display:block;margin-bottom:.15rem;font-size:.85rem;}
+.pdf-buttons{display:flex;gap:.6rem;flex-wrap:wrap;}
+.pdf-btn{display:flex;align-items:center;gap:.7rem;background:var(--navy2);border:1px solid var(--border2);border-radius:11px;padding:.8rem 1rem;cursor:pointer;transition:all .2s;flex:1;min-width:190px;}
+.pdf-btn:hover{border-color:rgba(245,166,35,.4);background:var(--navy4);transform:translateY(-1px);}
+.pdf-btn-icon{font-size:1.4rem;flex-shrink:0;}
+.pdf-btn-info{flex:1;}
+.pdf-btn-label{font-size:.82rem;font-weight:600;margin-bottom:.12rem;color:var(--white);}
+.pdf-btn-sub{font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.pdf-btn-acts{display:flex;gap:.3rem;flex-direction:column;}
+.bxs{font-size:.63rem;padding:.28rem .6rem;border-radius:6px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;white-space:nowrap;transition:all .2s;text-decoration:none;display:inline-block;text-align:center;}
+.bxs-view{background:var(--gold);color:var(--navy);}.bxs-view:hover{background:var(--gold2);}
+.bxs-dl{background:rgba(238,242,247,.08);color:var(--white);border:1px solid var(--border2)!important;}.bxs-dl:hover{background:rgba(238,242,247,.14);}
+.equipo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;}
+.equipo-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1.4rem;cursor:pointer;transition:all .22s;opacity:0;animation:fadeUp .5s ease forwards;}
+.equipo-card:hover{border-color:rgba(245,166,35,.35);background:var(--navy3);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.equipo-card-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
+.ic-blue{background:rgba(52,152,219,.15);}.ic-gold{background:rgba(245,166,35,.15);}.ic-green{background:rgba(46,204,113,.15);}.ic-purple{background:rgba(155,89,182,.15);}
+.equipo-card-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.5px;margin-bottom:.3rem;}
+.equipo-card-desc{font-size:.74rem;color:var(--muted);line-height:1.6;}
+.ip10-list{display:flex;flex-direction:column;gap:.6rem;}
+.ip10-explain{display:grid;grid-template-columns:1fr 260px;gap:1.2rem;background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:.5rem;}
+.ip10-explain-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.5px;color:var(--gold);margin-bottom:.6rem;}
+.ip10-explain-text p{font-size:.82rem;color:var(--muted);line-height:1.7;}
+.ip10-explain-text strong{color:var(--white);}
+.ip10-formula{margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.15);border-radius:8px;padding:.6rem .8rem;line-height:1.6;}
+.ip10-top5{background:var(--navy3);border:1px solid rgba(245,166,35,.2);border-radius:14px;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.75rem;}
+.ip10-top5-title{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
+.ip10-top5-list{display:flex;flex-direction:column;gap:.55rem;}
+.ip10-bar-item{display:flex;flex-direction:column;gap:.25rem;}
+.ip10-bar-header{display:flex;align-items:center;gap:.5rem;}
+.ip10-bar-pos{font-size:.75rem;min-width:1.6rem;font-family:'DM Mono',monospace;color:var(--muted);}
+.ip10-bar-name{flex:1;font-size:.78rem;font-weight:500;color:var(--white);}
+.ip10-bar-val{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);}
+.ip10-bar-track{height:5px;background:rgba(238,242,247,.07);border-radius:3px;overflow:hidden;}
+.ip10-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:width .8s ease;}
+.ip10-bar-mid{background:linear-gradient(90deg,#3498DB,#5DADE2);}
+.ip10-top5-meta{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.5rem;}
+@media(max-width:640px){.ip10-explain{grid-template-columns:1fr;}}
+.ip10-item{background:var(--navy2);border:1px solid var(--border);border-radius:11px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all .2s;opacity:0;animation:fadeUp .5s ease forwards;}
+.ip10-item:hover{border-color:rgba(245,166,35,.3);background:var(--navy3);}
+.ip10-num{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);min-width:2rem;text-align:center;}
+.ip10-info{flex:1;}.ip10-name{font-weight:500;font-size:.88rem;margin-bottom:.15rem;}.ip10-meta{font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.ip10-arrow{color:var(--muted);transition:all .2s;}.ip10-item:hover .ip10-arrow{color:var(--gold);transform:translateX(3px);}
+.fixture-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;opacity:0;animation:fadeUp .5s ease forwards;}
+.fixture-card.next{border-left:3px solid var(--gold);background:rgba(245,166,35,.03);}
+.fixture-card.cup-card{border-left:3px solid #9B59B6;background:rgba(155,89,182,.04);}
+.fixture-card.upcoming{border-left:3px solid rgba(52,152,219,.35);}
+.fixture-day-block{text-align:center;min-width:3rem;}
+.fixture-day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--white);line-height:1;}
+.fixture-month{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);}
+.fixture-div{width:1px;height:44px;background:var(--border2);flex-shrink:0;}
+.fixture-teams{flex:1;}.fixture-match{font-family:'Bebas Neue',sans-serif;font-size:.96rem;letter-spacing:.3px;margin-bottom:.2rem;}
+.fixture-match .vs{color:var(--gold);margin:0 .35rem;font-size:.76rem;}
+.fixture-detail{font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.cup-info-box{background:rgba(155,89,182,.06);border:1px solid rgba(155,89,182,.18);border-radius:12px;padding:.9rem 1.3rem;margin-bottom:1rem;font-size:.79rem;color:var(--muted);line-height:1.7;}
+.cup-info-box strong{color:#C39BD3;}
+.temporada-hero{background:linear-gradient(135deg,var(--navy3),var(--navy2));border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.temporada-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1rem;}
+.t-stat{background:var(--navy);border-radius:10px;padding:1rem;text-align:center;}
+.t-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;}
+.t-stat-lbl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
+.pdf-modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(5,12,22,.97);flex-direction:column;}
+.pdf-modal.open{display:flex;animation:fadeUp .2s ease;}
+.pdf-modal-bar{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.5rem;border-bottom:1px solid var(--border);background:var(--navy2);flex-shrink:0;gap:1rem;}
+.pdf-modal-left{display:flex;align-items:center;gap:.75rem;}
+.pdf-modal-escudo{width:28px;height:28px;background:white;border-radius:50%;padding:1px;overflow:hidden;flex-shrink:0;}
+.pdf-modal-escudo img{width:100%;height:100%;object-fit:contain;}
+.pdf-modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;}
+.pdf-modal-sub{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.pdf-modal-actions{display:flex;gap:.5rem;align-items:center;flex-shrink:0;}
+.pdf-frame{flex:1;border:none;width:100%;background:#fff;}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;border:none;text-decoration:none;transition:all .2s;}
+.btn-gold{background:var(--gold);color:var(--navy);}.btn-gold:hover{background:var(--gold2);}
+.btn-ghost{background:rgba(238,242,247,.07);color:var(--white);border:1px solid var(--border);}.btn-ghost:hover{background:rgba(238,242,247,.12);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.nav-link-playoff{color:var(--gold)!important;border-color:rgba(245,166,35,.2)!important;}
+.nav-link-playoff:hover,.nav-link-playoff.active{background:rgba(245,166,35,.15)!important;}
+.hero-card-playoff{border-color:rgba(245,166,35,.25)!important;background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(245,166,35,.04))!important;}
+/* STANDINGS */
+.standings-table{border-radius:14px;overflow:hidden;border:1px solid var(--border);}
+.standings-header{display:grid;grid-template-columns:2.5rem 1fr repeat(7,3.5rem);gap:0;background:var(--navy3);padding:.5rem .8rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);letter-spacing:.5px;}
+.standings-row{display:grid;grid-template-columns:2.5rem 1fr repeat(7,3.5rem);gap:0;padding:.45rem .8rem;font-size:.78rem;border-bottom:1px solid var(--border);transition:background .15s;}
+.standings-row:hover{background:var(--navy3);}
+.standings-idsc{background:rgba(245,166,35,.07)!important;border-left:3px solid var(--gold);}
+.playoff-zone{border-left:3px solid rgba(245,166,35,.4);}
+.playoffs-pre{border-left:3px solid rgba(52,152,219,.35);}
+.out-zone{opacity:.55;border-left:3px solid rgba(231,76,60,.2);}
+.st-pos{font-family:'DM Mono',monospace;color:var(--muted);font-size:.75rem;}
+.st-pos-num{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--muted);}
+.standings-idsc .st-pos-num{color:var(--gold);}
+.st-team{font-weight:500;font-size:.8rem;padding-right:.5rem;}
+.standings-idsc .st-team{color:var(--gold);font-weight:600;}
+.st-num{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);text-align:center;}
+.standings-idsc .st-num{color:var(--white);}
+.standings-divider{padding:.4rem .8rem;background:var(--navy3);font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;text-align:center;border-bottom:1px solid var(--border);}
+.standings-legend{display:flex;gap:1.2rem;flex-wrap:wrap;padding:.7rem .8rem;background:var(--navy3);font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.leg-item{display:flex;align-items:center;gap:.4rem;}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+/* BRACKET */
+.bracket-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+.bracket-match{background:var(--navy2);border:1px solid var(--border2);border-radius:14px;padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;}
+.bracket-idsc{border-color:rgba(245,166,35,.35);background:rgba(245,166,35,.05);}
+.bracket-pre{border-color:rgba(52,152,219,.25);background:rgba(52,152,219,.04);}
+.bracket-seed{display:flex;align-items:center;gap:.6rem;padding:.4rem .5rem;background:rgba(0,0,0,.25);border-radius:8px;}
+.bracket-home{border-left:2px solid var(--gold);}
+.bracket-away{border-left:2px solid var(--muted);}
+.bracket-pos{font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2rem;}
+.bracket-name{flex:1;font-size:.82rem;font-weight:500;}
+.bracket-idsc .bracket-home .bracket-name{color:var(--gold);}
+.bracket-pct{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
+.bracket-vs{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--muted);letter-spacing:2px;}
+.bracket-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;padding-top:.2rem;border-top:1px solid var(--border);}
+/* SCENARIOS */
+.scenarios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;}
+.scenario-card{border-radius:14px;padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;border:1px solid var(--border);}
+.scenario-safe{background:linear-gradient(135deg,rgba(46,204,113,.12),rgba(46,204,113,.04));border-color:rgba(46,204,113,.3);}
+.scenario-likely{background:linear-gradient(135deg,rgba(46,204,113,.07),rgba(46,204,113,.02));border-color:rgba(46,204,113,.2);}
+.scenario-probable{background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(245,166,35,.02));border-color:rgba(245,166,35,.2);}
+.scenario-risk{background:linear-gradient(135deg,rgba(231,76,60,.08),rgba(231,76,60,.02));border-color:rgba(231,76,60,.2);}
+.scenario-icon{font-size:1.4rem;}
+.scenario-vict{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;}
+.scenario-safe .scenario-vict{color:#2ECC71;}
+.scenario-likely .scenario-vict{color:#5DD68A;}
+.scenario-probable .scenario-vict{color:var(--gold);}
+.scenario-risk .scenario-vict{color:#E74C3C;}
+.scenario-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1.5px;color:var(--muted);}
+.scenario-safe .scenario-label{color:#2ECC71;}
+.scenario-likely .scenario-label{color:#5DD68A;}
+.scenario-probable .scenario-label{color:var(--gold);}
+.scenario-risk .scenario-label{color:#E74C3C;}
+.scenario-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.scenario-desc strong{color:var(--white);}
+.scenario-condition{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.5rem;line-height:1.5;}
+@media(max-width:600px){.standings-header,.standings-row{grid-template-columns:2rem 1fr repeat(3,2.8rem);}.standings-header span:nth-child(n+6),.standings-row span:nth-child(n+6){display:none;}}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.5px;}
+footer em{color:var(--gold);font-style:normal;}
+@media(max-width:768px){.playoff-strip{grid-template-columns:1fr;}}
+@media(max-width:640px){nav{padding:0 .8rem;}.nav-name small{display:none;}.nav-links{gap:.05rem;}.nav-link{padding:.35rem .5rem;font-size:.68rem;}.hero{padding:2.5rem 1.2rem 1.5rem;}.hero-cards{flex-direction:column;align-items:center;}.section{padding:0 1.2rem 3rem;}.timeline{padding-left:1.5rem;}.stats-strip{gap:1.2rem;}.pdf-buttons{flex-direction:column;}.pdf-modal-sub{display:none;}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--navy);}::-webkit-scrollbar-thumb{background:var(--navy4);border-radius:3px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-escudo"><img src="data:image/png;base64,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" alt="IDSC"></div>
+    <div class="nav-name">IDSC OLIVA<small>ANÁLISIS ESTADÍSTICO</small></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')">Inicio</button>
+    <button class="nav-link" onclick="showPage('rivales')">Rivales</button>
+    <button class="nav-link" onclick="showPage('fixture')">Fixture</button>
+    <button class="nav-link" onclick="showPage('equipo')">Mi Equipo</button>
+    <button class="nav-link" onclick="showPage('temporada')">Temporada</button>
+    <button class="nav-link nav-link-playoff" onclick="showPage('playoff')">🏆 Playoff</button>
+
+  </div>
+  <div class="nav-season">2025 / 26</div>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="eyebrow">IDSC Oliva · Liga Nacional de Básquet</div>
+    <h1>ANÁLISIS<br><em>ESTADÍSTICO</em></h1>
+    <p>Informes de scouting, estadísticas e índices de productividad del cuerpo técnico.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showPage('rivales')"><div class="hero-card-icon">🏀</div><div class="hero-card-label">Rivales</div><div class="hero-card-sub">19 partidos</div></div>
+      <div class="hero-card" onclick="showPage('fixture')"><div class="hero-card-icon">📅</div><div class="hero-card-label">Fixture</div><div class="hero-card-sub">Próximos partidos</div></div>
+      <div class="hero-card" onclick="showPage('equipo')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Mi Equipo</div><div class="hero-card-sub">IDSC Oliva</div></div>
+      <div class="hero-card" onclick="showPage('temporada')"><div class="hero-card-icon">📊</div><div class="hero-card-label">Temporada</div><div class="hero-card-sub">Estadísticas</div></div>
+      <div class="hero-card hero-card-playoff" onclick="showPage('playoff')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Playoff</div><div class="hero-card-sub">Cuadro proyectado</div></div>
+    </div>
+  </div>
+  <div class="playoff-strip">
+    <div class="po-card po-card-qualify">
+      <div class="po-pos-badge">1° PUESTO · 66.6% VICTORIAS</div>
+      <div class="po-label">🏆 Clasificación Playoff</div>
+      <div class="po-main">4 VICTORIAS</div>
+      <div class="po-sub">para clasificar matemáticamente entre los mejores 12</div>
+      <div class="po-detail">PJ: 27 · PG: 18 · PP: 9 · Restantes: 9</div>
+    </div>
+    <div class="po-card po-card-rival">
+      <div class="po-pos-badge">ACCESO DIRECTO A CUARTOS</div>
+      <div class="po-label">🎯 Rival proyectado en Playoff</div>
+      <div class="po-main">OBERÁ TC</div>
+      <div class="po-sub">actual 4° puesto · 17V 10D · 62.9% — si IDSC mantiene el 1°</div>
+      <div class="po-detail">Cuartos: 1° IDSC vs 8° · según tabla actualizada</div>
+    </div>
+    <div class="po-card po-card-next">
+      <div class="po-pos-badge">20 MAR · Dr. Luis Augusto Derna</div>
+      <div class="po-label">⚡ Próximo Rival</div>
+      <div class="po-main">OBERÁ TC</div>
+      <div class="po-sub">4° en la tabla · 17V 10D · 62.9% victorias</div>
+      <div class="po-detail">Liga Nacional · Visitante</div>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num">1°</div><div class="stat-lbl">Posición actual</div></div>
+    <div class="stat-item"><div class="stat-num">18</div><div class="stat-lbl">Victorias</div></div>
+    <div class="stat-item"><div class="stat-num">67%</div><div class="stat-lbl">% victorias</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-lbl">Partidos restantes</div></div>
+    <div class="stat-item"><div class="stat-num">19</div><div class="stat-lbl">PDFs disponibles</div></div>
+  </div>
+</div>
+
+<!-- RIVALES -->
+<div class="page" id="page-rivales">
+  <div class="page-header">
+    <div class="eyebrow">Informes de Scouting</div>
+    <h2>RIVALES</h2>
+    <p>Todos los partidos de la temporada. Los informes se generan días antes de cada partido.</p>
+  </div>
+  <div class="section">
+    <div class="section-title">
+      <h3>TEMPORADA 2025/26</h3>
+      <div class="section-line"></div>
+      <div class="section-count">19 partidos · 9 con informe · 10 pendientes</div>
+    </div>
+    <!-- LEYENDA -->
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <span class="badge badge-win">✓ Victoria</span>
+      <span class="badge badge-loss">✗ Derrota</span>
+      <span class="badge badge-next">⚡ Próximo</span>
+      <span class="badge badge-cup">🏆 Copa</span>
+      <span class="badge badge-pending">🕐 Informe pendiente</span>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item" style="animation-delay:0.04s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(0)">
+          <div class="rival-date"><div class="day">27</div><span>ENE</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">GIMNASIA (CR)</div>
+            <div class="rival-meta">Socios Fundadores · 27/01/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-loss">✗ Derrota 82–91</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-0"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.08s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(1)">
+          <div class="rival-date"><div class="day">29</div><span>ENE</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">SAN LORENZO</div>
+            <div class="rival-meta">Roberto Pando · 29/01/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-win">✓ Victoria 80–69</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-1"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.12s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(2)">
+          <div class="rival-date"><div class="day">04</div><span>FEB</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">SAN MARTÍN (C)</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 04/02/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-win">✓ Victoria 90–80</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-2"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.16s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(3)">
+          <div class="rival-date"><div class="day">10</div><span>FEB</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">FERRO</div>
+            <div class="rival-meta">Hector Etchart · 10/02/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-loss">✗ Derrota 82–88</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-3"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.2s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(4)">
+          <div class="rival-date"><div class="day">15</div><span>FEB</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">UNIÓN (SF)</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 15/02/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-win">✓ Victoria 103–75</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-4"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.24000000000000002s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(5)">
+          <div class="rival-date"><div class="day">06</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">RACING (CH)</div>
+            <div class="rival-meta">Grilon Arena · 06/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-loss">✗ Derrota 84–89</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-5"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.27999999999999997s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(6)">
+          <div class="rival-date"><div class="day">08</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">ARGENTINO (J)</div>
+            <div class="rival-meta">El Fortín de las Morochas · 08/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-win">✓ Victoria 95–83</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-6"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.32s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
+        <div class="rival-card" onclick="openRival(7)">
+          <div class="rival-date"><div class="day">12</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">REGATAS (C)</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 12/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-win">✓ Victoria 89–83</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-7"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.36s" data-status="next">
+        <div class="timeline-dot dot-next"></div>
+        <div class="rival-card" onclick="openRival(8)">
+          <div class="rival-date"><div class="day">18</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">LA UNIÓN FSA.</div>
+            <div class="rival-meta">Cincuentenario · 18/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">⚡ Próximo</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 81—88 proj.</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-8"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.39999999999999997s" data-status="next">
+        <div class="timeline-dot dot-next"></div>
+        <div class="rival-card" onclick="openRival(9)">
+          <div class="rival-date"><div class="day">20</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">OBERÁ TC</div>
+            <div class="rival-meta">Dr. Luis Augusto Derna · 20/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">⚡ Próximo</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 83—88 proj.</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-9"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.44s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(10)">
+          <div class="rival-date"><div class="day">23</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">INSTITUTO</div>
+            <div class="rival-meta">Angel Sandrín · 23/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">⚡ Próximo</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 82—84 proj.</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-10"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.48s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(11)">
+          <div class="rival-date"><div class="day">27</div><span>MAR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">PEÑAROL (MDP)</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 27/03/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-11"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.52s" data-status="cup">
+        <div class="timeline-dot dot-cup"></div>
+        <div class="rival-card" onclick="openRival(12)">
+          <div class="rival-date"><div class="day">1/2</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">OBRAS BASKET</div>
+            <div class="rival-meta">Por confirmar · Copa Islas Malvinas · 01-02/04/2026</div>
+            <div class="rival-badges"><span class="badge badge-loc">📍 Por confirmar</span><span class="badge badge-cup">🏆 Copa Islas Malvinas</span><span class="badge badge-pdf">📄 1 PDF</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-12"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.56s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(13)">
+          <div class="rival-date"><div class="day">07</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">PLATENSE</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 07/04/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-13"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.6000000000000001s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(14)">
+          <div class="rival-date"><div class="day">10</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">ATENAS (C)</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 10/04/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-14"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.64s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(15)">
+          <div class="rival-date"><div class="day">13</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">BOCA</div>
+            <div class="rival-meta">Luis Conde · 13/04/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-15"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.68s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(16)">
+          <div class="rival-date"><div class="day">15</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">OBRAS BASKET</div>
+            <div class="rival-meta">Templo del Rock · 15/04/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-16"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.7200000000000001s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(17)">
+          <div class="rival-date"><div class="day">18</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">QUIMSA</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 18/04/2026 · Liga Nacional</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+          </div>
+          <div class="rival-arrow">·</div>
+        </div>
+        <div class="rival-detail" id="detail-17"></div>
+      </div></div>
+  </div>
+</div>
+
+<!-- FIXTURE -->
+<div class="page" id="page-fixture">
+  <div class="page-header">
+    <div class="eyebrow">Liga Nacional 2025/26</div>
+    <h2>FIXTURE</h2>
+    <p>Próximos compromisos de IDSC Oliva — Liga Nacional y Copa Islas Malvinas.</p>
+  </div>
+  <div class="section">
+    <div class="section-title"><h3>LIGA NACIONAL — PRÓXIMOS PARTIDOS</h3><div class="section-line"></div></div>
+    <div class="fixture-card" style="animation-delay:.02s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">12</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">REGATAS (C) <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">21:30 hs · El Gigante de la Ruta 9</div></div><span class="badge badge-win">✓ Victoria 89–83</span></div>
+    <div class="fixture-card done" style="animation-delay:.05s"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">22:10 hs · Cincuentenario</div></div><span class="badge badge-done">Jugado</span></div>
+    <div class="fixture-card next" style="animation-delay:.11s"><div class="fixture-day-block"><div class="fixture-day">20</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBERÁ TC <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Dr. Luis Augusto Derna</div></div><span class="badge badge-next">⚡ Próximo</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.14s"><div class="fixture-day-block"><div class="fixture-day">23</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">INSTITUTO <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Angel Sandrín</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.17s"><div class="fixture-day-block"><div class="fixture-day">27</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> PEÑAROL (MDP)</div><div class="fixture-detail">El Gigante de la Ruta 9</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="section-title" style="margin-top:2rem"><h3>🏆 COPA ISLAS MALVINAS</h3><div class="section-line"></div><div class="section-count">1 y 2 de Abril · Cuadrangular</div></div>
+    <div class="cup-info-box"><strong>Torneo especial</strong> — IDSC Oliva clasificó entre los primeros 4 equipos de la primera mitad de la temporada regular. Formato cuadrangular: semifinales el 1° de abril, final el 2° de abril.</div>
+    <div class="fixture-card cup-card" style="animation-delay:.2s"><div class="fixture-day-block"><div class="fixture-day">01</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">SEMIFINAL — COPA ISLAS MALVINAS</div><div class="fixture-detail">IDSC OLIVA · Rival por confirmar</div></div><span class="badge badge-cup">🏆 Copa</span></div>
+    <div class="fixture-card cup-card" style="animation-delay:.23s"><div class="fixture-day-block"><div class="fixture-day">02</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">FINAL — COPA ISLAS MALVINAS</div><div class="fixture-detail">IDSC OLIVA · Rival por confirmar</div></div><span class="badge badge-cup">🏆 Copa</span></div>
+    <div class="section-title" style="margin-top:2rem"><h3>LIGA NACIONAL — CONTINUACIÓN</h3><div class="section-line"></div></div>
+    <div class="fixture-card upcoming" style="animation-delay:.26s"><div class="fixture-day-block"><div class="fixture-day">07</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> PLATENSE</div><div class="fixture-detail">El Gigante de la Ruta 9</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.29s"><div class="fixture-day-block"><div class="fixture-day">10</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> ATENAS (C)</div><div class="fixture-detail">El Gigante de la Ruta 9</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.32s"><div class="fixture-day-block"><div class="fixture-day">13</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">BOCA <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Luis Conde</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.35s"><div class="fixture-day-block"><div class="fixture-day">15</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBRAS <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Templo del Rock</div></div><span class="badge badge-future">📅 Programado</span></div>
+    <div class="fixture-card upcoming" style="animation-delay:.38s"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> QUIMSA</div><div class="fixture-detail">El Gigante de la Ruta 9</div></div><span class="badge badge-future">📅 Programado</span></div>
+  </div>
+</div>
+
+<!-- MI EQUIPO -->
+<div class="page" id="page-equipo">
+  <div class="page-header">
+    <div class="eyebrow">IDSC Oliva</div>
+    <h2>MI EQUIPO</h2>
+    <p>Perfil del equipo, análisis de jugadores e Índice de Productividad IP10.</p>
+  </div>
+  <div class="section">
+    <div class="section-title"><h3>PERFIL EQUIPO Y JUGADORES</h3><div class="section-line"></div><div class="section-count">5 documentos</div></div>
+    <div class="equipo-grid"><div class="equipo-card" onclick='openPdf("https://drive.google.com/file/d/1dPIrlTV6wjvmbJr-RXjZD4V0nzJXdvF-/preview","https://drive.google.com/uc?export=download&id=1dPIrlTV6wjvmbJr-RXjZD4V0nzJXdvF-","Análisis Jugadores Gráficos")' style="animation-delay:0.05s"><div class="equipo-card-icon ic-green">📈</div><div class="equipo-card-title">Análisis Jugadores Gráficos</div><div class="equipo-card-desc">Gráficos de rendimiento individual por jugador de IDSC.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">👁 Ver informe</span></div></div><div class="equipo-card" onclick='openPdf("https://drive.google.com/file/d/1hls_z9YQWt3bQUJ95YaydeC6FZTlgG5F/preview","https://drive.google.com/uc?export=download&id=1hls_z9YQWt3bQUJ95YaydeC6FZTlgG5F","Prioridades 2da Vuelta")' style="animation-delay:0.12000000000000001s"><div class="equipo-card-icon ic-gold">🎯</div><div class="equipo-card-title">Prioridades 2da Vuelta</div><div class="equipo-card-desc">Análisis táctico y objetivos para la segunda vuelta del torneo.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">👁 Ver informe</span></div></div><div class="equipo-card" onclick='openPdf("https://drive.google.com/file/d/1t_7BVYnQC5HVb0v4r_0jvMvGSbL2hO-S/preview","https://drive.google.com/uc?export=download&id=1t_7BVYnQC5HVb0v4r_0jvMvGSbL2hO-S","Informe IDSC LNB Actualizado")' style="animation-delay:0.19s"><div class="equipo-card-icon ic-blue">📋</div><div class="equipo-card-title">Informe IDSC LNB Actualizado</div><div class="equipo-card-desc">Estadísticas completas del equipo en la Liga Nacional 2025/26.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">👁 Ver informe</span></div></div><div class="equipo-card" onclick="showPage('lineups')" style="animation-delay:0.26s;border:1px solid rgba(245,166,35,.35);background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(245,166,35,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:var(--gold);color:#0d1b2a;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-gold">🔢</div><div class="equipo-card-title">Análisis de Lineups</div><div class="equipo-card-desc">Combinaciones de jugadores, duplas y tríos. Rendimiento en cancha partido a partido.</div><div style="margin-top:.8rem"><span class="badge badge-next" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('simulacion')" style="animation-delay:0.33s;border:1px solid rgba(52,152,219,.35);background:linear-gradient(135deg,rgba(52,152,219,.08),rgba(52,152,219,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#3498db;color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-blue">📊</div><div class="equipo-card-title">Simulación de Partidos</div><div class="equipo-card-desc">Proyección estadística de los próximos partidos basada en Offensive Rating, IP10 y forma reciente.</div><div style="margin-top:.8rem"><span class="badge badge-pdf" style="cursor:pointer">→ Ver simulación</span></div></div></div>
+    <div class="section-title" style="margin-top:2.5rem"><h3>IP10 — ÍNDICE DE PRODUCTIVIDAD</h3><div class="section-line"></div></div>
+
+    <!-- IP10 EXPLICACION -->
+    <div class="ip10-explain">
+      <div class="ip10-explain-text">
+        <div class="ip10-explain-title">¿Qué es el IP10?</div>
+        <p>El <strong>Índice de Productividad cada 10 minutos</strong> es una métrica propia de IDSC Oliva que mide el aporte real de cada jugador normalizado al tiempo en cancha. No solo cuenta puntos: integra anotación, creación de juego, rebotes, recuperaciones y tapones, penalizando pérdidas y faltas cometidas.</p>
+        <p style="margin-top:.5rem">Al normalizar por minutos, permite comparar objetivamente a jugadores con roles y tiempos distintos — desde el titular que juega 25 minutos hasta el rotativo que entra 8.</p>
+        <div class="ip10-formula">IP10 = PTS×1,0 + AST×1,3 + R.Of×1,3 + R.Def×1,1 + REC×1,4 + TAP×1,3 − PERD×1,3 + FREC×0,7 − FCOM×0,6 · (por cada 10 min jugados)</div>
+      </div>
+      <!-- TOP 5 IP10 -->
+      <div class="ip10-top5">
+        <div class="ip10-top5-title">⚡ TOP 5 · IP10 TEMPORADA</div>
+        <div class="ip10-top5-list">
+          <div class="ip10-bar-item">
+            <div class="ip10-bar-header"><span class="ip10-bar-pos">🥇</span><span class="ip10-bar-name">CAFFARO, A.</span><span class="ip10-bar-val">10.59</span></div>
+            <div class="ip10-bar-track"><div class="ip10-bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="ip10-bar-item">
+            <div class="ip10-bar-header"><span class="ip10-bar-pos">🥈</span><span class="ip10-bar-name">FILIPPETTI, E.</span><span class="ip10-bar-val">9.66</span></div>
+            <div class="ip10-bar-track"><div class="ip10-bar-fill" style="width:91.2%"></div></div>
+          </div>
+          <div class="ip10-bar-item">
+            <div class="ip10-bar-header"><span class="ip10-bar-pos">🥉</span><span class="ip10-bar-name">CONRRADI, F.</span><span class="ip10-bar-val">8.53</span></div>
+            <div class="ip10-bar-track"><div class="ip10-bar-fill" style="width:80.5%"></div></div>
+          </div>
+          <div class="ip10-bar-item">
+            <div class="ip10-bar-header"><span class="ip10-bar-pos">#4</span><span class="ip10-bar-name">MARCUCCI, N.</span><span class="ip10-bar-val">7.53</span></div>
+            <div class="ip10-bar-track"><div class="ip10-bar-fill ip10-bar-mid" style="width:71.1%"></div></div>
+          </div>
+          <div class="ip10-bar-item">
+            <div class="ip10-bar-header"><span class="ip10-bar-pos">#5</span><span class="ip10-bar-name">ROLFI, F.</span><span class="ip10-bar-val">7.54</span></div>
+            <div class="ip10-bar-track"><div class="ip10-bar-fill ip10-bar-mid" style="width:71.2%"></div></div>
+          </div>
+        </div>
+        <div class="ip10-top5-meta">Máximo: 10.59 · Actualizado al P27 vs Regatas (C)</div>
+      </div>
+    </div>
+
+    <!-- SINGLE IP10 REPORT -->
+    <div class="ip10-item" onclick='openPdf("https://drive.google.com/file/d/14ppByzB0Ucclv130EfsgORwONCU93cj6/preview","https://drive.google.com/uc?export=download&id=14ppByzB0Ucclv130EfsgORwONCU93cj6","IP10 — Actualizado Temporada 2025/26 · vs Regatas (C)")' style="animation-delay:0.05s;margin-top:1rem">
+      <div class="ip10-num">⚡</div>
+      <div class="ip10-info">
+        <div class="ip10-name">IP10 — Actualizado Temporada 2025/26 · vs Regatas (C)</div>
+        <div class="ip10-meta">Ranking completo · Gráficos · Insights · Actualizado PJ 27 · vs Regatas (C)</div>
+      </div>
+      <div class="ip10-arrow">→</div>
+    </div>
+    <div class="ip10-item" onclick='openPdf("https://drive.google.com/file/d/1piXiKavnMqO95lCX7YrJi7qYUw2yeHhT/preview","https://drive.google.com/uc?export=download&id=1piXiKavnMqO95lCX7YrJi7qYUw2yeHhT","IP10 — Informe de Temporada 2025/26 · P26")' style="animation-delay:0.1s;margin-top:0.4rem">
+      <div class="ip10-num">📄</div>
+      <div class="ip10-info">
+        <div class="ip10-name">IP10 — Informe de Temporada 2025/26</div>
+        <div class="ip10-meta">Ranking completo · Gráficos · Insights · Actualizado PJ 26</div>
+      </div>
+      <div class="ip10-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPORADA -->
+<div class="page" id="page-temporada">
+  <div class="page-header">
+    <div class="eyebrow">Liga Nacional 2025/26</div>
+    <h2>TEMPORADA</h2>
+    <p>Resumen estadístico de IDSC Oliva en la temporada actual.</p>
+  </div>
+  <div class="section">
+    <div class="temporada-hero">
+      <div class="temporada-stats">
+        <div class="t-stat"><div class="t-stat-num">1°</div><div class="t-stat-lbl">Posición</div></div>
+        <div class="t-stat"><div class="t-stat-num">18</div><div class="t-stat-lbl">Victorias</div></div>
+        <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Derrotas</div></div>
+        <div class="t-stat"><div class="t-stat-num">67%</div><div class="t-stat-lbl">% Victorias</div></div>
+        <div class="t-stat"><div class="t-stat-num">+159</div><div class="t-stat-lbl">Diferencia pts</div></div>
+        <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Restantes</div></div>
+        <div class="t-stat" style="border:1px solid rgba(245,166,35,.3);background:rgba(245,166,35,.07);position:relative;padding:.9rem .8rem;">
+          <div style="position:absolute;top:.35rem;right:.45rem;font-family:'DM Mono',monospace;font-size:.5rem;color:var(--gold);letter-spacing:.5px;line-height:1.2;">🏆 #1 LIGA</div>
+          <div class="t-stat-num" style="font-size:1.7rem;">86.2</div>
+          <div class="t-stat-lbl">Pts anotados/partido</div>
+        </div>
+        <div class="t-stat" style="border:1px solid rgba(52,152,219,.3);background:rgba(52,152,219,.07);position:relative;padding:.9rem .8rem;">
+          <div style="position:absolute;top:.35rem;right:.45rem;font-family:'DM Mono',monospace;font-size:.5rem;color:#5B9BF0;letter-spacing:.5px;line-height:1.2;">⚡ EFICIENCIA</div>
+          <div class="t-stat-num" style="font-size:1.7rem;color:#5B9BF0;">1.087</div>
+          <div class="t-stat-lbl">Pts por posesión</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 17/03/2026</div></div>
+    <div class="standings-table">
+      <div class="standings-header">
+        <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
+        <span class="st-num">PJ</span><span class="st-num">PG</span><span class="st-num">PP</span>
+        <span class="st-num">PF</span><span class="st-num">PC</span><span class="st-num">PTOS</span><span class="st-num">%V</span>
+      </div>
+      <div class="standings-row standings-idsc"><span class="st-pos st-pos-num">1</span><span class="st-team">⭐ INDEPENDIENTE (O)</span><span class="st-num">27</span><span class="st-num">18</span><span class="st-num">9</span><span class="st-num">2328</span><span class="st-num">2169</span><span class="st-num">45</span><span class="st-num">66.6%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">2</span><span class="st-team">FERRO</span><span class="st-num">27</span><span class="st-num">18</span><span class="st-num">9</span><span class="st-num">2300</span><span class="st-num">2235</span><span class="st-num">45</span><span class="st-num">66.6%</span></div>
+
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">3</span><span class="st-team">QUIMSA</span><span class="st-num">28</span><span class="st-num">18</span><span class="st-num">10</span><span class="st-num">2299</span><span class="st-num">2114</span><span class="st-num">46</span><span class="st-num">64.2%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">4</span><span class="st-team">GIMNASIA (CR)</span><span class="st-num">29</span><span class="st-num">18</span><span class="st-num">11</span><span class="st-num">2351</span><span class="st-num">2199</span><span class="st-num">47</span><span class="st-num">62.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">5</span><span class="st-team">OBERÁ</span><span class="st-num">26</span><span class="st-num">16</span><span class="st-num">10</span><span class="st-num">2095</span><span class="st-num">1975</span><span class="st-num">42</span><span class="st-num">61.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">6</span><span class="st-team">OBRAS</span><span class="st-num">25</span><span class="st-num">15</span><span class="st-num">10</span><span class="st-num">2033</span><span class="st-num">1966</span><span class="st-num">40</span><span class="st-num">60.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">7</span><span class="st-team">LA UNION FSA.</span><span class="st-num">29</span><span class="st-num">17</span><span class="st-num">12</span><span class="st-num">2336</span><span class="st-num">2295</span><span class="st-num">46</span><span class="st-num">58.6%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">8</span><span class="st-team">REGATAS (C)</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2077</span><span class="st-num">2019</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">9</span><span class="st-team">PEÑAROL (MDP)</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2178</span><span class="st-num">2162</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">10</span><span class="st-team">BOCA</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2194</span><span class="st-num">2101</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">11</span><span class="st-team">INSTITUTO</span><span class="st-num">28</span><span class="st-num">15</span><span class="st-num">13</span><span class="st-num">2124</span><span class="st-num">2110</span><span class="st-num">43</span><span class="st-num">53.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">12</span><span class="st-team">SAN MARTÍN (C)</span><span class="st-num">29</span><span class="st-num">13</span><span class="st-num">16</span><span class="st-num">2171</span><span class="st-num">2195</span><span class="st-num">42</span><span class="st-num">44.8%</span></div>
+      <div class="standings-divider"><span>— Fuera del playoff proyectado —</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">13</span><span class="st-team">UNION (SF)</span><span class="st-num">25</span><span class="st-num">11</span><span class="st-num">14</span><span class="st-num">2037</span><span class="st-num">2102</span><span class="st-num">36</span><span class="st-num">44.0%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">14</span><span class="st-team">OLÍMPICO (LB)</span><span class="st-num">28</span><span class="st-num">11</span><span class="st-num">17</span><span class="st-num">2195</span><span class="st-num">2218</span><span class="st-num">39</span><span class="st-num">39.2%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">15</span><span class="st-team">PLATENSE</span><span class="st-num">27</span><span class="st-num">10</span><span class="st-num">17</span><span class="st-num">2194</span><span class="st-num">2282</span><span class="st-num">37</span><span class="st-num">37.0%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">16</span><span class="st-team">ATENAS (C)</span><span class="st-num">25</span><span class="st-num">9</span><span class="st-num">16</span><span class="st-num">1871</span><span class="st-num">1992</span><span class="st-num">34</span><span class="st-num">36.0%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">17</span><span class="st-team">SAN LORENZO</span><span class="st-num">28</span><span class="st-num">10</span><span class="st-num">18</span><span class="st-num">2210</span><span class="st-num">2321</span><span class="st-num">38</span><span class="st-num">35.7%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">18</span><span class="st-team">RACING (CH)</span><span class="st-num">29</span><span class="st-num">9</span><span class="st-num">20</span><span class="st-num">2265</span><span class="st-num">2386</span><span class="st-num">38</span><span class="st-num">31.0%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">19</span><span class="st-team">ARGENTINO (J)</span><span class="st-num">27</span><span class="st-num">6</span><span class="st-num">21</span><span class="st-num">1993</span><span class="st-num">2410</span><span class="st-num">33</span><span class="st-num">22.2%</span></div>
+      <div class="standings-legend">
+        <span class="leg-item"><span class="leg-dot" style="background:rgba(245,166,35,.4)"></span>Top 4 — acceso directo a cuartos</span>
+        <span class="leg-item"><span class="leg-dot" style="background:rgba(52,152,219,.3)"></span>5°–12° — reclasificación previa</span>
+        <span class="leg-item"><span class="leg-dot" style="background:rgba(231,76,60,.2)"></span>13°–19° — fuera del playoff</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAYOFF -->
+<div class="page" id="page-playoff">
+  <div class="page-header">
+    <div class="eyebrow">IDSC Oliva · Liga Nacional 2025/26</div>
+    <h2>PLAYOFF</h2>
+    <p>Cuadro proyectado según la tabla actual. Se actualiza con cada nueva tabla de posiciones.</p>
+  </div>
+  <div class="section">
+
+    <!-- ESTADO IDSC -->
+    <div class="po-card po-card-qualify" style="margin-bottom:1.5rem;border-radius:14px;padding:1.2rem 1.6rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <div class="po-label">📍 IDSC OLIVA · POSICIÓN ACTUAL</div>
+          <div class="po-main" style="font-size:2.5rem">1° PUESTO</div>
+          <div class="po-sub">PJ 27 · 18V 9D · 66.6% · Acceso directo a cuartos de final</div>
+        </div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#2ECC71;line-height:1">4</div><div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace">VICT. PARA<br>CLASIFICAR</div></div>
+          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1">9</div><div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace">PARTIDOS<br>RESTANTES</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMATO INFO -->
+    <div class="cup-info-box" style="margin-bottom:1.5rem">
+      <strong>Formato playoff:</strong> Top 12 de 19 equipos clasifican. Los 4 primeros acceden directamente a Cuartos de Final. Del 5° al 12° disputan una Reclasificación previa (2 series al mejor de 3), y los 4 ganadores se suman a los cuartos.
+    </div>
+
+    <!-- ESCENARIOS CLASIFICACIÓN -->
+    <div class="section-title"><h3>ESCENARIOS DE CLASIFICACIÓN</h3><div class="section-line"></div><div class="section-count">Referencia: Unión SF · 13° · 38 pts · 9 partidos restantes</div></div>
+    <div class="scenarios-grid">
+      <div class="scenario-card scenario-safe">
+        <div class="scenario-icon">🔒</div>
+        <div class="scenario-vict">4 victorias</div>
+        <div class="scenario-label">CLASIFICACIÓN MATEMÁTICA</div>
+        <div class="scenario-desc">IDSC alcanza el 75% de victorias. Supera el máximo posible de Unión SF (55.6%). <strong>No depende de ningún otro resultado.</strong></div>
+        <div class="scenario-condition">Condición: ninguna — clasificación garantizada</div>
+      </div>
+      <div class="scenario-card scenario-likely">
+        <div class="scenario-icon">✅</div>
+        <div class="scenario-vict">3 victorias</div>
+        <div class="scenario-label">MUY PROBABLE</div>
+        <div class="scenario-desc">IDSC alcanza el 58% de victorias. Clasifica si Unión SF pierde <strong>al menos 1</strong> de sus 9 partidos restantes.</div>
+        <div class="scenario-condition">Unión SF: 40.7% victorias — muy probable que pierda alguno</div>
+      </div>
+      <div class="scenario-card scenario-probable">
+        <div class="scenario-icon">📊</div>
+        <div class="scenario-vict">2 victorias</div>
+        <div class="scenario-label">PROBABLE</div>
+        <div class="scenario-desc">IDSC alcanza el 56% de victorias. Clasifica si Unión SF pierde <strong>al menos 2</strong> de sus 9 partidos restantes.</div>
+        <div class="scenario-condition">Con 40.7% de victorias, perder 2 de 9 es altamente esperable</div>
+      </div>
+      <div class="scenario-card scenario-risk">
+        <div class="scenario-icon">⚠️</div>
+        <div class="scenario-vict">1 victoria</div>
+        <div class="scenario-label">CON RIESGO</div>
+        <div class="scenario-desc">IDSC alcanza el 53% de victorias. Necesita que Unión SF pierda <strong>al menos 3</strong> de 9. Posible pero hay margen de error.</div>
+        <div class="scenario-condition">Requiere seguimiento partido a partido</div>
+      </div>
+    </div>
+
+    <!-- CUARTOS DIRECTOS -->
+    <div class="section-title"><h3>CUARTOS DE FINAL DIRECTOS</h3><div class="section-line"></div><div class="section-count">Top 4</div></div>
+    <div class="bracket-grid">
+      <div class="bracket-match bracket-idsc">
+        <div class="bracket-seed bracket-home">
+          <span class="bracket-pos">1°</span>
+          <span class="bracket-name">⭐ INDEPENDIENTE (O)</span>
+          <span class="bracket-pct">66.6%</span>
+        </div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed bracket-away">
+          <span class="bracket-pos">8°</span>
+          <span class="bracket-name">BOCA</span>
+          <span class="bracket-pct">55.5%</span>
+        </div>
+        <div class="bracket-label">🏠 Local IDSC (si aplica)</div>
+      </div>
+      <div class="bracket-match">
+        <div class="bracket-seed bracket-home">
+          <span class="bracket-pos">2°</span>
+          <span class="bracket-name">QUIMSA</span>
+          <span class="bracket-pct">64.2%</span>
+        </div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed bracket-away">
+          <span class="bracket-pos">7°</span>
+          <span class="bracket-name">LA UNION FSA.</span>
+          <span class="bracket-pct">60.0%</span>
+        </div>
+      </div>
+      <div class="bracket-match">
+        <div class="bracket-seed bracket-home">
+          <span class="bracket-pos">3°</span>
+          <span class="bracket-name">QUIMSA</span>
+          <span class="bracket-pct">64.2%</span>
+        </div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed bracket-away">
+          <span class="bracket-pos">6°</span>
+          <span class="bracket-name">OBRAS</span>
+          <span class="bracket-pct">60.0%</span>
+        </div>
+      </div>
+      <div class="bracket-match">
+        <div class="bracket-seed bracket-home">
+          <span class="bracket-pos">4°</span>
+          <span class="bracket-name">GIMNASIA (CR)</span>
+          <span class="bracket-pct">62.0%</span>
+        </div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed bracket-away">
+          <span class="bracket-pos">5°</span>
+          <span class="bracket-name">OBERÁ</span>
+          <span class="bracket-pct">61.5%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECLASIFICACIÓN -->
+    <div class="section-title" style="margin-top:2rem"><h3>RECLASIFICACIÓN PREVIA</h3><div class="section-line"></div><div class="section-count">5°–12° · 2 series · 4 pasan a cuartos</div></div>
+    <div class="bracket-grid">
+      <div class="bracket-match bracket-pre">
+        <div class="bracket-seed"><span class="bracket-pos">9°</span><span class="bracket-name">PEÑAROL (MDP)</span><span class="bracket-pct">55.5%</span></div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed"><span class="bracket-pos">12°</span><span class="bracket-name">SAN MARTÍN (C)</span><span class="bracket-pct">44.8%</span></div>
+        <div class="bracket-label">Ganador avanza a Cuartos</div>
+      </div>
+      <div class="bracket-match bracket-pre">
+        <div class="bracket-seed"><span class="bracket-pos">10°</span><span class="bracket-name">BOCA</span><span class="bracket-pct">55.5%</span></div>
+        <div class="bracket-vs">VS</div>
+        <div class="bracket-seed"><span class="bracket-pos">11°</span><span class="bracket-name">INSTITUTO</span><span class="bracket-pct">53.5%</span></div>
+        <div class="bracket-label">Ganador avanza a Cuartos</div>
+      </div>
+    </div>
+
+    <div class="standings-legend" style="margin-top:1.5rem">
+      <span class="leg-item"><span class="leg-dot" style="background:var(--gold);opacity:.6"></span>Serie IDSC proyectada</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--blue);opacity:.5"></span>Acceso directo a cuartos</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--muted);opacity:.5"></span>Reclasificación previa</span>
+    </div>
+  </div>
+</div>
+
+<footer><em>IDSC Oliva</em> · Análisis Estadístico · Liga Nacional 2025/26 · Uso interno del cuerpo técnico</footer>
+
+<div class="pdf-modal" id="pdfModal">
+  <div class="pdf-modal-bar">
+    <div class="pdf-modal-left">
+      <div class="pdf-modal-escudo"><img src="data:image/png;base64,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" alt="IDSC"></div>
+      <div>
+        <div class="pdf-modal-title" id="pdfTitle">Informe</div>
+        <div class="pdf-modal-sub">IDSC Oliva · Liga Nacional 2025/26</div>
+      </div>
+    </div>
+    <div class="pdf-modal-actions">
+      <a id="pdfDownload" class="btn btn-gold" target="_blank">⬇ Descargar</a>
+      <button class="btn btn-ghost" onclick="closePdf()">✕ Cerrar</button>
+    </div>
+  </div>
+  <iframe class="pdf-frame" id="pdfFrame" allowfullscreen></iframe>
+</div>
+
+<script>
+const RIVALS = [
+  {name:"GIMNASIA (CR)", sub:"27/01/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1cfpist1vrwfufMcyvuCQh7SrQDIq6h8V/preview", download:"https://drive.google.com/uc?export=download&id=1cfpist1vrwfufMcyvuCQh7SrQDIq6h8V"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1jsJTnZ0z2s_QvcDuMZKXuFs8fTUnNIMT/preview", download:"https://drive.google.com/uc?export=download&id=1jsJTnZ0z2s_QvcDuMZKXuFs8fTUnNIMT"},
+  ]},
+  {name:"SAN LORENZO", sub:"29/01/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/10NoY2_c9Zq0k9Dv-xRvFLfQ2rVHL-vmz/preview", download:"https://drive.google.com/uc?export=download&id=10NoY2_c9Zq0k9Dv-xRvFLfQ2rVHL-vmz"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1OXrPilw5JApketsQqayrSHX7N0T6pVIS/preview", download:"https://drive.google.com/uc?export=download&id=1OXrPilw5JApketsQqayrSHX7N0T6pVIS"},
+  ]},
+  {name:"SAN MARTÍN (C)", sub:"04/02/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1aYPShrMsIrkAfqkAn2a--jR7X4NP_n-7/preview", download:"https://drive.google.com/uc?export=download&id=1aYPShrMsIrkAfqkAn2a--jR7X4NP_n-7"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/10rIJBKeL4IKJ80W2RBvrYvkdSaBY4a1z/preview", download:"https://drive.google.com/uc?export=download&id=10rIJBKeL4IKJ80W2RBvrYvkdSaBY4a1z"},
+  ]},
+  {name:"FERRO", sub:"10/02/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/13loF50YXruphoouOrQ4jydID-EGAnV2r/preview", download:"https://drive.google.com/uc?export=download&id=13loF50YXruphoouOrQ4jydID-EGAnV2r"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1rXJY-OEbqcYAZCT3BB90hGZH31ehpIug/preview", download:"https://drive.google.com/uc?export=download&id=1rXJY-OEbqcYAZCT3BB90hGZH31ehpIug"},
+  ]},
+  {name:"UNIÓN (SF)", sub:"15/02/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1FhdPtGnrU7LgoxRwsgZwuYVHD2nfZ8bv/preview", download:"https://drive.google.com/uc?export=download&id=1FhdPtGnrU7LgoxRwsgZwuYVHD2nfZ8bv"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1yVCLw7MKk9mgZBDLOuJhET25hwMeo0eJ/preview", download:"https://drive.google.com/uc?export=download&id=1yVCLw7MKk9mgZBDLOuJhET25hwMeo0eJ"},
+  ]},
+  {name:"RACING (CH)", sub:"06/03/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1PCuUrvbSlmOpktt7oRj1fVQTF7XKcqO2/preview", download:"https://drive.google.com/uc?export=download&id=1PCuUrvbSlmOpktt7oRj1fVQTF7XKcqO2"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1euMRW9E0ALd2J7zOooeyrdfy9oLq-Omv/preview", download:"https://drive.google.com/uc?export=download&id=1euMRW9E0ALd2J7zOooeyrdfy9oLq-Omv"},
+  ]},
+  {name:"ARGENTINO (J)", sub:"08/03/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/13gWxzA68eed3-4PKqkw7QyNvlfFDEqsa/preview", download:"https://drive.google.com/uc?export=download&id=13gWxzA68eed3-4PKqkw7QyNvlfFDEqsa"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1YCul2PiK-kIilgFh31mFKEdKkiNlzDS7/preview", download:"https://drive.google.com/uc?export=download&id=1YCul2PiK-kIilgFh31mFKEdKkiNlzDS7"},
+  ]},
+  {name:"REGATAS (C)", sub:"12/03/2026 · Liga Nacional", status:"done", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G/preview", download:"https://drive.google.com/uc?export=download&id=1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G"},
+    {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6/preview", download:"https://drive.google.com/uc?export=download&id=1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6"},
+  ]},
+  {name:"LA UNIÓN FSA.", sub:"18/03/2026 · Liga Nacional", status:"next", pdfs:[
+    {label:"Últimos Partidos (6P Visitante)", preview:"https://drive.google.com/file/d/1VZbHFJt6JsveX8yy47m713-hRzwjdA1H/preview", download:"https://drive.google.com/uc?export=download&id=1VZbHFJt6JsveX8yy47m713-hRzwjdA1H"},
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/100asNK5ACPwv8x9ix7COeX90fuS79t-E/preview", download:"https://drive.google.com/uc?export=download&id=100asNK5ACPwv8x9ix7COeX90fuS79t-E"},
+  ]},
+  {name:"OBERÁ TC", sub:"20/03/2026 · Liga Nacional", status:"next", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp/preview", download:"https://drive.google.com/uc?export=download&id=1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp"},
+    {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk/preview", download:"https://drive.google.com/uc?export=download&id=1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk"},
+  ]},
+  {name:"INSTITUTO", sub:"23/03/2026 · Liga Nacional", status:"next", pdfs:[
+    {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP/preview", download:"https://drive.google.com/uc?export=download&id=1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP"},
+    {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE/preview", download:"https://drive.google.com/uc?export=download&id=1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE"},
+  ]},
+  {name:"PEÑAROL (MDP)", sub:"27/03/2026 · Liga Nacional", status:"pending", matchDate:"2026-03-27", pdfs:[
+  ]},
+  {name:"OBRAS BASKET", sub:"Copa Islas Malvinas · 01-02/04/2026", status:"cup", pdfs:[
+    {label:"Informe de Scouting", preview:"https://drive.google.com/file/d/1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh/preview", download:"https://drive.google.com/uc?export=download&id=1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh"},
+  ]},
+  {name:"PLATENSE", sub:"07/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-07", pdfs:[
+  ]},
+  {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-10", pdfs:[
+  ]},
+  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-13", pdfs:[
+  ]},
+  {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-15", pdfs:[
+  ]},
+  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-18", pdfs:[
+  ]},
+];
+let currentOpen = -1;
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  ['home','rivales','fixture','equipo','temporada','playoff','lineups','simulacion'].forEach((p,i) => {
+    if(p===id) document.querySelectorAll('.nav-link')[i].classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openRival(idx) {
+  const items = document.querySelectorAll('.timeline-item');
+  const r = RIVALS[idx];
+  if(currentOpen===idx){items[idx].classList.remove('is-open');currentOpen=-1;return;}
+  if(currentOpen>=0) items[currentOpen].classList.remove('is-open');
+  currentOpen=idx;
+  const item=items[idx];
+  item.classList.add('is-open');
+  const detail=item.querySelector('.rival-detail');
+  if(!detail.innerHTML.trim()){
+    if(r.status==='pending'){
+      // Calcular fecha disponible: 2 días antes del partido
+      const match = new Date(r.matchDate + 'T12:00:00');
+      const avail = new Date(match);
+      avail.setDate(avail.getDate() - 2);
+      const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+      const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const fechaStr = `${dias[avail.getDay()]} ${avail.getDate()} de ${meses[avail.getMonth()]}`;
+      detail.innerHTML=`
+        <div class="pending-msg">
+          <div class="pending-msg-icon">📅</div>
+          <div class="pending-msg-text">
+            <strong>Informe disponible próximamente</strong>
+            El informe de scouting de ${r.name} estará disponible antes del partido.
+          </div>
+        </div>`;
+    } else {
+      const btns=r.pdfs.map(p=>`
+        <div class="pdf-btn" onclick='openPdf("${p.preview}","${p.download}","${r.name} — ${p.label}");event.stopPropagation()'>
+          <div class="pdf-btn-icon">📄</div>
+          <div class="pdf-btn-info"><div class="pdf-btn-label">${p.label}</div><div class="pdf-btn-sub">IDSC Scouting · ${r.sub}</div></div>
+          <div class="pdf-btn-acts">
+            <button class="bxs bxs-view" onclick='openPdf("${p.preview}","${p.download}","${r.name} — ${p.label}");event.stopPropagation()'>👁 Ver</button>
+            <a class="bxs bxs-dl" href="${p.download}" target="_blank" onclick="event.stopPropagation()">⬇ Bajar</a>
+          </div>
+        </div>`).join('');
+      detail.innerHTML=`<div class="detail-label">📁 Informes · ${r.name}</div><div class="pdf-buttons">${btns}</div>`;
+    }
+  }
+  item.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function openPdf(previewUrl,downloadUrl,title){
+  document.getElementById('pdfTitle').textContent=title;
+  document.getElementById('pdfFrame').src=previewUrl;
+  document.getElementById('pdfDownload').href=downloadUrl;
+  document.getElementById('pdfModal').classList.add('open');
+}
+function closePdf(){document.getElementById('pdfModal').classList.remove('open');document.getElementById('pdfFrame').src='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePdf();});
+</script>
+
+
+<!-- LINEUPS -->
+<div class="page" id="page-lineups">
+  <div class="page-header">
+    <div class="eyebrow">IDSC Oliva · Análisis Táctico</div>
+    <h2>ANÁLISIS DE LINEUPS</h2>
+    <p>Rendimiento de combinaciones de jugadores en cancha — duplas, tríos y quintetos.</p>
+  </div>
+  <div class="section">
+    <div id="lineups-accordion"></div>
+  </div>
+</div>
+
+<style>
+.lineup-accordion-item{background:var(--navy2);border:1px solid var(--border2);border-radius:14px;margin-bottom:.75rem;overflow:hidden;}
+.lineup-accordion-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;cursor:pointer;transition:background .2s;}
+.lineup-accordion-header:hover{background:rgba(255,255,255,.03);}
+.lineup-acc-result{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:70px;}
+.lineup-acc-result.win{color:#2ec87a;}
+.lineup-acc-result.loss{color:#e74c3c;}
+.lineup-acc-rival{font-weight:600;font-size:.95rem;flex:1;}
+.lineup-acc-date{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
+.lineup-acc-arrow{font-size:.8rem;color:var(--muted);transition:transform .3s;}
+.lineup-accordion-item.is-open .lineup-acc-arrow{transform:rotate(90deg);}
+.lineup-acc-body{display:none;padding:1.2rem;}
+.lineup-accordion-item.is-open .lineup-acc-body{display:block;}
+.lineup-tabs{display:flex;gap:.5rem;margin-bottom:1rem;}
+.lineup-tab{font-size:.75rem;font-weight:500;padding:.35rem 1rem;border-radius:6px;border:.5px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;}
+.lineup-tab.active{background:var(--navy3);color:var(--white);border-color:var(--border);}
+.lineup-table{width:100%;border-collapse:collapse;font-size:.78rem;}
+.lineup-table th{color:var(--gold);font-size:.65rem;text-align:left;padding:.4rem .6rem;border-bottom:.5px solid var(--border2);white-space:nowrap;}
+.lineup-table td{padding:.45rem .6rem;border-bottom:.5px solid var(--border);color:var(--white);vertical-align:middle;}
+.lineup-table tr:last-child td{border-bottom:none;}
+.lineup-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+.diff-pos{color:#2ec87a;font-weight:600;}
+.diff-neg{color:#e74c3c;font-weight:600;}
+.diff-neu{color:var(--muted);}
+.lineup-new-badge{display:inline-block;background:var(--gold);color:#0d1b2a;font-size:.5rem;font-weight:700;padding:.15rem .4rem;border-radius:3px;margin-left:.4rem;vertical-align:middle;letter-spacing:.3px;}
+</style>
+
+<script>
+const LINEUPS_DATA = [
+  {
+    id:"p27", rival:"vs REGATAS (C)", fecha:"12/03/2026", resultado:"V", score:"89-83",
+    quintetos:[
+      {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",min:"22:16",pts:44,rec:36,dif:"+8",ip10:"7.93"},
+      {jugadores:"CONRRADI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",min:"1:34",pts:10,rec:2,dif:"+8",ip10:"7.75"},
+      {jugadores:"CONRRADI · MARCUCCI · BARRIONUEVO · PAUTASSO · FILIPPETTI",min:"3:30",pts:16,rec:12,dif:"+4",ip10:"7.40"},
+      {jugadores:"MARCUCCI · BARRIONUEVO · PAUTASSO · VALLEJOS · FILIPPETTI",min:"2:19",pts:2,rec:2,dif:"0",ip10:"7.06"},
+      {jugadores:"MARCUCCI · BARRIONUEVO · TABAREZ · PAUTASSO · FILIPPETTI",min:"4:25",pts:10,rec:11,dif:"-1",ip10:"6.94"},
+      {jugadores:"MARCUCCI · BARRIONUEVO · ROLFI · PAUTASSO · FILIPPETTI",min:"4:12",pts:4,rec:16,dif:"-12",ip10:"7.21"},
+    ],
+    duplas:[
+      {jugadores:"CONRRADI + TABAREZ",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"7.37"},
+      {jugadores:"CONRRADI + ROLFI",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"8.04"},
+      {jugadores:"TABAREZ + ROLFI",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"6.87"},
+      {jugadores:"ROLFI + VALLEJOS",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"7.17"},
+      {jugadores:"CONRRADI + VALLEJOS",min:"24:57",pts:55,rec:39,dif:"+16",ip10:"7.66"},
+      {jugadores:"CONRRADI + FILIPPETTI",min:"5:04",pts:26,rec:14,dif:"+12",ip10:"9.09"},
+      {jugadores:"CAFFARO + ROLFI",min:"22:16",pts:44,rec:36,dif:"+8",ip10:"9.06"},
+      {jugadores:"CAFFARO + CONRRADI",min:"23:13",pts:44,rec:37,dif:"+7",ip10:"9.56"},
+    ],
+    trios:[
+      {jugadores:"CONRRADI + TABAREZ + ROLFI",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"7.42"},
+      {jugadores:"CONRRADI + ROLFI + VALLEJOS",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"7.62"},
+      {jugadores:"TABAREZ + ROLFI + VALLEJOS",min:"24:00",pts:55,rec:38,dif:"+17",ip10:"6.85"},
+      {jugadores:"CAFFARO + CONRRADI + ROLFI",min:"22:16",pts:44,rec:36,dif:"+8",ip10:"8.89"},
+      {jugadores:"CAFFARO + CONRRADI + VALLEJOS",min:"23:13",pts:44,rec:37,dif:"+8",ip10:"8.64"},
+      {jugadores:"CAFFARO + CONRRADI + TABAREZ",min:"22:16",pts:44,rec:36,dif:"+8",ip10:"8.44"},
+    ]
+  }
+];
+
+function renderLineups(){
+  const acc=document.getElementById('lineups-accordion');
+  if(!acc)return;
+  acc.innerHTML=LINEUPS_DATA.map((p,idx)=>`
+    <div class="lineup-accordion-item" id="lineup-item-${idx}">
+      <div class="lineup-accordion-header" onclick="toggleLineup(${idx})">
+        <div class="lineup-acc-result ${p.resultado==='V'?'win':'loss'}">${p.score}</div>
+        <div class="lineup-acc-rival">${p.rival}<span class="lineup-new-badge">NUEVO</span></div>
+        <div class="lineup-acc-date">${p.fecha}</div>
+        <div class="lineup-acc-arrow">&#9658;</div>
+      </div>
+      <div class="lineup-acc-body">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">
+          <strong style="color:var(--white)">Como leer:</strong>
+          Pts + = puntos anotados por IDSC mientras esa combinacion estaba en cancha &middot;
+          Pts - = puntos recibidos &middot; Dif = diferencia (positivo: IDSC domino ese tramo)
+        </p>
+        <div class="lineup-tabs">
+          <button class="lineup-tab active" onclick="switchTab(${idx},'quintetos',this)">Quintetos</button>
+          <button class="lineup-tab" onclick="switchTab(${idx},'duplas',this)">Duplas</button>
+          <button class="lineup-tab" onclick="switchTab(${idx},'trios',this)">Trios</button>
+        </div>
+        <div id="lineup-table-${idx}">${renderLTable(p.quintetos)}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderLTable(rows){
+  return '<table class="lineup-table"><thead><tr><th style="width:48%">Combinacion</th><th>Min</th><th>Pts +</th><th>Pts -</th><th>Dif</th><th>IP10</th></tr></thead><tbody>'+
+  rows.map(r=>{
+    const dc=r.dif.startsWith('+')?'diff-pos':(r.dif.startsWith('-')||r.dif==='-1'||r.dif==='-12')?'diff-neg':'diff-neu';
+    return '<tr><td style="font-weight:500">'+r.jugadores+'</td><td style="color:var(--muted);font-size:.72rem">'+r.min+'</td><td>'+r.pts+'</td><td>'+r.rec+'</td><td class="'+dc+'">'+r.dif+'</td><td style="color:var(--muted)">'+r.ip10+'</td></tr>';
+  }).join('')+'</tbody></table>';
+}
+
+function toggleLineup(idx){
+  const item=document.getElementById('lineup-item-'+idx);
+  item.classList.toggle('is-open');
+  item.querySelector('.lineup-accordion-header').classList.toggle('is-open');
+}
+
+function switchTab(idx,tipo,btn){
+  const p=LINEUPS_DATA[idx];
+  const data=tipo==='quintetos'?p.quintetos:tipo==='duplas'?p.duplas:p.trios;
+  document.getElementById('lineup-table-'+idx).innerHTML=renderLTable(data);
+  btn.closest('.lineup-tabs').querySelectorAll('.lineup-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded',renderLineups);
+</script>
+
+
+<!-- SIMULACIÓN -->
+<div class="page" id="page-simulacion">
+  <div class="page-header">
+    <div class="eyebrow">IDSC Oliva · Análisis Predictivo</div>
+    <h2>SIMULACIÓN DE PARTIDOS</h2>
+    <p>Proyección estadística basada en Offensive Rating, Defensive Rating, IP10 y forma reciente. Los 3 partidos son como visitante.</p>
+  </div>
+  <div class="section">
+
+    <!-- METODOLOGÍA -->
+    <div style="background:rgba(52,152,219,.06);border:1px solid rgba(52,152,219,.18);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:.8rem;color:var(--muted);line-height:1.7;">
+      <strong style="color:#5B9BF0;display:block;margin-bottom:.3rem;">📐 Metodología del modelo</strong>
+      Combina estadísticas de <strong style="color:var(--white)">temporada completa (70%)</strong> + <strong style="color:var(--white)">últimos 5 partidos (30%)</strong>. 
+      Incluye Offensive Rating vs Defensive Rating del rival, ritmo de juego (posesiones/partido) y factor local/visitante (±3.5 pts en LNB). 
+      Simulación Monte Carlo de 50.000 partidos. <em>Las probabilidades no son certezas — son indicadores estadísticos basados en datos reales.</em>
+    </div>
+
+    <!-- PARTIDO 1: LA UNIÓN FSA. -->
+    <div class="sim-card" id="sim-launion">
+      <div class="sim-header">
+        <div class="sim-date">18 MAR · 22:10 hs · Cincuentenario · <span class="sim-cond">✈️ Visitante</span></div>
+        <div class="sim-rivals">
+          <div class="sim-team sim-rival-team">
+            <div class="sim-team-name">LA UNIÓN FSA.</div>
+            <div class="sim-team-role">LOCAL</div>
+          </div>
+          <div class="sim-score-block">
+            <div class="sim-score"><span class="sim-pts-rival">88</span><span class="sim-vs">—</span><span class="sim-pts-idsc">81</span></div>
+            <div class="sim-score-label">proyección</div>
+          </div>
+          <div class="sim-team sim-idsc-team">
+            <div class="sim-team-name">IDSC OLIVA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+        <div class="sim-prob-bar-wrap">
+          <div class="sim-prob-label-l">La Unión 71.2%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:71.2%"></div></div>
+          <div class="sim-prob-label-r">IDSC 28.8%</div>
+        </div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave</div>
+          <div class="sim-factor sim-factor-neg">➖ IDSC juega de <strong>visitante</strong> (−3.5 pts ajuste estadístico)</div>
+          <div class="sim-factor sim-factor-neg">➖ La Unión tiene <strong>Offensive Rating superior</strong> (110.6 vs 108.7 de IDSC)</div>
+          <div class="sim-factor sim-factor-pos">➕ IDSC tiene el mejor <strong>Defensive Rating de los 3 rivales</strong> (101.3)</div>
+          <div class="sim-factor sim-factor-pos">➕ IDSC es superior en todos los <strong>indicadores absolutos de temporada</strong></div>
+          <div class="sim-factor sim-factor-neu">ℹ️ Ritmo estimado: 76 posesiones — IDSC debe imponer su ritmo más alto (79.3)</div>
+        </div>
+        <div class="sim-note">
+          <strong>Nota:</strong> El modelo le da ventaja a La Unión por ser local y su alto Offensive Rating. Sin embargo, IDSC tiene métricas defensivas claramente superiores y su Net Rating (+7.4) supera ampliamente al de La Unión (+1.9). En el largo de la temporada, IDSC es el mejor equipo — la condición de visitante es el principal factor que inclina la proyección.
+        </div>
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Optimista</div><div class="sim-sc-score">IDSC 87 — 83</div><div class="sim-sc-desc">IDSC impone ritmo alto, CONRRADI domina y ELSENER tiene noche discreta</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Base</div><div class="sim-sc-score">IDSC 81 — 88</div><div class="sim-sc-desc">La Unión aprovecha local, pero partido cerrado hasta el último cuarto</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Pesimista</div><div class="sim-sc-score">IDSC 74 — 95</div><div class="sim-sc-desc">La Unión abre el partido con triples (44% de sus tiros) y IDSC no puede recuperar</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 2: OBERÁ TC -->
+    <div class="sim-card" id="sim-obera">
+      <div class="sim-header">
+        <div class="sim-date">20 MAR · Dr. Luis Augusto Derna · <span class="sim-cond">✈️ Visitante</span></div>
+        <div class="sim-rivals">
+          <div class="sim-team sim-rival-team">
+            <div class="sim-team-name">OBERÁ TC</div>
+            <div class="sim-team-role">LOCAL</div>
+          </div>
+          <div class="sim-score-block">
+            <div class="sim-score"><span class="sim-pts-rival">88</span><span class="sim-vs">—</span><span class="sim-pts-idsc">83</span></div>
+            <div class="sim-score-label">proyección</div>
+          </div>
+          <div class="sim-team sim-idsc-team">
+            <div class="sim-team-name">IDSC OLIVA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+        <div class="sim-prob-bar-wrap">
+          <div class="sim-prob-label-l">Oberá 67.4%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:67.4%"></div></div>
+          <div class="sim-prob-label-r">IDSC 32.6%</div>
+        </div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave</div>
+          <div class="sim-factor sim-factor-neg">➖ IDSC juega de <strong>visitante</strong> (−3.5 pts ajuste estadístico)</div>
+          <div class="sim-factor sim-factor-neg">➖ Oberá llega en <strong>forma explosiva</strong> (4V en últimos 5) con BIRD en alza (IP10 13.8)</div>
+          <div class="sim-factor sim-factor-pos">➕ IDSC tiene <strong>mejor Defensive Rating</strong> (101.3 vs 103.3 de Oberá)</div>
+          <div class="sim-factor sim-factor-pos">➕ IDSC superior en <strong>Net Rating de temporada</strong> (+7.4 vs estimado +3.4 de Oberá)</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ DREPER no jugó el último partido — su disponibilidad es clave para Oberá</div>
+        </div>
+        <div class="sim-note">
+          <strong>Nota:</strong> El modelo le da ventaja a Oberá principalmente por ser local y por su racha reciente (4V en 5). En términos de métricas absolutas de temporada, IDSC es superior en defensa y Net Rating. El partido pendiente de esta noche (Oberá vs Ferro) también puede modificar su estado de forma. La proyección puede ajustarse con el resultado de ese partido.
+        </div>
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Optimista</div><div class="sim-sc-score">IDSC 89 — 82</div><div class="sim-sc-desc">IDSC impone ritmo alto, neutraliza a VORHEES y BIRD no repite su último partido</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Base</div><div class="sim-sc-score">IDSC 83 — 88</div><div class="sim-sc-desc">Partido ajustado, Oberá aprovecha el local en el 4° cuarto</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Pesimista</div><div class="sim-sc-score">IDSC 72 — 96</div><div class="sim-sc-desc">BIRD y VORHEES dominan, el triple exterior de Oberá (44%) no falla</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 3: INSTITUTO -->
+    <div class="sim-card" id="sim-instituto">
+      <div class="sim-header">
+        <div class="sim-date">23 MAR · Angel Sandrín · <span class="sim-cond">✈️ Visitante</span></div>
+        <div class="sim-rivals">
+          <div class="sim-team sim-rival-team">
+            <div class="sim-team-name">INSTITUTO</div>
+            <div class="sim-team-role">LOCAL</div>
+          </div>
+          <div class="sim-score-block">
+            <div class="sim-score"><span class="sim-pts-rival">84</span><span class="sim-vs">—</span><span class="sim-pts-idsc">82</span></div>
+            <div class="sim-score-label">proyección</div>
+          </div>
+          <div class="sim-team sim-idsc-team">
+            <div class="sim-team-name">IDSC OLIVA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+        <div class="sim-prob-bar-wrap">
+          <div class="sim-prob-label-l">Instituto 54.7%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:54.7%"></div></div>
+          <div class="sim-prob-label-r">IDSC 45.3%</div>
+        </div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave</div>
+          <div class="sim-factor sim-factor-neg">➖ IDSC juega de <strong>visitante</strong> (−3.5 pts ajuste estadístico)</div>
+          <div class="sim-factor sim-factor-neg">➖ Instituto viene con <strong>3 victorias consecutivas</strong> y en buena dinámica</div>
+          <div class="sim-factor sim-factor-pos">➕ Instituto tiene el <strong>Offensive Rating más bajo</strong> de los 3 rivales (103.3)</div>
+          <div class="sim-factor sim-factor-pos">➕ IDSC es muy superior en <strong>pts/partido</strong> (86.2 vs 76.9 de Instituto)</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ El partido más parejo en la proyección — apenas 2 pts de diferencia esperada</div>
+        </div>
+        <div class="sim-note">
+          <strong>Nota:</strong> El modelo le da una leve ventaja a Instituto únicamente por la condición de local. En métricas absolutas IDSC supera claramente a Instituto en todos los indicadores (pts/partido, Off Rating, Net Rating). Si IDSC logra imponer su ritmo ofensivo y controla a WHELAN y GARELLO, la victoria es probable. Es el rival más accesible de los tres en términos estadísticos.
+        </div>
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Optimista</div><div class="sim-sc-score">IDSC 92 — 78</div><div class="sim-sc-desc">IDSC impone su ritmo (79 pos/pp), VILDOZA no puede controlar el juego</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Base</div><div class="sim-sc-score">IDSC 82 — 84</div><div class="sim-sc-desc">Partido ajustado, Instituto aprovecha el local en los últimos minutos</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Pesimista</div><div class="sim-sc-score">IDSC 70 — 88</div><div class="sim-sc-desc">WHELAN y GARELLO explotan, IDSC no puede contener el ataque interior</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.sim-card{background:var(--navy2);border:1px solid var(--border2);border-radius:16px;margin-bottom:1.2rem;overflow:hidden;}
+.sim-header{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
+.sim-date{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);margin-bottom:.9rem;}
+.sim-cond{color:var(--gold);}
+.sim-rivals{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;}
+.sim-team{flex:1;}
+.sim-rival-team{text-align:left;}
+.sim-idsc-team{text-align:right;}
+.sim-team-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--white);letter-spacing:.5px;}
+.sim-idsc-team .sim-team-name{color:var(--gold);}
+.sim-team-role{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.15rem;}
+.sim-score-block{text-align:center;min-width:130px;}
+.sim-score{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;display:flex;align-items:center;justify-content:center;gap:.4rem;}
+.sim-pts-rival{color:#e74c3c;}
+.sim-pts-idsc{color:var(--gold);}
+.sim-vs{color:var(--muted);font-size:1.1rem;}
+.sim-score-label{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
+.sim-prob-bar-wrap{display:flex;align-items:center;gap:.7rem;}
+.sim-prob-label-l,.sim-prob-label-r{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);white-space:nowrap;min-width:80px;}
+.sim-prob-label-r{text-align:right;color:var(--gold);}
+.sim-prob-bar{flex:1;height:6px;background:rgba(245,166,35,.15);border-radius:3px;overflow:hidden;}
+.sim-prob-fill-rival{height:100%;background:linear-gradient(90deg,#e74c3c,#e67e22);border-radius:3px;}
+.sim-body{padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:1rem;}
+.sim-factors{display:flex;flex-direction:column;gap:.4rem;}
+.sim-factor-title{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem;}
+.sim-factor{font-size:.8rem;line-height:1.5;padding:.3rem .5rem;border-radius:6px;}
+.sim-factor strong{font-weight:600;}
+.sim-factor-pos{color:#2ec87a;background:rgba(46,200,122,.06);}
+.sim-factor-neg{color:#e07070;background:rgba(231,76,60,.06);}
+.sim-factor-neu{color:var(--muted);background:rgba(255,255,255,.03);}
+.sim-note{font-size:.78rem;color:var(--muted);line-height:1.7;background:rgba(52,152,219,.06);border-left:2px solid rgba(52,152,219,.3);padding:.7rem .9rem;border-radius:0 8px 8px 0;}
+.sim-note strong{color:var(--white);}
+.sim-scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;}
+.sim-scenario{border-radius:10px;padding:.8rem;border:1px solid var(--border2);text-align:center;}
+.sim-sc-label{font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem;}
+.sim-sc-score{font-family:'Bebas Neue',sans-serif;font-size:1rem;margin-bottom:.35rem;}
+.sim-sc-desc{font-size:.68rem;color:var(--muted);line-height:1.5;}
+.sim-sc-opt{background:rgba(46,200,122,.06);border-color:rgba(46,200,122,.2);}
+.sim-sc-opt .sim-sc-label{color:#2ec87a;}.sim-sc-opt .sim-sc-score{color:#2ec87a;}
+.sim-sc-base{background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.2);}
+.sim-sc-base .sim-sc-label{color:var(--gold);}.sim-sc-base .sim-sc-score{color:var(--gold);}
+.sim-sc-pes{background:rgba(231,76,60,.06);border-color:rgba(231,76,60,.2);}
+.sim-sc-pes .sim-sc-label{color:#e07070;}.sim-sc-pes .sim-sc-score{color:#e07070;}
+@media(max-width:600px){.sim-scenarios{grid-template-columns:1fr;}.sim-rivals{flex-direction:column;text-align:center;}.sim-idsc-team{text-align:center;}}
+</style>
+
+</body>
+</html>
