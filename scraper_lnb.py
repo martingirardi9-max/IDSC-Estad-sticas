@@ -61,6 +61,191 @@ def get_next_match():
         print(f"  Fixtures error: {e}")
     return None
 
+
+def get_idsc_results():
+    """Obtiene resultados recientes de IDSC desde 365scores"""
+    url = "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403&competitors=72002"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=15)
+        print(f"  Results HTTP {r.status_code}, {len(r.text)} chars")
+        if r.status_code != 200: return []
+        games = r.json().get('games', [])
+        results = []
+        for game in games:
+            home = game.get('homeCompetitor', {})
+            away = game.get('awayCompetitor', {})
+            home_name = home.get('name', '')
+            away_name = away.get('name', '')
+            if not (any(k in home_name.lower() for k in IDSC_KEYWORDS) or
+                    any(k in away_name.lower() for k in IDSC_KEYWORDS)):
+                continue
+            idsc_home = any(k in home_name.lower() for k in IDSC_KEYWORDS)
+            rival = away_name if idsc_home else home_name
+            idsc_score = home.get('score', 0) if idsc_home else away.get('score', 0)
+            rival_score = away.get('score', 0) if idsc_home else home.get('score', 0)
+            win = idsc_score > rival_score
+            results.append({
+                'rival': rival,
+                'idsc_score': idsc_score,
+                'rival_score': rival_score,
+                'win': win,
+                'result_str': f"{'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
+                'badge': f"✓ {'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
+            })
+            print(f"  Resultado: vs {rival} {'V' if win else 'D'} {idsc_score}-{rival_score}")
+        return results
+    except Exception as e:
+        print(f"  Results error: {e}")
+        return []
+
+def update_rivals_timeline(results, next_rival, content):
+    """Actualiza estados en el array RIVALS de JavaScript"""
+    if not results:
+        return content
+
+    changed_rivals = []
+
+    for res in results:
+        rival_name = res['rival'].lower()
+        # Normalizar nombres para matching
+        rival_keywords = rival_name.replace('la unión de formosa', 'la unión fsa').split()[:2]
+
+        # Buscar el rival en el JS array y actualizar su status
+        # Pattern: {name:"NOMBRE", ... status:"next" o "pending" ...}
+        # Cambiar a done y agregar resultado
+        import re as _re
+        
+        # Buscar bloque del rival en el array RIVALS
+        pattern = r'(\{name:"[^"]*(?:' + '|'.join(rival_keywords) + r')[^"]*"[^}]*?)status:"(?:next|pending)"([^}]*?\})'
+        
+        def replace_status(m):
+            block = m.group(0)
+            # Ya está done, no cambiar
+            if 'status:"done"' in block:
+                return block
+            block = block.replace('status:"next"', 'status:"done"')
+            block = block.replace('status:"pending"', 'status:"done"')
+            changed_rivals.append(res['rival'])
+            return block
+        
+        new_content = _re.sub(pattern, replace_status, content, flags=_re.IGNORECASE)
+        if new_content != content:
+            content = new_content
+
+    # Marcar próximo rival como "next" en el timeline HTML
+    if next_rival:
+        nv = next_rival.lower().split()[:2]
+        pattern2 = r'(data-status=")pending(".*?rival-name">(?:' + '|'.join(nv) + r')[^<]*</div>)'
+        content = _re.sub(pattern2, r'\g<1>next\g<2>', content, flags=_re.IGNORECASE|_re.DOTALL)
+
+    if changed_rivals:
+        print(f"  Rivales actualizados a done: {changed_rivals}")
+    return content
+
+
+def update_fixture(results, next_rival, content):
+    """
+    Actualiza el menú FIXTURE:
+    - Partidos jugados: clase 'done', badge resultado real (✓ Victoria/Derrota X-Y)
+    - Próximo partido: clase 'next', badge ⚡ Próximo
+    - Futuros: clase 'upcoming', badge 📅 Programado
+    """
+    import re as _re
+
+    if not results:
+        return content
+
+    # Crear dict de resultados por rival (nombre simplificado)
+    results_by_rival = {}
+    for r in results:
+        key = r['rival'].lower()
+        results_by_rival[key] = r
+
+    def normalize(name):
+        """Simplifica nombre para matching"""
+        name = name.lower()
+        replacements = {
+            'independiente de oliva': 'idsc',
+            'la unión de formosa': 'la unión fsa',
+            'la union de formosa': 'la unión fsa',
+            'ferro carril oeste': 'ferro',
+            'obras sanitarias': 'obras',
+            'olimpico': 'olímpico',
+            'penarol': 'peñarol',
+            'gimnasia y esgrima': 'gimnasia',
+            'argentino junin': 'argentino',
+            'racing club chivilcoy': 'racing',
+            'san martin': 'san martín',
+            'union de santa fe': 'union (sf)',
+            'boca juniors': 'boca',
+            'ciclista olimpico': 'olímpico (lb)',
+        }
+        for old, new in replacements.items():
+            name = name.replace(old, new)
+        return name
+
+    def find_result_for_fixture(fixture_text):
+        """Busca resultado para un partido del fixture"""
+        fixture_norm = normalize(fixture_text)
+        for rival_key, res in results_by_rival.items():
+            rival_norm = normalize(rival_key)
+            # Match si alguna palabra clave del rival aparece en el fixture
+            words = [w for w in rival_norm.split() if len(w) > 3]
+            if any(w in fixture_norm for w in words):
+                return res
+        return None
+
+    # Procesar cada fixture-card
+    def update_card(m):
+        card = m.group(0)
+        
+        # No tocar copa
+        if 'cup-card' in card or 'Copa' in card or 'COPA' in card:
+            return card
+        
+        # Extraer texto del partido para identificar rival
+        match_text = _re.search(r'fixture-match">(.*?)</div>', card, _re.DOTALL)
+        if not match_text:
+            return card
+        
+        match_str = match_text.group(1)
+        # Quitar el VS y IDSC OLIVA para quedarnos con el rival
+        match_clean = _re.sub(r'<[^>]+>', '', match_str)  # quitar HTML
+        match_clean = match_clean.replace('IDSC OLIVA', '').replace('VS', '').strip()
+
+        # Buscar si hay resultado
+        res = find_result_for_fixture(match_clean)
+
+        # Verificar si ya tiene resultado real (badge-win)
+        if 'badge-win' in card:
+            return card  # Ya tiene resultado real, no tocar
+
+        if res:
+            # Partido jugado — marcar como done con resultado
+            badge_text = f"✓ {'Victoria' if res['win'] else 'Derrota'} {res['idsc_score']}–{res['rival_score']}"
+            badge_class = 'badge-win' if res['win'] else 'badge-loss'
+            card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card done"', card)
+            card = _re.sub(r'<span class="badge[^"]*">.*?</span>', f'<span class="badge {badge_class}">{badge_text}</span>', card)
+        else:
+            # Verificar si es próximo
+            if next_rival and any(w in match_clean.lower() for w in normalize(next_rival).split() if len(w) > 3):
+                card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card next"', card)
+                card = _re.sub(r'<span class="badge[^"]*">.*?</span>', '<span class="badge badge-next">⚡ Próximo</span>', card)
+            else:
+                # Futuro
+                if 'fixture-card done' not in card and 'badge-win' not in card:
+                    card = _re.sub(r'class="fixture-card next"', 'class="fixture-card upcoming"', card)
+
+        return card
+
+    new_content = _re.sub(
+        r'<div class="fixture-card[^>]*>.*?</div>\s*</div>',
+        update_card,
+        content,
+        flags=_re.DOTALL
+    )
+    return new_content
+
 def build_standings_html(standings):
     rows = []
     for s in standings:
@@ -153,6 +338,42 @@ def update_html(standings, next_match, html_path='index.html'):
         )
         changed.append(f'próximo: {rival}')
 
+    # Actualizar timeline de rivales con resultados reales
+    results = get_idsc_results()
+    if results:
+        content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
+        changed.append(f'{len(results)} resultados en rivales')
+        content = update_fixture(results, next_match['rival'] if next_match else None, content)
+        changed.append('fixture')
+
+
+    # Cuadro playoff proyectado (top 8 de la tabla)
+    if standings and len(standings) >= 8:
+        top8 = standings[:8]
+        rival_8 = top8[7]['team'].upper()
+        pct_8 = round(top8[7]['pg']/top8[7]['pj']*100,1) if top8[7]['pj']>0 else 0
+
+        # Rival proyectado en HOME card
+        content = re.sub(
+            r'(po-card-rival.*?po-main">)(.*?)(</div>)',
+            r'\g<1>' + rival_8 + r'\g<3>',
+            content, count=1, flags=re.DOTALL
+        )
+        changed.append(f'playoff rival: {rival_8}')
+
+        # Bracket: actualizar nombre y % de cada seed 1-8
+        for s in top8:
+            pos = s['pos']
+            pct = round(s['pg']/s['pj']*100,1) if s['pj']>0 else 0
+            is_idsc = any(k in s['team'].lower() for k in ['independiente','oliva'])
+            name = '⭐ INDEPENDIENTE (O)' if is_idsc else s['team'].upper()
+            content = re.sub(
+                r'(<span class="bracket-pos">' + str(pos) + r'°</span>\s*<span class="bracket-name">)[^<]*(</span>\s*<span class="bracket-pct">)[^<]*(</span>)',
+                r'\g<1>' + name + r'\g<2>' + str(pct) + r'%\g<3>',
+                content
+            )
+        changed.append('bracket')
+
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(content)
     print(f"✅ HTML actualizado: {', '.join(changed)}")
@@ -180,3 +401,5 @@ if __name__ == '__main__':
     update_html(standings, nxt)
     print("─" * 50)
     print("✅ Proceso completado")
+
+# PATCH: agregar función de playoff al scraper existente
