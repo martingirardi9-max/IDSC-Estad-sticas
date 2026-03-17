@@ -1,6 +1,6 @@
 """
-IDSC Oliva - LNB Scraper v3
-Usa 365scores API con league ID 403 (Liga Nacional Argentina)
+IDSC Oliva - LNB Scraper v4
+365scores API — parser corregido + idioma inglés
 """
 import requests
 import json
@@ -12,82 +12,116 @@ IDSC_KEYWORDS = ['independiente', 'oliva', 'idsc']
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
     'Accept': 'application/json, text/plain, */*',
-    'Accept-Language': 'es-AR,es;q=0.9',
+    'Accept-Language': 'en-US,en;q=0.9',
     'Origin': 'https://www.365scores.com',
-    'Referer': 'https://www.365scores.com/es/basketball/league/liga-nacional-403/standings',
+    'Referer': 'https://www.365scores.com/en/basketball/league/liga-nacional-403/standings',
 }
 
-def get_standings_365():
-    """API de 365scores — league ID 403 = Liga Nacional Argentina"""
-    urls = [
-        "https://webws.365scores.com/web/standings/?appTypeId=5&langId=2&timezoneName=America/Argentina/Buenos_Aires&userCountryId=7&competitions=403",
-        "https://webws.365scores.com/web/standings/?appTypeId=5&langId=31&competitions=403",
-        "https://webws.365scores.com/web/standings/?competitions=403&appTypeId=5",
-    ]
-    for url in urls:
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=15)
-            print(f"  365scores: HTTP {r.status_code}, {len(r.text)} chars")
-            if r.status_code == 200 and len(r.text) > 100:
-                data = r.json()
-                print(f"  JSON keys: {list(data.keys()) if isinstance(data, dict) else type(data)}")
-                return parse_365_standings(data)
-        except Exception as e:
-            print(f"  Error: {e}")
-    return None
-
-def parse_365_standings(data):
-    """Parsea respuesta JSON de 365scores"""
-    standings = []
-    try:
-        # 365scores estructura: data -> standings -> groups -> rows
-        groups = data.get('standings', [{}])[0].get('groups', [{}])[0].get('rows', [])
-        if not groups:
-            # Intentar estructura alternativa
-            groups = data.get('rows', [])
-        
-        print(f"  Rows encontrados: {len(groups)}")
-        
-        for i, row in enumerate(groups):
-            team = row.get('competitor', {})
-            name = team.get('name', f'Equipo {i+1}')
-            stats = row.get('stats', [])
-            
-            # Stats vienen como lista ordenada: GP, W, L, PF, PA, etc.
-            def get_stat(key):
-                for s in stats:
-                    if s.get('name') == key or s.get('shortName') == key:
-                        return s.get('value', 0)
-                return 0
-            
-            standings.append({
-                'pos': row.get('position', i+1),
-                'team': name,
-                'pj': int(get_stat('GP') or get_stat('gamesPlayed') or 0),
-                'pg': int(get_stat('W') or get_stat('wins') or 0),
-                'pp': int(get_stat('L') or get_stat('losses') or 0),
-                'pf': int(get_stat('PF') or get_stat('pointsFor') or 0),
-                'pc': int(get_stat('PA') or get_stat('pointsAgainst') or 0),
-            })
-    except Exception as e:
-        print(f"  Parse error: {e}")
-        # Debug: mostrar estructura real
-        print(f"  Data sample: {str(data)[:300]}")
-    
-    return standings if standings else None
-
-def get_next_match_365():
-    """Próximo partido de IDSC desde 365scores"""
-    url = "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=2&timezoneName=America/Argentina/Buenos_Aires&competitions=403"
+def get_standings():
+    url = "https://webws.365scores.com/web/standings/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&userCountryId=7&competitions=403"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
-        print(f"  Fixtures 365: HTTP {r.status_code}, {len(r.text)} chars")
+        print(f"  HTTP {r.status_code}, {len(r.text)} chars")
+        if r.status_code != 200 or len(r.text) < 100:
+            return None
+        data = r.json()
+        
+        # Debug: mostrar estructura real de standings
+        standings_raw = data.get('standings', [])
+        print(f"  standings count: {len(standings_raw)}")
+        if standings_raw:
+            s0 = standings_raw[0]
+            print(f"  standings[0] keys: {list(s0.keys())}")
+            groups = s0.get('groups', [])
+            print(f"  groups count: {len(groups)}")
+            if groups:
+                g0 = groups[0]
+                print(f"  groups[0] keys: {list(g0.keys())}")
+                rows = g0.get('rows', [])
+                print(f"  rows count: {len(rows)}")
+                if rows:
+                    print(f"  rows[0] keys: {list(rows[0].keys())}")
+                    print(f"  rows[0] sample: {str(rows[0])[:300]}")
+                    return parse_standings(rows)
+                # Intentar 'competitors' en lugar de 'rows'
+                competitors = g0.get('competitors', [])
+                print(f"  competitors count: {len(competitors)}")
+                if competitors:
+                    print(f"  competitors[0]: {str(competitors[0])[:300]}")
+                    return parse_standings(competitors)
+            # Sin grupos — intentar rows directo en standings[0]
+            rows = s0.get('rows', [])
+            print(f"  direct rows: {len(rows)}")
+            if rows:
+                print(f"  row[0]: {str(rows[0])[:300]}")
+                return parse_standings(rows)
+        return None
+    except Exception as e:
+        print(f"  Error: {e}")
+        return None
+
+def parse_standings(rows):
+    standings = []
+    for i, row in enumerate(rows):
+        try:
+            # Intentar diferentes estructuras de nombre
+            team = (row.get('competitor') or row.get('team') or row.get('name') or {})
+            if isinstance(team, dict):
+                name = team.get('name') or team.get('shortName') or f'Equipo {i+1}'
+            else:
+                name = str(team) or f'Equipo {i+1}'
+            
+            # Stats — pueden estar como lista o dict
+            stats = row.get('stats', [])
+            
+            def get_stat(*keys):
+                for s in stats:
+                    for k in keys:
+                        if s.get('name','').lower() == k.lower() or \
+                           s.get('shortName','').lower() == k.lower() or \
+                           s.get('type','') == k:
+                            return int(s.get('value', 0) or 0)
+                return 0
+            
+            pj = get_stat('GP','gamesPlayed','played','PJ','G')
+            pg = get_stat('W','wins','won','PG','V')
+            pp = get_stat('L','losses','lost','PP','D')
+            pf = get_stat('PF','pointsFor','scored','PF')
+            pc = get_stat('PA','pointsAgainst','conceded','PC')
+            
+            # Si stats vacío, buscar directo en row
+            if pj == 0:
+                pj = int(row.get('played') or row.get('gamesPlayed') or row.get('GP') or 0)
+                pg = int(row.get('wins') or row.get('won') or row.get('W') or 0)
+                pp = int(row.get('losses') or row.get('lost') or row.get('L') or 0)
+            
+            standings.append({
+                'pos':  row.get('position') or row.get('rank') or i+1,
+                'team': name,
+                'pj':   pj,
+                'pg':   pg,
+                'pp':   pp,
+                'pf':   pf,
+                'pc':   pc,
+            })
+        except Exception as e:
+            print(f"  Parse row {i} error: {e}")
+    print(f"  Parseados: {len(standings)} equipos")
+    return standings if standings else None
+
+def get_next_match():
+    url = "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=15)
+        print(f"  Fixtures HTTP {r.status_code}, {len(r.text)} chars")
         if r.status_code == 200 and len(r.text) > 100:
             data = r.json()
             games = data.get('games', [])
+            print(f"  Games encontrados: {len(games)}")
             for game in games:
                 home = game.get('homeCompetitor', {}).get('name', '')
                 away = game.get('awayCompetitor', {}).get('name', '')
+                print(f"  Partido: {home} vs {away}")
                 if any(k in home.lower() for k in IDSC_KEYWORDS) or \
                    any(k in away.lower() for k in IDSC_KEYWORDS):
                     idsc_home = any(k in home.lower() for k in IDSC_KEYWORDS)
@@ -155,27 +189,38 @@ def update_html(standings, next_match, html_path='index.html'):
             content = re.sub(r'(t-stat-num">)67%(</div>\s*<div class="t-stat-lbl">% Victorias)', f'\\g<1>{pct}%\\2', content)
             content = re.sub(r'(t-stat-num">)9(</div>\s*<div class="t-stat-lbl">Restantes)', f'\\g<1>{rest}\\2', content)
             changed.append(f'IDSC {idsc["pos"]}° {idsc["pg"]}V {idsc["pp"]}D')
+        standings_html = build_standings_html(standings)
+        new = re.sub(
+            r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
+            f'\\1\n      {standings_html}\n      \\3',
+            content, flags=re.DOTALL
+        )
+        if new != content:
+            content = new
+            changed.append('tabla')
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(content)
     print(f"✅ HTML: {', '.join(changed)}")
 
 if __name__ == '__main__':
-    print(f"🏀 IDSC - LNB Scraper v3 (365scores) - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+    print(f"🏀 IDSC - LNB Scraper v4 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     print("─" * 50)
     print("Tabla de posiciones...")
-    standings = get_standings_365()
+    standings = get_standings()
     if standings:
-        print(f"✅ {len(standings)} equipos")
+        print(f"✅ Tabla: {len(standings)} equipos")
         idsc = next((s for s in standings if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
         if idsc:
-            print(f"   IDSC: {idsc['pos']}° | {idsc['pg']}V {idsc['pp']}D")
+            print(f"   IDSC: {idsc['pos']}° {idsc['pg']}V {idsc['pp']}D")
     else:
-        print("⚠️  Sin datos")
+        print("⚠️  Sin datos de tabla")
     print("Próximo partido...")
-    nxt = get_next_match_365()
+    nxt = get_next_match()
     if nxt:
-        print(f"✅ vs {nxt['rival']} ({'LOCAL' if nxt['idsc_local'] else 'VISITANTE'})")
+        cond = 'LOCAL' if nxt['idsc_local'] else 'VISITANTE'
+        print(f"✅ vs {nxt['rival']} ({cond})")
     else:
         print("⚠️  No encontrado")
     update_html(standings, nxt)
-    print("✅ Completado")
+    print("─" * 50)
+    print("✅ Proceso completado")
