@@ -356,9 +356,9 @@ def update_html(standings, next_match, html_path='index.html'):
         rival_8 = top8[7]['team'].upper()
         pct_8 = round(top8[7]['pg']/top8[7]['pj']*100,1) if top8[7]['pj']>0 else 0
 
-        # Rival proyectado en HOME card
+        # Rival proyectado en HOME card (solo dentro de po-card-rival, sin tocar po-card-qualify)
         content = re.sub(
-            r'(po-card-rival.*?po-main">)(.*?)(</div>)',
+            r'(class="po-card po-card-rival">.*?class="po-main">)(.*?)(</div>)',
             r'\g<1>' + rival_8 + r'\g<3>',
             content, count=1, flags=re.DOTALL
         )
