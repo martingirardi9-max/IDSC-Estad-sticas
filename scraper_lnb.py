@@ -315,7 +315,7 @@ def update_html(standings, next_match, html_path='index.html'):
                              f'\\g<1>{idsc["pp"]}\\2', content)
             content = re.sub(r'(t-stat-num">)\d+%(</div>\s*<div class="t-stat-lbl">% Victorias)',
                              f'\\g<1>{pct}%\\2', content)
-            content = re.sub(r'(t-stat-num">\+?-?\d+)(</div>\s*<div class="t-stat-lbl">Diferencia)',
+            content = re.sub(r'(t-stat-num">)\+?-?\d+(?:\+\d+)?(</div>\s*<div class="t-stat-lbl">Diferencia)',
                              f'\\g<1>{diff_str}\\2', content)
             content = re.sub(r'(t-stat-num">)\d+(</div>\s*<div class="t-stat-lbl">Restantes)',
                              f'\\g<1>{rest}\\2', content)
