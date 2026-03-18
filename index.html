@@ -80,10 +80,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,22,40,.97);backdrop-filt
 .timeline-item[data-status="done"] .rival-card::before{background:#2ECC71;}
 .timeline-item[data-status="next"] .rival-card::before{background:var(--gold);}
 .timeline-item[data-status="cup"] .rival-card::before{background:#9B59B6;}
-.timeline-item[data-status="next"] .rival-card{opacity:.7;}
-.timeline-item[data-status="next"] .rival-card:hover{opacity:1;}
+.timeline-item[data-status="pending"] .rival-card{opacity:.7;}
+.timeline-item[data-status="pending"] .rival-card:hover{opacity:1;}
 .rival-card:hover,.timeline-item.is-open .rival-card{border-color:rgba(245,166,35,.25);background:var(--navy3);}
-.timeline-item[data-status="next"] .rival-card:hover{border-color:rgba(122,143,166,.25);}
+.timeline-item[data-status="pending"] .rival-card:hover{border-color:rgba(122,143,166,.25);}
 .timeline-item.is-open .rival-card{border-radius:14px 14px 0 0;}
 .timeline-item.is-open .rival-card::before,.rival-card:hover::before{opacity:1;}
 .rival-date{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);min-width:2.5rem;text-align:center;line-height:1.3;}
@@ -290,15 +290,15 @@ footer em{color:var(--gold);font-style:normal;}
     <div class="po-card po-card-qualify">
       <div class="po-pos-badge">1° PUESTO · 66.6% VICTORIAS</div>
       <div class="po-label">🏆 Clasificación Playoff</div>
-      <div class="po-main">BOCA JUNIORS</div>
+      <div class="po-main">4 VICTORIAS</div>
       <div class="po-sub">para clasificar matemáticamente entre los mejores 12</div>
       <div class="po-detail">PJ: 27 · PG: 18 · PP: 9 · Restantes: 9</div>
     </div>
     <div class="po-card po-card-rival">
       <div class="po-pos-badge">ACCESO DIRECTO A CUARTOS</div>
       <div class="po-label">🎯 Rival proyectado en Playoff</div>
-      <div class="po-main">OBERÁ TC</div>
-      <div class="po-sub">actual 4° puesto · 17V 10D · 62.9% — si IDSC mantiene el 1°</div>
+      <div class="po-main">BOCA</div>
+      <div class="po-sub">actual 8° puesto · 16V 12D · 57.1% — si IDSC mantiene el 1°</div>
       <div class="po-detail">Cuartos: 1° IDSC vs 8° · según tabla actualizada</div>
     </div>
     <div class="po-card po-card-next">
@@ -311,9 +311,9 @@ footer em{color:var(--gold);font-style:normal;}
   </div>
   <div class="stats-strip">
     <div class="stat-item"><div class="stat-num">1°</div><div class="stat-lbl">Posición actual</div></div>
-    <div class="stat-item"><div class="stat-num">0</div><div class="stat-lbl">Victorias</div></div>
+    <div class="stat-item"><div class="stat-num">18</div><div class="stat-lbl">Victorias</div></div>
     <div class="stat-item"><div class="stat-num">67%</div><div class="stat-lbl">% victorias</div></div>
-    <div class="stat-item"><div class="stat-num">36</div><div class="stat-lbl">Partidos restantes</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-lbl">Partidos restantes</div></div>
     <div class="stat-item"><div class="stat-num">19</div><div class="stat-lbl">PDFs disponibles</div></div>
   </div>
 </div>
@@ -705,7 +705,7 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="t-stat"><div class="t-stat-num">18</div><div class="t-stat-lbl">Victorias</div></div>
         <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Derrotas</div></div>
         <div class="t-stat"><div class="t-stat-num">67%</div><div class="t-stat-lbl">% Victorias</div></div>
-        <div class="t-stat"><div class="t-stat-num">+159+159</div><div class="t-stat-lbl">Diferencia pts</div></div>
+        <div class="t-stat"><div class="t-stat-num">+159</div><div class="t-stat-lbl">Diferencia PF-PC</div></div>
         <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Restantes</div></div>
         <div class="t-stat" style="border:1px solid rgba(245,166,35,.3);background:rgba(245,166,35,.07);position:relative;padding:.9rem .8rem;">
           <div style="position:absolute;top:.35rem;right:.45rem;font-family:'DM Mono',monospace;font-size:.5rem;color:var(--gold);letter-spacing:.5px;line-height:1.2;">🏆 #1 LIGA</div>
@@ -727,25 +727,24 @@ footer em{color:var(--gold);font-style:normal;}
         <span class="st-num">PF</span><span class="st-num">PC</span><span class="st-num">PTOS</span><span class="st-num">%V</span>
       </div>
       <div class="standings-row standings-idsc"><span class="st-pos st-pos-num">1</span><span class="st-team">⭐ INDEPENDIENTE (O)</span><span class="st-num">27</span><span class="st-num">18</span><span class="st-num">9</span><span class="st-num">2328</span><span class="st-num">2169</span><span class="st-num">45</span><span class="st-num">66.6%</span></div>
-      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">2</span><span class="st-team">FERRO</span><span class="st-num">27</span><span class="st-num">18</span><span class="st-num">9</span><span class="st-num">2300</span><span class="st-num">2235</span><span class="st-num">45</span><span class="st-num">66.6%</span></div>
-
-      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">3</span><span class="st-team">QUIMSA</span><span class="st-num">28</span><span class="st-num">18</span><span class="st-num">10</span><span class="st-num">2299</span><span class="st-num">2114</span><span class="st-num">46</span><span class="st-num">64.2%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">2</span><span class="st-team">QUIMSA</span><span class="st-num">29</span><span class="st-num">19</span><span class="st-num">10</span><span class="st-num">2388</span><span class="st-num">2195</span><span class="st-num">48</span><span class="st-num">65.5%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">3</span><span class="st-team">OBERÁ</span><span class="st-num">28</span><span class="st-num">18</span><span class="st-num">10</span><span class="st-num">2258</span><span class="st-num">2132</span><span class="st-num">46</span><span class="st-num">64.2%</span></div>
       <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">4</span><span class="st-team">GIMNASIA (CR)</span><span class="st-num">29</span><span class="st-num">18</span><span class="st-num">11</span><span class="st-num">2351</span><span class="st-num">2199</span><span class="st-num">47</span><span class="st-num">62.0%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">5</span><span class="st-team">OBERÁ</span><span class="st-num">26</span><span class="st-num">16</span><span class="st-num">10</span><span class="st-num">2095</span><span class="st-num">1975</span><span class="st-num">42</span><span class="st-num">61.5%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">6</span><span class="st-team">OBRAS</span><span class="st-num">25</span><span class="st-num">15</span><span class="st-num">10</span><span class="st-num">2033</span><span class="st-num">1966</span><span class="st-num">40</span><span class="st-num">60.0%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">7</span><span class="st-team">LA UNION FSA.</span><span class="st-num">29</span><span class="st-num">17</span><span class="st-num">12</span><span class="st-num">2336</span><span class="st-num">2295</span><span class="st-num">46</span><span class="st-num">58.6%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">8</span><span class="st-team">REGATAS (C)</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2077</span><span class="st-num">2019</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">9</span><span class="st-team">PEÑAROL (MDP)</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2178</span><span class="st-num">2162</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">10</span><span class="st-team">BOCA</span><span class="st-num">27</span><span class="st-num">15</span><span class="st-num">12</span><span class="st-num">2194</span><span class="st-num">2101</span><span class="st-num">42</span><span class="st-num">55.5%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">11</span><span class="st-team">INSTITUTO</span><span class="st-num">28</span><span class="st-num">15</span><span class="st-num">13</span><span class="st-num">2124</span><span class="st-num">2110</span><span class="st-num">43</span><span class="st-num">53.5%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">5</span><span class="st-team">FERRO</span><span class="st-num">29</span><span class="st-num">18</span><span class="st-num">11</span><span class="st-num">2452</span><span class="st-num">2410</span><span class="st-num">47</span><span class="st-num">62.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">6</span><span class="st-team">LA UNION FSA.</span><span class="st-num">30</span><span class="st-num">18</span><span class="st-num">12</span><span class="st-num">2427</span><span class="st-num">2367</span><span class="st-num">48</span><span class="st-num">60.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">7</span><span class="st-team">OBRAS</span><span class="st-num">26</span><span class="st-num">15</span><span class="st-num">11</span><span class="st-num">2114</span><span class="st-num">2055</span><span class="st-num">41</span><span class="st-num">57.6%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">8</span><span class="st-team">BOCA</span><span class="st-num">28</span><span class="st-num">16</span><span class="st-num">12</span><span class="st-num">2280</span><span class="st-num">2171</span><span class="st-num">44</span><span class="st-num">57.1%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">9</span><span class="st-team">INSTITUTO</span><span class="st-num">29</span><span class="st-num">16</span><span class="st-num">13</span><span class="st-num">2221</span><span class="st-num">2177</span><span class="st-num">45</span><span class="st-num">55.1%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">10</span><span class="st-team">REGATAS (C)</span><span class="st-num">29</span><span class="st-num">16</span><span class="st-num">13</span><span class="st-num">2242</span><span class="st-num">2206</span><span class="st-num">45</span><span class="st-num">55.1%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">11</span><span class="st-team">PEÑAROL (MDP)</span><span class="st-num">29</span><span class="st-num">15</span><span class="st-num">14</span><span class="st-num">2319</span><span class="st-num">2327</span><span class="st-num">44</span><span class="st-num">51.7%</span></div>
       <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">12</span><span class="st-team">SAN MARTÍN (C)</span><span class="st-num">29</span><span class="st-num">13</span><span class="st-num">16</span><span class="st-num">2171</span><span class="st-num">2195</span><span class="st-num">42</span><span class="st-num">44.8%</span></div>
       <div class="standings-divider"><span>— Fuera del playoff proyectado —</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">13</span><span class="st-team">UNION (SF)</span><span class="st-num">25</span><span class="st-num">11</span><span class="st-num">14</span><span class="st-num">2037</span><span class="st-num">2102</span><span class="st-num">36</span><span class="st-num">44.0%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">14</span><span class="st-team">OLÍMPICO (LB)</span><span class="st-num">28</span><span class="st-num">11</span><span class="st-num">17</span><span class="st-num">2195</span><span class="st-num">2218</span><span class="st-num">39</span><span class="st-num">39.2%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">15</span><span class="st-team">PLATENSE</span><span class="st-num">27</span><span class="st-num">10</span><span class="st-num">17</span><span class="st-num">2194</span><span class="st-num">2282</span><span class="st-num">37</span><span class="st-num">37.0%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">16</span><span class="st-team">ATENAS (C)</span><span class="st-num">25</span><span class="st-num">9</span><span class="st-num">16</span><span class="st-num">1871</span><span class="st-num">1992</span><span class="st-num">34</span><span class="st-num">36.0%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">17</span><span class="st-team">SAN LORENZO</span><span class="st-num">28</span><span class="st-num">10</span><span class="st-num">18</span><span class="st-num">2210</span><span class="st-num">2321</span><span class="st-num">38</span><span class="st-num">35.7%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">18</span><span class="st-team">RACING (CH)</span><span class="st-num">29</span><span class="st-num">9</span><span class="st-num">20</span><span class="st-num">2265</span><span class="st-num">2386</span><span class="st-num">38</span><span class="st-num">31.0%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">13</span><span class="st-team">UNION (SF)</span><span class="st-num">27</span><span class="st-num">11</span><span class="st-num">16</span><span class="st-num">2205</span><span class="st-num">2279</span><span class="st-num">38</span><span class="st-num">40.7%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">14</span><span class="st-team">PLATENSE</span><span class="st-num">28</span><span class="st-num">11</span><span class="st-num">17</span><span class="st-num">2287</span><span class="st-num">2370</span><span class="st-num">39</span><span class="st-num">39.2%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">15</span><span class="st-team">OLÍMPICO (LB)</span><span class="st-num">29</span><span class="st-num">11</span><span class="st-num">18</span><span class="st-num">2272</span><span class="st-num">2297</span><span class="st-num">40</span><span class="st-num">37.9%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">16</span><span class="st-team">SAN LORENZO</span><span class="st-num">29</span><span class="st-num">11</span><span class="st-num">18</span><span class="st-num">2289</span><span class="st-num">2392</span><span class="st-num">40</span><span class="st-num">37.9%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">17</span><span class="st-team">ATENAS (C)</span><span class="st-num">26</span><span class="st-num">9</span><span class="st-num">17</span><span class="st-num">1961</span><span class="st-num">2090</span><span class="st-num">35</span><span class="st-num">34.6%</span></div>
+      <div class="standings-row out-zone"><span class="st-pos st-pos-num">18</span><span class="st-team">RACING (CH)</span><span class="st-num">30</span><span class="st-num">10</span><span class="st-num">20</span><span class="st-num">2349</span><span class="st-num">2466</span><span class="st-num">40</span><span class="st-num">33.3%</span></div>
       <div class="standings-row out-zone"><span class="st-pos st-pos-num">19</span><span class="st-team">ARGENTINO (J)</span><span class="st-num">27</span><span class="st-num">6</span><span class="st-num">21</span><span class="st-num">1993</span><span class="st-num">2410</span><span class="st-num">33</span><span class="st-num">22.2%</span></div>
       <div class="standings-legend">
         <span class="leg-item"><span class="leg-dot" style="background:rgba(245,166,35,.4)"></span>Top 4 — acceso directo a cuartos</span>
@@ -786,7 +785,7 @@ footer em{color:var(--gold);font-style:normal;}
     </div>
 
     <!-- ESCENARIOS CLASIFICACIÓN -->
-    <div class="section-title"><h3>ESCENARIOS DE CLASIFICACIÓN</h3><div class="section-line"></div><div class="section-count">Referencia: Unión SF · 13° · 38 pts · 9 partidos restantes</div></div>
+    <div class="section-title"><h3>ESCENARIOS DE CLASIFICACIÓN</h3><div class="section-line"></div><div class="section-count">Referencia: Unión SF · 13° · 38 pts · 8 partidos restantes</div></div>
     <div class="scenarios-grid">
       <div class="scenario-card scenario-safe">
         <div class="scenario-icon">🔒</div>
@@ -825,12 +824,12 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">1°</span>
           <span class="bracket-name">⭐ INDEPENDIENTE (O)</span>
-          <span class="bracket-pct">66.7%</span>
+          <span class="bracket-pct">66.6%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">8°</span>
-          <span class="bracket-name">BOCA JUNIORS</span>
+          <span class="bracket-name">BOCA</span>
           <span class="bracket-pct">57.1%</span>
         </div>
         <div class="bracket-label">🏠 Local IDSC (si aplica)</div>
@@ -844,34 +843,34 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">7°</span>
-          <span class="bracket-name">OBRAS SANITARIAS</span>
-          <span class="bracket-pct">57.7%</span>
+          <span class="bracket-name">OBRAS</span>
+          <span class="bracket-pct">57.6%</span>
         </div>
       </div>
       <div class="bracket-match">
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">3°</span>
-          <span class="bracket-name">OBERA TC</span>
-          <span class="bracket-pct">64.3%</span>
+          <span class="bracket-name">OBERÁ</span>
+          <span class="bracket-pct">64.2%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">6°</span>
-          <span class="bracket-name">LA UNIÓN DE FORMOSA</span>
+          <span class="bracket-name">LA UNION FSA.</span>
           <span class="bracket-pct">60.0%</span>
         </div>
       </div>
       <div class="bracket-match">
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">4°</span>
-          <span class="bracket-name">GIMNASIA Y ESGRIMA (CR)</span>
-          <span class="bracket-pct">62.1%</span>
+          <span class="bracket-name">GIMNASIA (CR)</span>
+          <span class="bracket-pct">62.0%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">5°</span>
-          <span class="bracket-name">FERRO CARRIL OESTE</span>
-          <span class="bracket-pct">62.1%</span>
+          <span class="bracket-name">FERRO</span>
+          <span class="bracket-pct">62.0%</span>
         </div>
       </div>
     </div>
@@ -880,15 +879,15 @@ footer em{color:var(--gold);font-style:normal;}
     <div class="section-title" style="margin-top:2rem"><h3>RECLASIFICACIÓN PREVIA</h3><div class="section-line"></div><div class="section-count">5°–12° · 2 series · 4 pasan a cuartos</div></div>
     <div class="bracket-grid">
       <div class="bracket-match bracket-pre">
-        <div class="bracket-seed"><span class="bracket-pos">9°</span><span class="bracket-name">PEÑAROL (MDP)</span><span class="bracket-pct">55.5%</span></div>
+        <div class="bracket-seed"><span class="bracket-pos">9°</span><span class="bracket-name">INSTITUTO</span><span class="bracket-pct">55.1%</span></div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed"><span class="bracket-pos">12°</span><span class="bracket-name">SAN MARTÍN (C)</span><span class="bracket-pct">44.8%</span></div>
         <div class="bracket-label">Ganador avanza a Cuartos</div>
       </div>
       <div class="bracket-match bracket-pre">
-        <div class="bracket-seed"><span class="bracket-pos">10°</span><span class="bracket-name">BOCA</span><span class="bracket-pct">55.5%</span></div>
+        <div class="bracket-seed"><span class="bracket-pos">10°</span><span class="bracket-name">REGATAS (C)</span><span class="bracket-pct">55.1%</span></div>
         <div class="bracket-vs">VS</div>
-        <div class="bracket-seed"><span class="bracket-pos">11°</span><span class="bracket-name">INSTITUTO</span><span class="bracket-pct">53.5%</span></div>
+        <div class="bracket-seed"><span class="bracket-pos">11°</span><span class="bracket-name">PEÑAROL (MDP)</span><span class="bracket-pct">51.7%</span></div>
         <div class="bracket-label">Ganador avanza a Cuartos</div>
       </div>
     </div>
@@ -954,15 +953,15 @@ const RIVALS = [
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G/preview", download:"https://drive.google.com/uc?export=download&id=1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G"},
     {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6/preview", download:"https://drive.google.com/uc?export=download&id=1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6"},
   ]},
-  {name:"LA UNIÓN FSA.", sub:"18/03/2026 · Liga Nacional", status:"done", pdfs:[
+  {name:"LA UNIÓN FSA.", sub:"18/03/2026 · Liga Nacional", status:"next", pdfs:[
     {label:"Últimos Partidos (6P Visitante)", preview:"https://drive.google.com/file/d/1VZbHFJt6JsveX8yy47m713-hRzwjdA1H/preview", download:"https://drive.google.com/uc?export=download&id=1VZbHFJt6JsveX8yy47m713-hRzwjdA1H"},
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/100asNK5ACPwv8x9ix7COeX90fuS79t-E/preview", download:"https://drive.google.com/uc?export=download&id=100asNK5ACPwv8x9ix7COeX90fuS79t-E"},
   ]},
-  {name:"OBERÁ TC", sub:"20/03/2026 · Liga Nacional", status:"done", pdfs:[
+  {name:"OBERÁ TC", sub:"20/03/2026 · Liga Nacional", status:"next", pdfs:[
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp/preview", download:"https://drive.google.com/uc?export=download&id=1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp"},
     {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk/preview", download:"https://drive.google.com/uc?export=download&id=1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk"},
   ]},
-  {name:"INSTITUTO", sub:"23/03/2026 · Liga Nacional", status:"done", pdfs:[
+  {name:"INSTITUTO", sub:"23/03/2026 · Liga Nacional", status:"next", pdfs:[
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP/preview", download:"https://drive.google.com/uc?export=download&id=1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP"},
     {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE/preview", download:"https://drive.google.com/uc?export=download&id=1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE"},
   ]},
@@ -971,15 +970,15 @@ const RIVALS = [
   {name:"OBRAS BASKET", sub:"Copa Islas Malvinas · 01-02/04/2026", status:"cup", pdfs:[
     {label:"Informe de Scouting", preview:"https://drive.google.com/file/d/1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh/preview", download:"https://drive.google.com/uc?export=download&id=1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh"},
   ]},
-  {name:"PLATENSE", sub:"07/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-07", pdfs:[
+  {name:"PLATENSE", sub:"07/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-07", pdfs:[
   ]},
-  {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-10", pdfs:[
+  {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-10", pdfs:[
   ]},
-  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-13", pdfs:[
+  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-13", pdfs:[
   ]},
-  {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-15", pdfs:[
+  {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-15", pdfs:[
   ]},
-  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-18", pdfs:[
+  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-18", pdfs:[
   ]},
 ];
 let currentOpen = -1;
