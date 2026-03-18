@@ -80,7 +80,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,22,40,.97);backdrop-filt
 .timeline-item[data-status="done"] .rival-card::before{background:#2ECC71;}
 .timeline-item[data-status="next"] .rival-card::before{background:var(--gold);}
 .timeline-item[data-status="cup"] .rival-card::before{background:#9B59B6;}
-.timeline-item[data-status="pending"] .rival-card{opacity:.7;}
+.timeline-item[data-status="next"] .rival-card{opacity:.7;}
 .timeline-item[data-status="pending"] .rival-card:hover{opacity:1;}
 .rival-card:hover,.timeline-item.is-open .rival-card{border-color:rgba(245,166,35,.25);background:var(--navy3);}
 .timeline-item[data-status="pending"] .rival-card:hover{border-color:rgba(122,143,166,.25);}
@@ -290,7 +290,7 @@ footer em{color:var(--gold);font-style:normal;}
     <div class="po-card po-card-qualify">
       <div class="po-pos-badge">1° PUESTO · 66.6% VICTORIAS</div>
       <div class="po-label">🏆 Clasificación Playoff</div>
-      <div class="po-main">4 VICTORIAS</div>
+      <div class="po-main">BOCA JUNIORS</div>
       <div class="po-sub">para clasificar matemáticamente entre los mejores 12</div>
       <div class="po-detail">PJ: 27 · PG: 18 · PP: 9 · Restantes: 9</div>
     </div>
@@ -705,7 +705,7 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="t-stat"><div class="t-stat-num">18</div><div class="t-stat-lbl">Victorias</div></div>
         <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Derrotas</div></div>
         <div class="t-stat"><div class="t-stat-num">67%</div><div class="t-stat-lbl">% Victorias</div></div>
-        <div class="t-stat"><div class="t-stat-num">+159</div><div class="t-stat-lbl">Diferencia PF-PC</div></div>
+        <div class="t-stat"><div class="t-stat-num">+159+159</div><div class="t-stat-lbl">Diferencia PF-PC</div></div>
         <div class="t-stat"><div class="t-stat-num">9</div><div class="t-stat-lbl">Restantes</div></div>
         <div class="t-stat" style="border:1px solid rgba(245,166,35,.3);background:rgba(245,166,35,.07);position:relative;padding:.9rem .8rem;">
           <div style="position:absolute;top:.35rem;right:.45rem;font-family:'DM Mono',monospace;font-size:.5rem;color:var(--gold);letter-spacing:.5px;line-height:1.2;">🏆 #1 LIGA</div>
@@ -824,12 +824,12 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">1°</span>
           <span class="bracket-name">⭐ INDEPENDIENTE (O)</span>
-          <span class="bracket-pct">66.6%</span>
+          <span class="bracket-pct">66.7%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">8°</span>
-          <span class="bracket-name">BOCA</span>
+          <span class="bracket-name">BOCA JUNIORS</span>
           <span class="bracket-pct">57.1%</span>
         </div>
         <div class="bracket-label">🏠 Local IDSC (si aplica)</div>
@@ -843,34 +843,34 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">7°</span>
-          <span class="bracket-name">OBRAS</span>
-          <span class="bracket-pct">57.6%</span>
+          <span class="bracket-name">OBRAS SANITARIAS</span>
+          <span class="bracket-pct">57.7%</span>
         </div>
       </div>
       <div class="bracket-match">
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">3°</span>
-          <span class="bracket-name">OBERÁ</span>
-          <span class="bracket-pct">64.2%</span>
+          <span class="bracket-name">OBERA TC</span>
+          <span class="bracket-pct">64.3%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">6°</span>
-          <span class="bracket-name">LA UNION FSA.</span>
+          <span class="bracket-name">LA UNIÓN DE FORMOSA</span>
           <span class="bracket-pct">60.0%</span>
         </div>
       </div>
       <div class="bracket-match">
         <div class="bracket-seed bracket-home">
           <span class="bracket-pos">4°</span>
-          <span class="bracket-name">GIMNASIA (CR)</span>
-          <span class="bracket-pct">62.0%</span>
+          <span class="bracket-name">GIMNASIA Y ESGRIMA (CR)</span>
+          <span class="bracket-pct">62.1%</span>
         </div>
         <div class="bracket-vs">VS</div>
         <div class="bracket-seed bracket-away">
           <span class="bracket-pos">5°</span>
-          <span class="bracket-name">FERRO</span>
-          <span class="bracket-pct">62.0%</span>
+          <span class="bracket-name">FERRO CARRIL OESTE</span>
+          <span class="bracket-pct">62.1%</span>
         </div>
       </div>
     </div>
@@ -953,15 +953,15 @@ const RIVALS = [
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G/preview", download:"https://drive.google.com/uc?export=download&id=1SHDBKJi_bhTf5H5EiocUR-Hv_Q6uLa8G"},
     {label:"Últimos Partidos", preview:"https://drive.google.com/file/d/1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6/preview", download:"https://drive.google.com/uc?export=download&id=1Vp7Kt2MkqVqmL4dkDkC8PqC-yNn_Zht6"},
   ]},
-  {name:"LA UNIÓN FSA.", sub:"18/03/2026 · Liga Nacional", status:"next", pdfs:[
+  {name:"LA UNIÓN FSA.", sub:"18/03/2026 · Liga Nacional", status:"done", pdfs:[
     {label:"Últimos Partidos (6P Visitante)", preview:"https://drive.google.com/file/d/1VZbHFJt6JsveX8yy47m713-hRzwjdA1H/preview", download:"https://drive.google.com/uc?export=download&id=1VZbHFJt6JsveX8yy47m713-hRzwjdA1H"},
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/100asNK5ACPwv8x9ix7COeX90fuS79t-E/preview", download:"https://drive.google.com/uc?export=download&id=100asNK5ACPwv8x9ix7COeX90fuS79t-E"},
   ]},
-  {name:"OBERÁ TC", sub:"20/03/2026 · Liga Nacional", status:"next", pdfs:[
+  {name:"OBERÁ TC", sub:"20/03/2026 · Liga Nacional", status:"done", pdfs:[
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp/preview", download:"https://drive.google.com/uc?export=download&id=1Isiz0AJk8hkl8TRXNfGSqxJqq_WgRYBp"},
     {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk/preview", download:"https://drive.google.com/uc?export=download&id=1b29_2vA8-71d2_G7lK1Tm1eXN7FdmSUk"},
   ]},
-  {name:"INSTITUTO", sub:"23/03/2026 · Liga Nacional", status:"next", pdfs:[
+  {name:"INSTITUTO", sub:"23/03/2026 · Liga Nacional", status:"done", pdfs:[
     {label:"Perfil de Temporada", preview:"https://drive.google.com/file/d/1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP/preview", download:"https://drive.google.com/uc?export=download&id=1Mt8_Z3WJbZ_AxDcxpWRYeuewUqJty_EP"},
     {label:"Últimos 5 Partidos", preview:"https://drive.google.com/file/d/1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE/preview", download:"https://drive.google.com/uc?export=download&id=1gloWhFbA6qD9uC5NnywZfDJl2ATbM6YE"},
   ]},
@@ -970,15 +970,15 @@ const RIVALS = [
   {name:"OBRAS BASKET", sub:"Copa Islas Malvinas · 01-02/04/2026", status:"cup", pdfs:[
     {label:"Informe de Scouting", preview:"https://drive.google.com/file/d/1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh/preview", download:"https://drive.google.com/uc?export=download&id=1oEoTi2SYGB0RZlXnLVmaVPbDMhAftgGh"},
   ]},
-  {name:"PLATENSE", sub:"07/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-07", pdfs:[
+  {name:"PLATENSE", sub:"07/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-07", pdfs:[
   ]},
-  {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-10", pdfs:[
+  {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-10", pdfs:[
   ]},
-  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-13", pdfs:[
+  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-13", pdfs:[
   ]},
-  {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-15", pdfs:[
+  {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-15", pdfs:[
   ]},
-  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"pending", matchDate:"2026-04-18", pdfs:[
+  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-18", pdfs:[
   ]},
 ];
 let currentOpen = -1;
