@@ -96,7 +96,15 @@ def get_idsc_results():
                 'badge': f"✓ {'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
             })
             print(f"  Resultado: vs {rival} {'V' if win else 'D'} {idsc_score}-{rival_score}")
-        return results
+        # Deduplicar — quedarse con el resultado más reciente por rival
+        seen = {}
+        deduped = []
+        for r in results:
+            key = r['rival'].lower()
+            if key not in seen:
+                seen[key] = True
+                deduped.append(r)
+        return deduped
     except Exception as e:
         print(f"  Results error: {e}")
         return []
@@ -333,7 +341,15 @@ def update_html(standings, next_match, html_path='index.html'):
             changed.append('tabla posiciones')
 
     if next_match:
-        rival = next_match['rival'].upper()
+        # Verificar que el próximo partido no sea uno ya jugado
+        already_played = results and any(
+            any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
+            for r in (results or [])
+        )
+        if already_played:
+            print(f"  ⚠️  Próximo ({next_match['rival']}) ya jugado — buscando siguiente...")
+            next_match = None
+        rival = next_match['rival'].upper() if next_match else ''
         content = re.sub(
             r'(po-card-next.*?po-main">)(.*?)(</div>)',
             f'\\g<1>{rival}\\g<3>',
