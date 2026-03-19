@@ -350,6 +350,19 @@ def update_html(standings, next_match, html_path='index.html'):
             print(f"  ⚠️  Tabla NO actualizada: 365scores tiene {pj_api}PJ pero HTML tiene {pj_html}PJ — esperando sync")
             changed.append(f'tabla pendiente sync ({pj_api}/{pj_html}PJ)')
 
+    # Obtener resultados ANTES del bloque next_match
+    results = get_idsc_results()
+
+    if next_match:
+        # Si el "próximo" ya fue jugado, saltarlo
+        already_played = bool(results) and any(
+            any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
+            for r in results
+        )
+        if already_played:
+            print(f"  ⚠️  Próximo ({next_match['rival']}) ya jugado — buscando siguiente...")
+            next_match = None
+
     if next_match:
         rival = next_match['rival'].upper()
         content = re.sub(
@@ -359,8 +372,6 @@ def update_html(standings, next_match, html_path='index.html'):
         )
         changed.append(f'próximo: {rival}')
 
-    # Actualizar timeline de rivales con resultados reales
-    results = get_idsc_results()
     if results:
         content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
         changed.append(f'{len(results)} resultados en rivales')
