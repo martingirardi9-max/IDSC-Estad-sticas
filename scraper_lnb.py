@@ -250,13 +250,17 @@ def update_fixture(results, next_rival, content):
     return new_content
 
 def build_standings_html(standings):
+    # Ordenar por posición para garantizar orden correcto independientemente de la API
+    standings_sorted = sorted(standings, key=lambda s: s['pos'])
     rows = []
-    for s in standings:
+    for s in standings_sorted:
         is_idsc = any(k in s['team'].lower() for k in IDSC_KEYWORDS)
         pct = round(s['pg'] / s['pj'] * 100, 1) if s['pj'] > 0 else 0
         pts = s['pj'] + s['pg']
         if is_idsc:
-            row_class, pos_class = 'standings-row standings-idsc', 'st-pos st-pos-gold'
+            zone = 'playoff-zone' if s['pos'] <= 4 else ('playoffs-pre' if s['pos'] <= 12 else '')
+            row_class = f'standings-row standings-idsc {zone}'.strip()
+            pos_class = 'st-pos st-pos-num'
             team_name = '⭐ INDEPENDIENTE (O)'
         elif s['pos'] <= 4:
             row_class, pos_class = 'standings-row playoff-zone', 'st-pos st-pos-num'
