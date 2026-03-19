@@ -1088,12 +1088,27 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closePdf();});
 .diff-neg{color:#e74c3c;font-weight:600;}
 .diff-neu{color:var(--muted);}
 .lineup-new-badge{display:inline-block;background:var(--gold);color:#0d1b2a;font-size:.5rem;font-weight:700;padding:.15rem .4rem;border-radius:3px;margin-left:.4rem;vertical-align:middle;letter-spacing:.3px;}
+.lineup-momento{background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:1rem;}
+.lineup-momento-title{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.lineup-momento-items{display:flex;flex-direction:column;gap:.4rem;}
+.lineup-momento-item{font-size:.8rem;color:var(--muted);line-height:1.5;padding-left:.5rem;}
+.lineup-momento-item strong{color:var(--white);}
+.lineup-momento-item.pos{border-left:2px solid #2ec87a;padding-left:.6rem;}
+.lineup-momento-item.neg{border-left:2px solid #e74c3c;padding-left:.6rem;}
+.lineup-momento-item.neu{border-left:2px solid var(--muted);padding-left:.6rem;}
 </style>
 
 <script>
 const LINEUPS_DATA = [
   {
     id:"p28", rival:"vs LA UNIÓN FSA.", fecha:"18/03/2026", resultado:"D", score:"103-91",
+    notas:[
+      {tipo:"neg", texto:"<strong>Apertura del 4° cuarto:</strong> el quinteto BARRIONUEVO·ROLFI·PAUTASSO·VALLEJOS·FILIPPETTI cedió −8 en menos de 4 minutos — el tramo que definió el partido."},
+      {tipo:"pos", texto:"<strong>Mejor segmento:</strong> CAFFARO·CONRRADI·TABAREZ·ROLFI·VALLEJOS anotaron +9 en 5 minutos en el 3° cuarto — único tramo donde IDSC dominó con claridad."},
+      {tipo:"neg", texto:"<strong>Dupla a revisar:</strong> VALLEJOS + FILIPPETTI juntos terminaron −10 en 9 minutos. La combinación no generó flujo ofensivo y fue explotada defensivamente."},
+      {tipo:"pos", texto:"<strong>Dupla destacada:</strong> CAFFARO + CONRRADI sumaron +8 en 14 minutos compartidos — la asociación más productiva del partido."},
+      {tipo:"neu", texto:"<strong>Conclusión:</strong> el partido se perdió en el 4° cuarto con la segunda unidad. La primera unidad estuvo competitiva y dominó el 3°. El quiebre fue la transición entre unidades al inicio del último período."},
+    ],
     quintetos:[
       {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",min:"5:07",pts:18,rec:9,dif:"+9",ip10:"8.23"},
       {jugadores:"CAFFARO · CONRRADI · TABAREZ · MARCUCCI · VALLEJOS",min:"3:10",pts:9,rec:7,dif:"+2",ip10:"7.83"},
@@ -1121,6 +1136,12 @@ const LINEUPS_DATA = [
   },
   {
     id:"p27", rival:"vs REGATAS (C)", fecha:"12/03/2026", resultado:"V", score:"89-83",
+    notas:[
+      {tipo:"pos", texto:"<strong>Quinteto titular dominante:</strong> CAFFARO·CONRRADI·TABAREZ·ROLFI·VALLEJOS jugó 22 minutos con diferencial +8 — la base de la victoria."},
+      {tipo:"neg", texto:"<strong>Segmento crítico:</strong> cuando CONRRADI salió y ROLFI quedó con la segunda unidad, IDSC cedió −12 en apenas 4 minutos. La salida de CONRRADI fue el detonante."},
+      {tipo:"pos", texto:"<strong>Dupla más productiva:</strong> CAFFARO + CONRRADI acumularon +7 en 23 minutos — la combinación más consistente de la temporada hasta el momento."},
+      {tipo:"neu", texto:"<strong>Conclusión:</strong> victoria sólida gracias al quinteto titular. La dependencia de CONRRADI como ancla de la segunda unidad es el punto táctico más relevante a trabajar."},
+    ],
     quintetos:[
       {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",min:"22:16",pts:44,rec:36,dif:"+8",ip10:"7.93"},
       {jugadores:"CONRRADI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",min:"1:34",pts:10,rec:2,dif:"+8",ip10:"7.75"},
@@ -1162,6 +1183,12 @@ function renderLineups(){
         <div class="lineup-acc-arrow">&#9658;</div>
       </div>
       <div class="lineup-acc-body">
+        ${p.notas ? `<div class="lineup-momento">
+          <div class="lineup-momento-title">🎯 Momentos clave del partido</div>
+          <div class="lineup-momento-items">
+            ${p.notas.map(n=>`<div class="lineup-momento-item ${n.tipo}">${n.texto}</div>`).join('')}
+          </div>
+        </div>` : ''}
         <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">
           <strong style="color:var(--white)">Como leer:</strong>
           Pts + = puntos anotados por IDSC mientras esa combinacion estaba en cancha &middot;
