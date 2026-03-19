@@ -297,6 +297,14 @@ def update_html(standings, next_match, html_path='index.html'):
         idsc = next((s for s in standings
                      if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
         if idsc:
+            # Solo actualizar stats si la API tiene datos actualizados
+            import re as _re2
+            pj_html_m = _re2.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re2.DOTALL)
+            pj_html_cur = int(pj_html_m.group(1)) if pj_html_m else 0
+            if idsc['pj'] < pj_html_cur:
+                print(f"  ⚠️  Stats IDSC NO actualizados: API {idsc['pj']}PJ < HTML {pj_html_cur}PJ")
+                idsc = None  # skip stats update
+        if idsc:
             pct  = round(idsc['pg'] / idsc['pj'] * 100) if idsc['pj'] > 0 else 0
             rest = 36 - idsc['pj']
             diff = idsc['pf'] - idsc['pc']
@@ -321,29 +329,26 @@ def update_html(standings, next_match, html_path='index.html'):
                              f'\\g<1>{rest}\\2', content)
             changed.append(f'IDSC {idsc["pos"]}° {idsc["pg"]}V {idsc["pp"]}D {pct}%')
 
-        # Tabla completa
-        standings_html = build_standings_html(standings)
-        new = re.sub(
-            r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
-            f'\\1\n      {standings_html}\n      \\3',
-            content, flags=re.DOTALL
-        )
-        if new != content:
-            content = new
-            changed.append('tabla posiciones')
-
-    # Obtener resultados ANTES del bloque next_match (necesario para already_played)
-    results = get_idsc_results()
-
-    if next_match:
-        # Si el "próximo" ya fue jugado, no mostrarlo como próximo
-        already_played = bool(results) and any(
-            any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
-            for r in results
-        )
-        if already_played:
-            print(f"  ⚠️  Próximo ({next_match['rival']}) ya jugado — buscando siguiente...")
-            next_match = None
+        # Tabla completa — solo actualizar si 365scores tiene datos >= al HTML actual
+        import re as _re
+        # Extraer PJ actual de IDSC en el HTML
+        pj_html_match = _re.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re.DOTALL)
+        pj_html = int(pj_html_match.group(1)) if pj_html_match else 0
+        pj_api = idsc['pj'] if idsc else 0
+        
+        if pj_api >= pj_html:
+            standings_html = build_standings_html(standings)
+            new = re.sub(
+                r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
+                f'\\1\n      {standings_html}\n      \\3',
+                content, flags=re.DOTALL
+            )
+            if new != content:
+                content = new
+                changed.append('tabla posiciones')
+        else:
+            print(f"  ⚠️  Tabla NO actualizada: 365scores tiene {pj_api}PJ pero HTML tiene {pj_html}PJ — esperando sync")
+            changed.append(f'tabla pendiente sync ({pj_api}/{pj_html}PJ)')
 
     if next_match:
         rival = next_match['rival'].upper()
@@ -355,6 +360,7 @@ def update_html(standings, next_match, html_path='index.html'):
         changed.append(f'próximo: {rival}')
 
     # Actualizar timeline de rivales con resultados reales
+    results = get_idsc_results()
     if results:
         content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
         changed.append(f'{len(results)} resultados en rivales')
