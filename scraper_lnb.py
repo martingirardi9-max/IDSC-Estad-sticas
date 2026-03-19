@@ -96,15 +96,7 @@ def get_idsc_results():
                 'badge': f"✓ {'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
             })
             print(f"  Resultado: vs {rival} {'V' if win else 'D'} {idsc_score}-{rival_score}")
-        # Deduplicar — quedarse con el resultado más reciente por rival
-        seen = {}
-        deduped = []
-        for r in results:
-            key = r['rival'].lower()
-            if key not in seen:
-                seen[key] = True
-                deduped.append(r)
-        return deduped
+        return results
     except Exception as e:
         print(f"  Results error: {e}")
         return []
@@ -340,16 +332,21 @@ def update_html(standings, next_match, html_path='index.html'):
             content = new
             changed.append('tabla posiciones')
 
+    # Obtener resultados ANTES del bloque next_match (necesario para already_played)
+    results = get_idsc_results()
+
     if next_match:
-        # Verificar que el próximo partido no sea uno ya jugado
-        already_played = results and any(
+        # Si el "próximo" ya fue jugado, no mostrarlo como próximo
+        already_played = bool(results) and any(
             any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
-            for r in (results or [])
+            for r in results
         )
         if already_played:
             print(f"  ⚠️  Próximo ({next_match['rival']}) ya jugado — buscando siguiente...")
             next_match = None
-        rival = next_match['rival'].upper() if next_match else ''
+
+    if next_match:
+        rival = next_match['rival'].upper()
         content = re.sub(
             r'(po-card-next.*?po-main">)(.*?)(</div>)',
             f'\\g<1>{rival}\\g<3>',
@@ -358,7 +355,6 @@ def update_html(standings, next_match, html_path='index.html'):
         changed.append(f'próximo: {rival}')
 
     # Actualizar timeline de rivales con resultados reales
-    results = get_idsc_results()
     if results:
         content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
         changed.append(f'{len(results)} resultados en rivales')
@@ -420,3 +416,5 @@ if __name__ == '__main__':
     update_html(standings, nxt)
     print("─" * 50)
     print("✅ Proceso completado")
+
+# PATCH: agregar función de playoff al scraper existente
