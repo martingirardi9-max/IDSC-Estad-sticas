@@ -404,5 +404,3 @@ if __name__ == '__main__':
     update_html(standings, nxt)
     print("─" * 50)
     print("✅ Proceso completado")
-
-# PATCH: agregar función de playoff al scraper existente
