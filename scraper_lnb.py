@@ -1,5 +1,5 @@
 """
-IDSC Oliva - LNB Scraper v6 — FINAL
+IDSC Oliva - LNB Scraper v7
 365scores API — keys confirmadas: gamePlayed, gamesWon, gamesLost, for, against
 """
 import requests
@@ -33,7 +33,6 @@ def get_standings():
                 'pf':   int(row.get('for', 0) or 0),
                 'pc':   int(row.get('against', 0) or 0),
             })
-        # Verificar primeros 3
         for s in standings[:3]:
             pct = round(s['pg']/s['pj']*100,1) if s['pj'] > 0 else 0
             print(f"  {s['pos']}° {s['team']}: {s['pj']}PJ {s['pg']}V {s['pp']}D {pct}%")
@@ -61,9 +60,7 @@ def get_next_match():
         print(f"  Fixtures error: {e}")
     return None
 
-
 def get_idsc_results():
-    """Obtiene resultados recientes de IDSC desde 365scores"""
     url = "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403&competitors=72002"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
@@ -83,7 +80,6 @@ def get_idsc_results():
             rival = away_name if idsc_home else home_name
             idsc_score = int(home.get('score', 0) or 0) if idsc_home else int(away.get('score', 0) or 0)
             rival_score = int(away.get('score', 0) or 0) if idsc_home else int(home.get('score', 0) or 0)
-            # Filtrar partidos sin resultado real (WO, no jugados)
             if idsc_score <= 0 and rival_score <= 0:
                 continue
             win = idsc_score > rival_score
@@ -102,70 +98,43 @@ def get_idsc_results():
         return []
 
 def update_rivals_timeline(results, next_rival, content):
-    """Actualiza estados en el array RIVALS de JavaScript"""
     if not results:
         return content
-
     changed_rivals = []
-
     for res in results:
         rival_name = res['rival'].lower()
-        # Normalizar nombres para matching
         rival_keywords = rival_name.replace('la unión de formosa', 'la unión fsa').split()[:2]
-
-        # Buscar el rival en el JS array y actualizar su status
-        # Pattern: {name:"NOMBRE", ... status:"next" o "pending" ...}
-        # Cambiar a done y agregar resultado
         import re as _re
-        
-        # Buscar bloque del rival en el array RIVALS
         pattern = r'(\{name:"[^"]*(?:' + '|'.join(rival_keywords) + r')[^"]*"[^}]*?)status:"(?:next|pending)"([^}]*?\})'
-        
         def replace_status(m):
             block = m.group(0)
-            # Ya está done, no cambiar
             if 'status:"done"' in block:
                 return block
             block = block.replace('status:"next"', 'status:"done"')
             block = block.replace('status:"pending"', 'status:"done"')
             changed_rivals.append(res['rival'])
             return block
-        
         new_content = _re.sub(pattern, replace_status, content, flags=_re.IGNORECASE)
         if new_content != content:
             content = new_content
-
-    # Marcar próximo rival como "next" en el timeline HTML
     if next_rival:
         nv = next_rival.lower().split()[:2]
         pattern2 = r'(data-status=")pending(".*?rival-name">(?:' + '|'.join(nv) + r')[^<]*</div>)'
         content = _re.sub(pattern2, r'\g<1>next\g<2>', content, flags=_re.IGNORECASE|_re.DOTALL)
-
     if changed_rivals:
         print(f"  Rivales actualizados a done: {changed_rivals}")
     return content
 
-
 def update_fixture(results, next_rival, content):
-    """
-    Actualiza el menú FIXTURE:
-    - Partidos jugados: clase 'done', badge resultado real (✓ Victoria/Derrota X-Y)
-    - Próximo partido: clase 'next', badge ⚡ Próximo
-    - Futuros: clase 'upcoming', badge 📅 Programado
-    """
     import re as _re
-
     if not results:
         return content
-
-    # Crear dict de resultados por rival (nombre simplificado)
     results_by_rival = {}
     for r in results:
         key = r['rival'].lower()
         results_by_rival[key] = r
 
     def normalize(name):
-        """Simplifica nombre para matching"""
         name = name.lower()
         replacements = {
             'independiente de oliva': 'idsc',
@@ -188,57 +157,39 @@ def update_fixture(results, next_rival, content):
         return name
 
     def find_result_for_fixture(fixture_text):
-        """Busca resultado para un partido del fixture"""
         fixture_norm = normalize(fixture_text)
         for rival_key, res in results_by_rival.items():
             rival_norm = normalize(rival_key)
-            # Match si alguna palabra clave del rival aparece en el fixture
             words = [w for w in rival_norm.split() if len(w) > 3]
             if any(w in fixture_norm for w in words):
                 return res
         return None
 
-    # Procesar cada fixture-card
     def update_card(m):
         card = m.group(0)
-        
-        # No tocar copa
         if 'cup-card' in card or 'Copa' in card or 'COPA' in card:
             return card
-        
-        # Extraer texto del partido para identificar rival
         match_text = _re.search(r'fixture-match">(.*?)</div>', card, _re.DOTALL)
         if not match_text:
             return card
-        
         match_str = match_text.group(1)
-        # Quitar el VS y IDSC OLIVA para quedarnos con el rival
-        match_clean = _re.sub(r'<[^>]+>', '', match_str)  # quitar HTML
+        match_clean = _re.sub(r'<[^>]+>', '', match_str)
         match_clean = match_clean.replace('IDSC OLIVA', '').replace('VS', '').strip()
-
-        # Buscar si hay resultado
         res = find_result_for_fixture(match_clean)
-
-        # Verificar si ya tiene resultado real (badge-win)
         if 'badge-win' in card:
-            return card  # Ya tiene resultado real, no tocar
-
+            return card
         if res:
-            # Partido jugado — marcar como done con resultado
             badge_text = f"✓ {'Victoria' if res['win'] else 'Derrota'} {res['idsc_score']}–{res['rival_score']}"
             badge_class = 'badge-win' if res['win'] else 'badge-loss'
             card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card done"', card)
             card = _re.sub(r'<span class="badge[^"]*">.*?</span>', f'<span class="badge {badge_class}">{badge_text}</span>', card)
         else:
-            # Verificar si es próximo
             if next_rival and any(w in match_clean.lower() for w in normalize(next_rival).split() if len(w) > 3):
                 card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card next"', card)
                 card = _re.sub(r'<span class="badge[^"]*">.*?</span>', '<span class="badge badge-next">⚡ Próximo</span>', card)
             else:
-                # Futuro
                 if 'fixture-card done' not in card and 'badge-win' not in card:
                     card = _re.sub(r'class="fixture-card next"', 'class="fixture-card upcoming"', card)
-
         return card
 
     new_content = _re.sub(
@@ -250,7 +201,6 @@ def update_fixture(results, next_rival, content):
     return new_content
 
 def build_standings_html(standings):
-    # Ordenar por posición para garantizar orden correcto independientemente de la API
     standings_sorted = sorted(standings, key=lambda s: s['pos'])
     rows = []
     for s in standings_sorted:
@@ -300,46 +250,45 @@ def update_html(standings, next_match, html_path='index.html'):
     if standings:
         idsc = next((s for s in standings
                      if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
-        if idsc:
-            # Solo actualizar stats si la API tiene datos actualizados
-            import re as _re2
-            pj_html_m = _re2.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re2.DOTALL)
-            pj_html_cur = int(pj_html_m.group(1)) if pj_html_m else 0
-            if idsc['pj'] < pj_html_cur:
-                print(f"  ⚠️  Stats IDSC NO actualizados: API {idsc['pj']}PJ < HTML {pj_html_cur}PJ")
-                idsc = None  # skip stats update
-        if idsc:
+
+        # ── FIX: leer PJ de IDSC del HTML para comparar ──────────────────────
+        import re as _re
+        pj_html_match = _re.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re.DOTALL)
+        pj_html = int(pj_html_match.group(1)) if pj_html_match else 0
+        pj_api  = idsc['pj'] if idsc else 0
+        print(f"  PJ check: API={pj_api} HTML={pj_html}")
+
+        # ── Stats de IDSC: solo si API >= HTML ───────────────────────────────
+        if idsc and pj_api >= pj_html:
             pct  = round(idsc['pg'] / idsc['pj'] * 100) if idsc['pj'] > 0 else 0
             rest = 36 - idsc['pj']
             diff = idsc['pf'] - idsc['pc']
             diff_str = f'+{diff}' if diff >= 0 else str(diff)
-            # Stats strip home
-            content = re.sub(r'(stat-num">)18(</div>\s*<div class="stat-lbl">Victorias)',
+            content = re.sub(r'(stat-num">\d+)(</div>\s*<div class="stat-lbl">Victorias)',
+                             f'<span class="stat-num">{idsc["pg"]}\\2', content)
+            # Stats strip — reemplazar por valor actual
+            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Victorias)',
                              f'\\g<1>{idsc["pg"]}\\2', content)
-            content = re.sub(r'(stat-num">)9(</div>\s*<div class="stat-lbl">Partidos restantes)',
+            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Partidos restantes)',
                              f'\\g<1>{rest}\\2', content)
-            content = re.sub(r'(stat-num">)19(</div>\s*<div class="stat-lbl">PDFs disponibles)',
-                             f'\\g<1>19\\2', content)
-            # Stats temporada
-            content = re.sub(r'(t-stat-num">)\d+(</div>\s*<div class="t-stat-lbl">Victorias)',
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Victorias)',
                              f'\\g<1>{idsc["pg"]}\\2', content)
-            content = re.sub(r'(t-stat-num">)\d+(</div>\s*<div class="t-stat-lbl">Derrotas)',
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Derrotas)',
                              f'\\g<1>{idsc["pp"]}\\2', content)
-            content = re.sub(r'(t-stat-num">)\d+%(</div>\s*<div class="t-stat-lbl">% Victorias)',
+            content = re.sub(r'(t-stat-num">\s*)\d+%(\s*</div>\s*<div class="t-stat-lbl">% Victorias)',
                              f'\\g<1>{pct}%\\2', content)
-            content = re.sub(r'(t-stat-num">)[^<]*(</div>\s*<div class="t-stat-lbl">Diferencia)',
+            content = re.sub(r'(t-stat-num">\s*)[^<]+(\s*</div>\s*<div class="t-stat-lbl">Diferencia)',
                              f'\\g<1>{diff_str}\\2', content)
-            content = re.sub(r'(t-stat-num">)\d+(</div>\s*<div class="t-stat-lbl">Restantes)',
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Restantes)',
                              f'\\g<1>{rest}\\2', content)
             changed.append(f'IDSC {idsc["pos"]}° {idsc["pg"]}V {idsc["pp"]}D {pct}%')
+        elif idsc:
+            print(f"  ⚠️  Stats IDSC NO actualizados: API {pj_api}PJ < HTML {pj_html}PJ")
 
-        # Tabla completa — solo actualizar si 365scores tiene datos >= al HTML actual
-        import re as _re
-        # Extraer PJ actual de IDSC en el HTML
-        pj_html_match = _re.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re.DOTALL)
-        pj_html = int(pj_html_match.group(1)) if pj_html_match else 0
-        pj_api = idsc['pj'] if idsc else 0
-        
+        # ── Tabla completa: siempre actualizar si hay datos válidos ──────────
+        # Solo se bloquea si la API devuelve MENOS partidos que el HTML para IDSC.
+        # El resto de equipos siempre se actualiza — evita que Obras u otros
+        # queden desactualizados aunque IDSC esté en lag.
         if pj_api >= pj_html:
             standings_html = build_standings_html(standings)
             new = re.sub(
@@ -350,15 +299,64 @@ def update_html(standings, next_match, html_path='index.html'):
             if new != content:
                 content = new
                 changed.append('tabla posiciones')
+            else:
+                changed.append('tabla sin cambios')
         else:
-            print(f"  ⚠️  Tabla NO actualizada: 365scores tiene {pj_api}PJ pero HTML tiene {pj_html}PJ — esperando sync")
-            changed.append(f'tabla pendiente sync ({pj_api}/{pj_html}PJ)')
+            # API desactualizada para IDSC: actualizar igual pero conservando
+            # la fila de IDSC tal como está en el HTML (otros equipos sí cambian)
+            standings_sin_idsc = [s for s in standings if not any(k in s['team'].lower() for k in IDSC_KEYWORDS)]
+            # Leer fila IDSC actual del HTML y preservarla
+            idsc_row_match = _re.search(
+                r'<div class="standings-row standings-idsc[^"]*">.*?</div>',
+                content, _re.DOTALL
+            )
+            idsc_row_html = idsc_row_match.group(0) if idsc_row_match else ''
+            # Construir tabla con otros equipos actualizados + fila IDSC preservada
+            otros_html = build_standings_html(standings_sin_idsc)
+            # Insertar fila IDSC en su posición correcta según pos del HTML
+            idsc_pos_match = _re.search(r'standings-idsc.*?st-pos-num">(\d+)', content, _re.DOTALL)
+            idsc_pos = int(idsc_pos_match.group(1)) if idsc_pos_match else 99
+            # Reconstruir lista completa ordenada con IDSC en su lugar
+            all_rows = []
+            idsc_inserted = False
+            for s in sorted(standings_sin_idsc, key=lambda x: x['pos']):
+                if not idsc_inserted and s['pos'] > idsc_pos:
+                    if idsc_row_html:
+                        all_rows.append(idsc_row_html)
+                    idsc_inserted = True
+                pct = round(s['pg']/s['pj']*100,1) if s['pj'] > 0 else 0
+                pts = s['pj'] + s['pg']
+                if s['pos'] <= 4:
+                    rc, pc = 'standings-row playoff-zone', 'st-pos st-pos-num'
+                elif s['pos'] <= 12:
+                    rc, pc = 'standings-row playoffs-pre', 'st-pos st-pos-num'
+                else:
+                    rc, pc = 'standings-row', 'st-pos st-pos-num'
+                all_rows.append(
+                    f'<div class="{rc}"><span class="{pc}">{s["pos"]}</span>'
+                    f'<span class="st-team">{s["team"].upper()}</span>'
+                    f'<span class="st-num">{s["pj"]}</span><span class="st-num">{s["pg"]}</span>'
+                    f'<span class="st-num">{s["pp"]}</span><span class="st-num">{s["pf"]}</span>'
+                    f'<span class="st-num">{s["pc"]}</span><span class="st-num">{pts}</span>'
+                    f'<span class="st-num">{pct}%</span></div>'
+                )
+            if not idsc_inserted and idsc_row_html:
+                all_rows.append(idsc_row_html)
+            combined = '\n      '.join(all_rows)
+            new = re.sub(
+                r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
+                f'\\1\n      {combined}\n      \\3',
+                content, flags=re.DOTALL
+            )
+            if new != content:
+                content = new
+                changed.append(f'tabla actualizada (IDSC preservado, API lag {pj_api}/{pj_html}PJ)')
+            print(f"  ⚠️  IDSC en lag ({pj_api}/{pj_html}PJ) — resto tabla actualizado, fila IDSC preservada")
 
-    # Obtener resultados ANTES del bloque next_match
+    # Resultados
     results = get_idsc_results()
 
     if next_match:
-        # Si el "próximo" ya fue jugado, saltarlo
         already_played = bool(results) and any(
             any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
             for r in results
@@ -382,22 +380,16 @@ def update_html(standings, next_match, html_path='index.html'):
         content = update_fixture(results, next_match['rival'] if next_match else None, content)
         changed.append('fixture')
 
-
-    # Cuadro playoff proyectado (top 8 de la tabla)
+    # Playoff bracket
     if standings and len(standings) >= 8:
-        top8 = standings[:8]
+        top8 = sorted(standings, key=lambda s: s['pos'])[:8]
         rival_8 = top8[7]['team'].upper()
-        pct_8 = round(top8[7]['pg']/top8[7]['pj']*100,1) if top8[7]['pj']>0 else 0
-
-        # Rival proyectado en HOME card (solo dentro de po-card-rival, sin tocar po-card-qualify)
         content = re.sub(
             r'(class="po-card po-card-rival">.*?class="po-main">)(.*?)(</div>)',
             r'\g<1>' + rival_8 + r'\g<3>',
             content, count=1, flags=re.DOTALL
         )
         changed.append(f'playoff rival: {rival_8}')
-
-        # Bracket: actualizar nombre y % de cada seed 1-8
         for s in top8:
             pos = s['pos']
             pct = round(s['pg']/s['pj']*100,1) if s['pj']>0 else 0
@@ -416,16 +408,14 @@ def update_html(standings, next_match, html_path='index.html'):
     print(f"   Fecha: {today}")
 
 if __name__ == '__main__':
-    print(f"🏀 IDSC Oliva - LNB Scraper v6 FINAL - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+    print(f"🏀 IDSC Oliva - LNB Scraper v7 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     print("─" * 50)
-
     print("Tabla de posiciones...")
     standings = get_standings()
     if standings:
         print(f"✅ {len(standings)} equipos obtenidos")
     else:
         print("⚠️  Sin datos de tabla")
-
     print("Próximo partido...")
     nxt = get_next_match()
     if nxt:
@@ -433,9 +423,6 @@ if __name__ == '__main__':
         print(f"✅ vs {nxt['rival']} ({cond})")
     else:
         print("⚠️  No encontrado")
-
     update_html(standings, nxt)
     print("─" * 50)
     print("✅ Proceso completado")
-
-# PATCH: agregar función de playoff al scraper existente
