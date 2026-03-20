@@ -285,73 +285,21 @@ def update_html(standings, next_match, html_path='index.html'):
         elif idsc:
             print(f"  ⚠️  Stats IDSC NO actualizados: API {pj_api}PJ < HTML {pj_html}PJ")
 
-        # ── Tabla completa: siempre actualizar si hay datos válidos ──────────
-        # Solo se bloquea si la API devuelve MENOS partidos que el HTML para IDSC.
-        # El resto de equipos siempre se actualiza — evita que Obras u otros
-        # queden desactualizados aunque IDSC esté en lag.
-        if pj_api >= pj_html:
-            standings_html = build_standings_html(standings)
-            new = re.sub(
-                r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
-                f'\\1\n      {standings_html}\n      \\3',
-                content, flags=re.DOTALL
-            )
-            if new != content:
-                content = new
-                changed.append('tabla posiciones')
-            else:
-                changed.append('tabla sin cambios')
+        # ── Tabla completa: siempre actualizar con datos de la API ─────────
+        # build_standings_html ya ordena por posición correctamente.
+        # Cuando la API tiene menos PJ que el HTML para IDSC, igual actualiza
+        # el resto — IDSC aparece con los datos que tenga la API en ese momento.
+        standings_html = build_standings_html(standings)
+        new = re.sub(
+            r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
+            f'\\1\n      {standings_html}\n      \\3',
+            content, flags=re.DOTALL
+        )
+        if new != content:
+            content = new
+            changed.append('tabla posiciones')
         else:
-            # API desactualizada para IDSC: actualizar igual pero conservando
-            # la fila de IDSC tal como está en el HTML (otros equipos sí cambian)
-            standings_sin_idsc = [s for s in standings if not any(k in s['team'].lower() for k in IDSC_KEYWORDS)]
-            # Leer fila IDSC actual del HTML y preservarla
-            idsc_row_match = _re.search(
-                r'<div class="standings-row standings-idsc[^"]*">.*?</div>',
-                content, _re.DOTALL
-            )
-            idsc_row_html = idsc_row_match.group(0) if idsc_row_match else ''
-            # Construir tabla con otros equipos actualizados + fila IDSC preservada
-            otros_html = build_standings_html(standings_sin_idsc)
-            # Insertar fila IDSC en su posición correcta según pos del HTML
-            idsc_pos_match = _re.search(r'standings-idsc.*?st-pos-num">(\d+)', content, _re.DOTALL)
-            idsc_pos = int(idsc_pos_match.group(1)) if idsc_pos_match else 99
-            # Reconstruir lista completa ordenada con IDSC en su lugar
-            all_rows = []
-            idsc_inserted = False
-            for s in sorted(standings_sin_idsc, key=lambda x: x['pos']):
-                if not idsc_inserted and s['pos'] > idsc_pos:
-                    if idsc_row_html:
-                        all_rows.append(idsc_row_html)
-                    idsc_inserted = True
-                pct = round(s['pg']/s['pj']*100,1) if s['pj'] > 0 else 0
-                pts = s['pj'] + s['pg']
-                if s['pos'] <= 4:
-                    rc, pc = 'standings-row playoff-zone', 'st-pos st-pos-num'
-                elif s['pos'] <= 12:
-                    rc, pc = 'standings-row playoffs-pre', 'st-pos st-pos-num'
-                else:
-                    rc, pc = 'standings-row', 'st-pos st-pos-num'
-                all_rows.append(
-                    f'<div class="{rc}"><span class="{pc}">{s["pos"]}</span>'
-                    f'<span class="st-team">{s["team"].upper()}</span>'
-                    f'<span class="st-num">{s["pj"]}</span><span class="st-num">{s["pg"]}</span>'
-                    f'<span class="st-num">{s["pp"]}</span><span class="st-num">{s["pf"]}</span>'
-                    f'<span class="st-num">{s["pc"]}</span><span class="st-num">{pts}</span>'
-                    f'<span class="st-num">{pct}%</span></div>'
-                )
-            if not idsc_inserted and idsc_row_html:
-                all_rows.append(idsc_row_html)
-            combined = '\n      '.join(all_rows)
-            new = re.sub(
-                r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
-                f'\\1\n      {combined}\n      \\3',
-                content, flags=re.DOTALL
-            )
-            if new != content:
-                content = new
-                changed.append(f'tabla actualizada (IDSC preservado, API lag {pj_api}/{pj_html}PJ)')
-            print(f"  ⚠️  IDSC en lag ({pj_api}/{pj_html}PJ) — resto tabla actualizado, fila IDSC preservada")
+            changed.append('tabla sin cambios')
 
     # Resultados
     results = get_idsc_results()
