@@ -1,6 +1,13 @@
 """
-IDSC Oliva - LNB Scraper v7
+IDSC Oliva - LNB Scraper v8
 365scores API — keys confirmadas: gamePlayed, gamesWon, gamesLost, for, against
+Mejoras v8:
+  - Bracket completo: 4 cruces proyectados (1vs8, 2vs7, 3vs6, 4vs5)
+  - Proyeccion de rival playoff con posicion + porcentaje en po-card-rival
+  - normalize_name() centralizado — tabla de aliases ampliada (Peniarol, Platense, Atenas...)
+  - update_rivals_timeline() usa normalize_name() para mayor robustez
+  - Deteccion mejorada de "ya jugado" en next_match
+  - Version y log en consola al finalizar
 """
 import requests
 import re
@@ -15,6 +22,44 @@ HEADERS = {
     'Origin': 'https://www.365scores.com',
     'Referer': 'https://www.365scores.com/en/basketball/league/liga-nacional-403/standings',
 }
+
+NAME_MAP = {
+    'independiente de oliva': 'idsc',
+    'la union de formosa': 'la union fsa',
+    'la union fsa': 'la union fsa',
+    'ferro carril oeste': 'ferro',
+    'obras sanitarias': 'obras',
+    'obras basket': 'obras',
+    'olimpico': 'olimpico',
+    'ciclista olimpico': 'olimpico lb',
+    'penarol': 'penarol',
+    'penarol mar del plata': 'penarol mdp',
+    'penariol mar del plata': 'penarol mdp',
+    'gimnasia y esgrima': 'gimnasia',
+    'argentino junin': 'argentino',
+    'argentino de junin': 'argentino',
+    'racing club chivilcoy': 'racing',
+    'racing chivilcoy': 'racing',
+    'san martin corrientes': 'san martin c',
+    'union de santa fe': 'union sf',
+    'boca juniors': 'boca',
+    'platense bs as': 'platense',
+    'platense vicente lopez': 'platense',
+    'atenas cordoba': 'atenas c',
+    'regatas corrientes': 'regatas c',
+    'instituto atletico': 'instituto',
+    'quimsa santiago': 'quimsa',
+}
+
+def normalize_name(name):
+    import unicodedata
+    n = name.lower().strip()
+    # strip accents for comparison
+    n = ''.join(c for c in unicodedata.normalize('NFD', n) if unicodedata.category(c) != 'Mn')
+    for old, new in NAME_MAP.items():
+        if old in n:
+            return new
+    return n
 
 def get_standings():
     url = "https://webws.365scores.com/web/standings/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&userCountryId=7&competitions=403"
@@ -33,12 +78,12 @@ def get_standings():
                 'pf':   int(row.get('for', 0) or 0),
                 'pc':   int(row.get('against', 0) or 0),
             })
-        for s in standings[:3]:
+        for s in standings[:4]:
             pct = round(s['pg']/s['pj']*100,1) if s['pj'] > 0 else 0
-            print(f"  {s['pos']}° {s['team']}: {s['pj']}PJ {s['pg']}V {s['pp']}D {pct}%")
+            print(f"  {s['pos']} {s['team']}: {s['pj']}PJ {s['pg']}V {s['pp']}D {pct}%")
         return standings
     except Exception as e:
-        print(f"  Error: {e}")
+        print(f"  Error standings: {e}")
         return None
 
 def get_next_match():
@@ -88,8 +133,7 @@ def get_idsc_results():
                 'idsc_score': idsc_score,
                 'rival_score': rival_score,
                 'win': win,
-                'result_str': f"{'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
-                'badge': f"✓ {'Victoria' if win else 'Derrota'} {idsc_score}–{rival_score}",
+                'result_str': f"{'Victoria' if win else 'Derrota'} {idsc_score}-{rival_score}",
             })
             print(f"  Resultado: vs {rival} {'V' if win else 'D'} {idsc_score}-{rival_score}")
         return results
@@ -102,66 +146,42 @@ def update_rivals_timeline(results, next_rival, content):
         return content
     changed_rivals = []
     for res in results:
-        rival_name = res['rival'].lower()
-        rival_keywords = rival_name.replace('la unión de formosa', 'la unión fsa').split()[:2]
-        import re as _re
-        pattern = r'(\{name:"[^"]*(?:' + '|'.join(rival_keywords) + r')[^"]*"[^}]*?)status:"(?:next|pending)"([^}]*?\})'
-        def replace_status(m):
+        rival_norm = normalize_name(res['rival'])
+        words = [w for w in rival_norm.split() if len(w) > 3]
+        if not words:
+            words = rival_norm.split()[:2]
+        pattern = r'(\{name:"[^"]*(?:' + '|'.join(re.escape(w) for w in words) + r')[^"]*"[^}]*?)status:"(?:next|pending)"([^}]*?\})'
+        def replace_status(m, _rival=res['rival']):
             block = m.group(0)
             if 'status:"done"' in block:
                 return block
             block = block.replace('status:"next"', 'status:"done"')
             block = block.replace('status:"pending"', 'status:"done"')
-            changed_rivals.append(res['rival'])
+            changed_rivals.append(_rival)
             return block
-        new_content = _re.sub(pattern, replace_status, content, flags=_re.IGNORECASE)
+        new_content = re.sub(pattern, replace_status, content, flags=re.IGNORECASE)
         if new_content != content:
             content = new_content
     if next_rival:
-        nv = next_rival.lower().split()[:2]
-        pattern2 = r'(data-status=")pending(".*?rival-name">(?:' + '|'.join(nv) + r')[^<]*</div>)'
-        content = _re.sub(pattern2, r'\g<1>next\g<2>', content, flags=_re.IGNORECASE|_re.DOTALL)
+        nv_norm = normalize_name(next_rival)
+        nv_words = [w for w in nv_norm.split() if len(w) > 3][:2]
+        if nv_words:
+            pattern2 = r'(data-status=")pending(".*?rival-name">(?:' + '|'.join(nv_words) + r')[^<]*</div>)'
+            content = re.sub(pattern2, r'\g<1>next\g<2>', content, flags=re.IGNORECASE|re.DOTALL)
     if changed_rivals:
-        print(f"  Rivales actualizados a done: {changed_rivals}")
+        print(f"  Rivales -> done: {changed_rivals}")
     return content
 
 def update_fixture(results, next_rival, content):
-    import re as _re
     if not results:
         return content
-    results_by_rival = {}
-    for r in results:
-        key = r['rival'].lower()
-        results_by_rival[key] = r
-
-    def normalize(name):
-        name = name.lower()
-        replacements = {
-            'independiente de oliva': 'idsc',
-            'la unión de formosa': 'la unión fsa',
-            'la union de formosa': 'la unión fsa',
-            'ferro carril oeste': 'ferro',
-            'obras sanitarias': 'obras',
-            'olimpico': 'olímpico',
-            'penarol': 'peñarol',
-            'gimnasia y esgrima': 'gimnasia',
-            'argentino junin': 'argentino',
-            'racing club chivilcoy': 'racing',
-            'san martin': 'san martín',
-            'union de santa fe': 'union (sf)',
-            'boca juniors': 'boca',
-            'ciclista olimpico': 'olímpico (lb)',
-        }
-        for old, new in replacements.items():
-            name = name.replace(old, new)
-        return name
+    results_by_rival = {normalize_name(r['rival']): r for r in results}
 
     def find_result_for_fixture(fixture_text):
-        fixture_norm = normalize(fixture_text)
-        for rival_key, res in results_by_rival.items():
-            rival_norm = normalize(rival_key)
+        ft_norm = normalize_name(fixture_text)
+        for rival_norm, res in results_by_rival.items():
             words = [w for w in rival_norm.split() if len(w) > 3]
-            if any(w in fixture_norm for w in words):
+            if any(w in ft_norm for w in words):
                 return res
         return None
 
@@ -169,34 +189,31 @@ def update_fixture(results, next_rival, content):
         card = m.group(0)
         if 'cup-card' in card or 'Copa' in card or 'COPA' in card:
             return card
-        match_text = _re.search(r'fixture-match">(.*?)</div>', card, _re.DOTALL)
+        match_text = re.search(r'fixture-match">(.*?)</div>', card, re.DOTALL)
         if not match_text:
             return card
         match_str = match_text.group(1)
-        match_clean = _re.sub(r'<[^>]+>', '', match_str)
+        match_clean = re.sub(r'<[^>]+>', '', match_str)
         match_clean = match_clean.replace('IDSC OLIVA', '').replace('VS', '').strip()
         res = find_result_for_fixture(match_clean)
-        if 'badge-win' in card:
+        if 'badge-win' in card or 'badge-loss' in card:
             return card
         if res:
-            badge_text = f"✓ {'Victoria' if res['win'] else 'Derrota'} {res['idsc_score']}–{res['rival_score']}"
             badge_class = 'badge-win' if res['win'] else 'badge-loss'
-            card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card done"', card)
-            card = _re.sub(r'<span class="badge[^"]*">.*?</span>', f'<span class="badge {badge_class}">{badge_text}</span>', card)
-        else:
-            if next_rival and any(w in match_clean.lower() for w in normalize(next_rival).split() if len(w) > 3):
-                card = _re.sub(r'class="fixture-card[^"]*"', 'class="fixture-card next"', card)
-                card = _re.sub(r'<span class="badge[^"]*">.*?</span>', '<span class="badge badge-next">⚡ Próximo</span>', card)
-            else:
-                if 'fixture-card done' not in card and 'badge-win' not in card:
-                    card = _re.sub(r'class="fixture-card next"', 'class="fixture-card upcoming"', card)
+            icon = 'V' if res['win'] else 'D'
+            badge_text = f"{icon} {res['idsc_score']}-{res['rival_score']}"
+            card = re.sub(r'class="badge badge-future">[^<]*</span>',
+                          f'class="badge {badge_class}">{badge_text}</span>', card)
+        if next_rival and normalize_name(next_rival) in normalize_name(match_clean):
+            if 'fixture-card next' not in card:
+                card = card.replace('class="fixture-card upcoming"', 'class="fixture-card next"')
         return card
 
-    new_content = _re.sub(
+    new_content = re.sub(
         r'<div class="fixture-card[^>]*>.*?</div>\s*</div>',
         update_card,
         content,
-        flags=_re.DOTALL
+        flags=re.DOTALL
     )
     return new_content
 
@@ -210,20 +227,19 @@ def build_standings_html(standings):
         if is_idsc:
             zone = 'playoff-zone' if s['pos'] <= 4 else ('playoffs-pre' if s['pos'] <= 12 else '')
             row_class = f'standings-row standings-idsc {zone}'.strip()
-            pos_class = 'st-pos st-pos-num'
-            team_name = '⭐ INDEPENDIENTE (O)'
+            team_name = 'INDEPENDIENTE (O)'
         elif s['pos'] <= 4:
-            row_class, pos_class = 'standings-row playoff-zone', 'st-pos st-pos-num'
+            row_class = 'standings-row playoff-zone'
             team_name = s['team'].upper()
         elif s['pos'] <= 12:
-            row_class, pos_class = 'standings-row playoffs-pre', 'st-pos st-pos-num'
+            row_class = 'standings-row playoffs-pre'
             team_name = s['team'].upper()
         else:
-            row_class, pos_class = 'standings-row', 'st-pos st-pos-num'
+            row_class = 'standings-row'
             team_name = s['team'].upper()
         rows.append(
             f'<div class="{row_class}">'
-            f'<span class="{pos_class}">{s["pos"]}</span>'
+            f'<span class="st-pos st-pos-num">{s["pos"]}</span>'
             f'<span class="st-team">{team_name}</span>'
             f'<span class="st-num">{s["pj"]}</span>'
             f'<span class="st-num">{s["pg"]}</span>'
@@ -236,141 +252,155 @@ def build_standings_html(standings):
         )
     return '\n      '.join(rows)
 
+def update_bracket_full(standings, content):
+    """
+    Actualiza el bracket completo de 4 cruces: 1vs8, 2vs7, 3vs6, 4vs5.
+    Detecta posicion de IDSC y actualiza po-card-rival con su rival proyectado.
+    """
+    if not standings or len(standings) < 8:
+        return content, None
+
+    top8 = sorted(standings, key=lambda s: s['pos'])[:8]
+    bracket_pairs = [(1,8),(2,7),(3,6),(4,5)]
+
+    # Detectar posicion de IDSC
+    idsc_team = next((s for s in top8 if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
+    idsc_pos  = idsc_team['pos'] if idsc_team else None
+    idsc_rival_name = None
+
+    if idsc_pos:
+        for h, l in bracket_pairs:
+            if idsc_pos == h:
+                rival_seed = l; break
+            elif idsc_pos == l:
+                rival_seed = h; break
+        else:
+            rival_seed = None
+        if rival_seed:
+            rt = next((s for s in top8 if s['pos'] == rival_seed), None)
+            if rt:
+                idsc_rival_name = rt['team'].upper()
+                pct_r = round(rt['pg']/rt['pj']*100,1) if rt['pj']>0 else 0
+                print(f"  Bracket IDSC: #{idsc_pos} vs #{rival_seed} {idsc_rival_name} ({pct_r}%)")
+                # Update po-card-rival main name
+                content = re.sub(
+                    r'(class="po-card po-card-rival">.*?class="po-main">)(.*?)(</div>)',
+                    r'\g<1>' + idsc_rival_name + r'\g<3>',
+                    content, count=1, flags=re.DOTALL
+                )
+                # Update po-card-rival detail line
+                content = re.sub(
+                    r'(po-card-rival[^>]*>.*?po-detail">)[^<]*(</div>)',
+                    r'\g<1>' + f'#{rt["pos"]} en tabla · {rt["pg"]}V {rt["pp"]}D · {pct_r}%' + r'\g<2>',
+                    content, count=1, flags=re.DOTALL
+                )
+
+    # Update bracket-grid seeds
+    for h, l in bracket_pairs:
+        for seed in [h, l]:
+            s = next((x for x in top8 if x['pos']==seed), None)
+            if not s: continue
+            pct = round(s['pg']/s['pj']*100,1) if s['pj']>0 else 0
+            is_idsc = any(k in s['team'].lower() for k in IDSC_KEYWORDS)
+            name = 'INDEPENDIENTE (O)' if is_idsc else s['team'].upper()
+            content = re.sub(
+                r'(<span class="bracket-pos">' + str(seed) + r'[^<]*</span>\s*<span class="bracket-name">)[^<]*(</span>\s*<span class="bracket-pct">)[^<]*(</span>)',
+                r'\g<1>' + name + r'\g<2>' + str(pct) + r'%\g<3>',
+                content
+            )
+
+    return content, idsc_rival_name
+
 def update_html(standings, next_match, html_path='index.html'):
     with open(html_path, 'r', encoding='utf-8') as f:
         content = f.read()
     today = datetime.now().strftime('%d/%m/%Y')
     changed = []
 
-    # Fecha
-    content = re.sub(r'Actualizada al \d{2}/\d{2}/\d{4}',
-                     f'Actualizada al {today}', content)
+    content = re.sub(r'Actualizada al \d{2}/\d{2}/\d{4}', f'Actualizada al {today}', content)
     changed.append('fecha')
 
     if standings:
-        idsc = next((s for s in standings
-                     if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
-
-        # ── FIX: leer PJ de IDSC del HTML para comparar ──────────────────────
-        import re as _re
-        pj_html_match = _re.search(r'standings-idsc.*?st-num">(\d+)</span>', content, _re.DOTALL)
+        idsc = next((s for s in standings if any(k in s['team'].lower() for k in IDSC_KEYWORDS)), None)
+        pj_html_match = re.search(r'standings-idsc.*?st-num">(\d+)</span>', content, re.DOTALL)
         pj_html = int(pj_html_match.group(1)) if pj_html_match else 0
         pj_api  = idsc['pj'] if idsc else 0
         print(f"  PJ check: API={pj_api} HTML={pj_html}")
 
-        # ── Stats de IDSC: solo si API >= HTML ───────────────────────────────
         if idsc and pj_api >= pj_html:
             pct  = round(idsc['pg'] / idsc['pj'] * 100) if idsc['pj'] > 0 else 0
             rest = 36 - idsc['pj']
             diff = idsc['pf'] - idsc['pc']
             diff_str = f'+{diff}' if diff >= 0 else str(diff)
-            content = re.sub(r'(stat-num">\d+)(</div>\s*<div class="stat-lbl">Victorias)',
-                             f'<span class="stat-num">{idsc["pg"]}\\2', content)
-            # Stats strip — reemplazar por valor actual
-            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Victorias)',
-                             f'\\g<1>{idsc["pg"]}\\2', content)
-            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Partidos restantes)',
-                             f'\\g<1>{rest}\\2', content)
-            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Victorias)',
-                             f'\\g<1>{idsc["pg"]}\\2', content)
-            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Derrotas)',
-                             f'\\g<1>{idsc["pp"]}\\2', content)
-            content = re.sub(r'(t-stat-num">\s*)\d+%(\s*</div>\s*<div class="t-stat-lbl">% Victorias)',
-                             f'\\g<1>{pct}%\\2', content)
-            content = re.sub(r'(t-stat-num">\s*)[^<]+(\s*</div>\s*<div class="t-stat-lbl">Diferencia)',
-                             f'\\g<1>{diff_str}\\2', content)
-            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Restantes)',
-                             f'\\g<1>{rest}\\2', content)
-            changed.append(f'IDSC {idsc["pos"]}° {idsc["pg"]}V {idsc["pp"]}D {pct}%')
+            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Victorias)', f'\\g<1>{idsc["pg"]}\\2', content)
+            content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Partidos restantes)', f'\\g<1>{rest}\\2', content)
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Victorias)', f'\\g<1>{idsc["pg"]}\\2', content)
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Derrotas)', f'\\g<1>{idsc["pp"]}\\2', content)
+            content = re.sub(r'(t-stat-num">\s*)\d+%(\s*</div>\s*<div class="t-stat-lbl">% Victorias)', f'\\g<1>{pct}%\\2', content)
+            content = re.sub(r'(t-stat-num">\s*)[^<]+(\s*</div>\s*<div class="t-stat-lbl">Diferencia)', f'\\g<1>{diff_str}\\2', content)
+            content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Restantes)', f'\\g<1>{rest}\\2', content)
+            changed.append(f'IDSC {idsc["pos"]} {idsc["pg"]}V {idsc["pp"]}D {pct}%')
         elif idsc:
-            print(f"  ⚠️  Stats IDSC NO actualizados: API {pj_api}PJ < HTML {pj_html}PJ")
+            print(f"  AVISO: Stats IDSC NO actualizados: API {pj_api}PJ < HTML {pj_html}PJ")
 
-        # ── Tabla completa: siempre actualizar con datos de la API ─────────
-        # build_standings_html ya ordena por posición correctamente.
-        # Cuando la API tiene menos PJ que el HTML para IDSC, igual actualiza
-        # el resto — IDSC aparece con los datos que tenga la API en ese momento.
         standings_html = build_standings_html(standings)
-        new = re.sub(
-            r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
-            f'\\1\n      {standings_html}\n      \\3',
-            content, flags=re.DOTALL
-        )
+        new = re.sub(r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
+                     f'\\1\n      {standings_html}\n      \\3', content, flags=re.DOTALL)
         if new != content:
             content = new
             changed.append('tabla posiciones')
         else:
             changed.append('tabla sin cambios')
 
-    # Resultados
     results = get_idsc_results()
 
     if next_match:
+        nm_norm = normalize_name(next_match['rival'])
         already_played = bool(results) and any(
-            any(k in r['rival'].lower() for k in next_match['rival'].lower().split()[:2])
+            nm_norm in normalize_name(r['rival']) or normalize_name(r['rival']) in nm_norm
             for r in results
         )
         if already_played:
-            print(f"  ⚠️  Próximo ({next_match['rival']}) ya jugado — buscando siguiente...")
+            print(f"  AVISO: Proximo ({next_match['rival']}) ya jugado")
             next_match = None
 
     if next_match:
         rival = next_match['rival'].upper()
-        content = re.sub(
-            r'(po-card-next.*?po-main">)(.*?)(</div>)',
-            f'\\g<1>{rival}\\g<3>',
-            content, count=1, flags=re.DOTALL
-        )
-        changed.append(f'próximo: {rival}')
+        content = re.sub(r'(po-card-next.*?po-main">)(.*?)(</div>)', f'\\g<1>{rival}\\g<3>',
+                         content, count=1, flags=re.DOTALL)
+        changed.append(f'proximo: {rival}')
 
     if results:
         content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
-        changed.append(f'{len(results)} resultados en rivales')
+        changed.append(f'{len(results)} resultados')
         content = update_fixture(results, next_match['rival'] if next_match else None, content)
         changed.append('fixture')
 
-    # Playoff bracket
     if standings and len(standings) >= 8:
-        top8 = sorted(standings, key=lambda s: s['pos'])[:8]
-        rival_8 = top8[7]['team'].upper()
-        content = re.sub(
-            r'(class="po-card po-card-rival">.*?class="po-main">)(.*?)(</div>)',
-            r'\g<1>' + rival_8 + r'\g<3>',
-            content, count=1, flags=re.DOTALL
-        )
-        changed.append(f'playoff rival: {rival_8}')
-        for s in top8:
-            pos = s['pos']
-            pct = round(s['pg']/s['pj']*100,1) if s['pj']>0 else 0
-            is_idsc = any(k in s['team'].lower() for k in ['independiente','oliva'])
-            name = '⭐ INDEPENDIENTE (O)' if is_idsc else s['team'].upper()
-            content = re.sub(
-                r'(<span class="bracket-pos">' + str(pos) + r'°</span>\s*<span class="bracket-name">)[^<]*(</span>\s*<span class="bracket-pct">)[^<]*(</span>)',
-                r'\g<1>' + name + r'\g<2>' + str(pct) + r'%\g<3>',
-                content
-            )
-        changed.append('bracket')
+        content, idsc_rival = update_bracket_full(standings, content)
+        changed.append(f'bracket · rival: {idsc_rival or "sin data"}')
 
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(content)
-    print(f"✅ HTML actualizado: {', '.join(changed)}")
-    print(f"   Fecha: {today}")
+    print(f"OK HTML actualizado: {', '.join(changed)}")
+    print(f"   Fecha: {today} · Scraper v8")
 
 if __name__ == '__main__':
-    print(f"🏀 IDSC Oliva - LNB Scraper v7 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
-    print("─" * 50)
+    print(f"IDSC Oliva - LNB Scraper v8 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+    print("-" * 50)
     print("Tabla de posiciones...")
     standings = get_standings()
     if standings:
-        print(f"✅ {len(standings)} equipos obtenidos")
+        print(f"OK {len(standings)} equipos obtenidos")
     else:
-        print("⚠️  Sin datos de tabla")
-    print("Próximo partido...")
+        print("AVISO Sin datos de tabla")
+    print("Proximo partido...")
     nxt = get_next_match()
     if nxt:
         cond = 'LOCAL' if nxt['idsc_local'] else 'VISITANTE'
-        print(f"✅ vs {nxt['rival']} ({cond})")
+        print(f"OK vs {nxt['rival']} ({cond})")
     else:
-        print("⚠️  No encontrado")
+        print("AVISO No encontrado")
     update_html(standings, nxt)
-    print("─" * 50)
-    print("✅ Proceso completado")
+    print("-" * 50)
+    print("OK Proceso completado v8")
