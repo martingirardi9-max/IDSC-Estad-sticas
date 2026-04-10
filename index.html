@@ -571,17 +571,17 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
         <div class="rival-detail" id="detail-14"></div>
       </div>
-      <div class="timeline-item" style="animation-delay:0.64s" data-status="pending">
-        <div class="timeline-dot dot-pending"></div>
+      <div class="timeline-item" style="animation-delay:0.64s" data-status="done">
+        <div class="timeline-dot dot-next"></div>
         <div class="rival-card" onclick="openRival(15)">
           <div class="rival-date"><div class="day">13</div><span>ABR</span></div>
           <div class="rival-divider"></div>
           <div class="rival-info">
             <div class="rival-name">BOCA</div>
             <div class="rival-meta">Luis Conde · 13/04/2026 · Liga Nacional</div>
-            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-pending">🕐 Informe pendiente</span></div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-future">📅 Próximo</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 Simulación disponible</span></div>
           </div>
-          <div class="rival-arrow">·</div>
+          <div class="rival-arrow">→</div>
         </div>
         <div class="rival-detail" id="detail-15"></div>
       </div>
@@ -1061,7 +1061,8 @@ const RIVALS = [
   {name:"ATENAS (C)", sub:"10/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-10", pdfs:[
     {label:"Informe de Scouting — Atenas (C)", sub:"Liga Nacional · 10/04/2026 · IDSC Local", preview:"https://drive.google.com/file/d/11tP2LIJsIM9KlSg0ywRbqHISGNU8bu-T/preview", download:"https://drive.google.com/uc?export=download&id=11tP2LIJsIM9KlSg0ywRbqHISGNU8bu-T"},
   ]},
-  {name:"BOCA", sub:"13/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-13", pdfs:[
+  {name:"BOCA", sub:"13/04/2026 · Liga Nacional · Visitante · Luis Conde", status:"done", matchDate:"2026-04-13", pdfs:[
+    {label:"Informe de Scouting — Boca Juniors", sub:"Temporada Regular 2025/26 · Últimos 5 PJ · IDSC Oliva", preview:"https://drive.google.com/file/d/1Zo_EfbxMcb40b8LSjRtjYG7TP0R1SPTV/preview", download:"https://drive.google.com/uc?export=download&id=1Zo_EfbxMcb40b8LSjRtjYG7TP0R1SPTV"},
   ]},
   {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-15", pdfs:[
   ]},
@@ -1450,7 +1451,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="page-header">
     <div class="eyebrow">IDSC Oliva · Análisis Predictivo</div>
     <h2>SIMULACIÓN DE PARTIDOS</h2>
-    <p>Proyección estadística basada en Offensive Rating, Defensive Rating, IP10 y forma reciente. Los 3 partidos son como visitante.</p>
+    <p>Proyección estadística basada en Offensive Rating, Defensive Rating, IP10 y forma reciente. Incluye análisis pre-partido de ATENAS (hoy, local) y BOCA (13 ABR, visitante).</p>
   </div>
   <div class="section">
 
@@ -1785,6 +1786,139 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Proyectado Opt.</div><div class="sim-sc-score">IDSC 96 — Platense 78</div><div class="sim-sc-desc">No se cumplió — Platense ganó los 4 cuartos</div></div>
           <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyectado Base</div><div class="sim-sc-score">IDSC 87 — Platense 79</div><div class="sim-sc-desc">No se cumplió — sin Conrradi, la rotación colapsó</div></div>
           <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Resultado Real</div><div class="sim-sc-score">IDSC 86 — Platense 98</div><div class="sim-sc-desc">Q4: 25–31. 5ª derrota consecutiva. Marcucci 25 pts, Filippetti 26 pts.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 6: ATENAS (C) — PRÓXIMO LOCAL -->
+    <div class="sim-card" id="sim-atenas">
+      <div class="sim-accordion-header" onclick="toggleSim('sim-atenas')">
+        <div class="sim-acc-rival">ATENAS (C) <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">10 ABR · 🏠 Local</span></div>
+        <div class="sim-acc-score"><span class="idsc-pts">82</span><span class="sep">—</span><span class="rival-pts">76</span></div>
+        <div class="sim-acc-pct" style="color:var(--gold)">IDSC FAVORITO</div>
+        <div class="sim-acc-badges"><span class="badge badge-next" style="font-size:.6rem;">⚡ Próximo</span><span class="badge badge-loc" style="font-size:.6rem;">🏠 Local</span><span class="badge" style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.2);font-size:.6rem;">68.4% IDSC</span></div>
+        <div class="sim-acc-arrow">&#9658;</div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-date" style="margin-bottom:.8rem;">10 ABR · El Gigante de la Ruta 9 · <span style="color:var(--gold)">🏠 Local · PARTIDO DE HOY</span></div>
+        <div class="sim-rivals" style="margin-bottom:1rem;">
+          <div class="sim-team" style="flex:1;text-align:left;">
+            <div class="sim-team-name" style="color:var(--gold)">IDSC OLIVA</div>
+            <div class="sim-team-role">LOCAL</div>
+          </div>
+          <div class="sim-score-block">
+            <div style="text-align:center;">
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">proyección base</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">82</span>
+              <span style="color:var(--muted);margin:0 .4rem;font-size:1.2rem;">—</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--muted);">76</span>
+            </div>
+          </div>
+          <div class="sim-team" style="flex:1;text-align:right;">
+            <div class="sim-team-name">ATENAS (C)</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+        <div class="sim-prob-bar-wrap" style="margin-bottom:1rem;">
+          <div class="sim-prob-label-l" style="color:var(--gold);">IDSC 68.4%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:31.6%;background:rgba(122,143,166,.4)"></div></div>
+          <div class="sim-prob-label-r">Atenas 31.6%</div>
+        </div>
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Condición local en El Gigante:</strong> IDSC tiene ventaja de +3.5 pts estadísticos jugando en casa. La racha de derrotas ocurrió en su mayoría de visitante.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Necesidad de cortar la racha:</strong> 5 derrotas consecutivas generan motivación extra. IDSC históricamente reacciona bien después de rachas negativas.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Atenas visita en descenso:</strong> Atenas tiene Defensive Rating por encima del promedio de liga (105.8) y su T3% (34%) está por debajo de la media. IDSC puede explotar el interior.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Forma reciente negativa:</strong> 5 derrotas seguidas afectan la confianza. La segunda unidad (Vallejos, Fernandez) no está aportando.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Atenas tiene juego interior sólido:</strong> Su IP10 promedio de pivots es alto — IDSC debe responder con Caffaro y Pautasso desde el inicio.</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Clave táctica:</strong> El Q1 será determinante — IDSC debe evitar el patrón de arranques lentos que le costó los últimos 5 partidos. Primera posesión con agresividad ofensiva es crítica.</div>
+        </div>
+        <div class="sim-note">
+          <strong>Análisis previo:</strong> IDSC enfrenta a Atenas (C) con la necesidad imperiosa de cortar la racha de 5 derrotas consecutivas. La condición de local en El Gigante es el principal diferencial a favor. El modelo da 68.4% de probabilidad a IDSC — la más alta de los últimos 3 partidos proyectados. Atenas no es el rival más complicado de la zona media de la tabla; su T2% (49%) y su Net Rating moderado lo ubican como un rival manejable para IDSC en condición de local. La clave pasa por el Q1: si IDSC arranca bien (gana los primeros 5 minutos), las probabilidades suben al 81%.
+        </div>
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Optimista</div><div class="sim-sc-score">IDSC 92 — 74</div><div class="sim-sc-desc">IDSC arranca fuerte en Q1, Marcucci y Filippetti explosivos, Atenas no encuentra ritmo exterior</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Base</div><div class="sim-sc-score">IDSC 82 — 76</div><div class="sim-sc-desc">Partido ajustado pero IDSC mantiene ventaja como local — Q4 definidor con Smith (Atenas) vs Marcucci</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Pesimista</div><div class="sim-sc-score">IDSC 73 — 81</div><div class="sim-sc-desc">Arranque lento en Q1 como el patrón reciente — Atenas se instala cómodo y explota el desorden defensivo de IDSC</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 7: BOCA — PRÓXIMO VISITANTE -->
+    <div class="sim-card" id="sim-boca">
+      <div class="sim-accordion-header" onclick="toggleSim('sim-boca')">
+        <div class="sim-acc-rival">BOCA <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">13 ABR · ✈️ Visitante · Luis Conde</span></div>
+        <div class="sim-acc-score"><span class="rival-pts">81</span><span class="sep">—</span><span class="idsc-pts">74</span></div>
+        <div class="sim-acc-pct" style="color:#e74c3c">BOCA FAVORITO</div>
+        <div class="sim-acc-badges"><span class="badge badge-future" style="font-size:.6rem;">📅 Programado</span><span class="badge badge-loc" style="font-size:.6rem;">✈️ Visitante</span><span class="badge" style="background:rgba(231,76,60,.12);color:#F1948A;border:1px solid rgba(231,76,60,.2);font-size:.6rem;">61.8% Boca</span></div>
+        <div class="sim-acc-arrow">&#9658;</div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-date" style="margin-bottom:.8rem;">13 ABR · Luis Conde · <span style="color:#F1948A">✈️ Visitante</span></div>
+        <div class="sim-rivals" style="margin-bottom:1rem;">
+          <div class="sim-team" style="flex:1;text-align:left;">
+            <div class="sim-team-name">BOCA JUNIORS</div>
+            <div class="sim-team-role">LOCAL · LUIS CONDE</div>
+          </div>
+          <div class="sim-score-block">
+            <div style="text-align:center;">
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">proyección base</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#e74c3c;">81</span>
+              <span style="color:var(--muted);margin:0 .4rem;font-size:1.2rem;">—</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">74</span>
+            </div>
+          </div>
+          <div class="sim-team" style="flex:1;text-align:right;">
+            <div class="sim-team-name" style="color:var(--gold)">IDSC OLIVA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+        <div class="sim-prob-bar-wrap" style="margin-bottom:1rem;">
+          <div class="sim-prob-label-l" style="color:#e74c3c;">Boca 61.8%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:61.8%"></div></div>
+          <div class="sim-prob-label-r">IDSC 38.2%</div>
+        </div>
+        <!-- Parciales proyectados -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;">
+          <div style="background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q1 CRÍTICO</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#e74c3c;line-height:1">Boca</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:.2rem">Smith activo en 90"</div>
+          </div>
+          <div style="background:rgba(231,76,60,.07);border:1px solid rgba(231,76,60,.15);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q2 PELIGRO</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#e74c3c;line-height:1">Boca</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:.2rem">Mejor cuarto de Boca</div>
+          </div>
+          <div style="background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--gold);margin-bottom:.3rem">Q3 OPORTUNIDAD</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">↔</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:.2rem">Boca arranca fuerte</div>
+          </div>
+          <div style="background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--gold);margin-bottom:.3rem">Q4 GANABLE</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">IDSC</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:.2rem">Boca irregular si persigue</div>
+          </div>
+        </div>
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave — basado en scouting Boca (últimos 5 PJ)</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Luis Conde — fortaleza de Boca:</strong> Los 5 partidos analizados de Boca son todos locales. Ajuste estadístico de −3.5 pts para IDSC como visitante. Boca gana el 80% de sus partidos en casa.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>SMITH (#8) en clutch — neutralizar en Q4:</strong> 14.0 pts/pp de media, anota en los últimos 2 minutos en 4/5 partidos. T2 al 51%, TL al 87%. Es el motor en momentos decisivos — requiere defensa individual dedicada en los últimos 3 minutos.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Q2 es el mejor cuarto de Boca (+2.6 prom.):</strong> Caffaro y Cuello activan la rotación. Cuello T3 sorpresivo en 3/5 partidos. IDSC debe estar alerta en esta franja.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>T3% al 31% — debilidad estructural de Boca:</strong> Muy por debajo del promedio de liga (38%). Defender el interior y empujar a Boca al perímetro. Forzar el tiro de afuera es la clave defensiva principal.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Q4 irregular de Boca (16.8 pts prom.):</strong> Cuando van abajo aumentan las pérdidas y los T3 forzados. Si IDSC llega al Q4 arriba o cerca, las probabilidades se invierten: Boca se desorganiza bajo presión.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Presionar a FAGGIANO (#3):</strong> El director de juego de Boca. Sin su ritmo organizativo, el equipo pierde claridad. Stenta como suplente es notablemente menos efectivo.</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Primera posesión del Q3 es CRÍTICA:</strong> Boca anota en la primera posesión del Q3 en 4/5 partidos — Smith y Vega explotan al inicio del tercer cuarto. IDSC debe entrar al Q3 con máxima intensidad defensiva.</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Caffaro — mejor IP10 de Boca (7.51):</strong> Liderar rebote ofensivo y TL. Defensa física sobre él en cada posesión — no dejar segundas oportunidades. Buscar que Langston o Giorgetti resuelvan en TL en momentos críticos.</div>
+        </div>
+        <div class="sim-note">
+          <strong>Análisis previo:</strong> Boca llega al partido con un registro de 3V/2D en sus últimos 5, todos de local en Luis Conde. Su T2% al 55% es su gran fortaleza y su T3% al 31% su mayor debilidad. IDSC debe explotar esa debilidad defensiva empujando a Boca al perímetro. El modelo da 61.8% a Boca por la condición de local, pero la diferencia es manejable. Si IDSC llega al Q4 a menos de 5 puntos de diferencia, la probabilidad de victoria sube al 47% — casi una moneda al aire. Las claves son: defender bien a Smith, presionar a Faggiano en organización, y no dejar rebote ofensivo a Caffaro.
+        </div>
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Optimista</div><div class="sim-sc-score">IDSC 84 — 79</div><div class="sim-sc-desc">IDSC cierra el T3 de Boca (fuerza 25%), Faggiano neutralizado, Q4 ganado con Smith controlado</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Base</div><div class="sim-sc-score">Boca 81 — IDSC 74</div><div class="sim-sc-desc">Partido cerrado hasta el Q4 donde Smith define — Boca aprovecha su condición de local</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Pesimista</div><div class="sim-sc-score">Boca 91 — IDSC 68</div><div class="sim-sc-desc">Smith explosivo desde Q1, Boca gana el Q2 ampliamente (+10) y IDSC nunca puede remontar</div></div>
         </div>
       </div>
     </div>
