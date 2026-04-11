@@ -1081,7 +1081,7 @@ function openRival(idx) {
   const item=items[idx];
   item.classList.add('is-open');
   const detail=item.querySelector('.rival-detail');
-  if(!detail.innerHTML.trim()){
+  if(!detail.innerHTML.trim() || (r.pdfs && r.pdfs.length > 0 && !detail.querySelector('.pdf-btn'))){
     if(r.status==='pending'){
       // Calcular fecha disponible: 2 días antes del partido
       const match = new Date(r.matchDate + 'T12:00:00');
