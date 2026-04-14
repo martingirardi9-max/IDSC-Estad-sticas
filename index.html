@@ -1168,9 +1168,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closePdf();});
 .lineup-table td{padding:.45rem .6rem;border-bottom:.5px solid var(--border);color:var(--white);vertical-align:middle;}
 .lineup-table tr:last-child td{border-bottom:none;}
 .lineup-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
-.diff-pos{color:#2ec87a;font-weight:600;}
-.diff-neg{color:#e74c3c;font-weight:600;}
-.diff-neu{color:var(--muted);}
+.diff-pos,.lineup-table td.diff-pos{color:#2ec87a!important;font-weight:600;}
+.diff-neg,.lineup-table td.diff-neg{color:#e74c3c!important;font-weight:600;}
+.diff-neu,.lineup-table td.diff-neu{color:var(--muted)!important;}
 .lineup-new-badge{display:inline-block;background:var(--gold);color:#0d1b2a;font-size:.5rem;font-weight:700;padding:.15rem .4rem;border-radius:3px;margin-left:.4rem;vertical-align:middle;letter-spacing:.3px;}
 .lineup-momento{background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:1rem;}
 .lineup-momento-title{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
@@ -1194,21 +1194,22 @@ const LINEUPS_DATA = [
       {tipo:"neg", texto:"<strong>La segunda unidad no aportó en Q4:</strong> El segmento FILIPPETTI·DUVANCED·PAUTASSO·FERNANDEZ·ROLFI cedió −5 en 1.4 minutos (Giorgetti 3P + Langston 2P). Sin Barrionuevo, el quinteto perdió movilidad defensiva."},
     ],
     quintetos:[
-      {jugadores:"CAFFARO · TABAREZ · MARCUCCI · VALLEJOS · ROLFI",           min:"4.8m",  pts:12, rec:12, dif:"0",   ip10:"6.14", cuartos:"Q4"},
-      {jugadores:"CAFFARO · BARRIONUEVO · FERNANDEZ · DUVANCED · PAUTASSO",   min:"6.2m",  pts:17, rec:17, dif:"0",   ip10:"6.84", cuartos:"Q2"},
       {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",           min:"5.1m",  pts:10, rec:14, dif:"-4",  ip10:"5.22", cuartos:"Q1"},
       {jugadores:"FILIPPETTI · TABAREZ · ROLFI · VALLEJOS · BARRIONUEVO",     min:"1.3m",  pts:4,  rec:3,  dif:"+1",  ip10:"6.18", cuartos:"Q1"},
       {jugadores:"FILIPPETTI · ROLFI · VALLEJOS · BARRIONUEVO · FERNANDEZ",   min:"2.0m",  pts:4,  rec:2,  dif:"+2",  ip10:"7.10", cuartos:"Q1"},
-      {jugadores:"FILIPPETTI · BARRIONUEVO · FERNANDEZ · DUVANCED · PAUTASSO",min:"1.6m",  pts:2,  rec:0,  dif:"+2",  ip10:"7.72", cuartos:"Q1"},
+      {jugadores:"FILIPPETTI · BARRIONUEVO · FERNANDEZ · DUVANCED · PAUTASSO",min:"1.0m",  pts:2,  rec:0,  dif:"+2",  ip10:"5.99", cuartos:"Q1"},
+      {jugadores:"CAFFARO · BARRIONUEVO · FERNANDEZ · DUVANCED · PAUTASSO",   min:"6.8m",  pts:17, rec:17, dif:"0",   ip10:"5.88", cuartos:"Q1·Q2"},
+      {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",        min:"2.7m",  pts:6,  rec:8,  dif:"-2",  ip10:"5.19", cuartos:"Q2"},
+      {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · HURTADO",           min:"0.8m",  pts:2,  rec:0,  dif:"+2",  ip10:"7.38", cuartos:"Q2"},
+      {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",        min:"0.4m",  pts:3,  rec:1,  dif:"+2",  ip10:"9.38", cuartos:"Q2"},
       {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",           min:"5.8m",  pts:10, rec:22, dif:"-12", ip10:"3.84", cuartos:"Q3"},
       {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",        min:"0.9m",  pts:2,  rec:0,  dif:"+2",  ip10:"6.89", cuartos:"Q3"},
       {jugadores:"MARCUCCI · ROLFI · VALLEJOS · FILIPPETTI · FERNANDEZ",      min:"0.6m",  pts:3,  rec:0,  dif:"+3",  ip10:"8.00", cuartos:"Q3"},
       {jugadores:"MARCUCCI · VALLEJOS · FILIPPETTI · FERNANDEZ · BARRIONUEVO",min:"1.1m",  pts:5,  rec:2,  dif:"+3",  ip10:"8.51", cuartos:"Q3"},
       {jugadores:"FILIPPETTI · FERNANDEZ · BARRIONUEVO · DUVANCED · PAUTASSO",min:"1.6m",  pts:4,  rec:2,  dif:"+2",  ip10:"7.21", cuartos:"Q3"},
-      {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · HURTADO",           min:"0.8m",  pts:2,  rec:0,  dif:"+2",  ip10:"7.38", cuartos:"Q2"},
-      {jugadores:"MARCUCCI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",        min:"2.6m",  pts:6,  rec:8,  dif:"-2",  ip10:"5.99", cuartos:"Q2"},
-      {jugadores:"FILIPPETTI · DUVANCED · PAUTASSO · BARRIONUEVO · FERNANDEZ",min:"3.3m",  pts:2,  rec:2,  dif:"0",   ip10:"5.68", cuartos:"Q4"},
+      {jugadores:"FILIPPETTI · BARRIONUEVO · FERNANDEZ · DUVANCED · PAUTASSO",min:"3.3m",  pts:2,  rec:2,  dif:"0",   ip10:"5.68", cuartos:"Q4"},
       {jugadores:"FILIPPETTI · DUVANCED · PAUTASSO · FERNANDEZ · ROLFI",      min:"1.4m",  pts:0,  rec:5,  dif:"-5",  ip10:"3.11", cuartos:"Q4"},
+      {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",           min:"4.8m",  pts:12, rec:12, dif:"0",   ip10:"6.14", cuartos:"Q4"},
       {jugadores:"FILIPPETTI · TABAREZ · MARCUCCI · ROLFI · CAFFARO",         min:"0.5m",  pts:0,  rec:2,  dif:"-2",  ip10:"3.22", cuartos:"Q4"},
     ],
   },
@@ -1377,13 +1378,32 @@ function renderLTable(rows){
   const header = hasCuartos
     ? '<th style="width:42%">Combinación</th><th>Min</th><th>Pts+</th><th>Pts−</th><th>Dif</th><th>IP10</th><th style="color:var(--muted)">Cuartos</th>'
     : '<th style="width:48%">Combinación</th><th>Min</th><th>Pts+</th><th>Pts−</th><th>Dif</th><th>IP10</th>';
+  const totalPts = rows.reduce((s,r)=>s+r.pts,0);
+  const totalRec = rows.reduce((s,r)=>s+r.rec,0);
+  const totalDif = totalPts - totalRec;
+  const totalDifStr = totalDif > 0 ? '+'+totalDif : String(totalDif);
+  const totalDifClass = totalDif > 0 ? 'diff-pos' : totalDif < 0 ? 'diff-neg' : 'diff-neu';
+  const totalMinRaw = rows.reduce((s,r)=>{
+    const v = parseFloat(String(r.min).replace('m','').replace(':','.')||0);
+    return s + (isNaN(v)?0:v);
+  },0);
+  const totalMinStr = totalMinRaw.toFixed(1)+'m';
+  const totalCuartosCell = hasCuartos ? '<td></td>' : '';
+  const totalRow = `<tr style="border-top:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.06);font-weight:700;">
+    <td style="color:var(--gold);font-size:.72rem;letter-spacing:.03em;">TOTAL PARTIDO</td>
+    <td style="color:var(--muted);font-size:.72rem">${totalMinStr}</td>
+    <td style="color:var(--gold)">${totalPts}</td>
+    <td style="color:var(--gold)">${totalRec}</td>
+    <td class="${totalDifClass}">${totalDifStr}</td>
+    <td></td>${totalCuartosCell}
+  </tr>`;
   return '<table class="lineup-table"><thead><tr>'+header+'</tr></thead><tbody>'+
   rows.map(r=>{
     const d = String(r.dif);
     const dc = d.startsWith('+')?'diff-pos':(d.startsWith('-')&&d!=='0')?'diff-neg':'diff-neu';
     const cuartosCell = hasCuartos ? `<td style="color:var(--muted);font-size:.65rem;font-family:'DM Mono',monospace">${r.cuartos||''}</td>` : '';
     return `<tr><td style="font-weight:500">${r.jugadores}</td><td style="color:var(--muted);font-size:.72rem">${r.min}</td><td>${r.pts}</td><td>${r.rec}</td><td class="${dc}">${r.dif}</td><td style="color:var(--muted)">${r.ip10}</td>${cuartosCell}</tr>`;
-  }).join('')+'</tbody></table>';
+  }).join('')+totalRow+'</tbody></table>';
 }
 
 document.addEventListener('DOMContentLoaded',renderLineups);
