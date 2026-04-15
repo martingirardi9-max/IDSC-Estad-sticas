@@ -585,15 +585,15 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
         <div class="rival-detail" id="detail-15"></div>
       </div>
-      <div class="timeline-item" style="animation-delay:0.68s" data-status="done">
-        <div class="timeline-dot dot-done"></div>
+      <div class="timeline-item" style="animation-delay:0.68s" data-status="next">
+        <div class="timeline-dot dot-next"></div>
         <div class="rival-card" onclick="openRival(16)">
           <div class="rival-date"><div class="day">15</div><span>ABR</span></div>
           <div class="rival-divider"></div>
           <div class="rival-info">
             <div class="rival-name">OBRAS BASKET</div>
             <div class="rival-meta">Templo del Rock · 15/04/2026 · Liga Nacional</div>
-            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">📅 HOY</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 Obras 88–82 proj.</span></div>
           </div>
           <div class="rival-arrow">→</div>
         </div>
@@ -1946,6 +1946,149 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyectado Base</div><div class="sim-sc-score">Boca 86 — IDSC 81</div><div class="sim-sc-desc">Cercano: el modelo acertó dirección y margen aproximado</div></div>
           <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Resultado Real</div><div class="sim-sc-score">Boca 92 — IDSC 86</div><div class="sim-sc-desc">Q1: 19–20 IDSC. Q4: 14–21 Boca. TABAREZ 10 pts debut.</div></div>
         </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 8: OBRAS BASKET — 15 ABR (HOY) · VISITANTE -->
+    <div class="sim-card" id="sim-obras-liga" style="border-color:rgba(245,166,35,.35);box-shadow:0 0 0 1px rgba(245,166,35,.15),0 0 30px rgba(245,166,35,.08);">
+      <div class="sim-accordion-header" onclick="toggleSim('sim-obras-liga')">
+        <div class="sim-acc-rival">OBRAS BASKET <span style="font-size:.65rem;color:var(--gold);font-family:'DM Mono',monospace;">15 ABR · ✈️ Visitante · HOY</span></div>
+        <div class="sim-acc-score" style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);">PRÓXIMO</div>
+        <div class="sim-acc-badges">
+          <span class="badge badge-next" style="font-size:.6rem;">📅 HOY · Liga Nacional</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--gold);">Proj: Obras 88 — IDSC 82</span>
+        </div>
+        <div class="sim-acc-arrow">&#9658;</div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-date" style="margin-bottom:.8rem;">15 ABR · Templo del Rock · <span class="sim-cond">✈️ Visitante</span> · <span style="color:var(--gold);font-weight:600;">📅 HOY — Jornada 34</span></div>
+
+        <!-- CONTEXTO DE TEMPORADA -->
+        <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.5rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;">📋 Contexto general</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.78rem;color:var(--muted);line-height:1.6;">
+            <div><strong style="color:var(--white);">IDSC Oliva</strong><br>19V – 15D · 10° puesto<br>Racha: L-L (Platense, Boca)<br>V como visitante esta fase: 1-3<br><span style="color:#e74c3c;">Sin Conrradi (lesión)</span></div>
+            <div><strong style="color:var(--white);">Obras Basket</strong><br>🏆 Campeón Copa Islas Malvinas<br>Racha reciente: 4V en últimos 5<br>Local fuerte: 110–103 vs Ferro reciente<br><span style="color:#2ec87a;">En alza — mejor forma del año</span></div>
+          </div>
+        </div>
+
+        <!-- ENFRENTAMIENTOS DIRECTOS -->
+        <div style="background:rgba(52,152,219,.06);border:1px solid rgba(52,152,219,.15);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.5rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:#5B9BF0;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;">🔁 Historial directo 2025/26</div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.8;">
+            <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span>Copa Islas Malvinas · 01/04 · SF · Formosa</span>
+              <span style="color:#e74c3c;font-weight:600;">Obras ganó</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:.3rem 0;">
+              <span>Liga Nacional · hoy · Templo del Rock</span>
+              <span style="color:var(--gold);">⚡ EN JUEGO</span>
+            </div>
+            <div style="margin-top:.5rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);font-style:italic;">
+              Obras ganó el único enfrentamiento previo esta temporada. IDSC buscará revancha.
+            </div>
+          </div>
+        </div>
+
+        <!-- SCORE BLOCK PROYECCIÓN -->
+        <div class="sim-rivals" style="margin-bottom:.5rem;">
+          <div class="sim-team sim-rival-team">
+            <div class="sim-team-name">OBRAS BASKET</div>
+            <div class="sim-team-role">LOCAL · TEMPLO DEL ROCK</div>
+          </div>
+          <div class="sim-score-block">
+            <div style="text-align:center;">
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem;">proyección</span>
+              <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;">
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#e74c3c;line-height:1;">88</span>
+                <span style="color:var(--muted);font-size:1rem;">—</span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1;">82</span>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.2rem;">resultado estimado</div>
+            </div>
+          </div>
+          <div class="sim-team sim-idsc-team">
+            <div class="sim-team-name">IDSC OLIVA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+
+        <!-- BARRA DE PROBABILIDAD -->
+        <div class="sim-prob-bar-wrap" style="margin-bottom:.8rem;">
+          <div class="sim-prob-label-l" style="color:#e07070;">Obras 67.4%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:67.4%"></div></div>
+          <div class="sim-prob-label-r">IDSC 32.6%</div>
+        </div>
+
+        <!-- ANÁLISIS DE OBRAS — ÚLTIMOS 5 -->
+        <div style="background:rgba(231,76,60,.04);border:1px solid rgba(231,76,60,.15);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.5rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:#e07070;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;">🔍 Obras — Últimos 5 partidos (del fixture)</div>
+          <div style="font-size:.75rem;color:var(--muted);line-height:1.8;">
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:.3rem .8rem;align-items:center;">
+              <span style="color:#2ec87a;font-weight:700;">V</span><span>Obras 85 – 80 vs Instituto <span style="font-family:'DM Mono',monospace;font-size:.62rem;">(local)</span></span><span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);">+5</span>
+              <span style="color:#2ec87a;font-weight:700;">V</span><span>San Martín 87 – 89 Obras <span style="font-family:'DM Mono',monospace;font-size:.62rem;">(visit.)</span></span><span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);">+2</span>
+              <span style="color:#2ec87a;font-weight:700;">V</span><span>Regatas 79 – 77 Obras <span style="font-family:'DM Mono',monospace;font-size:.62rem;">(visit.)</span></span><span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);">+2 *dif mínima</span>
+              <span style="color:#2ec87a;font-weight:700;">V</span><span>Ferro 78 – 90 Obras <span style="font-family:'DM Mono',monospace;font-size:.62rem;">(visit.)</span></span><span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);">+12</span>
+              <span style="color:#2ec87a;font-weight:700;">V</span><span>Obras 110 – 103 vs Ferro <span style="font-family:'DM Mono',monospace;font-size:.62rem;">(local)</span></span><span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);">+7</span>
+            </div>
+            <div style="margin-top:.6rem;padding:.4rem .6rem;background:rgba(231,76,60,.08);border-radius:6px;font-family:'DM Mono',monospace;font-size:.62rem;color:#e07070;">
+              ⚡ 5 victorias en los últimos 5 partidos · Racha perfecta · Prom. ofensivo: ~92 pts
+            </div>
+          </div>
+        </div>
+
+        <!-- FACTORES CLAVE -->
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave del partido</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Obras en racha perfecta:</strong> 5 victorias consecutivas entrando al partido — incluyendo Copa Islas Malvinas. La motivación y confianza del rival están en el pico de temporada</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>IDSC juega de visitante</strong> en el Templo del Rock (−3.5 pts ajuste estadístico) y con solo 1V en los últimos 4 partidos como visitante</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Sin Conrradi:</strong> La baja del base titular sigue siendo el factor más limitante — la segunda unidad pierde dinamismo ofensivo y el cierre de partidos se complica</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Racha negativa de IDSC:</strong> 2 derrotas consecutivas (Platense y Boca) — el equipo llega sin momentum, aunque el contexto "nada que perder" puede liberar</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>IDSC conoce a Obras:</strong> Los ya se enfrentaron en la Copa Islas Malvinas — hay scouting fresco y la defensa puede estar mejor preparada ante sus sistemas</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Motivación de revancha:</strong> Copa Islas Malvinas perdida + playoff ya asegurado = IDSC puede salir a jugar sin presión, con el chip de demostrar algo</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>FILIPPETTI y MARCUCCI en alto nivel:</strong> Los dos llegaron al duelo con Boca con 26 y 21 pts respectivamente — si repiten ese nivel, IDSC es competitivo</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Partido de cierre de fase regular:</strong> Con el playoff ya asegurado para ambos equipos, el resultado afecta el seeding pero no la clasificación — esto puede modificar la intensidad de rotaciones</div>
+        </div>
+
+        <!-- KEYS TÁCTICAS -->
+        <div style="background:rgba(155,89,182,.06);border:1px solid rgba(155,89,182,.18);border-radius:12px;padding:.9rem 1.1rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;">🎯 Claves tácticas para IDSC</div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.7;">
+            <div style="margin-bottom:.35rem;padding-left:.6rem;border-left:2px solid #C39BD3;">
+              <strong style="color:var(--white);">Controlar el ritmo en los primeros minutos:</strong> El patrón de Q1 catastrófico (vs Instituto, Peñarol) debe romperse. IDSC tiene que neutralizar el impulso de Obras desde el tip-off.
+            </div>
+            <div style="margin-bottom:.35rem;padding-left:.6rem;border-left:2px solid var(--gold);">
+              <strong style="color:var(--white);">Tabarez como ventaja táctica:</strong> En el partido vs Boca demostró ser clave como "sexto hombre" de impacto. Con un Obras que puede sobre-focalizarse en Filippetti/Marcucci, Tabarez puede brillar.
+            </div>
+            <div style="padding-left:.6rem;border-left:2px solid #5B9BF0;">
+              <strong style="color:var(--white);">Corte del triple exterior:</strong> Obras tiene capacidad de anotar desde el perímetro con volumen (registró 110 pts vs Ferro). Si se les permite tirar con comodidad, el partido se escapa.
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-note">
+          <strong>Análisis previo:</strong> Obras es el favorito más claro de los últimos partidos de IDSC como visitante. Llegan en forma perfecta (5V en 5), son campeones de la Copa Islas Malvinas, y juegan en su cancha. Para IDSC, el partido tiene valor de cara al playoff: terminar con victoria recuperaría confianza y podría mejorar el seeding. El modelo da 67.4% de probabilidad a Obras, pero en playoffs nada es certero — y IDSC ya conoce cómo juegan.
+        </div>
+
+        <!-- ESCENARIOS -->
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt">
+            <div class="sim-sc-label">Optimista</div>
+            <div class="sim-sc-score">IDSC 89 — Obras 85</div>
+            <div class="sim-sc-desc">IDSC rompe el patrón del Q1 malo, Filippetti y Marcucci dominan, y Tabarez aporta desde el banco. Victoria de impacto de cara al playoff.</div>
+          </div>
+          <div class="sim-scenario sim-sc-base">
+            <div class="sim-sc-label">Base</div>
+            <div class="sim-sc-score">Obras 88 — IDSC 82</div>
+            <div class="sim-sc-desc">Partido competitivo hasta el Q3. Obras cierra con su localía y la racha. IDSC compite pero cede en el tramo final.</div>
+          </div>
+          <div class="sim-scenario sim-sc-pes">
+            <div class="sim-sc-label">Pesimista</div>
+            <div class="sim-sc-score">Obras 97 — IDSC 74</div>
+            <div class="sim-sc-desc">Q1 complicado, Obras dispara al triple con comodidad, y la baja de Conrradi se siente en la conducción. Sin reacción posible.</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
