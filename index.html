@@ -606,8 +606,8 @@ footer em{color:var(--gold);font-style:normal;}
           <div class="rival-divider"></div>
           <div class="rival-info">
             <div class="rival-name">QUIMSA</div>
-            <div class="rival-meta">El Gigante de la Ruta 9 · 18/04/2026 · Liga Nacional</div>
-            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">🕐 Resultado pendiente</span></div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 18/04/2026 · Liga Nacional · Último partido fase regular</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pdf">📄 Informe disponible</span><span class="badge badge-sim" onclick="showPage('simulacion');event.stopPropagation()" style="cursor:pointer">📊 Ver simulación</span></div>
           </div>
           <div class="rival-arrow">→</div>
         </div>
@@ -1077,7 +1077,8 @@ const RIVALS = [
   {name:"OBRAS BASKET", sub:"15/04/2026 · Liga Nacional · Victoria 77–73", status:"done", matchDate:"2026-04-15", pdfs:[
     {label:"Informe de Scouting — Obras Basket", sub:"Liga Nacional · 15/04/2026 · IDSC Visitante", preview:"https://drive.google.com/file/d/1U9eFaaLdQPgSoxo-4mV5cucawfbd8783/preview", download:"https://drive.google.com/uc?export=download&id=1U9eFaaLdQPgSoxo-4mV5cucawfbd8783"},
   ]},
-  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional", status:"done", matchDate:"2026-04-18", pdfs:[
+  {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional · Último partido fase regular", status:"done", matchDate:"2026-04-18", pdfs:[
+    {label:"Informe de Scouting — Quimsa", sub:"Liga Nacional · 18/04/2026 · IDSC Local · El Gigante de la Ruta 9", preview:"https://drive.google.com/file/d/1GieP59T1oI0e0w-Adc_I0tKZgBzhn6Rf/preview", download:"https://drive.google.com/uc?export=download&id=1GieP59T1oI0e0w-Adc_I0tKZgBzhn6Rf"},
   ]},
 ];
 let currentOpen = -1;
@@ -2066,6 +2067,134 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Proyectado Opt.</div><div class="sim-sc-score">IDSC 89 — Obras 85</div><div class="sim-sc-desc">Casi se cumplió — IDSC ganó aunque con menor diferencia</div></div>
           <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyectado Base</div><div class="sim-sc-score">Obras 88 — IDSC 82</div><div class="sim-sc-desc">No se cumplió — IDSC ganó de visitante en el Templo del Rock</div></div>
           <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Resultado Real</div><div class="sim-sc-score">IDSC 77 — Obras 73</div><div class="sim-sc-desc">Q1: +4 IDSC. DUVANCED MVP (11.18). Filippetti+Vallejos+Marcucci = 44pts</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 9: QUIMSA — PRÓXIMO (18 ABR) -->
+    <div class="sim-card" id="sim-quimsa" style="border-color:rgba(245,166,35,.35);background:linear-gradient(135deg,rgba(245,166,35,.04),rgba(245,166,35,.01));">
+      <div class="sim-accordion-header" onclick="toggleSim('sim-quimsa')" style="background:rgba(245,166,35,.04);">
+        <div class="sim-acc-rival">QUIMSA <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">18 ABR · 🏠 Local · ⚡ Último partido</span></div>
+        <div class="sim-acc-score"><span class="idsc-pts">88</span><span class="sep">—</span><span class="rival-pts">84</span></div>
+        <div class="sim-acc-pct" style="color:var(--gold)">PROYECCIÓN BASE</div>
+        <div class="sim-acc-badges"><span class="badge badge-next" style="font-size:.6rem;">⚡ Partido pendiente</span><span class="badge badge-pdf" style="font-size:.6rem;cursor:pointer;" onclick="event.stopPropagation();var r=RIVALS[17];var d=document.getElementById('detail-17');if(!d.querySelector('.pdf-btn')){var p=r.pdfs[0];d.innerHTML='<div class=\'detail-label\'>📁 Informes · '+r.name+'</div><div class=\'pdf-buttons\'><div class=\'pdf-btn\' onclick=\'openPdf(\\\''+p.preview+'\\\',\\\''+p.download+'\\\',\\\'Quimsa — '+p.label+'\\\')\'><div class=\'pdf-btn-icon\'>📄</div><div class=\'pdf-btn-info\'><div class=\'pdf-btn-label\'>'+p.label+'</div><div class=\'pdf-btn-sub\'>IDSC Scouting · '+r.sub+'</div></div><div class=\'pdf-btn-acts\'><button class=\'bxs bxs-view\' onclick=\'openPdf(\\\''+p.preview+'\\\',\\\''+p.download+'\\\',\\\'Quimsa\\\');event.stopPropagation()\'>👁 Ver</button><a class=\'bxs bxs-dl\' href=\''+p.download+'\' target=\'_blank\'>⬇ Bajar</a></div></div></div>';}showPage('rivales');setTimeout(()=>{openRival(17);},200);">📄 Informe disponible</span></div>
+        <div class="sim-acc-arrow">&#9658;</div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-date" style="margin-bottom:.8rem;">18 ABR 2026 · El Gigante de la Ruta 9 · <span class="sim-cond">🏠 Local · <strong style="color:var(--gold);">ÚLTIMO PARTIDO — FASE REGULAR</strong></span></div>
+
+        <!-- Score proyectado -->
+        <div class="sim-rivals" style="margin-bottom:1rem;">
+          <div class="sim-team" style="flex:1;text-align:left;">
+            <div class="sim-team-name" style="color:var(--gold)">IDSC OLIVA</div>
+            <div class="sim-team-role">LOCAL</div>
+          </div>
+          <div class="sim-score-block">
+            <div style="text-align:center;margin-bottom:.3rem;">
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">PROYECCIÓN BASE</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">88</span>
+              <span style="color:var(--muted);margin:0 .4rem;font-size:1.1rem;">—</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#e74c3c;">84</span>
+            </div>
+            <div style="text-align:center;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--gold);margin-top:.2rem;letter-spacing:.5px;">IDSC FAVORITO · 54.8%</div>
+          </div>
+          <div class="sim-team" style="flex:1;text-align:right;">
+            <div class="sim-team-name">QUIMSA</div>
+            <div class="sim-team-role">VISITANTE</div>
+          </div>
+        </div>
+
+        <!-- Barra de probabilidad -->
+        <div class="sim-prob-bar-wrap" style="margin-bottom:1.2rem;">
+          <div class="sim-prob-label-l" style="color:var(--gold);">IDSC · 54.8%</div>
+          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:45.2%;background:linear-gradient(90deg,rgba(245,166,35,.4),rgba(245,166,35,.2));"></div></div>
+          <div class="sim-prob-label-r" style="color:#e74c3c;">QUIMSA · 45.2%</div>
+        </div>
+
+        <!-- Escenarios por cuarto proyectados -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;">
+          <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q1</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);line-height:1">22</div>
+            <div style="font-size:.7rem;color:var(--muted)">vs 24</div>
+            <div style="font-size:.65rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−2 proj.</div>
+          </div>
+          <div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q2</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#2ecc71;line-height:1">23</div>
+            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
+            <div style="font-size:.65rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+3 proj.</div>
+          </div>
+          <div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q3</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#2ecc71;line-height:1">24</div>
+            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
+            <div style="font-size:.65rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+4 proj. ⭐</div>
+          </div>
+          <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q4</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);line-height:1">19</div>
+            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
+            <div style="font-size:.65rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−1 proj.</div>
+          </div>
+        </div>
+
+        <!-- Estadísticas comparadas -->
+        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.8rem;">📊 COMPARATIVA DE TEMPORADA</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;font-size:.75rem;">
+            <div style="text-align:center;background:rgba(245,166,35,.07);border-radius:8px;padding:.6rem;">
+              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">POS. TABLA</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);">9°</div>
+              <div style="font-size:.6rem;color:var(--muted);">vs 2° Quimsa</div>
+            </div>
+            <div style="text-align:center;background:rgba(46,204,113,.07);border-radius:8px;padding:.6rem;">
+              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">% VICTORIAS</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#2ecc71;">55.6%</div>
+              <div style="font-size:.6rem;color:var(--muted);">vs 64.7% Quimsa</div>
+            </div>
+            <div style="text-align:center;background:rgba(52,152,219,.07);border-radius:8px;padding:.6rem;">
+              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">LOCAL %</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#5B9BF0;">70.6%</div>
+              <div style="font-size:.6rem;color:var(--muted);">IDSC de local</div>
+            </div>
+          </div>
+          <!-- Head to head esta temporada -->
+          <div style="margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border);">
+            <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">🔄 HISTORIAL TEMPORADA 2025/26 (ida y vuelta)</div>
+            <div style="display:flex;flex-direction:column;gap:.3rem;">
+              <div style="font-size:.75rem;color:var(--muted);padding:.3rem .5rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
+                ✈️ <strong style="color:var(--white);">IDSC vs QUIMSA (Visitante)</strong> — <span style="color:#e74c3c;">✗ Derrota IDSC 83 – Quimsa 86</span>
+              </div>
+              <div style="font-size:.75rem;color:var(--muted);padding:.3rem .5rem;background:rgba(245,166,35,.04);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;">
+                🏠 <strong style="color:var(--white);">IDSC vs QUIMSA (Local)</strong> — <span style="color:var(--gold);">📅 18/04 · Pendiente resultado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Factores clave -->
+        <div class="sim-factors">
+          <div class="sim-factor-title">Factores clave de la proyección</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>IDSC juega de local (El Gigante):</strong> 70.6% de victorias en casa — la mejor fortaleza del equipo esta temporada. Quimsa tendrá que superar un ambiente hostil y desplazarse desde Santiago del Estero.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Mejor estado de forma reciente:</strong> IDSC viene de ganar los últimos 2 partidos (Atenas OT + Obras visitante). La victoria en el Templo del Rock es el mejor momentum posible para cerrar la temporada.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Tercer cuarto — arma principal:</strong> IDSC promedia +2.3 en el Q3 (mejor cuarto de la temporada). Quimsa es un equipo de alto ritmo — si IDSC puede imponer su juego en el tercer período, el partido es favorable.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Quimsa es el equipo más ofensivo de la liga:</strong> 2° en la tabla, 64.7% de victorias, líder en puntos anotados. Su ataque es devastador con Marcos Mata y Jean Pierre Tokoto como motores principales. Promedian más de 90 pts/partido.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Historial de visitante vs Quimsa:</strong> IDSC perdió el partido de ida 83–86 en Santiago del Estero. Quimsa demostró ser un equipo peligroso incluso sin el factor cancha.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Partido sin presión para Quimsa:</strong> Ya clasificada al playoff (2° puesto), Quimsa puede rotar jugadores o probar variantes tácticas sin el peso del resultado — lo que la hace impredecible.</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Playoff ya asegurado para IDSC:</strong> El resultado no condiciona la clasificación (9° confirmado). Sin embargo, un cierre victorioso en casa da un gran impulso psicológico de cara a los cuartos de final vs La Unión FSA.</div>
+        </div>
+
+        <!-- Nota táctica -->
+        <div class="sim-note">
+          <strong>Contexto del partido:</strong> Es el cierre de la fase regular. IDSC (9° — 20V 16D) recibe a Quimsa (2° — 22V 12D) en El Gigante de la Ruta 9. Aunque ninguno de los dos tiene nada en juego en términos de clasificación, este partido tiene un valor enorme: IDSC busca cerrar la temporada regular con una victoria en casa y el mejor estado de forma posible antes del playoff. La última vez que se enfrentaron, Quimsa ganó por 86–83 en Santiago del Estero. En casa, IDSC es un equipo diferente — 12V en 17 partidos locales (70.6%). El modelo proyecta un partido cerrado donde el Q3 y la intensidad defensiva de IDSC serán determinantes. El informe de scouting incluye el análisis completo del sistema ofensivo y las rotaciones de Quimsa.
+        </div>
+
+        <!-- Escenarios -->
+        <div class="sim-scenarios">
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 96 — Quimsa 80</div><div class="sim-sc-desc">IDSC domina el Q3 (+12), CAFFARO y FILIPPETTI en su mejor nivel. Quimsa no repite su forma ofensiva de visitante</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">IDSC 88 — Quimsa 84</div><div class="sim-sc-desc">Partido cerrado. IDSC aprovecha el local y el tercer cuarto para sostener una ventaja mínima hasta el final</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">Quimsa 91 — IDSC 82</div><div class="sim-sc-desc">El ataque de Quimsa domina desde el Q1. IDSC repite el patrón de arranque lento y el déficit es insalvable</div></div>
         </div>
       </div>
     </div>
