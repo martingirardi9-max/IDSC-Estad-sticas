@@ -91,7 +91,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,22,40,.97);backdrop-filt
 .timeline-item[data-status="next"] .rival-card::before{background:var(--gold);}
 .timeline-item[data-status="cup"] .rival-card::before{background:#9B59B6;}
 .timeline-item[data-status="next"] .rival-card{opacity:.7;}
-.timeline-item[data-status="next"] .rival-card:hover{opacity:1;}
+.timeline-item[data-status="pending"] .rival-card:hover{opacity:1;}
 .rival-card:hover,.timeline-item.is-open .rival-card{border-color:rgba(245,166,35,.25);background:var(--navy3);}
 .timeline-item[data-status="pending"] .rival-card:hover{border-color:rgba(122,143,166,.25);}
 .timeline-item.is-open .rival-card{border-radius:14px 14px 0 0;}
@@ -288,43 +288,35 @@ footer em{color:var(--gold);font-style:normal;}
     <div class="eyebrow">IDSC Oliva · Liga Nacional de Básquet</div>
     <h1>ANÁLISIS<br><em>ESTADÍSTICO</em></h1>
     <p>Informes de scouting, estadísticas e índices de productividad del cuerpo técnico.</p>
-    <div class="hero-cards" style="grid-template-columns:repeat(3,1fr);max-width:520px;">
-      <div class="hero-card" onclick="showPage('rivales')"><div class="hero-card-icon">🏀</div><div class="hero-card-label">Rivales</div><div class="hero-card-sub">36 partidos</div></div>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showPage('rivales')"><div class="hero-card-icon">🏀</div><div class="hero-card-label">Rivales</div><div class="hero-card-sub">35 partidos</div></div>
+      <div class="hero-card" onclick="showPage('fixture')"><div class="hero-card-icon">📅</div><div class="hero-card-label">Fixture</div><div class="hero-card-sub">Próximos partidos</div></div>
+      <div class="hero-card" onclick="showPage('equipo')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Mi Equipo</div><div class="hero-card-sub">IDSC Oliva</div></div>
       <div class="hero-card" onclick="showPage('temporada')"><div class="hero-card-icon">📊</div><div class="hero-card-label">Temporada</div><div class="hero-card-sub">Estadísticas</div></div>
-      <div class="hero-card hero-card-playoff" onclick="showPage('playoff')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Playoff</div><div class="hero-card-sub">Cuadro completo</div></div>
+      <div class="hero-card hero-card-playoff" onclick="showPage('playoff')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Playoff</div><div class="hero-card-sub">Cuadro proyectado</div></div>
     </div>
   </div>
-  <div class="playoff-strip" style="grid-template-columns:1fr;max-width:700px;margin-left:auto;margin-right:auto;">
-    <div class="po-card po-card-rival" style="position:relative;overflow:hidden;">
-      <div class="qualify-stars">
-        <span class="qualify-star" style="top:15%;right:6%;animation-duration:2.8s;animation-delay:0s;color:rgba(245,166,35,.4);">⭐</span>
-        <span class="qualify-star" style="bottom:20%;right:15%;animation-duration:3.2s;animation-delay:.7s;font-size:.55rem;color:rgba(245,166,35,.3);">✨</span>
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 2rem;opacity:0;animation:fadeUp .6s ease forwards .5s;">
+    <div class="po-card po-card-next" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;">
+      <div>
+        <div class="po-pos-badge" style="margin-bottom:.7rem;">🏆 RECLASIFICACIÓN PLAYOFF · SERIE AL MEJOR DE 5</div>
+        <div class="po-label">⚡ PRÓXIMO PARTIDO</div>
+        <div class="po-main" style="font-size:2.8rem;margin-bottom:.4rem;">LA UNIÓN FSA.</div>
+        <div class="po-sub" style="font-size:.88rem;margin-bottom:.8rem;">Jueves 24 de Abril · Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:#5B9BF0">Juego 1 de 5</strong></div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <span class="badge badge-next" style="font-size:.65rem;padding:.25rem .7rem;">J1 · 24/ABR · Formosa</span>
+          <span class="badge badge-future" style="font-size:.65rem;padding:.25rem .7rem;">J2 · 26/ABR · Formosa</span>
+          <span class="badge badge-future" style="font-size:.65rem;padding:.25rem .7rem;">J3 · 30/ABR · Oliva</span>
+          <span class="badge badge-pending" style="font-size:.65rem;padding:.25rem .7rem;">J4* · 02/MAY · Oliva</span>
+          <span class="badge badge-pending" style="font-size:.65rem;padding:.25rem .7rem;">J5* · 05/MAY · Formosa</span>
+        </div>
       </div>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <div style="text-align:center;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.8rem;">
         <div>
-          <div class="po-pos-badge">⚡ RECLASIFICACIÓN · J6 · Sáb 18/04 · 21:00 hs</div>
-          <div class="po-label" style="margin-top:.5rem;">🎯 PRÓXIMO RIVAL · SERIE AL MEJOR DE 5</div>
-          <div class="po-main" style="font-size:2.8rem;line-height:1;">LA UNIÓN FSA</div>
-          <div class="po-sub">8° en la tabla · 20V 16D · 55.6% victorias · Cincuentenario, Formosa</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#5B9BF0;line-height:1;">8°</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;">VS IDSC 9°</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:.5rem;min-width:130px;">
-          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem .9rem;text-align:center;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">IDSC 9°</div>
-            <div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.2rem">vs 8° UNIÓN</div>
-          </div>
-          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem .9rem;text-align:center;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--white);line-height:1">MEJOR DE 5</div>
-            <div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.2rem">Ganador → Cuartos</div>
-          </div>
-        </div>
-      </div>
-      <div class="po-detail" style="margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;">
-        <span>J1 · 24/4</span><span style="opacity:.4">·</span>
-        <span>J2 · 26/4</span><span style="opacity:.4">·</span>
-        <span>J3 · 30/4</span><span style="opacity:.4">·</span>
-        <span style="opacity:.5">*J4 · 2/5</span><span style="opacity:.4">·</span>
-        <span style="opacity:.5">*J5 · 5/5</span>
-        <button onclick="showPage('playoff')" style="margin-left:auto;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:.3rem .8rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);cursor:pointer;transition:all .2s;">Ver cuadro →</button>
+        <button onclick="showPage('playoff')" style="background:linear-gradient(135deg,rgba(52,152,219,.2),rgba(52,152,219,.1));border:1px solid rgba(52,152,219,.4);color:#5B9BF0;border-radius:10px;padding:.55rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.3px;" onmouseover="this.style.background='rgba(52,152,219,.3)';this.style.borderColor='rgba(52,152,219,.7)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(52,152,219,.2),rgba(52,152,219,.1))';this.style.borderColor='rgba(52,152,219,.4)'">Ver cuadro →</button>
       </div>
     </div>
   </div>
@@ -348,7 +340,7 @@ footer em{color:var(--gold);font-style:normal;}
     <div class="section-title">
       <h3>TEMPORADA 2025/26</h3>
       <div class="section-line"></div>
-      <div class="section-count">36 partidos · 10 con informe · Playoff en curso</div>
+      <div class="section-count">36 partidos · 10 con informe · 1 pendiente</div>
     </div>
     <!-- LEYENDA -->
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;">
@@ -611,23 +603,78 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
         <div class="rival-detail" id="detail-17"></div>
       </div>
+      <!-- SEPARADOR PLAYOFF -->
+      <div style="margin:.8rem 0 .6rem -2rem;padding:.45rem .9rem;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:10px;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);letter-spacing:1.5px;">🏆 RECLASIFICACIÓN PLAYOFF · VS LA UNIÓN FSA (8°) · SERIE AL MEJOR DE 5</div>
       <div class="timeline-item" style="animation-delay:0.76s" data-status="next">
         <div class="timeline-dot dot-next"></div>
-        <div class="rival-card" onclick="showPage('playoff')">
+        <div class="rival-card" onclick="openRival(18)">
           <div class="rival-date"><div class="day">24</div><span>ABR</span></div>
           <div class="rival-divider"></div>
           <div class="rival-info">
-            <div class="rival-name">LA UNIÓN FSA. <span style="font-size:.72rem;color:var(--gold);font-family:'DM Mono',monospace;margin-left:.4rem;">J1 RECLASIFICACIÓN</span></div>
-            <div class="rival-meta">Cincuentenario · 24/04/2026 · Reclasificación Playoff · Mejor de 5</div>
-            <div class="rival-badges">
-              <span class="badge badge-loc">✈️ Visitante</span>
-              <span class="badge badge-next">⚡ Próximo · 24/4</span>
-              <span class="badge" style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);">🏆 PLAYOFF · 8° vs 9°</span>
-            </div>
+            <div class="rival-name">LA UNIÓN FSA. — JUEGO 1</div>
+            <div class="rival-meta">Estado Cincuentenario · Formosa · 24/04/2026 · Reclasificación</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">🏆 Juego 1 de 5</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
           </div>
           <div class="rival-arrow">→</div>
         </div>
-      </div></div></div>
+        <div class="rival-detail" id="detail-18"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.80s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(19)">
+          <div class="rival-date"><div class="day">26</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">LA UNIÓN FSA. — JUEGO 2</div>
+            <div class="rival-meta">Estado Cincuentenario · Formosa · 26/04/2026 · Reclasificación</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-future">📅 Juego 2 de 5</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-19"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.84s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(20)">
+          <div class="rival-date"><div class="day">30</div><span>ABR</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">LA UNIÓN FSA. — JUEGO 3</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 30/04/2026 · Reclasificación</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-future">📅 Juego 3 de 5</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-20"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.88s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(21)">
+          <div class="rival-date"><div class="day">02</div><span>MAY</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">LA UNIÓN FSA. — JUEGO 4 *</div>
+            <div class="rival-meta">El Gigante de la Ruta 9 · 02/05/2026 · Reclasificación</div>
+            <div class="rival-badges"><span class="badge badge-loc">🏠 Local</span><span class="badge badge-pending">* Si es necesario</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-21"></div>
+      </div>
+      <div class="timeline-item" style="animation-delay:0.92s" data-status="pending">
+        <div class="timeline-dot dot-pending"></div>
+        <div class="rival-card" onclick="openRival(22)">
+          <div class="rival-date"><div class="day">05</div><span>MAY</span></div>
+          <div class="rival-divider"></div>
+          <div class="rival-info">
+            <div class="rival-name">LA UNIÓN FSA. — JUEGO 5 *</div>
+            <div class="rival-meta">Estado Cincuentenario · Formosa · 05/05/2026 · Reclasificación</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-pending">* Si es necesario</span></div>
+          </div>
+          <div class="rival-arrow">→</div>
+        </div>
+        <div class="rival-detail" id="detail-22"></div>
+      </div></div>
   </div>
 </div>
 
@@ -636,25 +683,65 @@ footer em{color:var(--gold);font-style:normal;}
   <div class="page-header">
     <div class="eyebrow">Liga Nacional 2025/26</div>
     <h2>FIXTURE</h2>
-    <p>Próximos compromisos de IDSC Oliva — Liga Nacional y Copa Islas Malvinas.</p>
+    <p>Fase regular finalizada. IDSC Oliva avanza al Playoff — Reclasificación previa vs La Unión FSA.</p>
   </div>
   <div class="section">
-    <div class="section-title"><h3>LIGA NACIONAL — PRÓXIMOS PARTIDOS</h3><div class="section-line"></div></div>
-    <div class="fixture-card" style="animation-delay:.02s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">12</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">REGATAS (C) <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">21:30 hs · El Gigante de la Ruta 9</div></div><span class="badge badge-win">✓ Victoria 89–83</span></div>
-    <div class="fixture-card" style="animation-delay:.05s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">22:10 hs · Cincuentenario</div></div><span class="badge badge-loss">✗ Derrota 103–91</span></div>
-    <div class="fixture-card done" style="animation-delay:.11s"><div class="fixture-day-block"><div class="fixture-day">20</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBERÁ TC <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Dr. Luis Augusto Derna</div></div><span class="badge badge-loss">✗ Derrota 96–104 OT</span></div>
-    <div class="fixture-card" style="animation-delay:.14s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">23</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">INSTITUTO <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Angel Sandrín</div></div><span class="badge badge-loss">✗ Derrota 89–78</span></div>
-    <div class="fixture-card" style="animation-delay:.17s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">27</div><div class="fixture-month">MAR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> PEÑAROL (MDP)</div><div class="fixture-detail">El Gigante de la Ruta 9</div></div><span class="badge badge-loss">✗ Derrota 102–107</span></div>
-    <div class="section-title" style="margin-top:2rem"><h3>🏆 COPA ISLAS MALVINAS</h3><div class="section-line"></div><div class="section-count">1 y 2 de Abril · Cuadrangular · Finalizado</div></div>
-    <div class="cup-info-box"><strong>Torneo finalizado</strong> — Copa Islas Malvinas 2026. IDSC fue eliminado en semifinales. <strong style="color:#C39BD3;">🏆 Campeón: Obras Basket.</strong> Sede: Estado Cincuentenario · Formosa.</div>
-    <div class="fixture-card" style="animation-delay:.2s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">01</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">SEMIFINAL — IDSC OLIVA <span class="vs">VS</span> OBRAS BASKET</div><div class="fixture-detail">Estado Cincuentenario · Formosa</div></div><span class="badge badge-loss">✗ Derrota · Copa Islas Malvinas</span></div>
-    <div class="fixture-card" style="animation-delay:.23s;border-left:3px solid rgba(155,89,182,.4);background:rgba(155,89,182,.03)"><div class="fixture-day-block"><div class="fixture-day">02</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">FINAL — COPA ISLAS MALVINAS</div><div class="fixture-detail">🏆 Campeón: Obras Basket</div></div><span class="badge badge-cup">🏆 Obras campeón</span></div>
-    <div class="section-title" style="margin-top:2rem"><h3>LIGA NACIONAL — CONTINUACIÓN</h3><div class="section-line"></div></div>
-    <div class="fixture-card" style="animation-delay:.26s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">07</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> PLATENSE</div><div class="fixture-detail">El Gigante de la Ruta 9 · 07/04 · 21:00 hs</div></div><span class="badge badge-loss">✗ Derrota 86–98</span></div>
-    <div class="fixture-card" style="animation-delay:.29s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">10</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> ATENAS (C)</div><div class="fixture-detail">El Gigante de la Ruta 9 · 10/04 · En Tiempo Extra</div></div><span class="badge badge-win">✓ Victoria 108–104 OT</span></div>
-    <div class="fixture-card" style="animation-delay:.32s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">13</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">BOCA <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Luis Conde · ✈️ Visitante</div></div><span class="badge badge-loss">✗ Derrota 92–86</span></div>
-    <div class="fixture-card" style="animation-delay:.35s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">15</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBRAS <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Templo del Rock · ✈️ Visitante</div></div><span class="badge badge-win">✓ Victoria 77–73</span></div>
-    <div class="fixture-card upcoming" style="animation-delay:.38s"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> QUIMSA</div><div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local</div></div><span class="badge badge-future">📅 Último partido</span></div>
+    <div class="section-title"><h3>FASE REGULAR — ÚLTIMOS PARTIDOS</h3><div class="section-line"></div><div class="section-count">Finalizada · PJ 36 · 20V 16D</div></div>
+    <div class="fixture-card" style="animation-delay:.02s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">10</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> ATENAS (C)</div><div class="fixture-detail">El Gigante de la Ruta 9 · En Tiempo Extra</div></div><span class="badge badge-win">✓ Victoria 108–104 OT</span></div>
+    <div class="fixture-card" style="animation-delay:.05s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">13</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">BOCA <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Luis Conde · ✈️ Visitante</div></div><span class="badge badge-loss">✗ Derrota 92–86</span></div>
+    <div class="fixture-card" style="animation-delay:.08s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">15</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBRAS <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Templo del Rock · ✈️ Visitante</div></div><span class="badge badge-win">✓ Victoria 77–73</span></div>
+    <div class="fixture-card" style="animation-delay:.11s;border-left:3px solid rgba(122,143,166,.35);background:rgba(122,143,166,.03)"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> QUIMSA</div><div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · Último partido fase regular</div></div><span class="badge badge-done">✓ Fase regular finalizada</span></div>
+
+    <div class="section-title" style="margin-top:2rem"><h3>🏆 RECLASIFICACIÓN PLAYOFF — VS LA UNIÓN FSA (8°)</h3><div class="section-line"></div><div class="section-count">Serie al mejor de 5 · IDSC (9°) · Local J3 y J5</div></div>
+    <div class="cup-info-box" style="border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.04);">
+      <strong style="color:var(--gold);">Serie Reclasificación previa:</strong> La Unión FSA (8°) vs IDSC Oliva (9°) · Mejor de 5 partidos. El ganador accede a Cuartos de Final del Playoff. J1 y J2 en Formosa, J3 y J4 en Oliva, J5 en Formosa (*). <strong style="color:var(--gold);">* En caso de ser necesario.</strong>
+    </div>
+
+    <div class="fixture-card next" style="animation-delay:.14s">
+      <div class="fixture-day-block"><div class="fixture-day">24</div><div class="fixture-month">ABR</div></div>
+      <div class="fixture-div"></div>
+      <div class="fixture-teams">
+        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
+        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--gold)">JUEGO 1</strong></div>
+      </div>
+      <span class="badge badge-next">🏆 J1 — Próximo</span>
+    </div>
+    <div class="fixture-card upcoming" style="animation-delay:.17s">
+      <div class="fixture-day-block"><div class="fixture-day">26</div><div class="fixture-month">ABR</div></div>
+      <div class="fixture-div"></div>
+      <div class="fixture-teams">
+        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
+        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:#5B9BF0">JUEGO 2</strong></div>
+      </div>
+      <span class="badge badge-future">📅 J2</span>
+    </div>
+    <div class="fixture-card upcoming" style="animation-delay:.20s">
+      <div class="fixture-day-block"><div class="fixture-day">30</div><div class="fixture-month">ABR</div></div>
+      <div class="fixture-div"></div>
+      <div class="fixture-teams">
+        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> LA UNIÓN FSA.</div>
+        <div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · <strong style="color:#5B9BF0">JUEGO 3</strong></div>
+      </div>
+      <span class="badge badge-future">📅 J3</span>
+    </div>
+    <div class="fixture-card" style="animation-delay:.23s;opacity:.6">
+      <div class="fixture-day-block"><div class="fixture-day">02</div><div class="fixture-month">MAY</div></div>
+      <div class="fixture-div"></div>
+      <div class="fixture-teams">
+        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> LA UNIÓN FSA.</div>
+        <div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · <strong style="color:var(--muted)">JUEGO 4 *</strong></div>
+      </div>
+      <span class="badge badge-pending">* Si es necesario</span>
+    </div>
+    <div class="fixture-card" style="animation-delay:.26s;opacity:.6">
+      <div class="fixture-day-block"><div class="fixture-day">05</div><div class="fixture-month">MAY</div></div>
+      <div class="fixture-div"></div>
+      <div class="fixture-teams">
+        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
+        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--muted)">JUEGO 5 *</strong></div>
+      </div>
+      <span class="badge badge-pending">* Si es necesario</span>
+    </div>
   </div>
 </div>
 
@@ -816,7 +903,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
     </div>
-    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 20/04/2026 · P36</div></div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 19/04/2026 · P36</div></div>
     <div class="standings-table">
       <div class="standings-header">
         <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
@@ -825,24 +912,24 @@ footer em{color:var(--gold);font-style:normal;}
       </div>
       <!-- STANDINGS-START -->
       <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">1</span><span class="st-team">QUIMSA</span><span class="st-num">36</span><span class="st-num">24</span><span class="st-num">12</span><span class="st-num">3000</span><span class="st-num">2752</span><span class="st-num">60</span><span class="st-num">66.7%</span></div>
-      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">2</span><span class="st-team">GIMNASIA Y ESGRIMA (CR)</span><span class="st-num">35</span><span class="st-num">23</span><span class="st-num">12</span><span class="st-num">2854</span><span class="st-num">2681</span><span class="st-num">58</span><span class="st-num">65.7%</span></div>
-      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">3</span><span class="st-team">REGATAS</span><span class="st-num">36</span><span class="st-num">23</span><span class="st-num">13</span><span class="st-num">2867</span><span class="st-num">2743</span><span class="st-num">59</span><span class="st-num">63.9%</span></div>
-      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">4</span><span class="st-team">OBERA TC</span><span class="st-num">36</span><span class="st-num">23</span><span class="st-num">13</span><span class="st-num">2922</span><span class="st-num">2773</span><span class="st-num">59</span><span class="st-num">63.9%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">5</span><span class="st-team">OBRAS SANITARIAS</span><span class="st-num">35</span><span class="st-num">21</span><span class="st-num">14</span><span class="st-num">2845</span><span class="st-num">2759</span><span class="st-num">56</span><span class="st-num">60.0%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">6</span><span class="st-team">BOCA JUNIORS</span><span class="st-num">35</span><span class="st-num">21</span><span class="st-num">14</span><span class="st-num">2845</span><span class="st-num">2724</span><span class="st-num">56</span><span class="st-num">60.0%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">7</span><span class="st-team">FERRO CARRIL OESTE</span><span class="st-num">36</span><span class="st-num">21</span><span class="st-num">15</span><span class="st-num">3013</span><span class="st-num">2950</span><span class="st-num">57</span><span class="st-num">58.3%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">2</span><span class="st-team">OBERA TC</span><span class="st-num">35</span><span class="st-num">23</span><span class="st-num">12</span><span class="st-num">2844</span><span class="st-num">2691</span><span class="st-num">58</span><span class="st-num">65.7%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">3</span><span class="st-team">GIMNASIA Y ESGRIMA (CR)</span><span class="st-num">35</span><span class="st-num">23</span><span class="st-num">12</span><span class="st-num">2854</span><span class="st-num">2681</span><span class="st-num">58</span><span class="st-num">65.7%</span></div>
+      <div class="standings-row playoff-zone"><span class="st-pos st-pos-num">4</span><span class="st-team">REGATAS</span><span class="st-num">35</span><span class="st-num">22</span><span class="st-num">13</span><span class="st-num">2774</span><span class="st-num">2674</span><span class="st-num">57</span><span class="st-num">62.9%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">5</span><span class="st-team">FERRO CARRIL OESTE</span><span class="st-num">35</span><span class="st-num">21</span><span class="st-num">14</span><span class="st-num">2933</span><span class="st-num">2863</span><span class="st-num">56</span><span class="st-num">60.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">6</span><span class="st-team">OBRAS SANITARIAS</span><span class="st-num">35</span><span class="st-num">21</span><span class="st-num">14</span><span class="st-num">2845</span><span class="st-num">2759</span><span class="st-num">56</span><span class="st-num">60.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">7</span><span class="st-team">BOCA JUNIORS</span><span class="st-num">35</span><span class="st-num">21</span><span class="st-num">14</span><span class="st-num">2845</span><span class="st-num">2724</span><span class="st-num">56</span><span class="st-num">60.0%</span></div>
       <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">8</span><span class="st-team">LA UNIÓN DE FORMOSA</span><span class="st-num">36</span><span class="st-num">20</span><span class="st-num">16</span><span class="st-num">2925</span><span class="st-num">2889</span><span class="st-num">56</span><span class="st-num">55.6%</span></div>
       <div class="standings-row standings-idsc playoffs-pre"><span class="st-pos st-pos-num">9</span><span class="st-team">⭐ INDEPENDIENTE (O)</span><span class="st-num">36</span><span class="st-num">20</span><span class="st-num">16</span><span class="st-num">3154</span><span class="st-num">3049</span><span class="st-num">56</span><span class="st-num">55.6%</span></div>
       <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">10</span><span class="st-team">INSTITUTO</span><span class="st-num">36</span><span class="st-num">20</span><span class="st-num">16</span><span class="st-num">2788</span><span class="st-num">2722</span><span class="st-num">56</span><span class="st-num">55.6%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">11</span><span class="st-team">PENAROL</span><span class="st-num">36</span><span class="st-num">19</span><span class="st-num">17</span><span class="st-num">2932</span><span class="st-num">2930</span><span class="st-num">55</span><span class="st-num">52.8%</span></div>
-      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">12</span><span class="st-team">SAN MARTIN DE CORIENTES</span><span class="st-num">36</span><span class="st-num">17</span><span class="st-num">19</span><span class="st-num">2710</span><span class="st-num">2752</span><span class="st-num">53</span><span class="st-num">47.2%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">13</span><span class="st-team">CICLISTA OLÍMPICO</span><span class="st-num">36</span><span class="st-num">15</span><span class="st-num">21</span><span class="st-num">2850</span><span class="st-num">2881</span><span class="st-num">51</span><span class="st-num">41.7%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">14</span><span class="st-team">RACING CLUB CHIVILCOY</span><span class="st-num">36</span><span class="st-num">14</span><span class="st-num">22</span><span class="st-num">2858</span><span class="st-num">2946</span><span class="st-num">50</span><span class="st-num">38.9%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">15</span><span class="st-team">SAN LORENZO</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2832</span><span class="st-num">2964</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">16</span><span class="st-team">UNION DE SANTA FE</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2933</span><span class="st-num">3017</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">17</span><span class="st-team">PLATENSE</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2962</span><span class="st-num">3067</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">18</span><span class="st-team">ATENAS</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2770</span><span class="st-num">2935</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
-      <div class="standings-row out-zone"><span class="st-pos st-pos-num">19</span><span class="st-team">ARGENTINO JUNÍN</span><span class="st-num">35</span><span class="st-num">7</span><span class="st-num">28</span><span class="st-num">2586</span><span class="st-num">3112</span><span class="st-num">42</span><span class="st-num">20.0%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">11</span><span class="st-team">PENAROL</span><span class="st-num">35</span><span class="st-num">18</span><span class="st-num">17</span><span class="st-num">2845</span><span class="st-num">2850</span><span class="st-num">53</span><span class="st-num">51.4%</span></div>
+      <div class="standings-row playoffs-pre"><span class="st-pos st-pos-num">12</span><span class="st-team">SAN MARTIN DE CORIENTES</span><span class="st-num">35</span><span class="st-num">17</span><span class="st-num">18</span><span class="st-num">2642</span><span class="st-num">2663</span><span class="st-num">52</span><span class="st-num">48.6%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">13</span><span class="st-team">CICLISTA OLÍMPICO</span><span class="st-num">36</span><span class="st-num">15</span><span class="st-num">21</span><span class="st-num">2850</span><span class="st-num">2881</span><span class="st-num">51</span><span class="st-num">41.7%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">14</span><span class="st-team">RACING CLUB CHIVILCOY</span><span class="st-num">36</span><span class="st-num">14</span><span class="st-num">22</span><span class="st-num">2858</span><span class="st-num">2946</span><span class="st-num">50</span><span class="st-num">38.9%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">15</span><span class="st-team">PLATENSE</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2962</span><span class="st-num">3067</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">16</span><span class="st-team">SAN LORENZO</span><span class="st-num">36</span><span class="st-num">13</span><span class="st-num">23</span><span class="st-num">2832</span><span class="st-num">2964</span><span class="st-num">49</span><span class="st-num">36.1%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">17</span><span class="st-team">UNION DE SANTA FE</span><span class="st-num">35</span><span class="st-num">12</span><span class="st-num">23</span><span class="st-num">2844</span><span class="st-num">2949</span><span class="st-num">47</span><span class="st-num">34.3%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">18</span><span class="st-team">ATENAS</span><span class="st-num">35</span><span class="st-num">12</span><span class="st-num">23</span><span class="st-num">2688</span><span class="st-num">2857</span><span class="st-num">47</span><span class="st-num">34.3%</span></div>
+      <div class="standings-row"><span class="st-pos st-pos-num">19</span><span class="st-team">ARGENTINO JUNÍN</span><span class="st-num">34</span><span class="st-num">7</span><span class="st-num">27</span><span class="st-num">2517</span><span class="st-num">3019</span><span class="st-num">41</span><span class="st-num">20.6%</span></div>
       <!-- STANDINGS-END -->
       <div class="standings-legend">
         <span class="leg-item"><span class="leg-dot" style="background:rgba(245,166,35,.4)"></span>Top 4 — acceso directo a cuartos</span>
@@ -858,271 +945,174 @@ footer em{color:var(--gold);font-style:normal;}
   <div class="page-header">
     <div class="eyebrow">IDSC Oliva · Liga Nacional 2025/26</div>
     <h2>PLAYOFF</h2>
-    <p>Cuadro completo actualizado. Reclasificación en curso — IDSC enfrenta a La Unión FSA.</p>
+    <p>Cuadro proyectado según la tabla actual. Se actualiza con cada nueva tabla de posiciones.</p>
   </div>
   <div class="section">
 
-    <!-- ESTADO IDSC BANNER -->
+    <!-- ESTADO IDSC -->
     <div class="po-card po-card-qualify" style="margin-bottom:1.5rem;border-radius:14px;padding:1.2rem 1.6rem;">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
         <div>
-          <div class="po-badge-classified">✅ &nbsp;CLASIFICADO AL PLAYOFF · TEMPORADA 2025/26</div>
-          <div class="po-label">📍 IDSC OLIVA · POSICIÓN FINAL FASE REGULAR</div>
+          <div class="po-label">📍 IDSC OLIVA · POSICIÓN FINAL</div>
           <div class="po-main" style="font-size:2.5rem">9° PUESTO</div>
-          <div class="po-sub" style="color:#9AEBB7;">PJ 36 · 20V 16D · 55.6% · Reclasificación en curso</div>
+          <div class="po-sub">PJ 36 · 20V 16D · 55.6% · Fase regular finalizada · Reclasificación vs La Unión FSA (8°)</div>
         </div>
         <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
-          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-size:1.5rem;color:#2ECC71;line-height:1">✅</div><div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.3rem">FASE<br>REGULAR</div></div>
-          <div style="background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-size:1.5rem;color:var(--gold);line-height:1">🔥</div><div style="font-size:.6rem;color:var(--gold);font-family:'DM Mono',monospace;margin-top:.3rem">RECLASIF.<br>EN CURSO</div></div>
+          <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#2ECC71;line-height:1">✅</div><div style="font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace">FASE<br>REGULAR</div></div>
+          <div style="background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:70px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1">🏆</div><div style="font-size:.6rem;color:var(--gold);font-family:'DM Mono',monospace">RECLASI-<br>FICACIÓN</div></div>
         </div>
       </div>
     </div>
 
-    <!-- FORMATO INFO -->
-    <div class="cup-info-box" style="margin-bottom:1.5rem">
-      <strong>Formato playoff:</strong> Top 12 de 19 equipos clasifican. Los <strong style="color:#4AE382">4 primeros</strong> acceden directamente a Cuartos de Final. Del <strong style="color:#5B9BF0">5° al 12°</strong> disputan la Reclasificación (series al mejor de 5 partidos), y los 4 ganadores completan los cuartos.
-    </div>
-
-    <!-- CLASIFICADOS DIRECTOS TOP 4 -->
+    <!-- CLASIFICADOS DIRECTOS -->
     <div class="section-title"><h3>CLASIFICADOS DIRECTOS — CUARTOS DE FINAL</h3><div class="section-line"></div><div class="section-count">Top 4 · Acceso directo · Sin reclasificación</div></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-bottom:2rem;">
-      <div style="background:linear-gradient(135deg,rgba(46,204,113,.15),rgba(46,204,113,.05));border:1px solid rgba(46,204,113,.4);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#2ECC71;min-width:2.2rem;text-align:center;line-height:1">1</div>
-        <div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.4px">QUIMSA</div><div style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace">24V 12D · 66.6%</div></div>
-        <div style="margin-left:auto;font-size:1.1rem">✅</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-bottom:2rem;">
+      <div style="background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.2);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(46,204,113,.5);min-width:2rem;line-height:1;">1</div>
+        <div style="flex:1"><div style="font-weight:600;font-size:.85rem;">QUIMSA</div><div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">24V 12D · 66.6%</div></div>
+        <span style="color:#2ECC71;font-size:1.1rem;">✅</span>
       </div>
-      <div style="background:linear-gradient(135deg,rgba(46,204,113,.15),rgba(46,204,113,.05));border:1px solid rgba(46,204,113,.4);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#2ECC71;min-width:2.2rem;text-align:center;line-height:1">2</div>
-        <div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.4px">GIMNASIA (CR)</div><div style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace">24V 12D · 66.6%</div></div>
-        <div style="margin-left:auto;font-size:1.1rem">✅</div>
+      <div style="background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.2);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(46,204,113,.5);min-width:2rem;line-height:1;">2</div>
+        <div style="flex:1"><div style="font-weight:600;font-size:.85rem;">GIMNASIA (CR)</div><div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">24V 12D · 66.6%</div></div>
+        <span style="color:#2ECC71;font-size:1.1rem;">✅</span>
       </div>
-      <div style="background:linear-gradient(135deg,rgba(46,204,113,.15),rgba(46,204,113,.05));border:1px solid rgba(46,204,113,.4);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#2ECC71;min-width:2.2rem;text-align:center;line-height:1">3</div>
-        <div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.4px">REGATAS (C)</div><div style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace">23V 13D · 63.8%</div></div>
-        <div style="margin-left:auto;font-size:1.1rem">✅</div>
+      <div style="background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.2);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(46,204,113,.5);min-width:2rem;line-height:1;">3</div>
+        <div style="flex:1"><div style="font-weight:600;font-size:.85rem;">REGATAS (C)</div><div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">23V 13D · 63.8%</div></div>
+        <span style="color:#2ECC71;font-size:1.1rem;">✅</span>
       </div>
-      <div style="background:linear-gradient(135deg,rgba(46,204,113,.15),rgba(46,204,113,.05));border:1px solid rgba(46,204,113,.4);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#2ECC71;min-width:2.2rem;text-align:center;line-height:1">4</div>
-        <div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.4px">OBERÁ TC</div><div style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace">23V 13D · 63.8%</div></div>
-        <div style="margin-left:auto;font-size:1.1rem">✅</div>
-      </div>
-    </div>
-
-    <!-- RECLASIFICACIÓN CUADRO COMPLETO -->
-    <div class="section-title" style="margin-top:2rem"><h3>RECLASIFICACIÓN</h3><div class="section-line"></div><div class="section-count">5°–12° · 4 series · Mejor de 5 partidos · Ganadores a Cuartos</div></div>
-
-    <!-- Serie A: Ferro (6°) vs Peñarol (11°) -->
-    <div style="margin-bottom:1rem;">
-      <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;">
-        <div style="background:var(--navy3);padding:.55rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:1px;">SERIE A · 6° vs 11°</span>
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:1px;">EN CURSO</span>
-        </div>
-        <div style="padding:1rem 1.2rem;">
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center">6°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">FERRO CARRIL OESTE</div>
-          </div>
-          <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:3px;margin-bottom:.75rem">VS</div>
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center">11°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">PEÑAROL (MDP)</div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid var(--border);padding-top:.75rem;">
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J1 · 24/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J2 · 26/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J3 · 30/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J4 · 2/5</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J5 · 5/5</div>
-          </div>
-        </div>
+      <div style="background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.2);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(46,204,113,.5);min-width:2rem;line-height:1;">4</div>
+        <div style="flex:1"><div style="font-weight:600;font-size:.85rem;">OBERÁ TC</div><div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">23V 13D · 63.8%</div></div>
+        <span style="color:#2ECC71;font-size:1.1rem;">✅</span>
       </div>
     </div>
 
-    <!-- Serie IDSC: La Unión FSA (8°) vs IDSC (9°) -->
-    <div style="margin-bottom:1rem;">
-      <div style="background:rgba(245,166,35,.04);border:2px solid rgba(245,166,35,.45);border-radius:14px;overflow:hidden;box-shadow:0 0 30px rgba(245,166,35,.08);">
-        <div style="background:rgba(245,166,35,.12);padding:.55rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,166,35,.2);">
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:1px;">⭐ SERIE IDSC · 8° vs 9°</span>
-          <span id="po-serie-idsc-estado" style="font-family:'DM Mono',monospace;font-size:.63rem;color:#F1948A;letter-spacing:1px;">❌ ELIMINA IDSC</span>
+    <!-- RECLASIFICACIÓN -->
+    <div class="section-title"><h3>RECLASIFICACIÓN</h3><div class="section-line"></div><div class="section-count">5°–12° · 4 series · Mejor de 5 partidos · Ganadores a Cuartos</div></div>
+
+    <!-- SERIE B: 5° vs 12° -->
+    <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:1rem;">
+      <div style="background:var(--navy3);padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
+        <span style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px;">SERIE B · 5° vs 12°</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">EN CURSO</span>
+      </div>
+      <div style="padding:1rem 1.2rem;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;">
+          <div style="background:rgba(52,152,219,.15);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:#5B9BF0;min-width:2.2rem;text-align:center;">5°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">OBRAS / BOCA JUNIORS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
         </div>
-        <div style="padding:1rem 1.2rem;">
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center">8°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">LA UNIÓN FSA</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center" id="po-union-wins">3</div>
-          </div>
-          <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:3px;margin-bottom:.75rem">VS</div>
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
-            <div style="background:rgba(245,166,35,.2);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center">9°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px;color:var(--gold)">⭐ INDEPENDIENTE (O)</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);min-width:1.5rem;text-align:center" id="po-idsc-wins">2</div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid rgba(245,166,35,.15);padding-top:.75rem;" id="po-games-idsc">
-            <div class="po-game-idsc" data-game="1" onclick="openIDSCGame(1)" style="background:rgba(46,204,113,.18);border:1px solid rgba(46,204,113,.5);border-radius:8px;padding:.3rem .7rem;cursor:pointer;font-family:'DM Mono',monospace;font-size:.62rem;color:#4AE382;transition:all .2s;">J1 91–87</div>
-            <div class="po-game-idsc" data-game="2" onclick="openIDSCGame(2)" style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:.3rem .7rem;cursor:pointer;font-family:'DM Mono',monospace;font-size:.62rem;color:#F1948A;transition:all .2s;">J2 85–100</div>
-            <div class="po-game-idsc" data-game="3" onclick="openIDSCGame(3)" style="background:rgba(46,204,113,.18);border:1px solid rgba(46,204,113,.5);border-radius:8px;padding:.3rem .7rem;cursor:pointer;font-family:'DM Mono',monospace;font-size:.62rem;color:#4AE382;transition:all .2s;">J3 103–75</div>
-            <div class="po-game-idsc po-game-optional" data-game="4" onclick="openIDSCGame(4)" style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:.3rem .7rem;cursor:pointer;font-family:'DM Mono',monospace;font-size:.62rem;color:#F1948A;transition:all .2s;">J4 91–103</div>
-            <div class="po-game-idsc po-game-optional" data-game="5" onclick="openIDSCGame(5)" style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:.3rem .7rem;cursor:pointer;font-family:'DM Mono',monospace;font-size:.62rem;color:#F1948A;transition:all .2s;">J5 86–92</div>
-          </div>
-          <div style="margin-top:.6rem;font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;">* Si es necesario · Hacé click en cada partido para cargar resultado</div>
+        <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:2px;margin:.2rem 0;">VS</div>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-top:.6rem;">
+          <div style="background:rgba(122,143,166,.1);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center;">12°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">SAN MARTÍN (C)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
+        </div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:.2rem .6rem;color:var(--gold);">J1 · 25/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J2 · 27/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J3 · 30/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J4 · 2/5</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J5 · 5/5</span>
         </div>
       </div>
     </div>
 
-    <!-- Serie C: Obras/Boca (5°) vs San Martín (12°) -->
-    <div style="margin-bottom:1rem;">
-      <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;">
-        <div style="background:var(--navy3);padding:.55rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:1px;">SERIE C · 5° vs 12°</span>
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:1px;">EN CURSO</span>
+    <!-- SERIE IDSC: 8° vs 9° -->
+    <div style="background:var(--navy2);border:2px solid rgba(245,166,35,.4);border-radius:14px;overflow:hidden;margin-bottom:1rem;box-shadow:0 0 30px rgba(245,166,35,.08);">
+      <div style="background:rgba(245,166,35,.1);padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,166,35,.2);">
+        <span style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);letter-spacing:1px;">⭐ SERIE IDSC · 8° vs 9°</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:1px;">EN CURSO</span>
+      </div>
+      <div style="padding:1rem 1.2rem;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;">
+          <div style="background:rgba(122,143,166,.1);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center;">8°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">LA UNIÓN FSA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
         </div>
-        <div style="padding:1rem 1.2rem;">
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center">5°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">OBRAS / BOCA JUNIORS</div>
-          </div>
-          <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:3px;margin-bottom:.75rem">VS</div>
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center">12°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">SAN MARTÍN (C)</div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid var(--border);padding-top:.75rem;">
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J1 · 25/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J2 · 27/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J3 · 30/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J4 · 2/5</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J5 · 5/5</div>
-          </div>
+        <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:2px;margin:.2rem 0;">VS</div>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-top:.6rem;">
+          <div style="background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center;">9°</div>
+          <div style="flex:1;font-weight:700;font-size:.95rem;color:var(--gold);">⭐ INDEPENDIENTE (O)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);min-width:1.5rem;text-align:center;">0</div>
+        </div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.18);border:1px solid rgba(245,166,35,.4);border-radius:20px;padding:.2rem .6rem;color:var(--gold);font-weight:600;">J1 · 24/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J2 · 26/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J3 · 30/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J4 · 2/5</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J5 · 5/5</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:.6rem;">* Si es necesario · J1/J2 Formosa · J3/J4 Oliva · J5 Formosa</div>
+      </div>
+    </div>
+
+    <!-- SERIE C: 7° vs 10° -->
+    <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:1rem;">
+      <div style="background:var(--navy3);padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
+        <span style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px;">SERIE C · 5° vs 12°</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">EN CURSO</span>
+      </div>
+      <div style="padding:1rem 1.2rem;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;">
+          <div style="background:rgba(52,152,219,.15);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:#5B9BF0;min-width:2.2rem;text-align:center;">5°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">OBRAS / BOCA JUNIORS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
+        </div>
+        <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:2px;margin:.2rem 0;">VS</div>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-top:.6rem;">
+          <div style="background:rgba(122,143,166,.1);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center;">12°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">SAN MARTÍN (C)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
+        </div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:.2rem .6rem;color:var(--gold);">J1 · 25/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J2 · 27/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J3 · 30/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J4 · 2/5</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J5 · 5/5</span>
         </div>
       </div>
     </div>
 
-    <!-- Serie D: Boca/Obras (7°) vs Instituto (10°) -->
-    <div style="margin-bottom:2rem;">
-      <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;">
-        <div style="background:var(--navy3);padding:.55rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:1px;">SERIE D · 7° vs 10°</span>
-          <span style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:1px;">EN CURSO</span>
+    <!-- SERIE D: 7° vs 10° -->
+    <div style="background:var(--navy2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;">
+      <div style="background:var(--navy3);padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
+        <span style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px;">SERIE D · 7° vs 10°</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">EN CURSO</span>
+      </div>
+      <div style="padding:1rem 1.2rem;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;">
+          <div style="background:rgba(52,152,219,.15);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:#5B9BF0;min-width:2.2rem;text-align:center;">7°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">BOCA JUNIORS / OBRAS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
         </div>
-        <div style="padding:1rem 1.2rem;">
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center">7°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">BOCA JUNIORS / OBRAS</div>
-          </div>
-          <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:3px;margin-bottom:.75rem">VS</div>
-          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
-            <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.35rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center">10°</div>
-            <div style="flex:1;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.4px">INSTITUTO</div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid var(--border);padding-top:.75rem;">
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J1 · 25/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J2 · 27/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.3);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);">J3 · 30/4</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J4 · 2/5</div>
-            <div style="background:var(--navy4);border:1px dashed rgba(122,143,166,.2);border-radius:8px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(122,143,166,.5);">*J5 · 5/5</div>
-          </div>
+        <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:2px;margin:.2rem 0;">VS</div>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-top:.6rem;">
+          <div style="background:rgba(122,143,166,.1);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--muted);min-width:2.2rem;text-align:center;">10°</div>
+          <div style="flex:1;font-weight:600;font-size:.95rem;">INSTITUTO</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
+        </div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:.2rem .6rem;color:var(--gold);">J1 · 25/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J2 · 27/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J3 · 30/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J4 · 2/5</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J5 · 5/5</span>
         </div>
       </div>
     </div>
 
-    <div class="standings-legend" style="margin-bottom:2rem">
-      <span class="leg-item"><span class="leg-dot" style="background:#2ECC71;opacity:.8"></span>Clasificados directos Top 4</span>
-      <span class="leg-item"><span class="leg-dot" style="background:var(--gold);opacity:.7"></span>⭐ Serie IDSC</span>
-      <span class="leg-item"><span class="leg-dot" style="background:var(--muted);opacity:.4"></span>Otras series reclasificación</span>
+    <!-- LEYENDA -->
+    <div class="standings-legend">
+      <span class="leg-item"><span class="leg-dot" style="background:#2ECC71"></span>Clasificados directos Top 4</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--gold)"></span>⭐ Serie IDSC</span>
+      <span class="leg-item"><span class="leg-dot" style="background:rgba(122,143,166,.4)"></span>Otras series reclasificación</span>
     </div>
-
   </div>
 </div>
-
-<!-- MODAL RESULTADO PARTIDO IDSC -->
-<div id="po-result-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(5,12,22,.95);align-items:center;justify-content:center;">
-  <div style="background:var(--navy2);border:1px solid rgba(245,166,35,.3);border-radius:18px;padding:1.8rem 2rem;max-width:380px;width:92%;position:relative;">
-    <button onclick="closeResultModal()" style="position:absolute;top:.8rem;right:.8rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;">✕</button>
-    <div style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);letter-spacing:2px;margin-bottom:.3rem;" id="po-modal-label">PARTIDO 1 · 24/4</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.5px;margin-bottom:1.2rem;">¿RESULTADO?</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem;">
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:1px;">LA UNIÓN FSA</div>
-        <input id="po-score-union" type="number" min="0" placeholder="0" style="width:100%;background:var(--navy4);border:1px solid var(--border2);border-radius:8px;padding:.6rem .8rem;color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.5rem;text-align:center;outline:none;">
-      </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);margin-bottom:.4rem;letter-spacing:1px;">⭐ IDSC</div>
-        <input id="po-score-idsc-in" type="number" min="0" placeholder="0" style="width:100%;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:.6rem .8rem;color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1.5rem;text-align:center;outline:none;">
-      </div>
-    </div>
-    <button onclick="saveIDSCResult()" style="width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:.75rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;cursor:pointer;">GUARDAR RESULTADO</button>
-    <button onclick="clearIDSCResult()" id="po-clear-btn" style="width:100%;background:none;border:1px solid var(--border);border-radius:10px;padding:.5rem;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);cursor:pointer;margin-top:.5rem;display:none;">Borrar resultado</button>
-  </div>
-</div>
-
-<script>
-var poState = JSON.parse(localStorage.getItem('po_idsc_2526') || '{"games":{}}');
-var poCurrentGame = null;
-function savePoState(){ try{localStorage.setItem('po_idsc_2526', JSON.stringify(poState));}catch(e){} }
-function getIDSCGameDate(n){ return ['','24/4','26/4','30/4','2/5','5/5'][n]||''; }
-
-function openIDSCGame(n){
-  poCurrentGame = n;
-  var g = poState.games[n]||{};
-  document.getElementById('po-modal-label').textContent='PARTIDO '+n+' · '+getIDSCGameDate(n);
-  document.getElementById('po-score-union').value = g.union!==undefined?g.union:'';
-  document.getElementById('po-score-idsc-in').value = g.idsc!==undefined?g.idsc:'';
-  document.getElementById('po-clear-btn').style.display=(g.union!==undefined)?'block':'none';
-  var m=document.getElementById('po-result-modal');
-  m.style.display='flex';
-}
-function closeResultModal(){
-  document.getElementById('po-result-modal').style.display='none';
-  poCurrentGame=null;
-}
-function saveIDSCResult(){
-  var u=parseInt(document.getElementById('po-score-union').value);
-  var i=parseInt(document.getElementById('po-score-idsc-in').value);
-  if(isNaN(u)||isNaN(i)){alert('Ingresá ambos puntajes');return;}
-  if(!poState.games[poCurrentGame])poState.games[poCurrentGame]={};
-  poState.games[poCurrentGame].union=u;
-  poState.games[poCurrentGame].idsc=i;
-  savePoState();closeResultModal();renderIDSCSerie();
-}
-function clearIDSCResult(){
-  delete poState.games[poCurrentGame];
-  savePoState();closeResultModal();renderIDSCSerie();
-}
-function renderIDSCSerie(){
-  var unionW=0,idscW=0;
-  for(var n=1;n<=5;n++){
-    var g=poState.games[n];
-    var el=document.querySelector('.po-game-idsc[data-game="'+n+'"]');
-    if(!el)continue;
-    var isOpt=el.classList.contains('po-game-optional');
-    if(g&&g.union!==undefined){
-      var won=g.idsc>g.union;
-      if(won)idscW++;else unionW++;
-      el.style.background=won?'rgba(46,204,113,.18)':'rgba(231,76,60,.15)';
-      el.style.borderColor=won?'rgba(46,204,113,.5)':'rgba(231,76,60,.4)';
-      el.style.borderStyle='solid';
-      el.style.color=won?'#4AE382':'#F1948A';
-      el.textContent='J'+n+' '+g.idsc+'–'+g.union;
-    } else {
-      el.style.background=isOpt?'rgba(245,166,35,.04)':'rgba(245,166,35,.08)';
-      el.style.borderColor=isOpt?'rgba(245,166,35,.2)':'rgba(245,166,35,.25)';
-      el.style.borderStyle=isOpt?'dashed':'solid';
-      el.style.color=isOpt?'rgba(245,166,35,.5)':'var(--gold)';
-      el.textContent=(isOpt?'*':'')+'J'+n+' · '+getIDSCGameDate(n);
-    }
-  }
-  document.getElementById('po-union-wins').textContent=unionW;
-  document.getElementById('po-idsc-wins').textContent=idscW;
-  var e=document.getElementById('po-serie-idsc-estado');
-  if(idscW===3){e.textContent='✅ IDSC AVANZA';e.style.color='#4AE382';}
-  else if(unionW===3){e.textContent='❌ ELIMINA IDSC';e.style.color='#F1948A';}
-  else if(idscW>0||unionW>0){e.textContent='EN CURSO · '+idscW+'–'+unionW;e.style.color=idscW>unionW?'#4AE382':(idscW<unionW?'#F1948A':'var(--gold)');}
-  else{e.textContent='EN CURSO';e.style.color='var(--gold)';}
-}
-document.getElementById('po-result-modal').addEventListener('click',function(e){if(e.target===this)closeResultModal();});
-renderIDSCSerie();
-</script>
 
 <footer><em>IDSC Oliva</em> · Análisis Estadístico · Liga Nacional 2025/26 · Uso interno del cuerpo técnico</footer>
 
@@ -1214,6 +1204,13 @@ const RIVALS = [
   {name:"QUIMSA", sub:"18/04/2026 · Liga Nacional · Último partido fase regular", status:"done", matchDate:"2026-04-18", pdfs:[
     {label:"Informe de Scouting — Quimsa", sub:"Liga Nacional · 18/04/2026 · IDSC Local · El Gigante de la Ruta 9", preview:"https://drive.google.com/file/d/1GieP59T1oI0e0w-Adc_I0tKZgBzhn6Rf/preview", download:"https://drive.google.com/uc?export=download&id=1GieP59T1oI0e0w-Adc_I0tKZgBzhn6Rf"},
   ]},
+  {name:"LA UNIÓN FSA. — JUEGO 1", sub:"24/04/2026 · Reclasificación Playoff · Visitante · Formosa", status:"next", matchDate:"2026-04-24", pdfs:[
+    {label:"Informe de Scouting — La Unión FSA", sub:"Reclasificación Playoff · 24/04/2026 · Visitante · Formosa", preview:"https://drive.google.com/drive/folders/1UDQ9QEfArbSd2pnhvb-0VNCSqbWptcLD", download:"https://drive.google.com/drive/folders/1UDQ9QEfArbSd2pnhvb-0VNCSqbWptcLD"},
+  ]},
+  {name:"LA UNIÓN FSA. — JUEGO 2", sub:"26/04/2026 · Reclasificación Playoff · Visitante · Formosa", status:"pending", matchDate:"2026-04-26", pdfs:[]},
+  {name:"LA UNIÓN FSA. — JUEGO 3", sub:"30/04/2026 · Reclasificación Playoff · Local · El Gigante de la Ruta 9", status:"pending", matchDate:"2026-04-30", pdfs:[]},
+  {name:"LA UNIÓN FSA. — JUEGO 4 *", sub:"02/05/2026 · Reclasificación Playoff · Local · El Gigante de la Ruta 9 · *Si es necesario", status:"pending", matchDate:"2026-05-02", pdfs:[]},
+  {name:"LA UNIÓN FSA. — JUEGO 5 *", sub:"05/05/2026 · Reclasificación Playoff · Visitante · Formosa · *Si es necesario", status:"pending", matchDate:"2026-05-05", pdfs:[]},
 ];
 let currentOpen = -1;
 function showPage(id) {
