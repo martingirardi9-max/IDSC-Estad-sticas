@@ -109,21 +109,49 @@ def get_standings():
 
 
 def get_next_match():
-    """Busca el próximo partido de IDSC — funciona tanto en liga como en playoff."""
+    """Busca el próximo partido de IDSC — funciona tanto en liga como en playoff.
+    Filtra partidos ya jugados (statusId=5 o startTime pasado con score > 0).
+    """
     url = "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403"
+    now_utc = datetime.now(timezone.utc)
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
+        candidates = []
         for game in r.json().get('games', []):
-            home = game.get('homeCompetitor', {}).get('name', '')
-            away = game.get('awayCompetitor', {}).get('name', '')
-            if is_idsc(home) or is_idsc(away):
-                idsc_home = is_idsc(home)
-                return {
-                    'rival':      away if idsc_home else home,
-                    'idsc_local': idsc_home,
-                    'date':       game.get('startTime', ''),
-                    'game_id':    game.get('id'),
-                }
+            home = game.get('homeCompetitor', {})
+            away = game.get('awayCompetitor', {})
+            home_name = home.get('name', '')
+            away_name = away.get('name', '')
+            if not (is_idsc(home_name) or is_idsc(away_name)):
+                continue
+            # Ignorar partidos terminados (statusId=5) o con score registrado
+            status_id = game.get('statusId', 0)
+            if status_id == 5:
+                continue
+            home_score = int(home.get('score', 0) or 0)
+            away_score = int(away.get('score', 0) or 0)
+            if home_score > 0 or away_score > 0:
+                continue
+            # Ignorar si la fecha ya pasó hace más de 4 horas
+            start_str = game.get('startTime', '')
+            if start_str:
+                try:
+                    dt = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+                    if (now_utc - dt).total_seconds() > 14400:  # 4 horas
+                        continue
+                except Exception:
+                    pass
+            idsc_home = is_idsc(home_name)
+            candidates.append({
+                'rival':      away_name if idsc_home else home_name,
+                'idsc_local': idsc_home,
+                'date':       start_str,
+                'game_id':    game.get('id'),
+            })
+        if candidates:
+            # Ordenar por fecha y devolver el más próximo
+            candidates.sort(key=lambda g: g['date'])
+            return candidates[0]
     except Exception as e:
         print(f"  Next match error: {e}")
     return None
@@ -194,12 +222,15 @@ def get_playoff_serie_results():
                 if not ((is_idsc(home_name) and is_union(away_name)) or
                         (is_union(home_name) and is_idsc(away_name))):
                     continue
+                # Solo playoff: ignorar partidos de fase regular (antes del 23/04/2026)
+                start = game.get('startTime', '')
+                if start and start[:10] < '2026-04-23':
+                    continue
                 idsc_home = is_idsc(home_name)
                 idsc_score  = int(home.get('score', 0) or 0) if idsc_home else int(away.get('score', 0) or 0)
                 union_score = int(away.get('score', 0) or 0) if idsc_home else int(home.get('score', 0) or 0)
                 if idsc_score <= 0 and union_score <= 0:
                     continue
-                start = game.get('startTime', '')
                 results.append({
                     'idsc_score': idsc_score,
                     'union_score': union_score,
