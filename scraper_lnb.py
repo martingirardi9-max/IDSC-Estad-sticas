@@ -1,22 +1,21 @@
 """
-IDSC Oliva - LNB Scraper v9
-365scores API — Reclasificación Playoff 2025/26
+IDSC Oliva - LNB Scraper v10
+365scores API — Reclasificación + Cuartos de Final Playoff 2025/26
 
-Novedades v9:
-  - Modo PLAYOFF: detecta automáticamente si estamos en reclasificación
-  - Obtiene resultados de la serie IDSC vs La Unión FSA desde 365scores
-  - Actualiza el marcador de la serie (po-union-wins / po-idsc-wins)
-  - Actualiza cada partido jugado en po-games-idsc con resultado y color
-  - Actualiza el estado de la serie (po-serie-idsc-estado)
-  - Actualiza la card del home (La Unión FSA próximo rival)
-  - Mantiene toda la lógica v8 para fase regular como fallback
+Novedades v10:
+  - Trackea las 4 series de Reclasificación (A/B/C/D) automáticamente
+  - Actualiza marcadores, estado y badges de partidos jugados de TODAS las series
+  - Busca partidos por par de keywords de cada equipo (estrategia robusta)
+  - Preparado para Cuartos de Final: cuando terminen las reclasificaciones,
+    los cruces de cuartos se definen en CUARTOS_SERIES y se trackeará igual
+  - Mantiene toda la lógica v9 para IDSC (serie vs La Unión FSA)
 """
 import requests
 import re
 from datetime import datetime, timezone, timedelta
 
-IDSC_KEYWORDS = ['independiente', 'oliva', 'idsc']
-UNION_KEYWORDS = ['uni', 'formosa', 'unión']
+IDSC_KEYWORDS    = ['independiente', 'oliva', 'idsc']
+UNION_KEYWORDS   = ['uni', 'formosa', 'unión', 'union']
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -26,7 +25,60 @@ HEADERS = {
     'Referer': 'https://www.365scores.com/en/basketball/league/liga-nacional-403/standings',
 }
 
-# Fechas del calendario de la Reclasificación (para fallback si la API no devuelve fecha)
+# ─────────────────────────────────────────────────────────────────────────────
+# CONFIGURACIÓN DE SERIES
+# Cada serie define:
+#   html_id       → prefijo de los id="po-X-..." en el HTML
+#   home_kw       → keywords para el equipo "home" (el de mayor seed/local J1)
+#   away_kw       → keywords para el equipo "away"
+#   dates         → fechas de cada juego (para badges pendientes)
+#   playoff_start → fecha ISO mínima para filtrar partidos (evita fase regular)
+# ─────────────────────────────────────────────────────────────────────────────
+
+RECLASIF_SERIES = [
+    {
+        'label':         'Serie B · Ferro vs Peñarol',
+        'html_id':       'b',
+        'home_kw':       ['ferro', 'carril'],
+        'away_kw':       ['peñarol', 'penarol'],
+        'dates':         {1:'24/4', 2:'26/4', 3:'30/4', 4:'2/5', 5:'5/5'},
+        'playoff_start': '2026-04-23',
+    },
+    {
+        'label':         'Serie C · Obras vs Instituto',
+        'html_id':       'c',
+        'home_kw':       ['obras'],
+        'away_kw':       ['instituto'],
+        'dates':         {1:'25/4', 2:'27/4', 3:'30/4', 4:'2/5', 5:'5/5'},
+        'playoff_start': '2026-04-23',
+    },
+    {
+        'label':         'Serie D · Boca vs San Martín',
+        'html_id':       'd',
+        'home_kw':       ['boca'],
+        'away_kw':       ['san martín', 'san martin', 'corrientes'],
+        'dates':         {1:'25/4', 2:'27/4', 3:'30/4', 4:'2/5', 5:'5/5'},
+        'playoff_start': '2026-04-23',
+    },
+]
+
+# ── Cuartos de Final ──────────────────────────────────────────────────────────
+# Completar con los cruces reales cuando terminen las reclasificaciones.
+# Agregar los id="po-qfX-..." correspondientes en el HTML y descomentar.
+#
+# CUARTOS_SERIES = [
+#     {
+#         'label':         'QF1 · Quimsa vs Ganador A',
+#         'html_id':       'qf1',
+#         'home_kw':       ['quimsa'],
+#         'away_kw':       ['...'],
+#         'dates':         {1:'X/5', 2:'X/5', 3:'X/5', 4:'X/5', 5:'X/5'},
+#         'playoff_start': '2026-05-08',
+#     },
+# ]
+CUARTOS_SERIES = []  # Vacío hasta conocer los cruces
+
+# Calendario serie IDSC (para home card)
 RECLASIF_CALENDAR = {
     1: '2026-04-24',
     2: '2026-04-26',
@@ -81,6 +133,28 @@ def is_idsc(name):
 def is_union(name):
     return any(k in name.lower() for k in UNION_KEYWORDS)
 
+def match_team(name, keywords):
+    """True si el nombre del equipo contiene alguno de los keywords."""
+    name_lower = name.lower()
+    return any(k in name_lower for k in keywords)
+
+def serie_estado_text(home_wins, away_wins):
+    """Genera texto de estado y color CSS para una serie genérica."""
+    if home_wins == 3:
+        return f'✅ GANÓ HOME · {home_wins}–{away_wins}', '#4AE382'
+    elif away_wins == 3:
+        return f'✅ GANÓ AWAY · {home_wins}–{away_wins}', '#4AE382'
+    elif home_wins > 0 or away_wins > 0:
+        if home_wins > away_wins:
+            color = '#4AE382'
+        elif away_wins > home_wins:
+            color = '#F1948A'
+        else:
+            color = 'var(--gold)'
+        return f'EN CURSO · {home_wins}–{away_wins}', color
+    else:
+        return 'EN CURSO', '#5B9BF0'
+
 # ─────────────────────────────────────────────────────────────────────────────
 # SCRAPERS
 # ─────────────────────────────────────────────────────────────────────────────
@@ -109,9 +183,7 @@ def get_standings():
 
 
 def get_next_match():
-    """Busca el próximo partido de IDSC — funciona tanto en liga como en playoff.
-    Filtra partidos ya jugados (statusId=5 o startTime pasado con score > 0).
-    """
+    """Busca el próximo partido de IDSC (liga o playoff)."""
     url = "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403"
     now_utc = datetime.now(timezone.utc)
     try:
@@ -124,7 +196,6 @@ def get_next_match():
             away_name = away.get('name', '')
             if not (is_idsc(home_name) or is_idsc(away_name)):
                 continue
-            # Ignorar partidos terminados (statusId=5) o con score registrado
             status_id = game.get('statusId', 0)
             if status_id == 5:
                 continue
@@ -132,12 +203,11 @@ def get_next_match():
             away_score = int(away.get('score', 0) or 0)
             if home_score > 0 or away_score > 0:
                 continue
-            # Ignorar si la fecha ya pasó hace más de 4 horas
             start_str = game.get('startTime', '')
             if start_str:
                 try:
                     dt = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
-                    if (now_utc - dt).total_seconds() > 14400:  # 4 horas
+                    if (now_utc - dt).total_seconds() > 14400:
                         continue
                 except Exception:
                     pass
@@ -149,7 +219,6 @@ def get_next_match():
                 'game_id':    game.get('id'),
             })
         if candidates:
-            # Ordenar por fecha y devolver el más próximo
             candidates.sort(key=lambda g: g['date'])
             return candidates[0]
     except Exception as e:
@@ -158,7 +227,7 @@ def get_next_match():
 
 
 def get_idsc_results():
-    """Resultados de IDSC en liga regular (competición 403)."""
+    """Resultados de IDSC en liga regular."""
     url = "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403&competitors=72002"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
@@ -192,37 +261,20 @@ def get_idsc_results():
 
 
 def get_playoff_serie_results():
-    """
-    Obtiene los resultados de la serie de Reclasificación IDSC vs La Unión FSA.
-    
-    365scores agrupa los partidos de playoff bajo la misma competición (403) pero
-    con un stageName/stageId diferente. Intentamos dos estrategias:
-      1. Endpoint /results/ filtrando por el competitor de IDSC (72002) — debería
-         devolver también los partidos de playoff una vez jugados.
-      2. Fallback: endpoint /games/ buscando partidos con statusId=finished entre
-         los dos equipos.
-    
-    Devuelve lista de dicts ordenada por número de partido:
-      [{ 'game_num': 1, 'idsc_score': 85, 'union_score': 78, 'win': True, 'date': '24/4' }, ...]
-    """
+    """Resultados de la serie IDSC vs La Unión FSA."""
     results = []
-
-    # Estrategia 1: resultados del competitor IDSC (cubre liga + playoff)
     url = "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403&competitors=72002"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
         if r.status_code == 200:
-            games = r.json().get('games', [])
-            for game in games:
+            for game in r.json().get('games', []):
                 home = game.get('homeCompetitor', {})
                 away = game.get('awayCompetitor', {})
                 home_name = home.get('name', '')
                 away_name = away.get('name', '')
-                # Solo partidos IDSC vs La Unión
                 if not ((is_idsc(home_name) and is_union(away_name)) or
                         (is_union(home_name) and is_idsc(away_name))):
                     continue
-                # Solo playoff: ignorar partidos de fase regular (antes del 23/04/2026)
                 start = game.get('startTime', '')
                 if start and start[:10] < '2026-04-23':
                     continue
@@ -231,17 +283,13 @@ def get_playoff_serie_results():
                 union_score = int(away.get('score', 0) or 0) if idsc_home else int(home.get('score', 0) or 0)
                 if idsc_score <= 0 and union_score <= 0:
                     continue
-                results.append({
-                    'idsc_score': idsc_score,
-                    'union_score': union_score,
-                    'win': idsc_score > union_score,
-                    'start': start,
-                })
-            print(f"  Playoff serie: {len(results)} partidos encontrados vía /results/")
+                results.append({'idsc_score': idsc_score, 'union_score': union_score,
+                                 'win': idsc_score > union_score, 'start': start})
+            print(f"  Serie IDSC: {len(results)} partidos vía /results/")
     except Exception as e:
         print(f"  Playoff serie error: {e}")
 
-    # Estrategia 2: si no hay resultados, intentar con /games/ (partidos recientes/en curso)
+    # Fallback: /games/current/ con statusId=5
     if not results:
         url2 = "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403"
         try:
@@ -252,31 +300,131 @@ def get_playoff_serie_results():
                     away = game.get('awayCompetitor', {})
                     home_name = home.get('name', '')
                     away_name = away.get('name', '')
-                    status_id = game.get('statusId', 0)
                     if not ((is_idsc(home_name) and is_union(away_name)) or
                             (is_union(home_name) and is_idsc(away_name))):
                         continue
-                    # statusId 5 = finished en 365scores
-                    if status_id != 5:
+                    if game.get('statusId', 0) != 5:
                         continue
                     idsc_home = is_idsc(home_name)
                     idsc_score  = int(home.get('score', 0) or 0) if idsc_home else int(away.get('score', 0) or 0)
                     union_score = int(away.get('score', 0) or 0) if idsc_home else int(home.get('score', 0) or 0)
                     if idsc_score > 0 or union_score > 0:
-                        results.append({
-                            'idsc_score': idsc_score,
-                            'union_score': union_score,
-                            'win': idsc_score > union_score,
-                            'start': game.get('startTime', ''),
-                        })
+                        results.append({'idsc_score': idsc_score, 'union_score': union_score,
+                                         'win': idsc_score > union_score, 'start': game.get('startTime', '')})
         except Exception as e:
             print(f"  Playoff fallback error: {e}")
 
-    # Ordenar por fecha y asignar número de partido
+    results.sort(key=lambda g: g.get('start', ''))
+    for i, g in enumerate(results):
+        g['game_num'] = i + 1
+    return results
+
+
+def get_all_league_games():
+    """
+    Descarga todos los partidos de la liga (current + results) en una sola pasada.
+    Se reutiliza para buscar resultados de todas las series sin hacer requests extra.
+    """
+    all_games = []
+    seen = set()
+    for endpoint in [
+        "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403",
+        "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403",
+    ]:
+        try:
+            r = requests.get(endpoint, headers=HEADERS, timeout=15)
+            if r.status_code == 200:
+                for g in r.json().get('games', []):
+                    gid = g.get('id')
+                    if gid not in seen:
+                        seen.add(gid)
+                        all_games.append(g)
+        except Exception as e:
+            print(f"  get_all_league_games error: {e}")
+    print(f"  Total juegos descargados: {len(all_games)}")
+    return all_games
+
+
+def get_serie_results(serie_config, all_games_cache=None):
+    """
+    Obtiene los resultados de una serie entre dos equipos usando keywords.
+    Filtra por playoff_start para no confundir con partidos de fase regular.
+    Devuelve lista ordenada por fecha con game_num asignado.
+    """
+    home_kw = serie_config['home_kw']
+    away_kw = serie_config['away_kw']
+    playoff_start = serie_config.get('playoff_start', '2026-04-23')
+    label = serie_config.get('label', '')
+
+    games_to_check = all_games_cache or []
+
+    # Si no hay cache, descargar ambos endpoints
+    if not games_to_check:
+        for endpoint in [
+            "https://webws.365scores.com/web/games/current/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403",
+            "https://webws.365scores.com/web/games/results/?appTypeId=5&langId=1&timezoneName=America/Argentina/Buenos_Aires&competitions=403",
+        ]:
+            try:
+                r = requests.get(endpoint, headers=HEADERS, timeout=15)
+                if r.status_code == 200:
+                    games_to_check.extend(r.json().get('games', []))
+            except Exception as e:
+                print(f"  {label} endpoint error: {e}")
+
+    results = []
+    seen_ids = set()
+
+    for game in games_to_check:
+        game_id = game.get('id')
+        if game_id in seen_ids:
+            continue
+
+        home = game.get('homeCompetitor', {})
+        away = game.get('awayCompetitor', {})
+        home_name = home.get('name', '')
+        away_name = away.get('name', '')
+
+        # Verificar el cruce en ambas direcciones
+        home_vs_away = match_team(home_name, home_kw) and match_team(away_name, away_kw)
+        away_vs_home = match_team(home_name, away_kw) and match_team(away_name, home_kw)
+        if not (home_vs_away or away_vs_home):
+            continue
+
+        # Solo partidos post-playoff_start
+        start = game.get('startTime', '')
+        if start and start[:10] < playoff_start:
+            continue
+
+        # Solo partidos terminados
+        status_id = game.get('statusId', 0)
+        home_score = int(home.get('score', 0) or 0)
+        away_score = int(away.get('score', 0) or 0)
+
+        if status_id != 5 and (home_score <= 0 and away_score <= 0):
+            continue
+        if home_score <= 0 and away_score <= 0:
+            continue
+
+        seen_ids.add(game_id)
+
+        # Normalizar: siempre home=equipo home_kw, away=equipo away_kw
+        if home_vs_away:
+            h_score, a_score = home_score, away_score
+        else:
+            h_score, a_score = away_score, home_score
+
+        results.append({
+            'home_score': h_score,
+            'away_score': a_score,
+            'home_won':   h_score > a_score,
+            'start':      start,
+        })
+
     results.sort(key=lambda g: g.get('start', ''))
     for i, g in enumerate(results):
         g['game_num'] = i + 1
 
+    print(f"  {label}: {len(results)} partidos encontrados")
     return results
 
 
@@ -284,37 +432,104 @@ def get_playoff_serie_results():
 # ACTUALIZADORES HTML
 # ─────────────────────────────────────────────────────────────────────────────
 
-def update_playoff_serie(serie_results, content):
+def _games_badges_html(results_by_num, dates, total=5):
+    """HTML de los badges de juegos para una serie (jugados y pendientes)."""
+    spans = []
+    for num in range(1, total + 1):
+        g = results_by_num.get(num)
+        is_opt = num >= 4
+        if g:
+            won = g['home_won']
+            bg     = 'rgba(46,204,113,.18)' if won else 'rgba(231,76,60,.15)'
+            border = f'1px solid {"rgba(46,204,113,.5)" if won else "rgba(231,76,60,.4)"}'
+            color  = '#4AE382' if won else '#F1948A'
+            text   = f"J{num} {g['home_score']}–{g['away_score']}"
+        else:
+            if is_opt:
+                bg = 'rgba(245,166,35,.04)'; border = '1px dashed rgba(245,166,35,.2)'
+                color = 'rgba(245,166,35,.5)'; text = f'*J{num} · {dates.get(num, "")}'
+            else:
+                bg = 'rgba(245,166,35,.08)'; border = '1px solid rgba(245,166,35,.25)'
+                color = 'var(--gold)'; text = f'J{num} · {dates.get(num, "")}'
+        spans.append(
+            f'<span style="font-family:\'DM Mono\',monospace;font-size:.6rem;'
+            f'background:{bg};{border};border-radius:20px;padding:.2rem .6rem;color:{color};">'
+            f'{text}</span>'
+        )
+    return '\n          '.join(spans)
+
+
+def update_serie_html(serie_config, serie_results, content):
     """
-    Actualiza el cuadro de la serie IDSC vs La Unión FSA en la página de Playoff.
-    - Marcador de victorias (po-union-wins / po-idsc-wins)
-    - Cada partido jugado en po-games-idsc
-    - Estado de la serie (po-serie-idsc-estado)
+    Actualiza en el HTML los elementos de una serie genérica (B, C, D, QF1...):
+      id="po-X-home-wins"  → nº de victorias del equipo home
+      id="po-X-away-wins"  → nº de victorias del equipo away
+      id="po-X-estado"     → texto y color del estado de la serie
+      id="po-X-games"      → badges de cada juego (jugado o pendiente)
     """
     if not serie_results:
-        print("  Playoff serie: sin resultados aún, no se actualiza el cuadro")
+        return content
+
+    html_id = serie_config['html_id']
+    dates   = serie_config['dates']
+
+    home_wins = sum(1 for g in serie_results if g['home_won'])
+    away_wins = sum(1 for g in serie_results if not g['home_won'])
+
+    # Contadores de victorias
+    content = re.sub(
+        r'(id="po-' + html_id + r'-home-wins"[^>]*>)[^<]*(<)',
+        r'\g<1>' + str(home_wins) + r'\g<2>',
+        content
+    )
+    content = re.sub(
+        r'(id="po-' + html_id + r'-away-wins"[^>]*>)[^<]*(<)',
+        r'\g<1>' + str(away_wins) + r'\g<2>',
+        content
+    )
+
+    # Estado de la serie
+    estado_text, estado_color = serie_estado_text(home_wins, away_wins)
+    content = re.sub(
+        r'(id="po-' + html_id + r'-estado"[^>]*)style="[^"]*"([^>]*>)[^<]*(<)',
+        r'\g<1>style="font-family:\'DM Mono\',monospace;font-size:.62rem;color:' + estado_color + r';letter-spacing:1px;"\g<2>' + estado_text + r'\g<3>',
+        content
+    )
+
+    # Badges de partidos
+    results_by_num = {g['game_num']: g for g in serie_results}
+    badges_html = _games_badges_html(results_by_num, dates)
+    content = re.sub(
+        r'(id="po-' + html_id + r'-games"[^>]*>).*?(</div>)',
+        r'\g<1>\n          ' + badges_html + r'\n        \g<2>',
+        content, flags=re.DOTALL
+    )
+
+    print(f"  {serie_config['label']}: HTML actualizado · {home_wins}–{away_wins} · {len(serie_results)} jugados")
+    return content
+
+
+def update_playoff_serie(serie_results, content):
+    """Actualiza el cuadro específico de la serie IDSC vs La Unión FSA (estructura v9)."""
+    if not serie_results:
+        print("  Playoff serie IDSC: sin resultados aún")
         return content
 
     union_wins = sum(1 for g in serie_results if not g['win'])
     idsc_wins  = sum(1 for g in serie_results if g['win'])
 
-    # Marcadores
     content = re.sub(r'id="po-union-wins">[^<]*<', f'id="po-union-wins">{union_wins}<', content)
     content = re.sub(r'id="po-idsc-wins">[^<]*<',  f'id="po-idsc-wins">{idsc_wins}<',  content)
 
-    # Estado de la serie
     if idsc_wins == 3:
-        estado = '✅ IDSC AVANZA'
-        estado_color = '#4AE382'
+        estado = '✅ IDSC AVANZA'; estado_color = '#4AE382'
     elif union_wins == 3:
-        estado = '❌ ELIMINA IDSC'
-        estado_color = '#F1948A'
+        estado = '❌ ELIMINA IDSC'; estado_color = '#F1948A'
     elif idsc_wins > 0 or union_wins > 0:
         estado = f'EN CURSO · {idsc_wins}–{union_wins}'
         estado_color = '#4AE382' if idsc_wins > union_wins else ('#F1948A' if idsc_wins < union_wins else 'var(--gold)')
     else:
-        estado = 'EN CURSO'
-        estado_color = 'var(--gold)'
+        estado = 'EN CURSO'; estado_color = 'var(--gold)'
 
     content = re.sub(
         r'(id="po-serie-idsc-estado" style="[^"]*")[^>]*(>[^<]*<)',
@@ -322,8 +537,6 @@ def update_playoff_serie(serie_results, content):
         content
     )
 
-    # Actualizar cada partido jugado en el HTML
-    # Los elementos tienen data-game="N" y class="po-game-idsc"
     DATES = {1:'24/4', 2:'26/4', 3:'30/4', 4:'2/5', 5:'5/5'}
     played = {g['game_num']: g for g in serie_results}
 
@@ -350,35 +563,25 @@ def update_playoff_serie(serie_results, content):
                          f"border-radius:8px;padding:.3rem .7rem;cursor:pointer;"
                          f"font-family:'DM Mono',monospace;font-size:.62rem;color:{color};transition:all .2s;")
 
-        # Reemplazar el elemento específico por data-game="N"
         content = re.sub(
             r'(<div class="po-game-idsc[^"]*" data-game="' + str(num) + r'"[^>]*style=")[^"]*("[^>]*>)[^<]*(<)',
             r'\g<1>' + new_style.replace('\\', '\\\\') + r'\g<2>' + text + r'\g<3>',
             content
         )
 
-    changed_games = len(serie_results)
-    print(f"  Playoff serie actualizada: {idsc_wins}–{union_wins} (IDSC–Unión) · {changed_games} partidos jugados")
+    print(f"  Playoff serie IDSC: {idsc_wins}–{union_wins} · {len(serie_results)} partidos jugados")
     return content
 
 
 def update_home_next_rival(next_match, serie_results, content):
-    """
-    Actualiza la card principal del home (La Unión FSA como próximo rival).
-    Muestra la fecha del próximo partido de la serie.
-    """
     if not next_match:
         return content
 
-    rival = next_match['rival'].upper()
     fecha_fmt = format_date(next_match['date'])
-
-    # Determinar número del próximo partido de la serie
     games_played = len(serie_results)
     next_game_num = games_played + 1
     next_game_date = RECLASIF_CALENDAR.get(next_game_num, '')
 
-    # Actualizar el po-pos-badge con el número de juego y fecha
     if fecha_fmt:
         badge_text = f'⚡ RECLASIFICACIÓN · J{next_game_num} · {fecha_fmt}'
     elif next_game_date:
@@ -392,7 +595,6 @@ def update_home_next_rival(next_match, serie_results, content):
         content, count=1
     )
 
-    # Actualizar el marcador de la serie en el detalle
     union_wins = sum(1 for g in serie_results if not g['win'])
     idsc_wins  = sum(1 for g in serie_results if g['win'])
     if serie_results:
@@ -403,7 +605,7 @@ def update_home_next_rival(next_match, serie_results, content):
             content, count=1
         )
 
-    print(f"  Home card actualizada: J{next_game_num} · {fecha_fmt or next_game_date}")
+    print(f"  Home card: J{next_game_num} · {fecha_fmt or next_game_date}")
     return content
 
 
@@ -532,7 +734,7 @@ def update_html(standings, next_match, html_path='index.html'):
     content = re.sub(r'Actualizada al \d{2}/\d{2}/\d{4}', f'Actualizada al {today}', content)
     changed.append('fecha')
 
-    # Resultados liga regular
+    # Resultados liga regular IDSC
     results = get_idsc_results()
 
     # Racha y últimos 5
@@ -564,7 +766,6 @@ def update_html(standings, next_match, html_path='index.html'):
             rest = max(0, 36 - idsc['pj'])
             diff = idsc['pf'] - idsc['pc']
             diff_str = f'+{diff}' if diff >= 0 else str(diff)
-
             content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Victorias)', f'\\g<1>{idsc["pg"]}\\2', content)
             content = re.sub(r'(<div class="stat-num">)\d+(</div>\s*<div class="stat-lbl">Partidos restantes)', f'\\g<1>{rest}\\2', content)
             content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Victorias)', f'\\g<1>{idsc["pg"]}\\2', content)
@@ -574,7 +775,6 @@ def update_html(standings, next_match, html_path='index.html'):
             content = re.sub(r'(t-stat-num">\s*)\d+(\s*</div>\s*<div class="t-stat-lbl">Restantes)', f'\\g<1>{rest}\\2', content)
             changed.append(f'IDSC {idsc["pos"]}° {idsc["pg"]}V {idsc["pp"]}D')
 
-        # Tabla completa
         standings_html = build_standings_html(standings)
         new = re.sub(
             r'(<!-- STANDINGS-START -->)(.*?)(<!-- STANDINGS-END -->)',
@@ -585,23 +785,29 @@ def update_html(standings, next_match, html_path='index.html'):
             content = new
             changed.append('tabla posiciones')
 
-    # ── PLAYOFF: Resultados de la serie IDSC vs La Unión FSA ─────────────────
-    print("Resultados serie playoff IDSC vs La Unión FSA...")
-    serie_results = get_playoff_serie_results()
+    # ── PLAYOFF: Serie IDSC vs La Unión FSA ──────────────────────────────────
+    print("Serie IDSC vs La Unión FSA...")
+    serie_idsc = get_playoff_serie_results()
+    content = update_playoff_serie(serie_idsc, content)
+    content = update_home_next_rival(next_match, serie_idsc, content)
+    changed.append(f'serie IDSC: {len(serie_idsc)} partidos')
 
-    # Actualizar cuadro de la serie en página Playoff
-    content = update_playoff_serie(serie_results, content)
-    changed.append(f'serie playoff: {len(serie_results)} partidos')
+    # ── PLAYOFF: Otras series (B, C, D + futuros Cuartos) ────────────────────
+    # Una sola descarga para todas las series
+    print("Descargando juegos de la liga para series B/C/D...")
+    all_games = get_all_league_games()
 
-    # Actualizar card del home con próximo partido de la serie
-    content = update_home_next_rival(next_match, serie_results, content)
-    changed.append('home card playoff')
+    for serie_cfg in (RECLASIF_SERIES + CUARTOS_SERIES):
+        print(f"Procesando {serie_cfg['label']}...")
+        serie_results = get_serie_results(serie_cfg, all_games_cache=all_games)
+        content = update_serie_html(serie_cfg, serie_results, content)
+        changed.append(f"{serie_cfg['html_id']}: {len(serie_results)} partidos")
 
-    # Timeline rivales y fixture (liga regular)
+    # Timeline y fixture (liga regular IDSC)
     if results:
         content = update_rivals_timeline(results, next_match['rival'] if next_match else None, content)
         content = update_fixture(results, next_match['rival'] if next_match else None, content)
-        changed.append(f'{len(results)} resultados')
+        changed.append(f'{len(results)} resultados fixture')
 
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(content)
@@ -614,7 +820,7 @@ def update_html(standings, next_match, html_path='index.html'):
 # ─────────────────────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    print(f"🏀 IDSC Oliva - LNB Scraper v9 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+    print(f"🏀 IDSC Oliva - LNB Scraper v10 - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     print("─" * 50)
     print("Tabla de posiciones...")
     standings = get_standings()
