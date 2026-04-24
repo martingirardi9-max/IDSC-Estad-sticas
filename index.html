@@ -911,7 +911,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
     </div>
-    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 24/04/2026 · P36</div></div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 23/04/2026 · P36</div></div>
     <div class="standings-table">
       <div class="standings-header">
         <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
@@ -2363,6 +2363,378 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- DIVISOR PLAYOFF -->
+  <div style="margin:2rem 0 1.4rem;padding:1.3rem 1.8rem;background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(155,89,182,.06));border:1px solid rgba(155,89,182,.5);border-radius:16px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:rgba(155,89,182,.1);pointer-events:none;"></div>
+    <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:2.5px;color:#C39BD3;text-transform:uppercase;margin-bottom:.35rem;">🏆 FASE PLAYOFF — RECLASIFICACIÓN 2026</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:1.5px;color:#D7B4F3;line-height:1;margin-bottom:.2rem;">CUARTOS DE FINAL</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:var(--white);margin-bottom:.7rem;">IDSC OLIVA (9°) <span style="color:#C39BD3;">VS</span> LA UNIÓN FSA. (8°)</div>
+    <div style="font-size:.77rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;">Serie al mejor de 5 partidos. <strong style="color:var(--white);">J1/J2 en Formosa</strong> (La Unión local) · <strong style="color:var(--white);">J3/J4 en Oliva</strong> (IDSC local) · <strong style="color:var(--white);">J5 en Formosa</strong> si es necesario.</div>
+
+    <!-- Tracker de serie -->
+    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;letter-spacing:1px;white-space:nowrap;">SERIE ACTUAL:</div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:.1rem;">
+          <div style="width:36px;height:36px;background:rgba(245,166,35,.12);border:1.5px solid rgba(245,166,35,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--gold);">0</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.48rem;color:var(--muted);">IDSC</div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.9rem;color:var(--muted);">—</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:.1rem;">
+          <div style="width:36px;height:36px;background:rgba(155,89,182,.12);border:1.5px solid rgba(155,89,182,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:#C39BD3;">0</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.48rem;color:var(--muted);">LA UNIÓN</div>
+        </div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:.57rem;padding:.22rem .6rem;background:rgba(52,152,219,.15);border:1px solid rgba(52,152,219,.3);border-radius:6px;color:#5B9BF0;letter-spacing:.5px;">● SERIE PRÓXIMA A INICIARSE</div>
+    </div>
+
+    <!-- Chips de juegos -->
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(155,89,182,.18);border:1.5px solid rgba(155,89,182,.55);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:#C39BD3;min-width:36px;text-align:center;">G1</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:#C39BD3;">24/4 ✈️</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(155,89,182,.1);border:1.5px solid rgba(155,89,182,.3);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G2</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--muted);">26/4 ✈️</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(122,143,166,.08);border:1.5px solid rgba(122,143,166,.2);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G3</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--muted);">30/4 🏠</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(122,143,166,.08);border:1.5px solid rgba(122,143,166,.2);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G4</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--muted);">2/5 🏠</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;opacity:.5;">
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(122,143,166,.05);border:1.5px dashed rgba(122,143,166,.18);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G5</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--muted);">5/5 ✈️ *</div>
+      </div>
+    </div>
+
+    <!-- Head to head temporada regular -->
+    <div style="margin-top:1rem;padding-top:.85rem;border-top:1px solid rgba(155,89,182,.2);">
+      <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:#C39BD3;letter-spacing:1px;text-transform:uppercase;margin-bottom:.45rem;">📋 Historial directo — Temporada Regular 2025/26</div>
+      <div style="display:flex;flex-direction:column;gap:.25rem;">
+        <div style="font-size:.72rem;color:var(--muted);padding:.3rem .55rem;background:rgba(46,204,113,.05);border-left:2px solid #2ecc71;border-radius:0 6px 6px 0;">
+          🏠 <strong style="color:var(--white);">IDSC Local vs La Unión</strong> — <span style="color:#2ecc71;">✓ Victoria IDSC 91–87</span> <span style="font-size:.63rem;">(01/11/2025)</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--muted);padding:.3rem .55rem;background:rgba(231,76,60,.05);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
+          ✈️ <strong style="color:var(--white);">La Unión Local vs IDSC</strong> — <span style="color:#e74c3c;">✗ Derrota IDSC 91–103</span> <span style="font-size:.63rem;">(18/03/2026)</span>
+        </div>
+      </div>
+      <div style="margin-top:.4rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);">Balance: 1V – 1D · IDSC gana de local, pierde de visitante · Diferencial neto: 0 pts · Serie muy pareja</div>
+    </div>
+
+    <!-- Análisis estadístico comparado temporada regular -->
+    <div style="margin-top:1rem;padding-top:.85rem;border-top:1px solid rgba(155,89,182,.2);">
+      <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:#C39BD3;letter-spacing:1px;text-transform:uppercase;margin-bottom:.6rem;">📊 Comparativa estadística — Temporada Regular 2025/26</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.72rem;">
+        <div style="background:rgba(245,166,35,.06);border-radius:8px;padding:.6rem .8rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;">IDSC OLIVA — 9°</div>
+          <div style="color:var(--white);line-height:1.7;">⬛ 20V – 16D (55.6%)<br>🏠 Local: ~70% victorias<br>✈️ Visitante: ~42% victorias<br>⚡ Mejor cuarto: Q3 (+2.3 prom.)<br>🎯 PPP ofensivo: ≈0.98<br>🛡 Def. Rating: 101.3</div>
+        </div>
+        <div style="background:rgba(155,89,182,.06);border-radius:8px;padding:.6rem .8rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:#C39BD3;margin-bottom:.3rem;text-transform:uppercase;">LA UNIÓN FSA. — 8°</div>
+          <div style="color:var(--white);line-height:1.7;">⬛ 20V – 16D (55.6%)<br>🏠 Local: ~65% victorias<br>✈️ Visitante: ~46% victorias<br>⚡ Motor ofensivo: P. Elsener<br>🎯 T3 alto: ~44% en buenas noches<br>🛡 Off. Rating: 110.6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JUEGO 1 — 24/4 VISITANTE FORMOSA ══════════ -->
+  <div class="sim-card" id="sim-po-g1" style="border-color:rgba(155,89,182,.5);background:linear-gradient(135deg,rgba(155,89,182,.07),rgba(155,89,182,.02));">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g1')" style="background:rgba(155,89,182,.04);">
+      <div class="sim-acc-rival">
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:#C39BD3;letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G1 · ✈️ VISITANTE</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">24 ABR · Formosa · ⚡ PRÓXIMO</span>
+      </div>
+      <div class="sim-acc-score"><span class="rival-pts">83</span><span class="sep">—</span><span class="idsc-pts">79</span></div>
+      <div class="sim-acc-pct" style="color:#C39BD3;font-size:.62rem;">PROY. BASE</div>
+      <div class="sim-acc-badges">
+        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.2);color:#C39BD3;border:1px solid rgba(155,89,182,.35);">🏆 PLAYOFF</span>
+        <span class="badge badge-next" style="font-size:.58rem;">⚡ JUEGO DE HOY</span>
+      </div>
+      <div class="sim-acc-arrow">&#9658;</div>
+    </div>
+    <div class="sim-body">
+      <div class="sim-date" style="margin-bottom:.8rem;">24 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:#C39BD3;">G1 — CUARTOS DE FINAL · LA UNIÓN LOCAL</strong></span></div>
+
+      <div class="sim-rivals" style="margin-bottom:1rem;">
+        <div class="sim-team sim-rival-team">
+          <div class="sim-team-name" style="color:#C39BD3;">LA UNIÓN FSA.</div>
+          <div class="sim-team-role">LOCAL · SEMBRADO 8°</div>
+        </div>
+        <div class="sim-score-block">
+          <div style="text-align:center;">
+            <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">PROYECCIÓN BASE</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#9B59B6;">83</span>
+            <span style="color:var(--muted);margin:0 .4rem;font-size:1.1rem;">—</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">79</span>
+          </div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:.57rem;color:#e74c3c;margin-top:.3rem;letter-spacing:.5px;">LA UNIÓN FAVORITA · 61.2%</div>
+        </div>
+        <div class="sim-team sim-idsc-team">
+          <div class="sim-team-name">IDSC OLIVA</div>
+          <div class="sim-team-role">VISITANTE · SEMBRADO 9°</div>
+        </div>
+      </div>
+
+      <div class="sim-prob-bar-wrap" style="margin-bottom:1.2rem;">
+        <div class="sim-prob-label-l" style="color:#9B59B6;">LA UNIÓN · 61.2%</div>
+        <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:61.2%;background:linear-gradient(90deg,rgba(155,89,182,.55),rgba(155,89,182,.2));"></div></div>
+        <div class="sim-prob-label-r" style="color:var(--gold);">IDSC · 38.8%</div>
+      </div>
+
+      <!-- Cuartos proyectados -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;">
+        <div style="background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.2);border-radius:10px;padding:.7rem;text-align:center;">
+          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q1</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#e74c3c;line-height:1">23</div>
+          <div style="font-size:.68rem;color:var(--muted)">IDSC 18</div>
+          <div style="font-size:.62rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−5 proj.</div>
+        </div>
+        <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q2</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">20</div>
+          <div style="font-size:.68rem;color:var(--muted)">IDSC 21</div>
+          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+1 proj.</div>
+        </div>
+        <div style="background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.2);border-radius:10px;padding:.7rem;text-align:center;">
+          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q3</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#e74c3c;line-height:1">22</div>
+          <div style="font-size:.68rem;color:var(--muted)">IDSC 20</div>
+          <div style="font-size:.62rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−2 proj.</div>
+        </div>
+        <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q4</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">18</div>
+          <div style="font-size:.68rem;color:var(--muted)">IDSC 20</div>
+          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+2 proj.</div>
+        </div>
+      </div>
+
+      <!-- Contexto playoff + antecedente visitante -->
+      <div style="background:linear-gradient(135deg,rgba(231,76,60,.09),rgba(231,76,60,.03));border:1px solid rgba(231,76,60,.22);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">⚠️ ANTECEDENTE DIRECTO EN FORMOSA</div>
+        <div style="font-size:.77rem;color:var(--muted);line-height:1.65;">El 18/03/2026, IDSC jugó en el Cincuentenario y perdió <strong style="color:var(--white);">91–103</strong>. La Unión dominó con una diferencia de 12 puntos, aprovechando el factor local. En playoff, el ambiente se intensifica — las tribunas del Cincuentenario serán aún más hostiles. Sin embargo, IDSC llega con mejor estado de forma que en marzo: ganó 2 de sus últimos 3 partidos cerrando la fase regular.</div>
+      </div>
+
+      <!-- Claves La Unión -->
+      <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.7rem;">🔑 CLAVES DE LA UNIÓN FSA. — TEMPORADA REGULAR</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;font-size:.72rem;color:var(--muted);">
+          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">⚡ <strong style="color:var(--white);">Pablo Elsener</strong> — máximo anotador, motor del ataque exterior. Noche de playoffs = nivel elevado.</div>
+          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">🎯 <strong style="color:var(--white);">T3 peligroso</strong> — La Unión lanza muchos triples. En su mejor noche, conectó al 44%. Cerrar perímetro es vital.</div>
+          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">🏠 <strong style="color:var(--white);">Fuerte de local</strong> — 20-16 en temporada, con la mayoría de victorias en casa. Cincuentenario es fortaleza.</div>
+          <div style="padding:.35rem .5rem;background:rgba(46,204,113,.05);border-radius:6px;">📉 <strong style="color:var(--white);">Visitante más débil</strong> — De visitante, La Unión baja su efectividad notoriamente. Clave para los J3/J4.</div>
+        </div>
+      </div>
+
+      <!-- Contexto serie -->
+      <div style="background:linear-gradient(135deg,rgba(155,89,182,.1),rgba(155,89,182,.03));border:1px solid rgba(155,89,182,.3);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">🏆 LECTURA TÁCTICA DE SERIE — JUEGO 1</div>
+        <div style="font-size:.77rem;color:var(--muted);line-height:1.65;">Los dos primeros juegos son en Formosa, lo que pone a IDSC en situación de visitante desde el arranque. La clave de esta serie <strong style="color:var(--white);">no es ganar en Formosa</strong> (aunque sería enorme), sino <strong style="color:var(--white);">no caer 0–2</strong>. Ir a Oliva 1–1 o incluso 0–1 con buena imagen es un resultado útil. Perder los dos primeros en el Cincuentenario pondría la serie casi perdida.</div>
+        <div style="display:flex;gap:.4rem;margin-top:.7rem;flex-wrap:wrap;">
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);border-radius:5px;color:#2ecc71;">✓ Ganar G1 → Serie 1–0 · IDSC toma el mando</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);border-radius:5px;color:var(--gold);">↔ Perder G1 cerca → Serie 0–1 · Todavía abierta</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:5px;color:#e74c3c;">✗ Perder G1 lejos → Serie 0–1 · Urgencia en G2</div>
+        </div>
+      </div>
+
+      <div class="sim-factors">
+        <div class="sim-factor-title">Factores clave — Juego 1 en Formosa</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>Visitante en el Cincuentenario:</strong> En temporada regular, IDSC perdió allí 91–103. El ambiente en playoffs es más intenso. La Unión es local en los dos primeros juegos.</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>Elsener en modo playoff:</strong> Pablo Elsener es la pieza más peligrosa de La Unión. Los jugadores de alto nivel suelen elevar su rendimiento en instancias eliminatorias. Se requiere plan específico para contenerlo.</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>La Unión mejor sembrada:</strong> Terminaron 8° frente a 9° de IDSC, con idéntico balance 20V-16D. Estadísticamente, el sembrado superior tiene ligera ventaja en el inicio de serie.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Mejor forma reciente de IDSC:</strong> Cierre de temporada con 2 victorias en los últimos 3 partidos, incluyendo una visitante en Obras Basket (77–73). El equipo llega con confianza.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Experiencia táctica acumulada:</strong> IDSC ya jugó en el Cincuentenario en marzo. Conoce el ambiente, las rotaciones de La Unión y sus tendencias ofensivas.</div>
+        <div class="sim-factor sim-factor-neu">ℹ️ <strong>Objetivo estratégico de serie:</strong> No caer 0–2. Llegar a Oliva con la serie 1–1 o incluso 0–1 con imagen competitiva es el escenario viable. Los J3/J4 en El Gigante son el corazón de la serie.</div>
+      </div>
+
+      <div class="sim-note">
+        <strong>Contexto Juego 1:</strong> Arranca el playoff. IDSC Oliva (9°) visita a La Unión FSA. (8°) en el Estado Cincuentenario de Formosa. Es el primer partido de una serie al mejor de 5 donde los dos primeros juegos son en Formosa. El balance de la temporada regular fue 1-1 con IDSC ganando de local 91–87 y perdiendo de visitante 91–103. La Unión tiene a Pablo Elsener como referente ofensivo y un sistema de triples que puede ser explosivo. El modelo proyecta una victoria de La Unión por factor cancha y antecedente reciente, pero IDSC tiene real chance de robar el G1 si contiene a Elsener y mantiene el partido dentro de los 10 pts en el tercer cuarto.
+      </div>
+
+      <div class="sim-scenarios">
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 86 — La Unión 81</div><div class="sim-sc-desc">IDSC roba el G1 en Formosa. Elsener contenido, triples de La Unión bajos. IDSC toma el mando 1–0 en la serie.</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">La Unión 83 — IDSC 79</div><div class="sim-sc-desc">La Unión gana de local pero por margen ajustado. IDSC compite hasta el final. Serie 0–1, G2 decisivo.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 98 — IDSC 78</div><div class="sim-sc-desc">Elsener explota (30+ pts), triples de La Unión caen bien. IDSC no puede competir el ritmo. Serie 0–1 con imagen negativa.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JUEGO 2 — 26/4 VISITANTE FORMOSA ══════════ -->
+  <div class="sim-card" id="sim-po-g2" style="border-color:rgba(122,143,166,.2);opacity:.88;">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g2')">
+      <div class="sim-acc-rival">
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G2 · ✈️ VISITANTE</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">26 ABR · Formosa · Pendiente G1</span>
+      </div>
+      <div class="sim-acc-score"><span class="rival-pts" style="color:var(--muted)">?</span><span class="sep">—</span><span class="idsc-pts" style="color:var(--muted)">?</span></div>
+      <div class="sim-acc-pct" style="color:var(--muted);font-size:.62rem;">PENDIENTE</div>
+      <div class="sim-acc-badges">
+        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.12);color:#C39BD3;border:1px solid rgba(155,89,182,.22);">🏆 PLAYOFF</span>
+        <span class="badge" style="font-size:.58rem;background:rgba(122,143,166,.1);color:var(--muted);border:1px solid rgba(122,143,166,.15);">✈️ Formosa</span>
+      </div>
+      <div class="sim-acc-arrow">&#9658;</div>
+    </div>
+    <div class="sim-body">
+      <div class="sim-date" style="margin-bottom:.8rem;">26 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:var(--muted);">G2 — ÚLTIMO JUEGO EN FORMOSA</strong></span></div>
+
+      <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:1px;margin-bottom:.6rem;text-transform:uppercase;">🔒 PROYECCIÓN CONDICIONAL — DEPENDE DE G1</div>
+        <div style="display:flex;flex-direction:column;gap:.38rem;">
+          <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(46,204,113,.06);border-left:2px solid #2ecc71;border-radius:0 6px 6px 0;">
+            <strong style="color:#2ecc71;">Si IDSC gana G1 (1–0):</strong> <span style="color:var(--muted);">G2 = oportunidad de ir a Oliva 2–0. La Unión en modo urgencia en su propia cancha. IDSC proyectado 80–77.</span>
+          </div>
+          <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(245,166,35,.06);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;">
+            <strong style="color:var(--gold);">Si serie va 0–1:</strong> <span style="color:var(--muted);">G2 = partido crítico para IDSC. Perder = 0–2, serie casi perdida. Ganar = ir a Oliva 1–1. La Unión favorita 64%.</span>
+          </div>
+          <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
+            <strong style="color:#e74c3c;">Si IDSC cae 0–2:</strong> <span style="color:var(--muted);">Serie en situación crítica. Los J3/J4 en Oliva se vuelven obligatorios. IDSC ha remontado esta temporada antes.</span>
+          </div>
+        </div>
+        <div style="margin-top:.7rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);">ℹ️ En los últimos 3 años de LNB, el equipo que ganó G1 ganó la serie el 71% de las veces. El G2 es el partido más importante de la serie.</div>
+      </div>
+
+      <div class="sim-factors">
+        <div class="sim-factor-title">Factores proyectados — Juego 2 en Formosa</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>Segundo partido en Formosa:</strong> IDSC juega de visitante por segunda vez consecutiva. La fatiga del viaje y el ambiente hostil son factores acumulados.</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>La Unión ajusta tácticamente:</strong> Con el G1 jugado, el cuerpo técnico de La Unión tendrá 48hs para corregir lo que no funcionó. Los ajustes en G2 suelen ser efectivos.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>IDSC también adapta:</strong> El cuerpo técnico olívense también tendrá información táctica sobre La Unión en playoffs. El scouting de G1 es invaluable para G2.</div>
+        <div class="sim-factor sim-factor-neu">ℹ️ <strong>Fatiga física:</strong> Dos partidos en 3 días, ambos en Formosa. Los equipos con mayor profundidad de banco tienen ventaja en el G2. IDSC tiene rotación razonable.</div>
+      </div>
+
+      <div class="sim-note">
+        <strong>Contexto G2:</strong> El segundo partido consecutivo en el Cincuentenario. Este juego define en gran medida el control de la serie. Ir a Oliva 1–1 sería el resultado ideal para IDSC — pone la serie equilibrada con los dos juegos siguientes en El Gigante. Ir 2–0 sería histórico. Caer 0–2 obliga a ganar tres partidos seguidos incluyendo uno en Formosa.
+      </div>
+
+      <div class="sim-scenarios">
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 82 — La Unión 78</div><div class="sim-sc-desc">IDSC roba el G2. Va a Oliva 2–0. Posición ideal para cerrar la serie rápido en casa.</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">La Unión 84 — IDSC 77</div><div class="sim-sc-desc">La Unión gana en casa. Serie se traslada a Oliva con uno o cero para IDSC. Los J3/J4 en El Gigante son clave.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 92 — IDSC 73</div><div class="sim-sc-desc">La Unión barre Formosa (2–0). IDSC en situación crítica — necesita ganar 3 seguidos para avanzar.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JUEGO 3 — 30/4 LOCAL OLIVA ══════════ -->
+  <div class="sim-card" id="sim-po-g3" style="border-color:rgba(122,143,166,.15);opacity:.8;">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g3')">
+      <div class="sim-acc-rival">
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G3 · 🏠 LOCAL</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">30 ABR · El Gigante · Pendiente</span>
+      </div>
+      <div class="sim-acc-score"><span class="idsc-pts" style="color:var(--muted)">?</span><span class="sep">—</span><span class="rival-pts" style="color:var(--muted)">?</span></div>
+      <div class="sim-acc-pct" style="color:var(--muted);font-size:.62rem;">PENDIENTE</div>
+      <div class="sim-acc-badges">
+        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.12);color:#C39BD3;border:1px solid rgba(155,89,182,.22);">🏆 PLAYOFF</span>
+        <span class="badge" style="font-size:.58rem;background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.2);">🏠 El Gigante</span>
+      </div>
+      <div class="sim-acc-arrow">&#9658;</div>
+    </div>
+    <div class="sim-body">
+      <div class="sim-date" style="margin-bottom:.8rem;">30 ABR 2026 · El Gigante de la Ruta 9 · Oliva · <span class="sim-cond">🏠 Local · <strong style="color:#2ecc71;">G3 — PRIMER JUEGO EN OLIVA</strong></span></div>
+
+      <div style="background:linear-gradient(135deg,rgba(46,204,113,.1),rgba(46,204,113,.03));border:1px solid rgba(46,204,113,.3);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#2ecc71;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">🏠 IDSC RECUPERA LA VENTAJA DE CANCHA</div>
+        <div style="font-size:.77rem;color:var(--muted);line-height:1.65;">Los J3/J4 se juegan en <strong style="color:var(--white);">El Gigante de la Ruta 9</strong>. Durante la temporada regular, IDSC ganó el <strong style="color:#2ecc71;">70.6%</strong> de sus partidos en casa. La Unión ya perdió en Oliva en temporada regular (87–91). El ambiente de El Gigante en un partido de playoff será completamente diferente — IDSC tiene aquí su mayor oportunidad de tomar o ampliar ventaja en la serie.</div>
+        <div style="display:flex;flex-direction:column;gap:.35rem;margin-top:.7rem;">
+          <div style="font-size:.72rem;padding:.3rem .55rem;background:rgba(155,89,182,.07);border-left:2px solid #9b59b6;border-radius:0 6px 6px 0;"><strong style="color:#C39BD3;">Si IDSC viene 2–0:</strong> G3 para cerrar la serie o ir 3–0. Posición dominante.</div>
+          <div style="font-size:.72rem;padding:.3rem .55rem;background:rgba(46,204,113,.06);border-left:2px solid #2ecc71;border-radius:0 6px 6px 0;"><strong style="color:#2ecc71;">Si serie va 1–1:</strong> G3 para tomar ventaja 2–1. Partido bisagra de la serie.</div>
+          <div style="font-size:.72rem;padding:.3rem .55rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;"><strong style="color:#e74c3c;">Si IDSC viene 0–2:</strong> G3 = supervivencia. Ganar o la serie termina en G4.</div>
+        </div>
+      </div>
+
+      <div class="sim-factors">
+        <div class="sim-factor-title">Factores proyectados — Juego 3 en Oliva</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>El Gigante de la Ruta 9:</strong> 70.6% de victorias de IDSC en casa durante temporada regular. La Unión ya perdió aquí en el año. El ambiente será explosivo en playoffs.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>La Unión de visitante:</strong> Fuera de Formosa, La Unión baja notoriamente su efectividad. Esta es la debilidad histórica del equipo formoseño.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Antecedente positivo local:</strong> IDSC le ganó a La Unión de local en temporada regular 91–87. El Gigante ya demostró ser una fortaleza contra este rival.</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>Posible acumulación física:</strong> IDSC ya habrá jugado 2 partidos en Formosa en días previos. La recuperación física en 4 días será clave.</div>
+        <div class="sim-factor sim-factor-neu">ℹ️ <strong>Ajustes tácticos profundos:</strong> Con 2 juegos de historia en la serie, ambos cuerpos técnicos tendrán el scouting más detallado posible del rival. Las correcciones serán específicas y ejecutadas.</div>
+      </div>
+
+      <div class="sim-scenarios">
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 91 — La Unión 77</div><div class="sim-sc-desc">IDSC domina en El Gigante. El público empuja desde el primer cuarto. La Unión no puede replicar su nivel de Formosa.</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">IDSC 84 — La Unión 79</div><div class="sim-sc-desc">Partido físico. IDSC sostiene el local en el Q3 y Q4. La ventaja de cancha es el diferencial.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 86 — IDSC 80</div><div class="sim-sc-desc">La Unión gana incluso en Oliva. Si la serie iba 0–2, IDSC queda eliminado. Si iba 1–1, La Unión toma ventaja 1–2.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JUEGO 4 — 2/5 LOCAL OLIVA ══════════ -->
+  <div class="sim-card" id="sim-po-g4" style="border-color:rgba(122,143,166,.12);opacity:.75;">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g4')">
+      <div class="sim-acc-rival">
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G4 · 🏠 LOCAL</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">2 MAY · El Gigante · Pendiente</span>
+      </div>
+      <div class="sim-acc-score"><span class="idsc-pts" style="color:var(--muted)">?</span><span class="sep">—</span><span class="rival-pts" style="color:var(--muted)">?</span></div>
+      <div class="sim-acc-pct" style="color:var(--muted);font-size:.62rem;">PENDIENTE</div>
+      <div class="sim-acc-badges">
+        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.12);color:#C39BD3;border:1px solid rgba(155,89,182,.22);">🏆 PLAYOFF</span>
+        <span class="badge" style="font-size:.58rem;background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.2);">🏠 El Gigante</span>
+      </div>
+      <div class="sim-acc-arrow">&#9658;</div>
+    </div>
+    <div class="sim-body">
+      <div class="sim-date" style="margin-bottom:.8rem;">02 MAY 2026 · El Gigante de la Ruta 9 · Oliva · <span class="sim-cond">🏠 Local · <strong style="color:var(--muted);">G4 — POSIBLE PARTIDO DECISIVO</strong></span></div>
+
+      <div style="background:linear-gradient(135deg,rgba(231,76,60,.09),rgba(231,76,60,.03));border:1px solid rgba(231,76,60,.22);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">⚠️ ESCENARIOS CRÍTICOS DE SERIE — G4</div>
+        <div style="display:flex;flex-direction:column;gap:.35rem;">
+          <div style="font-size:.72rem;padding:.32rem .55rem;background:rgba(155,89,182,.07);border-left:2px solid #9b59b6;border-radius:0 6px 6px 0;"><strong style="color:#C39BD3;">Si IDSC viene 3–0:</strong> Serie terminada en G3. No hay G4.</div>
+          <div style="font-size:.72rem;padding:.32rem .55rem;background:rgba(46,204,113,.06);border-left:2px solid #2ecc71;border-radius:0 6px 6px 0;"><strong style="color:#2ecc71;">Si IDSC viene 2–1:</strong> G4 = MATCH POINT en Oliva. Victoria = clasificación a semifinales.</div>
+          <div style="font-size:.72rem;padding:.32rem .55rem;background:rgba(245,166,35,.06);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;"><strong style="color:var(--gold);">Si serie va 1–2:</strong> G4 = supervivencia. IDSC debe ganar para ir a G5 en Formosa.</div>
+          <div style="font-size:.72rem;padding:.32rem .55rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;"><strong style="color:#e74c3c;">Si IDSC viene 0–3:</strong> Serie terminada. La Unión avanza. No hay G4.</div>
+        </div>
+      </div>
+
+      <div class="sim-scenarios">
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 88 — La Unión 77</div><div class="sim-sc-desc">IDSC cierra la serie en casa. Clasificación histórica a semifinales de la Liga Nacional. El Gigante explota.</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">IDSC 82 — La Unión 80</div><div class="sim-sc-desc">Partido cerrado. IDSC aprovecha el local para sacar o ampliar la ventaja en la serie. Define el rumbo final.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 85 — IDSC 78</div><div class="sim-sc-desc">La Unión gana en Oliva. Serie forzada al G5 en Formosa o eliminación de IDSC si venía 1–3.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JUEGO 5 — 5/5 VISITANTE FORMOSA (SI APLICA) ══════════ -->
+  <div class="sim-card" id="sim-po-g5" style="border-color:rgba(122,143,166,.1);opacity:.62;border-style:dashed;">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g5')">
+      <div class="sim-acc-rival">
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G5 · ✈️ VISITANTE — SI APLICA</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">5 MAY · Formosa · Solo si 2–2</span>
+      </div>
+      <div class="sim-acc-score"><span class="rival-pts" style="color:var(--muted)">?</span><span class="sep">—</span><span class="idsc-pts" style="color:var(--muted)">?</span></div>
+      <div class="sim-acc-pct" style="color:var(--muted);font-size:.62rem;">SI APLICA</div>
+      <div class="sim-acc-badges">
+        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.1);color:#C39BD3;border:1px dashed rgba(155,89,182,.2);">🏆 PLAYOFF</span>
+        <span class="badge" style="font-size:.58rem;background:rgba(122,143,166,.08);color:var(--muted);border:1px dashed rgba(122,143,166,.15);">⚔️ WINNER TAKES ALL</span>
+      </div>
+      <div class="sim-acc-arrow">&#9658;</div>
+    </div>
+    <div class="sim-body">
+      <div class="sim-date" style="margin-bottom:.8rem;">05 MAY 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:#C39BD3;">G5 — WINNER TAKES ALL · FORMOSA DECIDE</strong></span></div>
+
+      <div style="background:linear-gradient(135deg,rgba(155,89,182,.13),rgba(155,89,182,.04));border:1px solid rgba(155,89,182,.4);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.55rem;">⚔️ EL PARTIDO MÁS IMPORTANTE — SOLO SI SERIE LLEGA A 2–2</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.7;">El Juego 5 se juega en <strong style="color:var(--white);">Formosa</strong>. La Unión recupera la ventaja de cancha en el partido definitorio. IDSC deberá ganar en el Cincuentenario para avanzar a semifinales — el escenario más difícil de la serie. Sin embargo, la historia reciente de IDSC en playoffs muestra capacidad de competir bajo presión extrema.</div>
+        <div style="margin-top:.75rem;padding:.5rem .7rem;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.2);border-radius:8px;font-family:'DM Mono',monospace;font-size:.6rem;color:#e74c3c;">⚠️ PROYECCIÓN G5: LA UNIÓN FAVORITA EN CASA · 62% · Proyección base: La Unión 85 — IDSC 79</div>
+      </div>
+
+      <div class="sim-note">Solo se juega si la serie llega 2–2. IDSC tendría que ganar en Formosa por segunda vez en la serie para avanzar a semifinales de la Liga Nacional 2026. El partido definitorio en el Cincuentenario.</div>
+
+      <div class="sim-scenarios">
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 83 — La Unión 79</div><div class="sim-sc-desc">IDSC gana en Formosa en el partido definitorio. Hazaña histórica. Clasificación a semifinales ganando 2 de 3 como visitante.</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">La Unión 85 — IDSC 79</div><div class="sim-sc-desc">La Unión gana en casa en el partido decisivo. Elsener y el Cincuentenario marcan la diferencia final. IDSC eliminado.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 94 — IDSC 71</div><div class="sim-sc-desc">La Unión cierra con autoridad en su cancha. IDSC no puede sostener el nivel después de una serie tan intensa.</div></div>
+      </div>
+    </div>
+  </div>
 
   </div>
 </div>
