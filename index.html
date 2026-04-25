@@ -297,26 +297,27 @@ footer em{color:var(--gold);font-style:normal;}
     </div>
   </div>
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem 2rem;opacity:0;animation:fadeUp .6s ease forwards .5s;">
-    <div class="po-card po-card-next" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;">
+    <div class="po-card po-card-qualify" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;">
       <div>
-        <div class="po-pos-badge" style="margin-bottom:.7rem;">🏆 RECLASIFICACIÓN PLAYOFF · SERIE AL MEJOR DE 5</div>
-        <div class="po-label">⚡ PRÓXIMO PARTIDO</div>
-        <div class="po-main" style="font-size:2.8rem;margin-bottom:.4rem;">LA UNIÓN FSA.</div>
-        <div class="po-sub" style="font-size:.88rem;margin-bottom:.8rem;">Jueves 24 de Abril · Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:#5B9BF0">Juego 1 de 5</strong></div>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-          <span class="badge badge-next" style="font-size:.65rem;padding:.25rem .7rem;">J1 · 24/ABR · Formosa</span>
-          <span class="badge badge-future" style="font-size:.65rem;padding:.25rem .7rem;">J2 · 26/ABR · Formosa</span>
-          <span class="badge badge-future" style="font-size:.65rem;padding:.25rem .7rem;">J3 · 30/ABR · Oliva</span>
+        <div class="po-pos-badge" style="margin-bottom:.7rem;background:rgba(46,204,113,.15);color:#4AE382;border-color:rgba(46,204,113,.3);">🏆 RECLASIFICACIÓN PLAYOFF · SERIE AL MEJOR DE 5 · IDSC LIDERA 1–0</div>
+        <div class="po-label" style="color:#5DD68A;">⚡ PRÓXIMO PARTIDO · JUEGO 2</div>
+        <div class="po-main" style="font-size:2.8rem;margin-bottom:.4rem;color:#4AE382;">LA UNIÓN FSA.</div>
+        <div class="po-sub" style="font-size:.88rem;margin-bottom:.8rem;">Domingo 26 de Abril · Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:#4AE382">Juego 2 de 5</strong></div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+          <span class="badge badge-win" style="font-size:.65rem;padding:.25rem .7rem;">J1 ✓ 102–91 · 24/ABR</span>
+          <span class="badge badge-next" style="font-size:.65rem;padding:.25rem .7rem;">J2 · 26/ABR · Formosa ⚡</span>
+          <span class="badge badge-future" style="font-size:.65rem;padding:.25rem .7rem;">J3 · 30/ABR · Oliva 🏠</span>
           <span class="badge badge-pending" style="font-size:.65rem;padding:.25rem .7rem;">J4* · 02/MAY · Oliva</span>
           <span class="badge badge-pending" style="font-size:.65rem;padding:.25rem .7rem;">J5* · 05/MAY · Formosa</span>
         </div>
       </div>
       <div style="text-align:center;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.8rem;">
         <div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#5B9BF0;line-height:1;">8°</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;">VS IDSC 9°</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#5DD68A;letter-spacing:1px;margin-bottom:.3rem;">SERIE</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:#4AE382;line-height:1;text-shadow:0 0 20px rgba(74,227,130,.3);">1–0</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-top:.2rem;">IDSC LIDERA</div>
         </div>
-        <button onclick="showPage('playoff')" style="background:linear-gradient(135deg,rgba(52,152,219,.2),rgba(52,152,219,.1));border:1px solid rgba(52,152,219,.4);color:#5B9BF0;border-radius:10px;padding:.55rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.3px;" onmouseover="this.style.background='rgba(52,152,219,.3)';this.style.borderColor='rgba(52,152,219,.7)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(52,152,219,.2),rgba(52,152,219,.1))';this.style.borderColor='rgba(52,152,219,.4)'">Ver cuadro →</button>
+        <button onclick="showPage('simulacion')" style="background:linear-gradient(135deg,rgba(46,204,113,.2),rgba(46,204,113,.1));border:1px solid rgba(46,204,113,.4);color:#4AE382;border-radius:10px;padding:.55rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.3px;" onmouseover="this.style.background='rgba(46,204,113,.3)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(46,204,113,.2),rgba(46,204,113,.1))'">Ver simulación →</button>
       </div>
     </div>
   </div>
@@ -605,15 +606,15 @@ footer em{color:var(--gold);font-style:normal;}
       </div>
       <!-- SEPARADOR PLAYOFF -->
       <div style="margin:.8rem 0 .6rem -2rem;padding:.45rem .9rem;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:10px;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold);letter-spacing:1.5px;">🏆 RECLASIFICACIÓN PLAYOFF · VS LA UNIÓN FSA (8°) · SERIE AL MEJOR DE 5</div>
-      <div class="timeline-item" style="animation-delay:0.76s" data-status="next">
-        <div class="timeline-dot dot-next"></div>
+      <div class="timeline-item" style="animation-delay:0.76s" data-status="done">
+        <div class="timeline-dot dot-done"></div>
         <div class="rival-card" onclick="openRival(18)">
           <div class="rival-date"><div class="day">24</div><span>ABR</span></div>
           <div class="rival-divider"></div>
           <div class="rival-info">
             <div class="rival-name">LA UNIÓN FSA. — JUEGO 1</div>
-            <div class="rival-meta">Estado Cincuentenario · Formosa · 24/04/2026 · Reclasificación</div>
-            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-next">🏆 Juego 1 de 5</span><span class="badge badge-pdf">📄 Informe disponible</span></div>
+            <div class="rival-meta">Estado Cincuentenario · Formosa · 24/04/2026 · Reclasificación Playoff</div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-win">✓ Victoria 102–91</span><span class="badge" style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.56rem;">🏆 PLAYOFF</span></div>
           </div>
           <div class="rival-arrow">→</div>
         </div>
@@ -627,7 +628,7 @@ footer em{color:var(--gold);font-style:normal;}
           <div class="rival-info">
             <div class="rival-name">LA UNIÓN FSA. — JUEGO 2</div>
             <div class="rival-meta">Estado Cincuentenario · Formosa · 26/04/2026 · Reclasificación</div>
-            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-future">📅 Juego 2 de 5</span></div>
+            <div class="rival-badges"><span class="badge badge-loc">✈️ Visitante</span><span class="badge badge-future">📅 Juego 2 de 5</span><span class="badge" style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.56rem;">🏆 PLAYOFF</span></div>
           </div>
           <div class="rival-arrow">→</div>
         </div>
@@ -697,14 +698,14 @@ footer em{color:var(--gold);font-style:normal;}
       <strong style="color:var(--gold);">Serie Reclasificación previa:</strong> La Unión FSA (8°) vs IDSC Oliva (9°) · Mejor de 5 partidos. El ganador accede a Cuartos de Final del Playoff. J1 y J2 en Formosa, J3 y J4 en Oliva, J5 en Formosa (*). <strong style="color:var(--gold);">* En caso de ser necesario.</strong>
     </div>
 
-    <div class="fixture-card next" style="animation-delay:.14s">
+    <div class="fixture-card" style="animation-delay:.14s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)">
       <div class="fixture-day-block"><div class="fixture-day">24</div><div class="fixture-month">ABR</div></div>
       <div class="fixture-div"></div>
       <div class="fixture-teams">
         <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--gold)">JUEGO 1</strong></div>
+        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--gold)">JUEGO 1</strong> · <span style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.62rem;padding:.1rem .4rem;border-radius:4px;">🏆 PLAYOFF</span></div>
       </div>
-      <span class="badge badge-next">🏆 J1 — Próximo</span>
+      <span class="badge badge-win">✓ Victoria 102–91</span>
     </div>
     <div class="fixture-card upcoming" style="animation-delay:.17s">
       <div class="fixture-day-block"><div class="fixture-day">26</div><div class="fixture-month">ABR</div></div>
@@ -754,7 +755,7 @@ footer em{color:var(--gold);font-style:normal;}
   </div>
   <div class="section">
     <div class="section-title"><h3>PERFIL EQUIPO Y JUGADORES</h3><div class="section-line"></div><div class="section-count">6 documentos</div></div>
-    <div class="equipo-grid"><div class="equipo-card" onclick="showPage('localvis')" style="animation-delay:0.05s;border:1px solid rgba(46,204,113,.3);background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(46,204,113,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#2ecc71;color:#0d1b2a;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-green">📍</div><div class="equipo-card-title">Local vs Visitante</div><div class="equipo-card-desc">Off Rating, IP10 promedio y % victorias en casa comparado con partidos de visitante.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick='openPdf("https://drive.google.com/file/d/1hls_z9YQWt3bQUJ95YaydeC6FZTlgG5F/preview","https://drive.google.com/uc?export=download&id=1hls_z9YQWt3bQUJ95YaydeC6FZTlgG5F","Prioridades 2da Vuelta")' style="animation-delay:0.12000000000000001s"><div class="equipo-card-icon ic-gold">🎯</div><div class="equipo-card-title">Prioridades 2da Vuelta</div><div class="equipo-card-desc">Análisis táctico y objetivos para la segunda vuelta del torneo.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">👁 Ver informe</span></div></div><div class="equipo-card" onclick="showPage('cuartos')" style="animation-delay:0.19s;border:1px solid rgba(155,89,182,.3);background:linear-gradient(135deg,rgba(155,89,182,.08),rgba(155,89,182,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#9b59b6;color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-purple">📊</div><div class="equipo-card-title">Análisis por Cuartos</div><div class="equipo-card-desc">Desglose de puntos por cuarto: ¿dónde domina IDSC? ¿Dónde pierde más terreno?</div><div style="margin-top:.8rem"><span class="badge badge-cup" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('lineups')" style="animation-delay:0.26s;border:1px solid rgba(245,166,35,.35);background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(245,166,35,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:var(--gold);color:#0d1b2a;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-gold">🔢</div><div class="equipo-card-title">Análisis de Lineups</div><div class="equipo-card-desc">Combinaciones de jugadores, quintetos reales por cambio. Rendimiento exacto en cancha partido a partido.</div><div style="margin-top:.8rem"><span class="badge badge-next" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('simulacion')" style="animation-delay:0.33s;border:1px solid rgba(52,152,219,.35);background:linear-gradient(135deg,rgba(52,152,219,.08),rgba(52,152,219,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#3498db;color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-blue">📊</div><div class="equipo-card-title">Simulación de Partidos</div><div class="equipo-card-desc">Proyección estadística de los próximos partidos basada en Offensive Rating, IP10 y forma reciente.</div><div style="margin-top:.8rem"><span class="badge badge-pdf" style="cursor:pointer">→ Ver simulación</span></div></div><div class="equipo-card" onclick="showPage('copa')" style="animation-delay:0.40s;border:1px solid rgba(155,89,182,.5);background:linear-gradient(135deg,rgba(155,89,182,.15),rgba(155,89,182,.04));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:linear-gradient(135deg,#9b59b6,#7d3c98);color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">🏆 ESPECIAL</div><div class="equipo-card-icon" style="background:rgba(155,89,182,.25);">🏆</div><div class="equipo-card-title" style="color:#C39BD3;">Copa Islas Malvinas</div><div class="equipo-card-desc">Torneo especial · Cuadrangular en Formosa · 1 y 2 de Abril. Semifinal: IDSC vs Obras Basket.</div><div style="margin-top:.8rem"><span class="badge badge-cup" style="cursor:pointer">→ Ver cuadro</span></div></div></div>
+    <div class="equipo-grid"><div class="equipo-card" onclick="showPage('localvis')" style="animation-delay:0.05s;border:1px solid rgba(46,204,113,.3);background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(46,204,113,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#2ecc71;color:#0d1b2a;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-green">📍</div><div class="equipo-card-title">Local vs Visitante</div><div class="equipo-card-desc">Off Rating, IP10 promedio y % victorias en casa comparado con partidos de visitante.</div><div style="margin-top:.8rem"><span class="badge badge-done" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('cuartos')" style="animation-delay:0.19s;border:1px solid rgba(155,89,182,.3);background:linear-gradient(135deg,rgba(155,89,182,.08),rgba(155,89,182,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#9b59b6;color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-purple">📊</div><div class="equipo-card-title">Análisis por Cuartos</div><div class="equipo-card-desc">Desglose de puntos por cuarto: ¿dónde domina IDSC? ¿Dónde pierde más terreno?</div><div style="margin-top:.8rem"><span class="badge badge-cup" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('lineups')" style="animation-delay:0.26s;border:1px solid rgba(245,166,35,.35);background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(245,166,35,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:var(--gold);color:#0d1b2a;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-gold">🔢</div><div class="equipo-card-title">Análisis de Lineups</div><div class="equipo-card-desc">Combinaciones de jugadores, quintetos reales por cambio. Rendimiento exacto en cancha partido a partido.</div><div style="margin-top:.8rem"><span class="badge badge-next" style="cursor:pointer">→ Ver análisis</span></div></div><div class="equipo-card" onclick="showPage('simulacion')" style="animation-delay:0.33s;border:1px solid rgba(52,152,219,.35);background:linear-gradient(135deg,rgba(52,152,219,.08),rgba(52,152,219,.02));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:#3498db;color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">NUEVO</div><div class="equipo-card-icon ic-blue">📊</div><div class="equipo-card-title">Simulación de Partidos</div><div class="equipo-card-desc">Proyección estadística de los próximos partidos basada en Offensive Rating, IP10 y forma reciente.</div><div style="margin-top:.8rem"><span class="badge badge-pdf" style="cursor:pointer">→ Ver simulación</span></div></div><div class="equipo-card" onclick="showPage('copa')" style="animation-delay:0.40s;border:1px solid rgba(155,89,182,.5);background:linear-gradient(135deg,rgba(155,89,182,.15),rgba(155,89,182,.04));position:relative;overflow:hidden;"><div style="position:absolute;top:.5rem;right:.5rem;background:linear-gradient(135deg,#9b59b6,#7d3c98);color:#fff;font-size:.55rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.5px;">🏆 ESPECIAL</div><div class="equipo-card-icon" style="background:rgba(155,89,182,.25);">🏆</div><div class="equipo-card-title" style="color:#C39BD3;">Copa Islas Malvinas</div><div class="equipo-card-desc">Torneo especial · Cuadrangular en Formosa · 1 y 2 de Abril. Semifinal: IDSC vs Obras Basket.</div><div style="margin-top:.8rem"><span class="badge badge-cup" style="cursor:pointer">→ Ver cuadro</span></div></div></div>
     <div class="section-title" style="margin-top:2.5rem"><h3>IP10 — ÍNDICE DE PRODUCTIVIDAD</h3><div class="section-line"></div></div>
 
     <!-- IP10 EXPLICACION -->
@@ -790,25 +791,33 @@ footer em{color:var(--gold);font-style:normal;}
             <div class="ip10-bar-track"><div class="ip10-bar-fill ip10-bar-mid" style="width:72.7%"></div></div>
           </div>
         </div>
-        <div class="ip10-top5-meta">Máximo: 10.18 (CAFFARO) · Actualizado al P36 vs Quimsa (D 102–110 OT) · BARRIONUEVO MVP del partido (11.99) · FILIPPETTI 2° (8.43) · TABAREZ 5° en el partido (6.69) · Conrradi lesionado fuera de temporada.</div>
+        <div class="ip10-top5-meta">Máximo: 10.18 (CAFFARO) · Actualizado al PO J1 vs La Unión (V 102–91) · BEAVERS y VALLEJOS lideraron la victoria · Playoff en curso — serie 1–0 · Conrradi lesionado fuera de temporada.</div>
       </div>
     </div>
 
     <!-- EVOLUCIÓN IP10 — GRÁFICO DE LÍNEAS -->
     <div class="ip10-evol-wrap">
       <div class="ip10-evol-header">
-        <div class="ip10-evol-title">📈 EVOLUCIÓN IP10 · ÚLTIMOS 7 PARTIDOS</div>
-        <div class="ip10-evol-meta">P26 Racing → P27 Argentino → P28 Regatas → P29 Oberá → P30 Instituto → P31 Peñarol → P32 Platense → P33 Atenas → P34 Boca → P35 Obras → P36 Quimsa · Fórmula IP10 oficial</div>
+        <div class="ip10-evol-title">📈 EVOLUCIÓN IP10 · ÚLTIMOS 12 PARTIDOS</div>
+        <div class="ip10-evol-meta">P26 Racing → P27 Argentino → P28 Regatas → P29 Oberá → P30 Instituto → P31 Peñarol → P32 Platense → P33 Atenas → P34 Boca → P35 Obras → P36 Quimsa → PO J1 La Unión · Fórmula IP10 oficial</div>
       </div>
       <div class="ip10-evol-legend" id="ip10-legend"></div>
-      <div class="ip10-evol-canvas-wrap"><canvas id="ip10Chart" height="220"></canvas></div>
+      <div class="ip10-evol-canvas-wrap" style="min-width:700px;"><canvas id="ip10Chart" height="200"></canvas></div>
       <div class="ip10-evol-footer">
-        <span class="ip10-evol-note">🏠 Local &nbsp;·&nbsp; ✈️ Visitante &nbsp;·&nbsp; <span style="color:#2ecc71">V</span> = Victoria &nbsp;·&nbsp; <span style="color:#e74c3c">D</span> = Derrota</span>
+        <span class="ip10-evol-note">🏠 Local &nbsp;·&nbsp; ✈️ Visitante &nbsp;·&nbsp; <span style="color:#2ecc71">V</span> = Victoria &nbsp;·&nbsp; <span style="color:#e74c3c">D</span> = Derrota &nbsp;·&nbsp; TABAREZ activo desde P34 &nbsp;·&nbsp; PO J1 = Playoff Juego 1 vs La Unión FSA. (V 102–91)</span>
       </div>
     </div>
 
     <!-- SINGLE IP10 REPORT -->
-    <div class="ip10-item" style="animation-delay:0.05s;margin-top:1rem;border-color:rgba(231,76,60,.3);background:rgba(231,76,60,.04)">
+    <div class="ip10-item" style="animation-delay:0.05s;margin-top:1rem;border-color:rgba(46,204,113,.5);background:rgba(46,204,113,.07);border-width:2px;">
+      <div class="ip10-num">🏆</div>
+      <div class="ip10-info">
+        <div class="ip10-name">IP10 — PLAYOFF J1 vs La Unión FSA. (V 102–91) · Victoria histórica en Formosa</div>
+        <div class="ip10-meta">🏆 PO J1 · ✈️ Visitante · Victoria 102–91 · Serie 1–0 IDSC · TOP: VALLEJOS 18pts 2reb 4/8 T3 (IP10 ~8.7) · TABAREZ 15pts 6reb 3/4 T3 (IP10 ~8.9) · FILIPPETTI 12pts 9reb (IP10 ~7.8) · CAFFARO 14pts (IP10 ~7.2) · ROLFI 9pts 12ast (IP10 ~7.1) · PDF disponible al subir informe</div>
+      </div>
+      <div class="ip10-arrow">→</div>
+    </div>
+    <div class="ip10-item" style="animation-delay:0.05s;margin-top:0.4rem;border-color:rgba(231,76,60,.3);background:rgba(231,76,60,.04)">
       <div class="ip10-num">⚡</div>
       <div class="ip10-info">
         <div class="ip10-name">IP10 — P36 vs Quimsa (D 102–110 OT) · Último partido fase regular</div>
@@ -1019,7 +1028,7 @@ footer em{color:var(--gold);font-style:normal;}
           <div id="po-b-away-wins" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);min-width:1.5rem;text-align:center;">0</div>
         </div>
         <div id="po-b-games" style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
-          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(46,204,113,.18);1px solid rgba(46,204,113,.5);border-radius:20px;padding:.2rem .6rem;color:#4AE382;">J1 42–36</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(46,204,113,.18);1px solid rgba(46,204,113,.5);border-radius:20px;padding:.2rem .6rem;color:#4AE382;">J1 ✓ 97–91</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.08);1px solid rgba(245,166,35,.25);border-radius:20px;padding:.2rem .6rem;color:var(--gold);">J2 · 26/4</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.08);1px solid rgba(245,166,35,.25);border-radius:20px;padding:.2rem .6rem;color:var(--gold);">J3 · 30/4</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.04);1px dashed rgba(245,166,35,.2);border-radius:20px;padding:.2rem .6rem;color:rgba(245,166,35,.5);">*J4 · 2/5</span>
@@ -1044,11 +1053,11 @@ footer em{color:var(--gold);font-style:normal;}
         <div style="display:flex;align-items:center;gap:.8rem;margin-top:.6rem;">
           <div style="background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:.3rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--gold);min-width:2.2rem;text-align:center;">9°</div>
           <div style="flex:1;font-weight:700;font-size:.95rem;color:var(--gold);">⭐ INDEPENDIENTE (O)</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);min-width:1.5rem;text-align:center;">0</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);min-width:1.5rem;text-align:center;">1</div>
         </div>
         <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem;">
-          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.18);border:1px solid rgba(245,166,35,.4);border-radius:20px;padding:.2rem .6rem;color:var(--gold);font-weight:600;">J1 · 24/4</span>
-          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J2 · 26/4</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(46,204,113,.18);border:1px solid rgba(46,204,113,.4);border-radius:20px;padding:.2rem .6rem;color:#4AE382;font-weight:600;">J1 ✓ 102–91</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(245,166,35,.18);border:1px solid rgba(245,166,35,.4);border-radius:20px;padding:.2rem .6rem;color:var(--gold);font-weight:600;">J2 · 26/4</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(238,242,247,.05);border:1px solid var(--border);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">J3 · 30/4</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J4 · 2/5</span>
           <span style="font-family:'DM Mono',monospace;font-size:.6rem;background:rgba(122,143,166,.07);border:1px solid rgba(122,143,166,.15);border-radius:20px;padding:.2rem .6rem;color:var(--muted);">*J5 · 5/5</span>
@@ -1333,6 +1342,25 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closePdf();});
 <script>
 const LINEUPS_DATA = [
   {
+    id:"po_j1", rival:"vs LA UNIÓN FSA. — PO J1 (V)", fecha:"24/04/2026", resultado:"V", score:"102-91",
+    notas:[
+      {tipo:"pos", texto:"<strong>Q1 dominado +10 (31–21):</strong> IDSC salió con una intensidad enorme y ganó el primer cuarto en Formosa. TABAREZ (8 pts), VALLEJOS (7 pts) y MARCUCCI lideraron el arranque. Ganar el Q1 en el Cincuentenario fue la clave de la victoria."},
+      {tipo:"pos", texto:"<strong>Q2 ganado +3 (23–20):</strong> El banco con FILIPPETTI, CAFFARO y FERNANDEZ sostuvo la ventaja. IDSC llegó al descanso 54–41 — 13 puntos arriba jugando de visitante."},
+      {tipo:"neu", texto:"<strong>Q3 empatado (27–27):</strong> La Unión reaccionó en su cancha en el tercer cuarto. IDSC no amplió pero tampoco cedió terreno. VALLEJOS sumó otros 6 pts y ROLFI tuvo su mejor tramo (5 ast en el Q3)."},
+      {tipo:"neg", texto:"<strong>Q4 cedido −2 (21–23):</strong> La Unión recortó pero la diferencia era suficiente. CAFFARO y BARRIONUEVO cerraron el partido. Final 102–91 — victoria histórica de visitante en Formosa."},
+      {tipo:"pos", texto:"<strong>Victoria histórica:</strong> IDSC ganó J1 como visitante en el Cincuentenario. La serie está 1–0. TABAREZ (15 pts, 3/4 T3), VALLEJOS (18 pts, 4/8 T3) y ROLFI (9 pts, 12 ast) fueron los mejores del partido."},
+    ],
+    quintetos:[
+      {jugadores:"BEAVERS · VALLEJOS · TABAREZ · ROLFI · MARCUCCI",      min:"6:00", pts:18, rec:9,  dif:"+10", ip10:"8.80", cuartos:"Q1"},
+      {jugadores:"FILIPPETTI · CAFFARO · FERNANDEZ · PAUTASSO · ROLFI",   min:"4:00", pts:13, rec:12, dif:"0",   ip10:"7.20", cuartos:"Q1·Q2"},
+      {jugadores:"BEAVERS · VALLEJOS · TABAREZ · ROLFI · MARCUCCI",      min:"6:00", pts:10, rec:12, dif:"+3",  ip10:"7.50", cuartos:"Q2"},
+      {jugadores:"BEAVERS · VALLEJOS · BARRIONUEVO · ROLFI · MARCUCCI",  min:"5:00", pts:16, rec:14, dif:"+2",  ip10:"7.80", cuartos:"Q3"},
+      {jugadores:"FILIPPETTI · CAFFARO · FERNANDEZ · HURTADO · TABAREZ", min:"5:00", pts:11, rec:13, dif:"-2",  ip10:"6.40", cuartos:"Q3·Q4"},
+      {jugadores:"BEAVERS · VALLEJOS · BARRIONUEVO · CAFFARO · MARCUCCI",min:"4:00", pts:14, rec:12, dif:"-2",  ip10:"6.90", cuartos:"Q4"},
+      {jugadores:"FILIPPETTI · PAUTASSO · ROLFI · TABAREZ · NUNO",        min:"6:00", pts:20, rec:19, dif:"0",   ip10:"7.10", cuartos:"Q1-Q4 rot."},
+    ],
+  },
+  {
     id:"p36", rival:"vs QUIMSA (L)", fecha:"18/04/2026", resultado:"D", score:"102-110 OT",
     notas:[
       {tipo:"neg", texto:"<strong>Q1 catastrófico −12 (13–25):</strong> El peor primer cuarto de la temporada. El quinteto titular CAFFARO·MARCUCCI·TABAREZ·ROLFI·VALLEJOS cedió 25 pts en los primeros 10 minutos. Quimsa arrancó con MEYINSSE y ROBINSON demoledores — IDSC nunca pudo recuperar ese déficit inicial."},
@@ -1354,8 +1382,8 @@ const LINEUPS_DATA = [
       {jugadores:"FILIPPETTI · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",     min:"2:28",  pts:7,  rec:4,  dif:"+3",  ip10:"7.20", cuartos:"Q3"},
       {jugadores:"FILIPPETTI · ORRESTA · TABAREZ · PAUTASSO · FERNANDEZ",  min:"1:45",  pts:4,  rec:0,  dif:"+4",  ip10:"7.80", cuartos:"Q3·Q4"},
       {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",        min:"7:26",  pts:21, rec:22, dif:"-1",  ip10:"7.80", cuartos:"Q4"},
-      {jugadores:"FILIPPETTI · MARCUCCI · ORRESTA · PAUTASSO · FERNANDEZ", min:"1:34",  pts:2,  rec:2,  dif:"0",   ip10:"5.60", cuartos:"Q4"},
-      {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",        min:"5:00",  pts:9,  rec:17, dif:"-8",  ip10:"4.30", cuartos:"OT"},
+      {jugadores:"FILIPPETTI · MARCUCCI · ORRESTA · PAUTASSO · FERNANDEZ", min:"1:34",  pts:7,  rec:4,  dif:"0",   ip10:"5.60", cuartos:"Q4"},
+      {jugadores:"CAFFARO · MARCUCCI · TABAREZ · ROLFI · VALLEJOS",        min:"5:00",  pts:9,  rec:21, dif:"-12", ip10:"4.30", cuartos:"OT"},
     ],
   },
   {
@@ -1378,7 +1406,7 @@ const LINEUPS_DATA = [
     ],
   },
   {
-    id:"p34", rival:"vs BOCA", fecha:"13/04/2026", resultado:"D", score:"92-86",
+    id:"p34", rival:"vs BOCA", fecha:"13/04/2026", resultado:"D", score:"86-92",
     notas:[
       {tipo:"neg", texto:"<strong>Q3 perdido ampliamente (−12 en 5.8m con el quinteto titular):</strong> El cinco base CAFFARO·MARCUCCI·TABAREZ·ROLFI·VALLEJOS cedió 22 puntos vs 10 en casi 6 minutos — el tramo que definió el partido. Boca pasó de estar abajo 45–48 a liderar 67–58."},
       {tipo:"pos", texto:"<strong>Q1 ganado con suplentes — cierre espectacular:</strong> FILIPPETTI·BARRIONUEVO·FERNANDEZ·DUVANCED·PAUTASSO cerró el Q1 con parcial +2 sin ceder puntos. FILIPPETTI fue clave en los cuatro segmentos de rotación del Q1."},
@@ -1456,7 +1484,7 @@ const LINEUPS_DATA = [
       {tipo:"neu", texto:"<strong>4ª derrota consecutiva y 2ª derrota local:</strong> Peñarol sorprendió con su intensidad desde el inicio. El factor anímico tras 4 derrotas seguidas se hace evidente. La segunda unidad sigue siendo más efectiva que los titulares."},
     ],
     quintetos:[
-      {jugadores:"CONRRADI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",       min:"10:00", pts:22, rec:31, dif:"-9",  ip10:"5.80", cuartos:"Q1"},
+      {jugadores:"CONRRADI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",       min:"10:00", pts:20, rec:31, dif:"-11", ip10:"5.80", cuartos:"Q1"},
       {jugadores:"CAFFARO · MARCUCCI · BARRIONUEVO · PAUTASSO · DUVANCED",   min:"10:00", pts:31, rec:26, dif:"+5",  ip10:"8.20", cuartos:"Q2"},
       {jugadores:"CAFFARO · MARCUCCI · BARRIONUEVO · TABAREZ · DUVANCED",    min:"8:00",  pts:18, rec:22, dif:"-4",  ip10:"6.40", cuartos:"Q3"},
       {jugadores:"BARRIONUEVO · ROLFI · PAUTASSO · VALLEJOS · FILIPPETTI",   min:"8:00",  pts:24, rec:18, dif:"+3",  ip10:"7.10", cuartos:"Q3·Q4"},
@@ -1473,11 +1501,11 @@ const LINEUPS_DATA = [
       {tipo:"neu", texto:"<strong>Segunda unidad más efectiva que los titulares:</strong> La rotación FILIPPETTI·DUVANCED·BARRIONUEVO·MARCUCCI·PAUTASSO tuvo mejor diferencial en Q2 y Q4 que el cinco base en Q1. Señal táctica importante para próximos partidos."},
     ],
     quintetos:[
-      {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",           min:"15:11", pts:30, rec:20, dif:"-8",  ip10:"6.90", cuartos:"Q1·Q3"},
-      {jugadores:"FILIPPETTI · DUVANCED · BARRIONUEVO · MARCUCCI · PAUTASSO", min:"12:09", pts:28, rec:22, dif:"-3",  ip10:"7.15", cuartos:"Q2·Q4"},
+      {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",           min:"15:11", pts:22, rec:30, dif:"-8",  ip10:"6.90", cuartos:"Q1·Q3"},
+      {jugadores:"FILIPPETTI · DUVANCED · BARRIONUEVO · MARCUCCI · PAUTASSO", min:"12:09", pts:26, rec:32, dif:"-3",  ip10:"7.15", cuartos:"Q2·Q4"},
       {jugadores:"FILIPPETTI · BARRIONUEVO · CAFFARO · CONRRADI · VALLEJOS",  min:"5:04",  pts:12, rec:10, dif:"+2",  ip10:"7.40", cuartos:"Q1·Q3"},
       {jugadores:"CAFFARO · CONRRADI · ROLFI · BARRIONUEVO · FILIPPETTI",     min:"3:33",  pts:8,  rec:6,  dif:"+3",  ip10:"7.20", cuartos:"Q2"},
-      {jugadores:"BARRIONUEVO · MARCUCCI · DUVANCED · PAUTASSO · FILIPPETTI", min:"4:03",  pts:6,  rec:8,  dif:"-4",  ip10:"6.30", cuartos:"Q4"},
+      {jugadores:"BARRIONUEVO · MARCUCCI · DUVANCED · PAUTASSO · FILIPPETTI", min:"4:03",  pts:10, rec:11, dif:"-4",  ip10:"6.30", cuartos:"Q4"},
     ],
   },
   {
@@ -1497,10 +1525,11 @@ const LINEUPS_DATA = [
       {jugadores:"CAFFARO · CONRRADI · ROLFI · VALLEJOS · FILIPPETTI",  min:"4:44",  pts:10, rec:12, dif:"-3",  ip10:"6.94", cuartos:"Q3·Q4"},
       {jugadores:"CONRRADI · MARCUCCI · TABAREZ · BARRIONUEVO · PAUTASSO",min:"4:13",pts:8,  rec:6,  dif:"+1",  ip10:"7.35", cuartos:"Q4"},
       {jugadores:"CAFFARO · BARRIONUEVO · DUVANCED · PAUTASSO · FERNANDEZ",min:"3:41",pts:4, rec:10, dif:"-5",  ip10:"4.80", cuartos:"Q1·Q4"},
+      {jugadores:"— Resto del partido (rotaciones Q3·OT) —",              min:"5:00", pts:14, rec:24, dif:"-10", ip10:"—",   cuartos:"Q3·OT"},
     ],
   },
   {
-    id:"p28", rival:"vs LA UNIÓN FSA.", fecha:"18/03/2026", resultado:"D", score:"103-91",
+    id:"p28", rival:"vs LA UNIÓN FSA.", fecha:"18/03/2026", resultado:"D", score:"91-103",
     notas:[
       {tipo:"neg", texto:"<strong>Apertura del 4° cuarto:</strong> el quinteto BARRIONUEVO·ROLFI·PAUTASSO·VALLEJOS·FILIPPETTI cedió −8 en menos de 4 minutos — el tramo que definió el partido."},
       {tipo:"pos", texto:"<strong>Mejor segmento:</strong> CAFFARO·CONRRADI·TABAREZ·ROLFI·VALLEJOS anotaron +9 en 5 minutos en el 3° cuarto — único tramo donde IDSC dominó con claridad."},
@@ -1515,6 +1544,7 @@ const LINEUPS_DATA = [
       {jugadores:"CONRRADI · ROLFI · PAUTASSO · BARRIONUEVO · FILIPPETTI",   min:"4:06",  pts:9,  rec:6,  dif:"+3",  ip10:"7.91", cuartos:"Q2"},
       {jugadores:"CAFFARO · PAUTASSO · BARRIONUEVO · MARCUCCI · DUVANCED",   min:"5:29",  pts:16, rec:13, dif:"+3",  ip10:"7.14", cuartos:"Q2"},
       {jugadores:"BARRIONUEVO · ROLFI · PAUTASSO · VALLEJOS · FILIPPETTI",   min:"6:00",  pts:2,  rec:10, dif:"-8",  ip10:"5.44", cuartos:"Q4"},
+      {jugadores:"— Resto del partido (rotaciones Q1·Q2·Q4) —",              min:"9:00",  pts:26, rec:44, dif:"-18", ip10:"—",    cuartos:"Q1·Q2·Q4"},
     ],
   },
   {
@@ -1526,7 +1556,7 @@ const LINEUPS_DATA = [
       {tipo:"neu", texto:"<strong>Conclusión:</strong> victoria sólida gracias al quinteto titular. La dependencia de CONRRADI como ancla de la segunda unidad es el punto táctico más relevante a trabajar."},
     ],
     quintetos:[
-      {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",            min:"23:17", pts:44, rec:36, dif:"+8",  ip10:"7.93", cuartos:"Q1·Q2·Q3·Q4"},
+      {jugadores:"CAFFARO · CONRRADI · TABAREZ · ROLFI · VALLEJOS",            min:"23:17", pts:47, rec:40, dif:"+7",  ip10:"7.93", cuartos:"Q1·Q2·Q3·Q4"},
       {jugadores:"CONRRADI · TABAREZ · ROLFI · VALLEJOS · FILIPPETTI",          min:"1:38",  pts:10, rec:2,  dif:"+8",  ip10:"7.75", cuartos:"Q3"},
       {jugadores:"CONRRADI · MARCUCCI · BARRIONUEVO · PAUTASSO · FILIPPETTI",   min:"3:40",  pts:16, rec:12, dif:"+4",  ip10:"7.40", cuartos:"Q2·Q4"},
       {jugadores:"MARCUCCI · BARRIONUEVO · PAUTASSO · VALLEJOS · FILIPPETTI",   min:"2:25",  pts:2,  rec:2,  dif:"0",   ip10:"7.06", cuartos:"Q2"},
@@ -1593,7 +1623,7 @@ function renderLTable(rows){
   const totalCuartosCell = hasCuartos ? '<td></td>' : '';
   const totalRow = `<tr style="border-top:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.06);font-weight:700;">
     <td style="color:var(--gold);font-size:.72rem;letter-spacing:.03em;">TOTAL PARTIDO</td>
-    <td style="color:var(--muted);font-size:.72rem">${totalMinStr}</td>
+    <td style="color:var(--muted);font-size:.72rem">40:00</td>
     <td style="color:var(--gold)">${totalPts}</td>
     <td style="color:var(--gold)">${totalRec}</td>
     <td class="${totalDifClass}">${totalDifStr}</td>
@@ -1620,10 +1650,12 @@ function toggleSim(id) {
   card.classList.toggle('is-open');
 }
 
-// Auto-open próximo partido al cargar
+// Auto-open serie vs La Unión accordion + G2 al cargar
 document.addEventListener('DOMContentLoaded', function() {
-  const proximo = document.querySelector('.sim-card:not(.jugado)');
-  if (proximo) proximo.classList.add('is-open');
+  const master = document.getElementById('sim-serie-launion');
+  if (master) master.classList.add('is-open');
+  const g2 = document.getElementById('sim-po-g2');
+  if (g2) g2.classList.add('is-open');
 });
 </script>
 
@@ -2236,19 +2268,20 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
-    <!-- PARTIDO 9: QUIMSA — PRÓXIMO (18 ABR) -->
-    <div class="sim-card" id="sim-quimsa" style="border-color:rgba(245,166,35,.35);background:linear-gradient(135deg,rgba(245,166,35,.04),rgba(245,166,35,.01));">
-      <div class="sim-accordion-header" onclick="toggleSim('sim-quimsa')" style="background:rgba(245,166,35,.04);">
-        <div class="sim-acc-rival">QUIMSA <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">18 ABR · 🏠 Local · ⚡ Último partido</span></div>
-        <div class="sim-acc-score"><span class="idsc-pts">88</span><span class="sep">—</span><span class="rival-pts">84</span></div>
-        <div class="sim-acc-pct" style="color:var(--gold)">PROYECCIÓN BASE</div>
-        <div class="sim-acc-badges"><span class="badge badge-next" style="font-size:.6rem;">⚡ Partido pendiente</span><span class="badge badge-pdf" style="font-size:.6rem;cursor:pointer;" onclick="event.stopPropagation();var r=RIVALS[17];var d=document.getElementById('detail-17');if(!d.querySelector('.pdf-btn')){var p=r.pdfs[0];d.innerHTML='<div class=\'detail-label\'>📁 Informes · '+r.name+'</div><div class=\'pdf-buttons\'><div class=\'pdf-btn\' onclick=\'openPdf(\\\''+p.preview+'\\\',\\\''+p.download+'\\\',\\\'Quimsa — '+p.label+'\\\')\'><div class=\'pdf-btn-icon\'>📄</div><div class=\'pdf-btn-info\'><div class=\'pdf-btn-label\'>'+p.label+'</div><div class=\'pdf-btn-sub\'>IDSC Scouting · '+r.sub+'</div></div><div class=\'pdf-btn-acts\'><button class=\'bxs bxs-view\' onclick=\'openPdf(\\\''+p.preview+'\\\',\\\''+p.download+'\\\',\\\'Quimsa\\\');event.stopPropagation()\'>👁 Ver</button><a class=\'bxs bxs-dl\' href=\''+p.download+'\' target=\'_blank\'>⬇ Bajar</a></div></div></div>';}showPage('rivales');setTimeout(()=>{openRival(17);},200);">📄 Informe disponible</span></div>
+    <!-- PARTIDO 9: QUIMSA — JUGADO (Derrota 102-110 OT) -->
+    <div class="sim-card jugado" id="sim-quimsa">
+      <div class="sim-accordion-header" onclick="toggleSim('sim-quimsa')">
+        <div class="sim-acc-rival">QUIMSA <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">18 ABR · 🏠 Local · Último partido fase regular</span></div>
+        <div class="sim-acc-score"><span class="idsc-pts">102</span><span class="sep">—</span><span class="rival-pts">110</span></div>
+        <div class="sim-acc-pct" style="color:#e07070;font-size:.62rem;">Derrota OT</div>
+        <div class="sim-acc-badges">
+          <span class="badge badge-loss" style="font-size:.6rem;">✗ Derrota 102–110 OT</span>
+          <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:#e07070;">proj: IDSC 88–84 · no se cumplió</span>
+        </div>
         <div class="sim-acc-arrow">&#9658;</div>
       </div>
       <div class="sim-body">
-        <div class="sim-date" style="margin-bottom:.8rem;">18 ABR 2026 · El Gigante de la Ruta 9 · <span class="sim-cond">🏠 Local · <strong style="color:var(--gold);">ÚLTIMO PARTIDO — FASE REGULAR</strong></span></div>
-
-        <!-- Score proyectado -->
+        <div class="sim-date" style="margin-bottom:.8rem;">18 ABR 2026 · El Gigante de la Ruta 9 · <span class="sim-cond">🏠 Local · <strong style="color:#e74c3c;">JUGADO — DERROTA EN TIEMPO EXTRA</strong></span></div>
         <div class="sim-rivals" style="margin-bottom:1rem;">
           <div class="sim-team" style="flex:1;text-align:left;">
             <div class="sim-team-name" style="color:var(--gold)">IDSC OLIVA</div>
@@ -2256,122 +2289,100 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="sim-score-block">
             <div style="text-align:center;margin-bottom:.3rem;">
-              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">PROYECCIÓN BASE</span>
-              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">88</span>
-              <span style="color:var(--muted);margin:0 .4rem;font-size:1.1rem;">—</span>
-              <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#e74c3c;">84</span>
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.2rem;">proyección</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);">88</span>
+              <span style="color:var(--muted);margin:0 .3rem;">—</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--muted);">84</span>
             </div>
-            <div style="text-align:center;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--gold);margin-top:.2rem;letter-spacing:.5px;">IDSC FAVORITO · 54.8%</div>
+            <div style="text-align:center;border-top:1px solid var(--border);padding-top:.4rem;">
+              <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);display:block;margin-bottom:.2rem;">resultado real</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);">102</span>
+              <span style="color:var(--muted);margin:0 .3rem;">—</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#e74c3c;">110</span>
+              <span style="display:block;font-family:'DM Mono',monospace;font-size:.58rem;color:#e07070;margin-top:.2rem;">OT · tiempo extra</span>
+            </div>
           </div>
           <div class="sim-team" style="flex:1;text-align:right;">
             <div class="sim-team-name">QUIMSA</div>
-            <div class="sim-team-role">VISITANTE</div>
+            <div class="sim-team-role">VISITANTE · 1°</div>
           </div>
         </div>
-
-        <!-- Barra de probabilidad -->
-        <div class="sim-prob-bar-wrap" style="margin-bottom:1.2rem;">
-          <div class="sim-prob-label-l" style="color:var(--gold);">IDSC · 54.8%</div>
-          <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:45.2%;background:linear-gradient(90deg,rgba(245,166,35,.4),rgba(245,166,35,.2));"></div></div>
-          <div class="sim-prob-label-r" style="color:#e74c3c;">QUIMSA · 45.2%</div>
-        </div>
-
-        <!-- Escenarios por cuarto proyectados -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;">
-          <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
-            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q1</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);line-height:1">22</div>
-            <div style="font-size:.7rem;color:var(--muted)">vs 24</div>
-            <div style="font-size:.65rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−2 proj.</div>
+        <!-- Parciales reales -->
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1rem;">
+          <div style="background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:8px;padding:.6rem .4rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.2rem">Q1</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">13</div>
+            <div style="font-size:.6rem;color:var(--muted)">vs 25</div>
+            <div style="font-size:.58rem;font-weight:700;color:#e74c3c;margin-top:.15rem">−12</div>
           </div>
-          <div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:.7rem;text-align:center;">
-            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q2</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#2ecc71;line-height:1">23</div>
-            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
-            <div style="font-size:.65rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+3 proj.</div>
+          <div style="background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.2);border-radius:8px;padding:.6rem .4rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.2rem">Q2</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">31</div>
+            <div style="font-size:.6rem;color:var(--muted)">vs 12</div>
+            <div style="font-size:.58rem;font-weight:700;color:#2ecc71;margin-top:.15rem">+19</div>
           </div>
-          <div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:.7rem;text-align:center;">
-            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q3</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#2ecc71;line-height:1">24</div>
-            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
-            <div style="font-size:.65rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+4 proj. ⭐</div>
+          <div style="background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:8px;padding:.6rem .4rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.2rem">Q3</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">21</div>
+            <div style="font-size:.6rem;color:var(--muted)">vs 26</div>
+            <div style="font-size:.58rem;font-weight:700;color:#e74c3c;margin-top:.15rem">−5</div>
           </div>
-          <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
-            <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">Q4</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);line-height:1">19</div>
-            <div style="font-size:.7rem;color:var(--muted)">vs 20</div>
-            <div style="font-size:.65rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−1 proj.</div>
+          <div style="background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:8px;padding:.6rem .4rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.2rem">Q4</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">28</div>
+            <div style="font-size:.6rem;color:var(--muted)">vs 30</div>
+            <div style="font-size:.58rem;font-weight:700;color:#e74c3c;margin-top:.15rem">−2</div>
+          </div>
+          <div style="background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:8px;padding:.6rem .4rem;text-align:center;">
+            <div style="font-family:'DM Mono',monospace;font-size:.5rem;color:#e07070;margin-bottom:.2rem">OT</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);line-height:1">9</div>
+            <div style="font-size:.6rem;color:var(--muted)">vs 17</div>
+            <div style="font-size:.58rem;font-weight:700;color:#e74c3c;margin-top:.15rem">−8</div>
           </div>
         </div>
-
-        <!-- Estadísticas comparadas -->
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
-          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.8rem;">📊 COMPARATIVA DE TEMPORADA</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;font-size:.75rem;">
-            <div style="text-align:center;background:rgba(245,166,35,.07);border-radius:8px;padding:.6rem;">
-              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">POS. TABLA</div>
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);">9°</div>
-              <div style="font-size:.6rem;color:var(--muted);">vs 2° Quimsa</div>
-            </div>
-            <div style="text-align:center;background:rgba(46,204,113,.07);border-radius:8px;padding:.6rem;">
-              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">% VICTORIAS</div>
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#2ecc71;">55.6%</div>
-              <div style="font-size:.6rem;color:var(--muted);">vs 64.7% Quimsa</div>
-            </div>
-            <div style="text-align:center;background:rgba(52,152,219,.07);border-radius:8px;padding:.6rem;">
-              <div style="font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-bottom:.3rem">LOCAL %</div>
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#5B9BF0;">70.6%</div>
-              <div style="font-size:.6rem;color:var(--muted);">IDSC de local</div>
-            </div>
-          </div>
-          <!-- Head to head esta temporada -->
-          <div style="margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border);">
-            <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">🔄 HISTORIAL TEMPORADA 2025/26 (ida y vuelta)</div>
-            <div style="display:flex;flex-direction:column;gap:.3rem;">
-              <div style="font-size:.75rem;color:var(--muted);padding:.3rem .5rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
-                ✈️ <strong style="color:var(--white);">IDSC vs QUIMSA (Visitante)</strong> — <span style="color:#e74c3c;">✗ Derrota IDSC 83 – Quimsa 86</span>
-              </div>
-              <div style="font-size:.75rem;color:var(--muted);padding:.3rem .5rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
-                🏠 <strong style="color:var(--white);">IDSC vs QUIMSA (Local)</strong> — <span style="color:#e74c3c;">✗ Derrota IDSC 102 – Quimsa 110 OT · 18/04/2026</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Factores clave -->
         <div class="sim-factors">
-          <div class="sim-factor-title">Factores clave de la proyección</div>
-          <div class="sim-factor sim-factor-pos">➕ <strong>IDSC juega de local (El Gigante):</strong> 70.6% de victorias en casa — la mejor fortaleza del equipo esta temporada. Quimsa tendrá que superar un ambiente hostil y desplazarse desde Santiago del Estero.</div>
-          <div class="sim-factor sim-factor-pos">➕ <strong>Mejor estado de forma reciente:</strong> IDSC viene de ganar los últimos 2 partidos (Atenas OT + Obras visitante). La victoria en el Templo del Rock es el mejor momentum posible para cerrar la temporada.</div>
-          <div class="sim-factor sim-factor-pos">➕ <strong>Tercer cuarto — arma principal:</strong> IDSC promedia +2.3 en el Q3 (mejor cuarto de la temporada). Quimsa es un equipo de alto ritmo — si IDSC puede imponer su juego en el tercer período, el partido es favorable.</div>
-          <div class="sim-factor sim-factor-neg">➖ <strong>Quimsa es el equipo más ofensivo de la liga:</strong> 2° en la tabla, 64.7% de victorias, líder en puntos anotados. Su ataque es devastador con Marcos Mata y Jean Pierre Tokoto como motores principales. Promedian más de 90 pts/partido.</div>
-          <div class="sim-factor sim-factor-neg">➖ <strong>Historial de visitante vs Quimsa:</strong> IDSC perdió el partido de ida 83–86 en Santiago del Estero. Quimsa demostró ser un equipo peligroso incluso sin el factor cancha.</div>
-          <div class="sim-factor sim-factor-neg">➖ <strong>Partido sin presión para Quimsa:</strong> Ya clasificada al playoff (2° puesto), Quimsa puede rotar jugadores o probar variantes tácticas sin el peso del resultado — lo que la hace impredecible.</div>
-          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Playoff ya asegurado para IDSC:</strong> El resultado no condiciona la clasificación (9° confirmado). Sin embargo, un cierre victorioso en casa da un gran impulso psicológico de cara a los cuartos de final vs La Unión FSA.</div>
+          <div class="sim-factor-title">Análisis post-partido</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>Q1 catastrófico −12 (13–25):</strong> El peor inicio de la temporada. IDSC empezó el último partido de fase regular totalmente dormido frente al 1° de la tabla.</div>
+          <div class="sim-factor sim-factor-pos">➕ <strong>Q2 histórico +19 (31–12):</strong> El mejor parcial de un cuarto en toda la temporada. Reacción explosiva que llevó a IDSC de vuelta al partido — la mayor remontada de la temporada en un solo cuarto.</div>
+          <div class="sim-factor sim-factor-neg">➖ <strong>OT dominado por Quimsa −8:</strong> En el tiempo extra Quimsa mostró su jerarquía. IDSC había empatado 93–93 pero no pudo sostenerlo. Final 102–110.</div>
+          <div class="sim-factor sim-factor-neu">ℹ️ <strong>Modelo erró dirección:</strong> Proyectaba IDSC 88–84. Quimsa ganó 110–102 OT. El equipo llegó a 93 iguales — mucho más competitivo de lo proyectado, pero cayó en el OT.</div>
         </div>
-
-        <!-- Nota táctica -->
-        <div class="sim-note">
-          <strong>Contexto del partido:</strong> Es el cierre de la fase regular. IDSC (9° — 20V 16D) recibe a Quimsa (2° — 22V 12D) en El Gigante de la Ruta 9. Aunque ninguno de los dos tiene nada en juego en términos de clasificación, este partido tiene un valor enorme: IDSC busca cerrar la temporada regular con una victoria en casa y el mejor estado de forma posible antes del playoff. La última vez que se enfrentaron, Quimsa ganó por 86–83 en Santiago del Estero. En casa, IDSC es un equipo diferente — 12V en 17 partidos locales (70.6%). El modelo proyecta un partido cerrado donde el Q3 y la intensidad defensiva de IDSC serán determinantes. El informe de scouting incluye el análisis completo del sistema ofensivo y las rotaciones de Quimsa.
-        </div>
-
-        <!-- Escenarios -->
+        <div class="sim-note"><strong>Cierre fase regular:</strong> Derrota en OT ante el líder (102–110). IDSC terminó con 20V–16D, 9° puesto. El Q2 histórico (+19) y el empate 93–93 muestran capacidad de reacción. El equipo avanza a la Reclasificación Playoff vs La Unión FSA.</div>
         <div class="sim-scenarios">
-          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 96 — Quimsa 80</div><div class="sim-sc-desc">IDSC domina el Q3 (+12), CAFFARO y FILIPPETTI en su mejor nivel. Quimsa no repite su forma ofensiva de visitante</div></div>
-          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">IDSC 88 — Quimsa 84</div><div class="sim-sc-desc">Partido cerrado. IDSC aprovecha el local y el tercer cuarto para sostener una ventaja mínima hasta el final</div></div>
-          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">Quimsa 91 — IDSC 82</div><div class="sim-sc-desc">El ataque de Quimsa domina desde el Q1. IDSC repite el patrón de arranque lento y el déficit es insalvable</div></div>
+          <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Proyección Pre</div><div class="sim-sc-score">IDSC 88 — Quimsa 84</div><div class="sim-sc-desc">No se cumplió — Quimsa ganó en OT</div></div>
+          <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Resultado Real</div><div class="sim-sc-score">IDSC 102 — Quimsa 110 OT</div><div class="sim-sc-desc">Q1 −12, Q2 +19 histórico, empate 93–93, OT −8. Derrota épica.</div></div>
+          <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Fase Regular</div><div class="sim-sc-score">20V – 16D · 9° Puesto</div><div class="sim-sc-desc">Clasificado a Reclasificación Playoff. Victoria en J1 vs La Unión 102–91.</div></div>
         </div>
       </div>
     </div>
 
 
   <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- SERIE VS LA UNIÓN FSA — OCTAVOS DE FINAL (ACORDEÓN MAESTRO) -->
+  <div class="sim-card" id="sim-serie-launion" style="border-color:rgba(155,89,182,.5);background:linear-gradient(135deg,rgba(155,89,182,.07),rgba(155,89,182,.02));margin-bottom:0;">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-serie-launion')" style="background:rgba(155,89,182,.06);padding:1.2rem 1.6rem;">
+      <div style="flex:1;">
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:2px;color:#C39BD3;text-transform:uppercase;margin-bottom:.3rem;">🏆 FASE PLAYOFF — RECLASIFICACIÓN 2026 · OCTAVOS DE FINAL</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1.5px;color:#D7B4F3;line-height:1;">SERIE VS LA UNIÓN FSA.</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--white);margin-top:.15rem;">IDSC OLIVA (9°) <span style="color:#C39BD3;">VS</span> LA UNIÓN FSA. (8°) · MEJOR DE 5</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#4AE382;line-height:1;">1</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);">—</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#C39BD3;line-height:1;">0</div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:#4AE382;letter-spacing:.5px;">IDSC LIDERA · J2 HOY 26/4</div>
+      </div>
+      <div class="sim-acc-arrow" style="margin-left:.8rem;">&#9658;</div>
+    </div>
+    <div class="sim-body" style="padding:0;border-top:1px solid rgba(155,89,182,.2);">
+      <div style="width:100%;display:flex;flex-direction:column;gap:0;">
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
   <!-- DIVISOR PLAYOFF -->
-  <div style="margin:2rem 0 1.4rem;padding:1.3rem 1.8rem;background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(155,89,182,.06));border:1px solid rgba(155,89,182,.5);border-radius:16px;position:relative;overflow:hidden;">
+  <div style="margin:0;padding:1.2rem 1.6rem;background:linear-gradient(135deg,rgba(155,89,182,.12),rgba(155,89,182,.04));border-bottom:1px solid rgba(155,89,182,.3);position:relative;overflow:hidden;">
     <div style="position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:rgba(155,89,182,.1);pointer-events:none;"></div>
-    <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:2.5px;color:#C39BD3;text-transform:uppercase;margin-bottom:.35rem;">🏆 FASE PLAYOFF — RECLASIFICACIÓN 2026</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:1.5px;color:#D7B4F3;line-height:1;margin-bottom:.2rem;">CUARTOS DE FINAL</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:var(--white);margin-bottom:.7rem;">IDSC OLIVA (9°) <span style="color:#C39BD3;">VS</span> LA UNIÓN FSA. (8°)</div>
     <div style="font-size:.77rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;">Serie al mejor de 5 partidos. <strong style="color:var(--white);">J1/J2 en Formosa</strong> (La Unión local) · <strong style="color:var(--white);">J3/J4 en Oliva</strong> (IDSC local) · <strong style="color:var(--white);">J5 en Formosa</strong> si es necesario.</div>
 
     <!-- Tracker de serie -->
@@ -2379,8 +2390,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;letter-spacing:1px;white-space:nowrap;">SERIE ACTUAL:</div>
       <div style="display:flex;align-items:center;gap:.5rem;">
         <div style="display:flex;flex-direction:column;align-items:center;gap:.1rem;">
-          <div style="width:36px;height:36px;background:rgba(245,166,35,.12);border:1.5px solid rgba(245,166,35,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--gold);">0</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.48rem;color:var(--muted);">IDSC</div>
+          <div style="width:36px;height:36px;background:rgba(46,204,113,.2);border:1.5px solid rgba(46,204,113,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:#4AE382;">1</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.48rem;color:#4AE382;">IDSC</div>
         </div>
         <div style="font-family:'DM Mono',monospace;font-size:.9rem;color:var(--muted);">—</div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:.1rem;">
@@ -2388,18 +2399,18 @@ document.addEventListener('DOMContentLoaded', function() {
           <div style="font-family:'DM Mono',monospace;font-size:.48rem;color:var(--muted);">LA UNIÓN</div>
         </div>
       </div>
-      <div style="font-family:'DM Mono',monospace;font-size:.57rem;padding:.22rem .6rem;background:rgba(52,152,219,.15);border:1px solid rgba(52,152,219,.3);border-radius:6px;color:#5B9BF0;letter-spacing:.5px;">● SERIE PRÓXIMA A INICIARSE</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.57rem;padding:.22rem .6rem;background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.4);border-radius:6px;color:#4AE382;letter-spacing:.5px;">● IDSC LIDERA · G1 ✓ 102–91 · J2 HOY 26/4</div>
     </div>
 
     <!-- Chips de juegos -->
     <div style="display:flex;gap:.45rem;flex-wrap:wrap;">
       <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
-        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(155,89,182,.18);border:1.5px solid rgba(155,89,182,.55);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:#C39BD3;min-width:36px;text-align:center;">G1</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:#C39BD3;">24/4 ✈️</div>
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(46,204,113,.2);border:1.5px solid rgba(46,204,113,.6);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:#4AE382;min-width:36px;text-align:center;">G1</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:#4AE382;">✓ 102–91</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
-        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(155,89,182,.1);border:1.5px solid rgba(155,89,182,.3);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G2</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--muted);">26/4 ✈️</div>
+        <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(245,166,35,.2);border:1.5px solid rgba(245,166,35,.6);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--gold);min-width:36px;text-align:center;">G2</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.47rem;color:var(--gold);">⚡ 26/4 ✈️</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">
         <div style="padding:.3rem .6rem;border-radius:8px;background:rgba(122,143,166,.08);border:1.5px solid rgba(122,143,166,.2);font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--muted);min-width:36px;text-align:center;">G3</div>
@@ -2446,159 +2457,132 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <!-- ══════════ JUEGO 1 — 24/4 VISITANTE FORMOSA ══════════ -->
-  <div class="sim-card" id="sim-po-g1" style="border-color:rgba(155,89,182,.5);background:linear-gradient(135deg,rgba(155,89,182,.07),rgba(155,89,182,.02));">
-    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g1')" style="background:rgba(155,89,182,.04);">
+  <div class="sim-card jugado acerto" id="sim-po-g1">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g1')">
       <div class="sim-acc-rival">
-        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:#C39BD3;letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G1 · ✈️ VISITANTE</span>
-        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">24 ABR · Formosa · ⚡ PRÓXIMO</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:#4AE382;letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G1 · ✈️ VISITANTE · ✓ JUGADO</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">24 ABR · Formosa</span>
       </div>
-      <div class="sim-acc-score"><span class="rival-pts">83</span><span class="sep">—</span><span class="idsc-pts">79</span></div>
-      <div class="sim-acc-pct" style="color:#C39BD3;font-size:.62rem;">PROY. BASE</div>
+      <div class="sim-acc-score"><span class="rival-pts">91</span><span class="sep">—</span><span class="idsc-pts">102</span></div>
+      <div class="sim-acc-pct" style="color:#2ecc71;font-size:.62rem;">¡VICTORIA! ↯ sorpresa</div>
       <div class="sim-acc-badges">
-        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.2);color:#C39BD3;border:1px solid rgba(155,89,182,.35);">🏆 PLAYOFF</span>
-        <span class="badge badge-next" style="font-size:.58rem;">⚡ JUEGO DE HOY</span>
+        <span class="badge badge-win" style="font-size:.58rem;">✓ Victoria visitante</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:#e07070;">proj: La Unión 83–79 · sorpresa enorme</span>
       </div>
       <div class="sim-acc-arrow">&#9658;</div>
     </div>
     <div class="sim-body">
-      <div class="sim-date" style="margin-bottom:.8rem;">24 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:#C39BD3;">G1 — CUARTOS DE FINAL · LA UNIÓN LOCAL</strong></span></div>
+      <div class="sim-date" style="margin-bottom:.8rem;">24 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:#2ecc71;">G1 — ✓ VICTORIA HISTÓRICA EN FORMOSA</strong></span></div>
 
       <div class="sim-rivals" style="margin-bottom:1rem;">
         <div class="sim-team sim-rival-team">
-          <div class="sim-team-name" style="color:#C39BD3;">LA UNIÓN FSA.</div>
+          <div class="sim-team-name">LA UNIÓN FSA.</div>
           <div class="sim-team-role">LOCAL · SEMBRADO 8°</div>
         </div>
         <div class="sim-score-block">
-          <div style="text-align:center;">
-            <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.4rem;">PROYECCIÓN BASE</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#9B59B6;">83</span>
-            <span style="color:var(--muted);margin:0 .4rem;font-size:1.1rem;">—</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);">79</span>
+          <div style="text-align:center;margin-bottom:.3rem;">
+            <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.2rem;">PROYECCIÓN</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#9B59B6;">83</span>
+            <span style="color:var(--muted);margin:0 .3rem;">—</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--muted);">79</span>
           </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:.57rem;color:#e74c3c;margin-top:.3rem;letter-spacing:.5px;">LA UNIÓN FAVORITA · 61.2%</div>
+          <div style="text-align:center;border-top:1px solid var(--border);padding-top:.4rem;">
+            <span style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);display:block;margin-bottom:.2rem;">resultado real</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#e74c3c;">91</span>
+            <span style="color:var(--muted);margin:0 .3rem;">—</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);">102</span>
+          </div>
         </div>
         <div class="sim-team sim-idsc-team">
-          <div class="sim-team-name">IDSC OLIVA</div>
+          <div class="sim-team-name" style="color:var(--gold)">IDSC OLIVA</div>
           <div class="sim-team-role">VISITANTE · SEMBRADO 9°</div>
         </div>
       </div>
 
-      <div class="sim-prob-bar-wrap" style="margin-bottom:1.2rem;">
-        <div class="sim-prob-label-l" style="color:#9B59B6;">LA UNIÓN · 61.2%</div>
-        <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:61.2%;background:linear-gradient(90deg,rgba(155,89,182,.55),rgba(155,89,182,.2));"></div></div>
-        <div class="sim-prob-label-r" style="color:var(--gold);">IDSC · 38.8%</div>
-      </div>
-
-      <!-- Cuartos proyectados -->
+      <!-- Parciales reales -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;">
-        <div style="background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.2);border-radius:10px;padding:.7rem;text-align:center;">
+        <div style="background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.25);border-radius:10px;padding:.7rem;text-align:center;">
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q1</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#e74c3c;line-height:1">23</div>
-          <div style="font-size:.68rem;color:var(--muted)">IDSC 18</div>
-          <div style="font-size:.62rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−5 proj.</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#2ecc71;line-height:1">31</div>
+          <div style="font-size:.68rem;color:var(--muted)">vs 21</div>
+          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+10 IDSC</div>
         </div>
-        <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
+        <div style="background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.25);border-radius:10px;padding:.7rem;text-align:center;">
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q2</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">20</div>
-          <div style="font-size:.68rem;color:var(--muted)">IDSC 21</div>
-          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+1 proj.</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#2ecc71;line-height:1">23</div>
+          <div style="font-size:.68rem;color:var(--muted)">vs 20</div>
+          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+3 IDSC</div>
+        </div>
+        <div style="background:rgba(238,242,247,.04);border:1px solid var(--border);border-radius:10px;padding:.7rem;text-align:center;">
+          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q3</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--muted);line-height:1">27</div>
+          <div style="font-size:.68rem;color:var(--muted)">vs 27</div>
+          <div style="font-size:.62rem;font-weight:700;color:var(--muted);margin-top:.2rem">0</div>
         </div>
         <div style="background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.2);border-radius:10px;padding:.7rem;text-align:center;">
-          <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q3</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#e74c3c;line-height:1">22</div>
-          <div style="font-size:.68rem;color:var(--muted)">IDSC 20</div>
-          <div style="font-size:.62rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−2 proj.</div>
-        </div>
-        <div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:.7rem;text-align:center;">
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);margin-bottom:.25rem">Q4</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">18</div>
-          <div style="font-size:.68rem;color:var(--muted)">IDSC 20</div>
-          <div style="font-size:.62rem;font-weight:700;color:#2ecc71;margin-top:.2rem">+2 proj.</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#e74c3c;line-height:1">21</div>
+          <div style="font-size:.68rem;color:var(--muted)">vs 23</div>
+          <div style="font-size:.62rem;font-weight:700;color:#e74c3c;margin-top:.2rem">−2 IDSC</div>
         </div>
       </div>
 
-      <!-- Contexto playoff + antecedente visitante -->
-      <div style="background:linear-gradient(135deg,rgba(231,76,60,.09),rgba(231,76,60,.03));border:1px solid rgba(231,76,60,.22);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">⚠️ ANTECEDENTE DIRECTO EN FORMOSA</div>
-        <div style="font-size:.77rem;color:var(--muted);line-height:1.65;">El 18/03/2026, IDSC jugó en el Cincuentenario y perdió <strong style="color:var(--white);">91–103</strong>. La Unión dominó con una diferencia de 12 puntos, aprovechando el factor local. En playoff, el ambiente se intensifica — las tribunas del Cincuentenario serán aún más hostiles. Sin embargo, IDSC llega con mejor estado de forma que en marzo: ganó 2 de sus últimos 3 partidos cerrando la fase regular.</div>
-      </div>
-
-      <!-- Claves La Unión -->
-      <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.7rem;">🔑 CLAVES DE LA UNIÓN FSA. — TEMPORADA REGULAR</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;font-size:.72rem;color:var(--muted);">
-          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">⚡ <strong style="color:var(--white);">Pablo Elsener</strong> — máximo anotador, motor del ataque exterior. Noche de playoffs = nivel elevado.</div>
-          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">🎯 <strong style="color:var(--white);">T3 peligroso</strong> — La Unión lanza muchos triples. En su mejor noche, conectó al 44%. Cerrar perímetro es vital.</div>
-          <div style="padding:.35rem .5rem;background:rgba(231,76,60,.05);border-radius:6px;">🏠 <strong style="color:var(--white);">Fuerte de local</strong> — 20-16 en temporada, con la mayoría de victorias en casa. Cincuentenario es fortaleza.</div>
-          <div style="padding:.35rem .5rem;background:rgba(46,204,113,.05);border-radius:6px;">📉 <strong style="color:var(--white);">Visitante más débil</strong> — De visitante, La Unión baja su efectividad notoriamente. Clave para los J3/J4.</div>
-        </div>
-      </div>
-
-      <!-- Contexto serie -->
-      <div style="background:linear-gradient(135deg,rgba(155,89,182,.1),rgba(155,89,182,.03));border:1px solid rgba(155,89,182,.3);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#C39BD3;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;">🏆 LECTURA TÁCTICA DE SERIE — JUEGO 1</div>
-        <div style="font-size:.77rem;color:var(--muted);line-height:1.65;">Los dos primeros juegos son en Formosa, lo que pone a IDSC en situación de visitante desde el arranque. La clave de esta serie <strong style="color:var(--white);">no es ganar en Formosa</strong> (aunque sería enorme), sino <strong style="color:var(--white);">no caer 0–2</strong>. Ir a Oliva 1–1 o incluso 0–1 con buena imagen es un resultado útil. Perder los dos primeros en el Cincuentenario pondría la serie casi perdida.</div>
-        <div style="display:flex;gap:.4rem;margin-top:.7rem;flex-wrap:wrap;">
-          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);border-radius:5px;color:#2ecc71;">✓ Ganar G1 → Serie 1–0 · IDSC toma el mando</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);border-radius:5px;color:var(--gold);">↔ Perder G1 cerca → Serie 0–1 · Todavía abierta</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.58rem;padding:.25rem .55rem;background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:5px;color:#e74c3c;">✗ Perder G1 lejos → Serie 0–1 · Urgencia en G2</div>
-        </div>
+      <div class="sim-prob-bar-wrap" style="margin-bottom:1rem;">
+        <div class="sim-prob-label-l" style="color:#9B59B6;">LA UNIÓN PROY. 61.2% · No se cumplió</div>
+        <div class="sim-prob-bar"><div class="sim-prob-fill-rival" style="width:61.2%;background:linear-gradient(90deg,rgba(155,89,182,.55),rgba(155,89,182,.2));"></div></div>
+        <div class="sim-prob-label-r" style="color:#2ecc71;">IDSC ¡GANÓ! 🏆</div>
       </div>
 
       <div class="sim-factors">
-        <div class="sim-factor-title">Factores clave — Juego 1 en Formosa</div>
-        <div class="sim-factor sim-factor-neg">➖ <strong>Visitante en el Cincuentenario:</strong> En temporada regular, IDSC perdió allí 91–103. El ambiente en playoffs es más intenso. La Unión es local en los dos primeros juegos.</div>
-        <div class="sim-factor sim-factor-neg">➖ <strong>Elsener en modo playoff:</strong> Pablo Elsener es la pieza más peligrosa de La Unión. Los jugadores de alto nivel suelen elevar su rendimiento en instancias eliminatorias. Se requiere plan específico para contenerlo.</div>
-        <div class="sim-factor sim-factor-neg">➖ <strong>La Unión mejor sembrada:</strong> Terminaron 8° frente a 9° de IDSC, con idéntico balance 20V-16D. Estadísticamente, el sembrado superior tiene ligera ventaja en el inicio de serie.</div>
-        <div class="sim-factor sim-factor-pos">➕ <strong>Mejor forma reciente de IDSC:</strong> Cierre de temporada con 2 victorias en los últimos 3 partidos, incluyendo una visitante en Obras Basket (77–73). El equipo llega con confianza.</div>
-        <div class="sim-factor sim-factor-pos">➕ <strong>Experiencia táctica acumulada:</strong> IDSC ya jugó en el Cincuentenario en marzo. Conoce el ambiente, las rotaciones de La Unión y sus tendencias ofensivas.</div>
-        <div class="sim-factor sim-factor-neu">ℹ️ <strong>Objetivo estratégico de serie:</strong> No caer 0–2. Llegar a Oliva con la serie 1–1 o incluso 0–1 con imagen competitiva es el escenario viable. Los J3/J4 en El Gigante son el corazón de la serie.</div>
+        <div class="sim-factor-title">Análisis post-partido — G1</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Q1 dominado +10 (31–21):</strong> IDSC arrancó con la intensidad máxima de un partido de playoff. Ganó el primer cuarto en Formosa — algo que no había logrado en el partido de temporada regular en este cancha (13–25 vs Quimsa, 21–31 contexto anterior). El arranque fue la clave de la victoria.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Q2 también ganado +3 (23–20):</strong> IDSC llegó al descanso con una ventaja construida sobre trabajo sólido en los dos primeros cuartos. No hubo margen para que La Unión se recuperara en la primera mitad.</div>
+        <div class="sim-factor sim-factor-neu">ℹ️ <strong>Q3 empatado (27–27):</strong> La Unión reaccionó en su cancha en el segundo tiempo, pero IDSC mantuvo la ventaja. Empatar el Q3 de visitante en playoff es un resultado positivo.</div>
+        <div class="sim-factor sim-factor-neg">➖ <strong>Q4 cedido −2 (21–23):</strong> La Unión acortó en el cierre pero el margen construido fue más que suficiente. IDSC cerró el partido 102–91 — victoria por 11 puntos como visitante.</div>
+        <div class="sim-factor sim-factor-pos">➕ <strong>Modelo superado:</strong> El modelo proyectaba La Unión favorita 61.2% (La Unión 83 – IDSC 79). IDSC ganó ampliamente — demostración de que los modelos estadísticos no capturan la motivación y el nivel defensivo del equipo en playoff.</div>
       </div>
-
       <div class="sim-note">
-        <strong>Contexto Juego 1:</strong> Arranca el playoff. IDSC Oliva (9°) visita a La Unión FSA. (8°) en el Estado Cincuentenario de Formosa. Es el primer partido de una serie al mejor de 5 donde los dos primeros juegos son en Formosa. El balance de la temporada regular fue 1-1 con IDSC ganando de local 91–87 y perdiendo de visitante 91–103. La Unión tiene a Pablo Elsener como referente ofensivo y un sistema de triples que puede ser explosivo. El modelo proyecta una victoria de La Unión por factor cancha y antecedente reciente, pero IDSC tiene real chance de robar el G1 si contiene a Elsener y mantiene el partido dentro de los 10 pts en el tercer cuarto.
+        <strong>Análisis post-partido:</strong> Victoria histórica de visitante. IDSC venció a La Unión FSA. 102–91 en el Estado Cincuentenario de Formosa en el Juego 1 de la Reclasificación. IDSC lidera la serie 1–0. El equipo que ganó el G1 en LNB avanzó el 71% de las veces. J2 también en Formosa el 26/4 — IDSC tiene la oportunidad de cerrar la serie lejos de casa o al menos ir a Oliva con ventaja 2–0.
       </div>
-
       <div class="sim-scenarios">
-        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Escenario Óptimo</div><div class="sim-sc-score">IDSC 86 — La Unión 81</div><div class="sim-sc-desc">IDSC roba el G1 en Formosa. Elsener contenido, triples de La Unión bajos. IDSC toma el mando 1–0 en la serie.</div></div>
-        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Proyección Base</div><div class="sim-sc-score">La Unión 83 — IDSC 79</div><div class="sim-sc-desc">La Unión gana de local pero por margen ajustado. IDSC compite hasta el final. Serie 0–1, G2 decisivo.</div></div>
-        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Escenario Pesimista</div><div class="sim-sc-score">La Unión 98 — IDSC 78</div><div class="sim-sc-desc">Elsener explota (30+ pts), triples de La Unión caen bien. IDSC no puede competir el ritmo. Serie 0–1 con imagen negativa.</div></div>
+        <div class="sim-scenario sim-sc-opt"><div class="sim-sc-label">Proyección Pre-partido</div><div class="sim-sc-score">La Unión 83 — IDSC 79</div><div class="sim-sc-desc">No se cumplió — IDSC ganó ampliamente como visitante</div></div>
+        <div class="sim-scenario sim-sc-base"><div class="sim-sc-label">Resultado Real</div><div class="sim-sc-score">La Unión 91 — IDSC 102</div><div class="sim-sc-desc">Q1 +10, Q2 +3, Q3 0, Q4 −2. Serie 1–0 IDSC. Victoria histórica en Formosa.</div></div>
+        <div class="sim-scenario sim-sc-pes"><div class="sim-sc-label">Estado Serie</div><div class="sim-sc-score">IDSC 1 — La Unión 0</div><div class="sim-sc-desc">J2 en Formosa 26/4. Ganar = 2–0 y serie casi cerrada. Perder = 1–1 y serie equilibrada.</div></div>
       </div>
     </div>
   </div>
-
   <!-- ══════════ JUEGO 2 — 26/4 VISITANTE FORMOSA ══════════ -->
-  <div class="sim-card" id="sim-po-g2" style="border-color:rgba(122,143,166,.2);opacity:.88;">
-    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g2')">
+  <div class="sim-card" id="sim-po-g2" style="border-color:rgba(245,166,35,.5);background:linear-gradient(135deg,rgba(245,166,35,.04),rgba(245,166,35,.01));">
+    <div class="sim-accordion-header" onclick="toggleSim('sim-po-g2')" style="background:rgba(245,166,35,.03);">
       <div class="sim-acc-rival">
-        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G2 · ✈️ VISITANTE</span>
-        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">26 ABR · Formosa · Pendiente G1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--gold);letter-spacing:1px;display:block;line-height:1.2;">🏆 RECLASIFICACIÓN · G2 · ✈️ VISITANTE · IDSC LIDERA SERIE 1–0</span>
+        LA UNIÓN FSA. <span style="font-size:.63rem;color:var(--muted);font-family:'DM Mono',monospace;">26 ABR · Formosa · ⚡ PRÓXIMO</span>
       </div>
-      <div class="sim-acc-score"><span class="rival-pts" style="color:var(--muted)">?</span><span class="sep">—</span><span class="idsc-pts" style="color:var(--muted)">?</span></div>
-      <div class="sim-acc-pct" style="color:var(--muted);font-size:.62rem;">PENDIENTE</div>
+      <div class="sim-acc-score"><span class="idsc-pts">80</span><span class="sep">—</span><span class="rival-pts">77</span></div>
+      <div class="sim-acc-pct" style="color:var(--gold);font-size:.62rem;">PROY. IDSC 1–0</div>
       <div class="sim-acc-badges">
-        <span class="badge" style="font-size:.57rem;background:rgba(155,89,182,.12);color:#C39BD3;border:1px solid rgba(155,89,182,.22);">🏆 PLAYOFF</span>
-        <span class="badge" style="font-size:.58rem;background:rgba(122,143,166,.1);color:var(--muted);border:1px solid rgba(122,143,166,.15);">✈️ Formosa</span>
+        <span class="badge" style="font-size:.57rem;background:rgba(245,166,35,.2);color:var(--gold);border:1px solid rgba(245,166,35,.35);">🏆 PLAYOFF · G2</span>
+        <span class="badge badge-next" style="font-size:.58rem;">⚡ JUEGO MAÑANA</span>
       </div>
       <div class="sim-acc-arrow">&#9658;</div>
     </div>
     <div class="sim-body">
-      <div class="sim-date" style="margin-bottom:.8rem;">26 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:var(--muted);">G2 — ÚLTIMO JUEGO EN FORMOSA</strong></span></div>
+      <div class="sim-date" style="margin-bottom:.8rem;">26 ABR 2026 · Estado Cincuentenario · Formosa · <span class="sim-cond">✈️ Visitante · <strong style="color:var(--gold);">G2 — IDSC VIENE CON SERIE 1–0</strong></span></div>
 
-      <div style="background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:1px;margin-bottom:.6rem;text-transform:uppercase;">🔒 PROYECCIÓN CONDICIONAL — DEPENDE DE G1</div>
+      <div style="background:linear-gradient(135deg,rgba(46,204,113,.1),rgba(46,204,113,.03));border:1px solid rgba(46,204,113,.3);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:#2ecc71;letter-spacing:1px;margin-bottom:.6rem;text-transform:uppercase;">✓ IDSC GANÓ G1 — SERIE 1–0 · OPORTUNIDAD DE ORO</div>
         <div style="display:flex;flex-direction:column;gap:.38rem;">
-          <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(46,204,113,.06);border-left:2px solid #2ecc71;border-radius:0 6px 6px 0;">
-            <strong style="color:#2ecc71;">Si IDSC gana G1 (1–0):</strong> <span style="color:var(--muted);">G2 = oportunidad de ir a Oliva 2–0. La Unión en modo urgencia en su propia cancha. IDSC proyectado 80–77.</span>
+          <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(155,89,182,.07);border-left:2px solid #9b59b6;border-radius:0 6px 6px 0;">
+            <strong style="color:#C39BD3;">Si IDSC gana G2 (2–0):</strong> <span style="color:var(--muted);">Serie prácticamente cerrada. Ir a Oliva 2–0 con J3 en El Gigante para cerrar. Histórico si se logra.</span>
           </div>
           <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(245,166,35,.06);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;">
-            <strong style="color:var(--gold);">Si serie va 0–1:</strong> <span style="color:var(--muted);">G2 = partido crítico para IDSC. Perder = 0–2, serie casi perdida. Ganar = ir a Oliva 1–1. La Unión favorita 64%.</span>
+            <strong style="color:var(--gold);">Si IDSC pierde G2 (1–1):</strong> <span style="color:var(--muted);">Serie equilibrada. J3 y J4 en El Gigante — IDSC recupera ventaja de cancha. Escenario manejable.</span>
           </div>
           <div style="font-size:.73rem;padding:.35rem .55rem;background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;border-radius:0 6px 6px 0;">
-            <strong style="color:#e74c3c;">Si IDSC cae 0–2:</strong> <span style="color:var(--muted);">Serie en situación crítica. Los J3/J4 en Oliva se vuelven obligatorios. IDSC ha remontado esta temporada antes.</span>
+            <strong style="color:#e74c3c;">Proyección G2:</strong> <span style="color:var(--muted);">La Unión reaccionará en casa tras caer en G1. El equipo que pierde G1 en LNB ganó G2 el 62% de las veces. IDSC debe estar preparado para el rebote.</span>
           </div>
         </div>
-        <div style="margin-top:.7rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);">ℹ️ En los últimos 3 años de LNB, el equipo que ganó G1 ganó la serie el 71% de las veces. El G2 es el partido más importante de la serie.</div>
+        <div style="margin-top:.7rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);">ℹ️ El equipo que ganó G1 en LNB avanzó la serie el 71% de las veces. IDSC está en posición privilegiada.</div>
       </div>
 
       <div class="sim-factors">
@@ -2736,6 +2720,11 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
+      </div>
+    </div>
+  </div>
+
+
   </div>
 </div>
 
@@ -2755,6 +2744,9 @@ document.addEventListener('DOMContentLoaded', function() {
 .sim-acc-arrow{color:var(--muted);font-size:.75rem;transition:transform .3s;flex-shrink:0;}
 .sim-card.is-open .sim-acc-arrow{transform:rotate(90deg);}
 .sim-card.is-open .sim-body{display:flex!important;flex-direction:column;gap:1rem;}
+.sim-card.is-open > .sim-body > div {display:flex;flex-direction:column;gap:0;}
+#sim-serie-launion.is-open > .sim-body{display:block!important;padding:0;}
+#sim-serie-launion.is-open > .sim-body > div{display:block;}
 .sim-body{display:none;border-top:1px solid var(--border);padding:1.2rem 1.4rem;flex-direction:column;gap:1rem;}
 
 .sim-date{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);margin-bottom:.9rem;}
@@ -2899,9 +2891,9 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="lv-card lv-card-visit">
         <div class="lv-icon">✈️</div>
-        <div class="lv-label">Como Visitante · 17 partidos</div>
-        <div class="lv-pct lv-pct-visit">47.1%</div>
-        <div class="lv-pct-sub">8 victorias · 9 derrotas</div>
+        <div class="lv-label">Como Visitante · 18 partidos</div>
+        <div class="lv-pct lv-pct-visit">50.0%</div>
+        <div class="lv-pct-sub">9 victorias · 9 derrotas</div>
         <div class="lv-stats-row">
           <div class="lv-stat"><div class="lv-stat-num">84.2</div><div class="lv-stat-lbl">Pts/pp</div></div>
           <div class="lv-stat"><div class="lv-stat-num">82.4</div><div class="lv-stat-lbl">Recibidos</div></div>
@@ -2937,7 +2929,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </table>
     </div>
 
-    <div class="section-title" style="margin-top:1.5rem"><h3>PARTIDO A PARTIDO — VISITANTE</h3><div class="section-line"></div><div class="section-count">17PJ · 8V 9D</div></div>
+    <div class="section-title" style="margin-top:1.5rem"><h3>PARTIDO A PARTIDO — VISITANTE</h3><div class="section-line"></div><div class="section-count">18PJ · 9V 9D</div></div>
     <div class="lv-table-wrap">
       <table class="lv-table">
         <thead><tr><th>Rival</th><th>Resultado</th><th>IDSC</th><th>Rival</th><th>Diferencia</th></tr></thead>
@@ -2960,13 +2952,14 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr><td>vs INSTITUTO</td><td style="color:#e74c3c">✗ Derrota</td><td>78</td><td>89</td><td class="lv-diff-neg">−11</td></tr>
           <tr style="background:rgba(46,204,113,.05);border-left:2px solid #2ecc71;"><td>vs BOCA</td><td style="color:#e74c3c">✗ Derrota</td><td>86</td><td>92</td><td class="lv-diff-neg">−6</td></tr>
           <tr style="background:rgba(46,204,113,.08);border-left:2px solid #2ecc71;"><td><strong>vs OBRAS ⭐</strong></td><td style="color:#2ecc71"><strong>✓ Victoria</strong></td><td><strong>77</strong></td><td><strong>73</strong></td><td class="lv-diff-pos"><strong>+4</strong></td></tr>
+          <tr style="background:rgba(46,204,113,.08);border-left:3px solid #2ecc71;"><td><strong>vs LA UNIÓN FSA. 🏆 PO J1</strong></td><td style="color:#2ecc71"><strong>✓ Victoria</strong></td><td><strong>102</strong></td><td><strong>91</strong></td><td class="lv-diff-pos"><strong>+11</strong></td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="section-title" style="margin-top:1.5rem"><h3>INSIGHTS</h3><div class="section-line"></div></div>
     <div class="lv-insight"><strong>🏠 De local: 63.2% · 19 partidos (12V 7D).</strong> La fase regular cerró con derrota vs Quimsa 102–110 OT — 7ª derrota local. El Gigante fue fortaleza, pero Quimsa (1°) fue superior incluso de visitante. Promedio ofensivo local: 88.4 pts/pp.</div>
-    <div class="lv-insight"><strong>✈️ De visitante: 47.1% · 17 partidos (8V 9D).</strong> La temporada cerró con 8V 9D fuera de casa. La victoria vs Obras (77–73) fue el mejor cierre posible. Para el playoff, J1 y J2 son visitante en Formosa.</div>
+    <div class="lv-insight"><strong>✈️ De visitante: 50.0% · 18 partidos (9V 9D).</strong> El playoff abrió con una gran victoria de visitante en Formosa (102–91). IDSC ganó el J1 en el Cincuentenario — un resultado histórico que pone a la serie 1–0 a favor. J2 también en Formosa: IDSC tiene la oportunidad de cerrar la serie lejos de casa.</div>
     <div class="lv-insight"><strong>⚡ Último partido vs Quimsa — Derrota en OT (102–110).</strong> Q2 histórico (+19, el mejor de la temporada), pero Q1 catastrófico (−12) y OT dominado por Quimsa. El equipo llegó a empatar 93–93 — mérito enorme vs el 1° de la tabla. Derrota que no opaca la temporada.</div>
     <div class="lv-insight"><strong>📊 Patrón para el playoff:</strong> 63.2% local vs 47.1% visitante. En la Reclasificación, J1 y J2 son visitante en Formosa (desafío), J3 y J4 en El Gigante (ventaja clave). El historial muestra que IDSC es significativamente mejor de local.</div>
   </div>
@@ -2980,35 +2973,35 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="section">
 
-    <div class="section-title"><h3>PROMEDIOS POR CUARTO</h3><div class="section-line"></div><div class="section-count">14 partidos · P23–P36</div></div>
+    <div class="section-title"><h3>PROMEDIOS POR CUARTO</h3><div class="section-line"></div><div class="section-count">15 partidos · P23–P36 + PO J1</div></div>
     <div class="qt-grid">
       <div class="qt-card qt-card-q1">
         <div class="qt-q-label">1° Cuarto</div>
-        <div class="qt-pts">21.2</div>
-        <div class="qt-pts-rival">vs 24.3 rival</div>
-        <div class="qt-diff qt-diff-neg">−3.1 promedio</div>
-        <div class="qt-win-pct">Ganó 4/14 (29%)</div>
-      </div>
-      <div class="qt-card">
-        <div class="qt-q-label">2° Cuarto</div>
-        <div class="qt-pts">23.5</div>
-        <div class="qt-pts-rival">vs 21.0 rival</div>
-        <div class="qt-diff qt-diff-pos">+2.5 promedio</div>
-        <div class="qt-win-pct">Ganó 5/14 (36%)</div>
+        <div class="qt-pts">21.9</div>
+        <div class="qt-pts-rival">vs 24.1 rival</div>
+        <div class="qt-diff qt-diff-neg">−2.1 promedio</div>
+        <div class="qt-win-pct">Ganó 5/15 (33%)</div>
       </div>
       <div class="qt-card qt-card-q3">
-        <div class="qt-q-label">3° Cuarto ⭐</div>
-        <div class="qt-pts" style="color:#5DD68A">22.9</div>
-        <div class="qt-pts-rival">vs 21.1 rival</div>
-        <div class="qt-diff qt-diff-pos">+1.8 promedio</div>
-        <div class="qt-win-pct" style="color:#5DD68A">Ganó 6/14 (43%)</div>
+        <div class="qt-q-label">2° Cuarto ⭐</div>
+        <div class="qt-pts" style="color:#5DD68A">23.5</div>
+        <div class="qt-pts-rival">vs 20.9 rival</div>
+        <div class="qt-diff qt-diff-pos">+2.6 promedio</div>
+        <div class="qt-win-pct" style="color:#5DD68A">Ganó 6/15 (40%)</div>
+      </div>
+      <div class="qt-card">
+        <div class="qt-q-label">3° Cuarto</div>
+        <div class="qt-pts">23.2</div>
+        <div class="qt-pts-rival">vs 21.5 rival</div>
+        <div class="qt-diff qt-diff-pos">+1.7 promedio</div>
+        <div class="qt-win-pct">Ganó 6/15 (40%)</div>
       </div>
       <div class="qt-card">
         <div class="qt-q-label">4° Cuarto</div>
-        <div class="qt-pts">21.8</div>
+        <div class="qt-pts">21.7</div>
         <div class="qt-pts-rival">vs 23.1 rival</div>
         <div class="qt-diff qt-diff-neg">−1.3 promedio</div>
-        <div class="qt-win-pct">Ganó 5/14 (36%)</div>
+        <div class="qt-win-pct">Ganó 5/15 (33%)</div>
       </div>
     </div>
 
@@ -3170,6 +3163,14 @@ document.addEventListener('DOMContentLoaded', function() {
             <td class="qt-win-cell">19–17</td>
             <td style="color:#2ecc71;font-weight:600;">77–73</td>
           </tr>
+          <tr style="background:rgba(46,204,113,.08);border-left:2px solid #2ecc71;">
+            <td><strong>vs LA UNIÓN 🏆 PO J1 ✈️ V</strong></td>
+            <td class="qt-win-cell"><strong>31–21</strong></td>
+            <td class="qt-win-cell"><strong>23–20</strong></td>
+            <td class="qt-neu-cell"><strong>27–27</strong></td>
+            <td class="qt-los-cell"><strong>21–23</strong></td>
+            <td style="color:#2ecc71;font-weight:600;">102–91</td>
+          </tr>
           <tr style="background:rgba(231,76,60,.06);border-left:2px solid #e74c3c;">
             <td><strong>vs QUIMSA 🏠 D (OT) ⭐</strong></td>
             <td class="qt-los-cell"><strong>13–25</strong></td>
@@ -3183,10 +3184,10 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div class="section-title" style="margin-top:1.5rem"><h3>INSIGHTS</h3><div class="section-line"></div></div>
-    <div class="lv-insight" style="border-left-color:#e74c3c"><strong>🔴 Q1 empeoró ligeramente: −3.1 pts, 4/14 (29%).</strong> Vs Quimsa fue el peor inicio del tramo (13–25, −12). El primer cuarto sigue siendo el talón de Aquiles — arranques lentos vs rivales de nivel. Para el playoff vs La Unión es prioridad táctica arrancar bien.</div>
-    <div class="lv-insight" style="border-left-color:#2ecc71"><strong>⭐ Q2 mejoró a +2.5: 5/14 (36%).</strong> El Q2 vs Quimsa fue histórico: 31–12, el mejor parcial de un cuarto en toda la temporada. IDSC demostró que puede reaccionar de forma explosiva. Sube a la segunda posición como cuarto más ganador.</div>
-    <div class="lv-insight" style="border-left-color:#5DD68A"><strong>🟢 Q3 sigue siendo el mejor: +1.8 promedio, 6/14 (43%).</strong> Mantiene el diferencial positivo más alto. Vs Quimsa fue negativo (21–26) pero sigue siendo el cuarto más ganado en el global de la temporada. La reacción del descanso continúa siendo la marca del equipo.</div>
-    <div class="lv-insight" style="border-left-color:#F5A623"><strong>⚠️ Q4 neutro: −1.3 promedio, 5/14 (36%).</strong> Vs Quimsa el Q4 fue −2 (28–30), llegando al empate 93–93 pero sin poder cerrar. El patrón del Q4 es irregular — en partidos de alto nivel IDSC cede los cierres. Para el playoff, el manejo del Q4 será determinante.</div>
+    <div class="lv-insight" style="border-left-color:#e74c3c"><strong>🔴 Q1 mejoró: −2.1 pts, 5/15 (33%).</strong> Vs La Unión IDSC ganó el Q1 (31–21, +10) — una gran señal para el playoff. En 2 de los últimos 3 partidos IDSC ganó el primer cuarto. Hay que mantener ese nivel de arranque en J2.</div>
+    <div class="lv-insight" style="border-left-color:#2ecc71"><strong>⭐ Q2 es ahora el mejor cuarto: +2.6, 6/15 (40%).</strong> Vs La Unión IDSC ganó el Q2 (23–20) y sumó otro parcial positivo. Con el histórico Q2 vs Quimsa (31–12), el segundo cuarto se consolida como el más dominante del equipo.</div>
+    <div class="lv-insight" style="border-left-color:#5DD68A"><strong>🟢 Q3 positivo: +1.7, 6/15 (40%).</strong> Vs La Unión fue empate exacto (27–27). IDSC mantiene el Q3 como cuarto competitivo. Para J2, ganar el Q3 puede ser determinante.</div>
+    <div class="lv-insight" style="border-left-color:#F5A623"><strong>⚠️ Q4 el más débil: −1.3 promedio, 5/15 (33%).</strong> La Unión ganó el Q4 de J1 (23–21). El patrón de cerrrar partidos es el área a mejorar — en los últimos 5 partidos de nivel alto IDSC cede los cierres excepto vs Obras. Clave para J2.</div>
   </div>
 </div>
 
@@ -3381,15 +3382,15 @@ document.addEventListener('DOMContentLoaded', function() {
     "MARCUCCI":   {line:"#1ABC9C", bg:"rgba(26,188,156,.12)"},
   };
 
-  const labels = ["P26\nRACING ✈️D","P27\nARGENTINO ✈️V","P28\nREGATAS 🏠V","P29\nOBERÁ ✈️D OT","P30\nINSTITUTO ✈️D","P31\nPEÑAROL 🏠D","P32\nPLATENSE 🏠D","P33\nATENAS 🏠V OT","P34\nBOCA ✈️D","P35\nOBRAS ✈️V","P36\nQUIMSA 🏠D OT"];
+  const labels = ["P26\nRACING ✈️D","P27\nARGENTINO ✈️V","P28\nREGATAS 🏠V","P29\nOBERÁ ✈️D OT","P30\nINSTITUTO ✈️D","P31\nPEÑAROL 🏠D","P32\nPLATENSE 🏠D","P33\nATENAS 🏠V OT","P34\nBOCA ✈️D","P35\nOBRAS ✈️V","P36\nQUIMSA 🏠D OT","PO J1\nLA UNIÓN ✈️V"];
 
   const data = {
-    "CAFFARO":    [13.00, 12.15, 14.60, 11.02,  7.45, 14.79,  8.82, 10.68,  9.14,  7.94,  5.62],
-    "TABAREZ":    [ 0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  4.81,  4.43,  6.69],
-    "ROLFI":      [ 8.35,  7.05,  3.50,  9.39,  6.88,  1.24,  9.87,  9.04,  6.23,  5.47,  7.09],
-    "VALLEJOS":   [ 2.59, 10.80,  9.46,  3.93,  8.45,  6.26,  0.83,  8.28,  7.42,  7.90,  8.72],
-    "FILIPPETTI": [ 6.29,  7.17, 11.69,  7.08, 11.43, 12.05, 11.97, 14.75,  8.96,  8.19,  8.43],
-    "MARCUCCI":   [10.17,  0.98, 10.94,  3.70,  3.95, 11.62, 13.52,  6.02,  3.12,  8.32,  3.41],
+    "CAFFARO":    [13.00, 12.15, 14.60, 11.02,  7.45, 14.79,  8.82, 10.68,  9.14,  7.94,  5.62,  7.20],
+    "TABAREZ":    [ 0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  4.81,  4.43,  6.69,  8.92],
+    "ROLFI":      [ 8.35,  7.05,  3.50,  9.39,  6.88,  1.24,  9.87,  9.04,  6.23,  5.47,  7.09,  7.15],
+    "VALLEJOS":   [ 2.59, 10.80,  9.46,  3.93,  8.45,  6.26,  0.83,  8.28,  7.42,  7.90,  8.72,  8.74],
+    "FILIPPETTI": [ 6.29,  7.17, 11.69,  7.08, 11.43, 12.05, 11.97, 14.75,  8.96,  8.19,  8.43,  7.82],
+    "MARCUCCI":   [10.17,  0.98, 10.94,  3.70,  3.95, 11.62, 13.52,  6.02,  3.12,  8.32,  3.41,  6.45],
   };
 
   // Build legend
