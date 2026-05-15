@@ -6677,7 +6677,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
             'X-Title': 'IDSC Dashboard'
           },
           body: JSON.stringify({
-            model: 'deepseek/deepseek-r1:free',
+            model: 'google/gemma-3-27b-it:free',
             messages: [{role:'system', content: buildSystemPrompt()}].concat(
               history.map(function(m){return {role:m.role==='model'?'assistant':m.role, content:m.content};})
             ),
