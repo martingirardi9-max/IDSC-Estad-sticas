@@ -273,10 +273,10 @@ footer em{color:var(--gold);font-style:normal;}
   <div class="nav-links">
     <button class="nav-link active" onclick="showPage('home')">Inicio</button>
     <button class="nav-link" onclick="showPage('rivales')">Rivales</button>
-    <button class="nav-link" onclick="showPage('fixture')">Fixture</button>
     <button class="nav-link" onclick="showPage('equipo')">Mi Equipo</button>
     <button class="nav-link" onclick="showPage('temporada')">Temporada</button>
     <button class="nav-link nav-link-playoff" onclick="showPage('playoff')">🏆 Playoff</button>
+    <button class="nav-link" onclick="showPage('chat')" style="background:linear-gradient(135deg,rgba(91,155,240,.15),rgba(91,155,240,.05));border-color:rgba(91,155,240,.4);color:#5B9BF0;">🤖 Asistente IA</button>
 
   </div>
   <div class="nav-season">2025 / 26</div>
@@ -290,7 +290,6 @@ footer em{color:var(--gold);font-style:normal;}
     <p>Informes de scouting, estadísticas e índices de productividad del cuerpo técnico.</p>
     <div class="hero-cards">
       <div class="hero-card" onclick="showPage('rivales')"><div class="hero-card-icon">🏀</div><div class="hero-card-label">Rivales</div><div class="hero-card-sub">35 partidos</div></div>
-      <div class="hero-card" onclick="showPage('fixture')"><div class="hero-card-icon">📅</div><div class="hero-card-label">Fixture</div><div class="hero-card-sub">Próximos partidos</div></div>
       <div class="hero-card" onclick="showPage('equipo')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Mi Equipo</div><div class="hero-card-sub">IDSC Oliva</div></div>
       <div class="hero-card" onclick="showPage('temporada')"><div class="hero-card-icon">📊</div><div class="hero-card-label">Temporada</div><div class="hero-card-sub">Estadísticas</div></div>
       <div class="hero-card hero-card-playoff" onclick="showPage('playoff')"><div class="hero-card-icon">🏆</div><div class="hero-card-label">Playoff</div><div class="hero-card-sub">Cuadro proyectado</div></div>
@@ -764,124 +763,6 @@ footer em{color:var(--gold);font-style:normal;}
   </div>
 </div>
 
-<!-- FIXTURE -->
-<div class="page" id="page-fixture">
-  <div class="page-header">
-    <div class="eyebrow">Liga Nacional 2025/26</div>
-    <h2>FIXTURE</h2>
-    <p>Fase regular finalizada. IDSC Oliva avanza al Playoff — Reclasificación previa vs La Unión FSA.</p>
-  </div>
-  <div class="section">
-    <div class="section-title"><h3>FASE REGULAR — ÚLTIMOS PARTIDOS</h3><div class="section-line"></div><div class="section-count">Finalizada · PJ 36 · 20V 16D</div></div>
-    <div class="fixture-card" style="animation-delay:.02s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">10</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> ATENAS (C)</div><div class="fixture-detail">El Gigante de la Ruta 9 · En Tiempo Extra</div></div><span class="badge badge-win">✓ Victoria 108–104 OT</span></div>
-    <div class="fixture-card" style="animation-delay:.05s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">13</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">BOCA <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Luis Conde · ✈️ Visitante</div></div><span class="badge badge-loss">✗ Derrota 92–86</span></div>
-    <div class="fixture-card" style="animation-delay:.08s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)"><div class="fixture-day-block"><div class="fixture-day">15</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">OBRAS <span class="vs">VS</span> IDSC OLIVA</div><div class="fixture-detail">Templo del Rock · ✈️ Visitante</div></div><span class="badge badge-win">✓ Victoria 77–73</span></div>
-    <div class="fixture-card" style="animation-delay:.11s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)"><div class="fixture-day-block"><div class="fixture-day">18</div><div class="fixture-month">ABR</div></div><div class="fixture-div"></div><div class="fixture-teams"><div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> QUIMSA</div><div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · Último partido fase regular</div></div><span class="badge badge-loss">✗ Derrota 102–110 OT</span></div>
-
-    <div class="section-title" style="margin-top:2rem"><h3>🏆 RECLASIFICACIÓN PLAYOFF — VS LA UNIÓN FSA (8°)</h3><div class="section-line"></div><div class="section-count">Serie al mejor de 5 · IDSC (9°) · Local J3 y J5</div></div>
-    <div class="cup-info-box" style="border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.04);">
-      <strong style="color:var(--gold);">Serie Reclasificación previa:</strong> La Unión FSA (8°) vs IDSC Oliva (9°) · Mejor de 5 partidos. El ganador accede a Cuartos de Final del Playoff. J1 y J2 en Formosa, J3 y J4 en Oliva, J5 en Formosa (*). <strong style="color:var(--gold);">* En caso de ser necesario.</strong>
-    </div>
-
-    <div class="fixture-card" style="animation-delay:.14s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">24</div><div class="fixture-month">ABR</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--gold)">JUEGO 1</strong> · <span style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.62rem;padding:.1rem .4rem;border-radius:4px;">🏆 PLAYOFF</span></div>
-      </div>
-      <span class="badge badge-win">✓ Victoria 102–91</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.17s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">26</div><div class="fixture-month">ABR</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--gold)">JUEGO 2</strong> · <span style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.62rem;padding:.1rem .4rem;border-radius:4px;">🏆 PLAYOFF</span></div>
-      </div>
-      <span class="badge badge-loss">✗ Derrota 62–86</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.20s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">30</div><div class="fixture-month">ABR</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> LA UNIÓN FSA.</div>
-        <div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · <strong style="color:var(--gold)">JUEGO 3</strong> · <span style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.62rem;padding:.1rem .4rem;border-radius:4px;">🏆 PLAYOFF</span></div>
-      </div>
-      <span class="badge badge-win">✓ Victoria 83–78</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.23s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">02</div><div class="fixture-month">MAY</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> LA UNIÓN FSA.</div>
-        <div class="fixture-detail">El Gigante de la Ruta 9 · 🏠 Local · <strong style="color:var(--gold)">JUEGO 4</strong> · <span style="background:rgba(245,166,35,.12);color:var(--gold);border:1px solid rgba(245,166,35,.25);font-size:.62rem;padding:.1rem .4rem;border-radius:4px;">🏆 PLAYOFF · CLASIFICADO</span></div>
-      </div>
-      <span class="badge badge-win">✓ Victoria 97–92</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.26s;opacity:.5">
-      <div class="fixture-day-block"><div class="fixture-day">05</div><div class="fixture-month">MAY</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">LA UNIÓN FSA. <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Estado Cincuentenario · Formosa · ✈️ Visitante · <strong style="color:var(--muted)">JUEGO 5 *</strong></div>
-      </div>
-      <span class="badge badge-pending">* No se jugó · Serie cerrada 3–1</span>
-    </div>
-
-    <div class="section-title" style="margin-top:2rem"><h3>🏆 CUARTOS DE FINAL — VS GIMNASIA CR (2°)</h3><div class="section-line"></div><div class="section-count">Al mejor de 5 · J1/J2 Comodoro · J3/J4 Oliva · *J5 Comodoro</div></div>
-    <div class="cup-info-box" style="border-color:rgba(52,152,219,.35);background:rgba(52,152,219,.05);">
-      <strong style="color:#5B9BF0;">Cuartos de Final LNB 2026:</strong> Gimnasia CR (2°) vs IDSC Oliva (9° vía reclasificación) · Al mejor de 5 partidos. J1 y J2 en Socios Fundadores, Comodoro Rivadavia (Visitante). J3 y J4 en El Gigante de la Ruta 9, Oliva (Local). *J5 en Comodoro si es necesario.
-    </div>
-
-    <div class="fixture-card" style="animation-delay:.28s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">08</div><div class="fixture-month">MAY</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">GIMNASIA CR <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Socios Fundadores · Comodoro Rivadavia · ✈️ Visitante · <strong style="color:#5B9BF0;">CUARTOS J1</strong> · Serie: 0–1</div>
-      </div>
-      <span class="badge badge-loss">✗ Derrota 66–78</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.30s;border-left:3px solid rgba(231,76,60,.5);background:rgba(231,76,60,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">10</div><div class="fixture-month">MAY</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">GIMNASIA CR <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Socios Fundadores · Comodoro Rivadavia · ✈️ Visitante · <strong style="color:#5B9BF0;">CUARTOS J2</strong> · Serie: 0–2</div>
-      </div>
-      <span class="badge badge-loss">✗ Derrota 72–77</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.32s;border-left:3px solid rgba(46,204,113,.5);background:rgba(46,204,113,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">13</div><div class="fixture-month">MAY</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> GIMNASIA CR</div>
-        <div class="fixture-detail">El Gigante de la Ruta 9 · Oliva · 🏠 Local · <strong style="color:#5B9BF0;">CUARTOS J3</strong> · Serie: 1–2</div>
-      </div>
-      <span class="badge badge-win">✓ Victoria 78–76</span>
-    </div>
-    <div class="fixture-card next" style="animation-delay:.34s;border-left:3px solid var(--gold);background:rgba(245,166,35,.03)">
-      <div class="fixture-day-block"><div class="fixture-day">J4</div><div class="fixture-month">🏠 OLV</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">IDSC OLIVA <span class="vs">VS</span> GIMNASIA CR</div>
-        <div class="fixture-detail">El Gigante de la Ruta 9 · Oliva · 🏠 Local · <strong style="color:#5B9BF0;">CUARTOS J4</strong></div>
-      </div>
-      <span class="badge" style="background:rgba(52,152,219,.15);border:1px solid rgba(52,152,219,.4);color:#5B9BF0;">⚡ Próximo · Local</span>
-    </div>
-    <div class="fixture-card" style="animation-delay:.36s;opacity:.5">
-      <div class="fixture-day-block"><div class="fixture-day">*J5</div><div class="fixture-month">✈️ CR</div></div>
-      <div class="fixture-div"></div>
-      <div class="fixture-teams">
-        <div class="fixture-match">GIMNASIA CR <span class="vs">VS</span> IDSC OLIVA</div>
-        <div class="fixture-detail">Socios Fundadores · Comodoro Rivadavia · ✈️ Visitante · <strong style="color:var(--muted)">CUARTOS J5 *</strong></div>
-      </div>
-      <span class="badge badge-pending">* Si es necesario</span>
-    </div>
-  </div>
-</div>
-
 <!-- MI EQUIPO -->
 <div class="page" id="page-equipo">
   <div class="page-header">
@@ -1136,7 +1017,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
     </div>
-    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 15/05/2026 · P36</div></div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 14/05/2026 · P36</div></div>
     <div class="standings-table">
       <div class="standings-header">
         <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
@@ -1238,7 +1119,7 @@ footer em{color:var(--gold);font-style:normal;}
             </div>
           </div>
           <div style="padding:.28rem .8rem;background:var(--navy3);">
-            <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);">J1: QUI 85–59 · J2: INS 74–80 · Serie 1–1</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);">J1: QUI 85–59 · J2: INS 74–80 · J3: QUI 78–66 · Serie 2–1</span>
           </div>
         </div>
 
@@ -1263,7 +1144,7 @@ footer em{color:var(--gold);font-style:normal;}
             </div>
           </div>
           <div style="padding:.28rem .8rem;background:var(--navy3);">
-            <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);">J1: OBE 66–70 · J2: BOC 80–102 · Serie 0–2</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);">J1: OBE 66–70 · J2: BOC 80–102 · J3: BOC 78–86 · BOCA CLASIFICA 3–0</span>
           </div>
         </div>
 
@@ -1534,12 +1415,30 @@ const RIVALS = [
   // Índice 34: CDF J5
   {name:"GIMNASIA CR — CUARTOS J5 *", sub:"Cuartos de Final LNB · Visitante · Socios Fundadores · Comodoro · *Si es necesario", status:"done", matchDate:"2026-05-20", pdfs:[]},
 ];
+
+window.IDSC_RIVALS = RIVALS;
+var SEASON_STATS = {
+  "BARRIONUEVO": {pj:42,min_t:610.6,min_pp:14.5,pts_t:202,pts_pp:4.8,tl:"13/23",tl_pct:"56%",t2:"48/80",t2_pct:"60%",t3:"31/95",t3_pct:"32%",rob_t:18,rob_pp:0.4,rdef_t:70,rdef_pp:1.7,reb_t:52,reb_pp:1.2,ast_t:69,ast_pp:1.6,tap_c:0,tap_r:3,rec_t:30,rec_pp:0.7,perd_t:35,perd_pp:0.8,fc_t:60,fc_pp:1.4,fr_t:35,fr_pp:0.8,val_t:202,val_pp:4.8},
+  "CAFFARO":     {pj:44,min_t:861.8,min_pp:19.6,pts_t:508,pts_pp:11.6,tl:"190/243",tl_pct:"78%",t2:"132/219",t2_pct:"60%",t3:"18/63",t3_pct:"28%",rob_t:89,rob_pp:2.0,rdef_t:252,rdef_pp:5.7,reb_t:163,reb_pp:3.7,ast_t:25,ast_pp:0.6,tap_c:19,tap_r:13,rec_t:28,rec_pp:0.6,perd_t:44,perd_pp:1.0,fc_t:121,fc_pp:2.8,fr_t:202,fr_pp:4.6,val_t:671,val_pp:15.2},
+  "CONRRADI":    {pj:36,min_t:859.4,min_pp:23.9,pts_t:402,pts_pp:11.2,tl:"71/88",tl_pct:"80%",t2:"107/204",t2_pct:"52%",t3:"39/133",t3_pct:"29%",rob_t:16,rob_pp:0.4,rdef_t:162,rdef_pp:4.5,reb_t:146,reb_pp:4.1,ast_t:93,ast_pp:2.6,tap_c:7,tap_r:10,rec_t:61,rec_pp:1.7,perd_t:64,perd_pp:1.8,fc_t:69,fc_pp:1.9,fr_t:95,fr_pp:2.6,val_t:469,val_pp:13.0},
+  "DUVANCED":    {pj:36,min_t:362.1,min_pp:10.1,pts_t:119,pts_pp:3.3,tl:"24/41",tl_pct:"58%",t2:"40/77",t2_pct:"51%",t3:"5/25",t3_pct:"20%",rob_t:29,rob_pp:0.8,rdef_t:82,rdef_pp:2.3,reb_t:53,reb_pp:1.5,ast_t:11,ast_pp:0.3,tap_c:7,tap_r:8,rec_t:13,rec_pp:0.4,perd_t:13,perd_pp:0.4,fc_t:62,fc_pp:1.7,fr_t:37,fr_pp:1.0,val_t:112,val_pp:3.1},
+  "FERNANDEZ":   {pj:26,min_t:443.6,min_pp:17.1,pts_t:147,pts_pp:5.7,tl:"26/30",tl_pct:"86%",t2:"20/61",t2_pct:"32%",t3:"27/96",t3_pct:"28%",rob_t:16,rob_pp:0.6,rdef_t:74,rdef_pp:2.9,reb_t:58,reb_pp:2.2,ast_t:20,ast_pp:0.8,tap_c:4,tap_r:4,rec_t:20,rec_pp:0.8,perd_t:20,perd_pp:0.8,fc_t:45,fc_pp:1.7,fr_t:25,fr_pp:1.0,val_t:107,val_pp:4.1},
+  "FILIPPETTI":  {pj:44,min_t:862.3,min_pp:19.6,pts_t:555,pts_pp:12.6,tl:"118/155",tl_pct:"76%",t2:"211/336",t2_pct:"62%",t3:"5/12",t3_pct:"41%",rob_t:63,rob_pp:1.4,rdef_t:204,rdef_pp:4.6,reb_t:141,reb_pp:3.2,ast_t:33,ast_pp:0.8,tap_c:16,tap_r:20,rec_t:36,rec_pp:0.8,perd_t:66,perd_pp:1.5,fc_t:136,fc_pp:3.1,fr_t:141,fr_pp:3.2,val_t:594,val_pp:13.5},
+  "HURTADO":     {pj:16,min_t:32.8,min_pp:2.0,pts_t:17,pts_pp:1.1,tl:"3/7",tl_pct:"42%",t2:"7/15",t2_pct:"46%",t3:"0/0",t3_pct:"0%",rob_t:7,rob_pp:0.4,rdef_t:13,rdef_pp:0.8,reb_t:6,reb_pp:0.4,ast_t:0,ast_pp:0.0,tap_c:3,tap_r:1,rec_t:1,rec_pp:0.1,perd_t:1,perd_pp:0.1,fc_t:9,fc_pp:0.6,fr_t:6,fr_pp:0.4,val_t:17,val_pp:1.1},
+  "MARCUCCI":    {pj:44,min_t:877.9,min_pp:19.9,pts_t:402,pts_pp:9.1,tl:"59/88",tl_pct:"67%",t2:"71/135",t2_pct:"52%",t3:"67/194",t3_pct:"34%",rob_t:36,rob_pp:0.8,rdef_t:87,rdef_pp:2.0,reb_t:51,reb_pp:1.2,ast_t:49,ast_pp:1.1,tap_c:14,tap_r:19,rec_t:41,rec_pp:0.9,perd_t:42,perd_pp:0.9,fc_t:110,fc_pp:2.5,fr_t:89,fr_pp:2.0,val_t:291,val_pp:6.6},
+  "PAUTASSO":    {pj:44,min_t:742.8,min_pp:16.9,pts_t:166,pts_pp:3.8,tl:"15/26",tl_pct:"57%",t2:"32/62",t2_pct:"51%",t3:"29/109",t3_pct:"26%",rob_t:35,rob_pp:0.8,rdef_t:153,rdef_pp:3.5,reb_t:118,reb_pp:2.7,ast_t:48,ast_pp:1.1,tap_c:3,tap_r:0,rec_t:20,rec_pp:0.5,perd_t:21,perd_pp:0.5,fc_t:103,fc_pp:2.3,fr_t:43,fr_pp:1.0,val_t:188,val_pp:4.3},
+  "ROLFI":       {pj:44,min_t:1115.1,min_pp:25.3,pts_t:421,pts_pp:9.6,tl:"50/68",tl_pct:"73%",t2:"118/225",t2_pct:"52%",t3:"45/143",t3_pct:"31%",rob_t:18,rob_pp:0.4,rdef_t:159,rdef_pp:3.6,reb_t:141,reb_pp:3.2,ast_t:210,ast_pp:4.8,tap_c:5,tap_r:6,rec_t:57,rec_pp:1.3,perd_t:96,perd_pp:2.2,fc_t:102,fc_pp:2.3,fr_t:98,fr_pp:2.2,val_t:523,val_pp:11.9},
+  "TABAREZ":     {pj:41,min_t:939.6,min_pp:22.9,pts_t:348,pts_pp:8.5,tl:"56/71",tl_pct:"78%",t2:"59/114",t2_pct:"51%",t3:"58/165",t3_pct:"35%",rob_t:52,rob_pp:1.3,rdef_t:178,rdef_pp:4.3,reb_t:126,reb_pp:3.1,ast_t:68,ast_pp:1.7,tap_c:12,tap_r:6,rec_t:40,rec_pp:1.0,perd_t:54,perd_pp:1.3,fc_t:96,fc_pp:2.3,fr_t:76,fr_pp:1.9,val_t:389,val_pp:9.5},
+  "VALLEJOS":    {pj:44,min_t:1122.5,min_pp:25.5,pts_t:517,pts_pp:11.8,tl:"53/72",tl_pct:"73%",t2:"103/193",t2_pct:"53%",t3:"86/245",t3_pct:"35%",rob_t:32,rob_pp:0.7,rdef_t:175,rdef_pp:4.0,reb_t:143,reb_pp:3.2,ast_t:32,ast_pp:0.7,tap_c:4,tap_r:11,rec_t:20,rec_pp:0.5,perd_t:44,perd_pp:1.0,fc_t:75,fc_pp:1.7,fr_t:63,fr_pp:1.4,val_t:413,val_pp:9.4},
+};
+window.IDSC_SEASON = SEASON_STATS;
+
 let currentOpen = -1;
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  ['home','rivales','fixture','equipo','temporada','playoff','lineups','simulacion','localvis','cuartos','copa'].forEach((p,i) => {
+  ['home','rivales','equipo','temporada','playoff','lineups','simulacion','localvis','cuartos','copa','chat'].forEach((p,i) => {
     if(p===id) document.querySelectorAll('.nav-link')[i]?.classList.add('active');
   });
   window.scrollTo({top:0,behavior:'smooth'});
@@ -2057,6 +1956,8 @@ const LINEUPS_DATA = [
     ],
   }
 ];
+
+window.IDSC_LINEUPS = LINEUPS_DATA;
 
 function renderLineups(){
   const acc = document.getElementById('lineups-accordion');
@@ -4292,6 +4193,9 @@ var DATA = {
   "HURTADO":     [null,null,null,null,null,null,null,null,null,null,18.08,4.13,6.94,null,null,null,null],
   "CONRRADI":    [null,null,null,null,null,null,null,null,null,null,null,null,7.73,1.56,4.50,12.87,7.49],
 };
+// Exponer globalmente para el Asistente IA
+window.IDSC_DATA      = DATA;
+window.IDSC_ALL_GAMES = ALL_GAMES;
 
 var PLAYER_NAMES = Object.keys(COLORS);
 var WAVG = {};
@@ -4524,6 +4428,1235 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
 
 <script>
 
+</script>
+
+<!-- ══════════════════════════════════════════════════════ CHAT PAGE -->
+<div class="page" id="page-chat">
+  <div class="page-header">
+    <div class="eyebrow">🤖 ASISTENTE IA</div>
+    <h2>ASISTENTE IA · ANÁLISIS CONVERSACIONAL</h2>
+    <p>Preguntá sobre resultados, IP10, stats de jugadores, quintetos, series y más. El asistente tiene acceso a todos los datos del dashboard.</p>
+  </div>
+  <div style="max-width:760px;margin:0 auto;padding:0 1.5rem 3rem;">
+
+    <!-- Badge tiempo real -->
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
+      <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
+        <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+        Motor local · sin conexión · datos del dashboard en tiempo real
+      </span>
+      <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">IP10 · resultados · quintetos · cuartos · serie · sin API key</span>
+    </div>
+
+    <!-- Sugerencias -->
+    <div id="chat-suggestions" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;">
+      <button class="chat-sug" onclick="chatSuggest(this)">IP10 de Tabarez últimos 3 partidos</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Simulación del J4</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Mejor quinteto del J3</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">¿Cuál es nuestro cuarto más débil?</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Tabla de posiciones</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Comparar Caffaro y Vallejos</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">¿Cómo estamos de local vs visitante?</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">¿Quién subió el rendimiento en el J3?</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Cuadro de playoffs</button>
+      <button class="chat-sug" onclick="chatSuggest(this)">Stats de temporada</button>
+    </div>v>
+
+    <!-- Historial -->
+    <div id="chat-messages" style="
+      min-height:320px;max-height:520px;overflow-y:auto;
+      background:var(--navy2);border:1px solid var(--border);border-radius:14px;
+      padding:1.2rem;margin-bottom:1rem;
+      display:flex;flex-direction:column;gap:.85rem;
+    ">
+      <div class="chat-msg chat-msg-assistant">
+        <div class="chat-bubble">
+          👋 Hola, Tincho. Corro completamente offline — leo los datos del dashboard en tiempo real, sin necesidad de API ni conexión.<br><br>Podés preguntarme sobre IP10, resultados, quintetos, cuartos, serie, tendencias y más. Escribí <strong>ayuda</strong> para ver todo.
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div style="display:flex;gap:.6rem;align-items:flex-end;">
+      <textarea id="chat-input" placeholder="Ej: ¿IP10 de Tabarez en el último partido?" rows="2" style="
+        flex:1;background:var(--navy2);border:1.5px solid var(--border);border-radius:10px;
+        color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;
+        padding:.75rem 1rem;resize:none;outline:none;line-height:1.5;
+        transition:border-color .2s;
+      " onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();chatSend();}"
+         onfocus="this.style.borderColor='rgba(91,155,240,.6)'"
+         onblur="this.style.borderColor='var(--border)'"></textarea>
+      <div style="display:flex;flex-direction:column;gap:.4rem;">
+        <button onclick="chatSend()" id="chat-send-btn" style="
+          background:linear-gradient(135deg,#3498DB,#5B9BF0);
+          border:none;border-radius:10px;color:#fff;
+          font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;
+          padding:.75rem 1.2rem;cursor:pointer;white-space:nowrap;
+          transition:opacity .2s;min-width:80px;
+        ">Enviar ↑</button>
+        <button onclick="chatClear()" style="
+          background:transparent;border:1px solid var(--border);border-radius:10px;
+          color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;
+          padding:.45rem .8rem;cursor:pointer;white-space:nowrap;
+          transition:all .15s;
+        " onmouseover="this.style.borderColor='rgba(231,76,60,.5)';this.style.color='#F1948A'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Limpiar</button>
+      </div>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.5rem;text-align:center;">
+      Enter para enviar · Shift+Enter para nueva línea · Powered by Claude Sonnet
+    </div>
+  </div>
+</div>
+
+<style>
+.chat-msg{display:flex;gap:.6rem;align-items:flex-start;}
+.chat-msg-user{flex-direction:row-reverse;}
+.chat-bubble{
+  max-width:88%;padding:.75rem 1rem;border-radius:12px;
+  font-size:.86rem;line-height:1.65;color:var(--white);
+}
+.chat-msg-assistant .chat-bubble{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:4px 12px 12px 12px;
+}
+.chat-msg-user .chat-bubble{
+  background:linear-gradient(135deg,rgba(52,152,219,.35),rgba(91,155,240,.2));
+  border:1px solid rgba(91,155,240,.4);
+  border-radius:12px 4px 12px 12px;
+  color:#d0e8ff;
+}
+.chat-msg-typing .chat-bubble{color:var(--muted);font-style:italic;}
+.chat-sug{
+  background:var(--navy3);border:1px solid var(--border);
+  color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.72rem;
+  padding:.35rem .75rem;border-radius:20px;cursor:pointer;
+  transition:all .15s;white-space:nowrap;
+}
+.chat-sug:hover{border-color:rgba(91,155,240,.5);color:#5B9BF0;background:rgba(91,155,240,.08);}
+.chat-avatar{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700;margin-top:.1rem;
+}
+.chat-avatar-ai{background:linear-gradient(135deg,#3498DB,#5B9BF0);color:#fff;}
+.chat-avatar-user{background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);color:var(--gold);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+</style>
+
+<script>
+(function(){
+  // ── Extrae contexto en tiempo real desde los datos del dashboard ──────────
+  function extractContext() {
+    var lines = [];
+    lines.push('=== IDSC OLIVA · DASHBOARD ESTADÍSTICO · LNB 2025/26 ===');
+    lines.push('Fecha extracción: ' + new Date().toLocaleDateString('es-AR'));
+    lines.push('');
+
+    // ── 1. SERIE ACTUAL ───────────────────────────────────────────────────
+    try {
+      var serieEl = document.querySelector('.po-label');
+      var poSubEl = document.querySelector('.po-sub');
+      if (serieEl) lines.push('SERIE ACTUAL: ' + serieEl.textContent.trim());
+      if (poSubEl) lines.push('DETALLE: ' + poSubEl.textContent.trim());
+    } catch(e) {}
+
+    // ── 2. IP10 DATOS COMPLETOS DESDE JS ─────────────────────────────────
+    lines.push('');
+    lines.push('--- IP10 POR JUGADOR (un valor por partido jugado) ---');
+    try {
+      var gameLabels = typeof ALL_GAMES !== 'undefined'
+        ? ALL_GAMES.map(function(g){ return g.label + (g.sub?'('+g.sub+')':''); })
+        : [];
+      lines.push('Partidos en orden: [' + gameLabels.join(' | ') + ']');
+      lines.push('');
+      var players = typeof DATA !== 'undefined' ? DATA : {};
+      Object.keys(players).forEach(function(name) {
+        var vals = players[name];
+        var nonNull = vals.filter(function(v){ return v !== null; });
+        var avg = nonNull.length
+          ? (nonNull.reduce(function(a,b){return a+b;},0)/nonNull.length).toFixed(2)
+          : 'N/A';
+        var last3 = [];
+        for (var i = vals.length-1; i >= 0 && last3.length < 3; i--) {
+          if (vals[i] !== null) last3.unshift(vals[i]);
+        }
+        var strVals = vals.map(function(v){ return v===null?'—':v; }).join(', ');
+        lines.push(name + ' | promedio=' + avg + ' (' + nonNull.length + 'PJ)'
+          + ' | últimos3=[' + last3.join(', ') + ']'
+          + ' | todos=[' + strVals + ']');
+      });
+    } catch(e) { lines.push('(error IP10: ' + e + ')'); }
+
+    // ── 3. LINEUPS / QUINTETOS ────────────────────────────────────────────
+    lines.push('');
+    lines.push('--- QUINTETOS Y STINTS POR PARTIDO ---');
+    try {
+      var _LD2 = window.IDSC_LINEUPS||(typeof LINEUPS_DATA!=='undefined'?LINEUPS_DATA:null);
+      if (_LD2) {
+        LINEUPS_DATA.forEach(function(game) {
+          lines.push('');
+          lines.push('PARTIDO: ' + game.rival + ' | ' + game.fecha
+            + ' | ' + (game.resultado==='V'?'Victoria':'Derrota') + ' ' + game.score);
+          if (game.notas && game.notas.length) {
+            game.notas.forEach(function(n) {
+              lines.push('  [' + n.tipo.toUpperCase() + '] ' + n.texto.replace(/<[^>]+>/g,''));
+            });
+          }
+          if (game.quintetos && game.quintetos.length) {
+            lines.push('  Stints (cuarto | min | jugadores | pts_IDSC-pts_rival | dif | ip10prom):');
+            game.quintetos.forEach(function(q) {
+              lines.push('    ' + q.cuartos + ' ' + q.min + ' | '
+                + q.jugadores + ' | ' + q.pts + '-' + q.rec
+                + ' (' + q.dif + ') | IP10=' + q.ip10);
+            });
+          }
+        });
+      }
+    } catch(e) { lines.push('(error lineups: ' + e + ')'); }
+
+    // ── 4. LOCAL VS VISITANTE ─────────────────────────────────────────────
+    lines.push('');
+    lines.push('--- LOCAL VS VISITANTE ---');
+    try {
+      var lvLabels = document.querySelectorAll('.lv-label');
+      var lvPcts   = document.querySelectorAll('.lv-pct');
+      var lvSubs   = document.querySelectorAll('.lv-pct-sub');
+      var lvStats  = document.querySelectorAll('.lv-stats-row');
+      for (var i=0; i<lvLabels.length; i++) {
+        var statNums = lvStats[i] ? Array.from(lvStats[i].querySelectorAll('.lv-stat-num')).map(function(el){return el.textContent.trim();}) : [];
+        var statLbls = lvStats[i] ? Array.from(lvStats[i].querySelectorAll('.lv-stat-lbl')).map(function(el){return el.textContent.trim();}) : [];
+        var statStr  = statNums.map(function(v,j){ return (statLbls[j]||'')+':'+v; }).join(' | ');
+        lines.push((lvLabels[i]?lvLabels[i].textContent.trim():'')
+          + ' · ' + (lvPcts[i]?lvPcts[i].textContent.trim():'')
+          + ' · ' + (lvSubs[i]?lvSubs[i].textContent.trim():'')
+          + ' · ' + statStr);
+      }
+      var insights = document.querySelectorAll('#page-localvis .lv-insight');
+      if (insights.length) {
+        lines.push('Insights:');
+        insights.forEach(function(el){ lines.push('  · ' + el.textContent.trim()); });
+      }
+      // Tables
+      var lvTables = document.querySelectorAll('#page-localvis table');
+      lvTables.forEach(function(tbl) {
+        var rows = tbl.querySelectorAll('tr');
+        rows.forEach(function(row) {
+          var cells = Array.from(row.querySelectorAll('td,th')).map(function(c){return c.textContent.trim();});
+          if (cells.some(function(c){return c.length>0;}))
+            lines.push('  ' + cells.join(' | '));
+        });
+      });
+    } catch(e) { lines.push('(error local/vis: ' + e + ')'); }
+
+    // ── 5. ANÁLISIS POR CUARTOS ───────────────────────────────────────────
+    lines.push('');
+    lines.push('--- ANÁLISIS POR CUARTOS ---');
+    try {
+      var qtCards = document.querySelectorAll('.qt-card');
+      qtCards.forEach(function(card) {
+        var label = card.querySelector('.qt-q-label');
+        var pts   = card.querySelector('.qt-pts');
+        var rival = card.querySelector('.qt-pts-rival');
+        var diff  = card.querySelector('.qt-diff');
+        var win   = card.querySelector('.qt-win-pct');
+        if (label) lines.push(label.textContent.trim()
+          + ': IDSC ' + (pts?pts.textContent.trim():'')
+          + ' ' + (rival?rival.textContent.trim():'')
+          + ' ' + (diff?diff.textContent.trim():'')
+          + ' ' + (win?win.textContent.trim():''));
+      });
+      var qtRows = document.querySelectorAll('#page-cuartos table tr');
+      if (qtRows.length > 1) {
+        lines.push('Histórico por partido (rival | Q1 | Q2 | Q3 | Q4 | total):');
+        qtRows.forEach(function(row) {
+          var cells = Array.from(row.querySelectorAll('td,th')).map(function(c){return c.textContent.trim();});
+          if (cells.length) lines.push('  ' + cells.join(' | '));
+        });
+      }
+      var qtInsights = document.querySelectorAll('#page-cuartos .lv-insight');
+      if (qtInsights.length) {
+        lines.push('Insights por cuartos:');
+        qtInsights.forEach(function(el){ lines.push('  · ' + el.textContent.trim()); });
+      }
+    } catch(e) { lines.push('(error cuartos: ' + e + ')'); }
+
+    // ── 6. RIVALES — timeline completa ───────────────────────────────────
+    lines.push('');
+    lines.push('--- RESULTADOS COMPLETOS VS RIVALES ---');
+    try {
+      var rivalItems = document.querySelectorAll('.timeline-item');
+      rivalItems.forEach(function(item) {
+        var name = item.querySelector('.rival-name');
+        var bdgs = item.querySelectorAll('.badge');
+        var detail = item.querySelector('.rival-detail');
+        if (name) {
+          var btext = Array.from(bdgs).map(function(b){return b.textContent.trim();}).filter(Boolean).join(' | ');
+          lines.push('  ' + name.textContent.trim()
+            + (detail?' · '+detail.textContent.trim():'')
+            + ' | ' + btext);
+        }
+      });
+    } catch(e) { lines.push('(error rivales: ' + e + ')'); }
+
+    // ── 7. PLAYOFF BRACKET ───────────────────────────────────────────────
+    lines.push('');
+    lines.push('--- CUADRO DE PLAYOFFS ---');
+    try {
+      // Read from each bracket matchup block
+      var bracketBlocks = document.querySelectorAll('#page-playoff .bracket-matchup, #page-playoff [style*="navy3"]');
+      bracketBlocks.forEach(function(block) {
+        var text = block.textContent.replace(/\s+/g,' ').trim();
+        if (text.length > 10 && text.length < 400) lines.push('  ' + text);
+      });
+      // Also read the po-card
+      var poCard = document.querySelector('#page-playoff .po-card');
+      if (poCard) {
+        lines.push('Card IDSC playoff: ' + poCard.textContent.replace(/\s+/g,' ').trim().substring(0,500));
+      }
+    } catch(e) { lines.push('(error playoff: ' + e + ')'); }
+
+    // ── 8. IP10 TOP 5 ─────────────────────────────────────────────────────
+    lines.push('');
+    lines.push('--- IP10 TOP 5 TEMPORADA ---');
+    try {
+      var barItems = document.querySelectorAll('.ip10-bar-item');
+      barItems.forEach(function(item) {
+        var pos  = item.querySelector('.ip10-bar-pos');
+        var name = item.querySelector('.ip10-bar-name');
+        var val  = item.querySelector('.ip10-bar-val');
+        if (name) lines.push('  '+(pos?pos.textContent.trim():'')+' '
+          +name.textContent.trim()+': '+(val?val.textContent.trim():''));
+      });
+      var meta = document.querySelector('.ip10-top5-meta');
+      if (meta) lines.push('  '+meta.textContent.trim());
+    } catch(e) { lines.push('(error top5: ' + e + ')'); }
+
+    // ── 9. IP10 REPORTES POR PARTIDO ─────────────────────────────────────
+    lines.push('');
+    lines.push('--- REPORTES IP10 POR PARTIDO ---');
+    try {
+      var ip10Items = document.querySelectorAll('.ip10-item');
+      ip10Items.forEach(function(item) {
+        var name = item.querySelector('.ip10-name');
+        var meta2 = item.querySelector('.ip10-meta');
+        if (name) lines.push('  ' + name.textContent.trim());
+        if (meta2) lines.push('    ' + meta2.textContent.trim());
+      });
+    } catch(e) { lines.push('(error ip10 reportes: ' + e + ')'); }
+
+
+    // ── 10. SIMULACIÓN DE PARTIDOS ────────────────────────────────────────
+    lines.push('');
+    lines.push('--- SIMULACIÓN DE PARTIDOS ---');
+    try {
+      var simCards = document.querySelectorAll('.sim-card');
+      simCards.forEach(function(card) {
+        var rival    = card.querySelector('.sim-acc-rival');
+        var score    = card.querySelector('.sim-acc-score');
+        var date     = card.querySelector('.sim-date');
+        var factors  = card.querySelectorAll('.sim-factor');
+        var note     = card.querySelector('.sim-note');
+        var scenarios = card.querySelectorAll('.sim-scenario');
+        var isJugado = card.classList.contains('jugado');
+        if (!rival) return;
+        lines.push('');
+        lines.push('PARTIDO: ' + rival.textContent.replace(/\s+/g,' ').trim()
+          + (score ? ' | Score: ' + score.textContent.replace(/\s+/g,' ').trim() : '')
+          + (isJugado ? ' | [JUGADO]' : ' | [PRÓXIMO]'));
+        if (date) lines.push('  Fecha: ' + date.textContent.replace(/\s+/g,' ').trim().substring(0,120));
+        factors.forEach(function(f) {
+          lines.push('  Factor: ' + f.textContent.replace(/\s+/g,' ').trim().substring(0,200));
+        });
+        if (note) lines.push('  Nota: ' + note.textContent.replace(/\s+/g,' ').trim().substring(0,300));
+        scenarios.forEach(function(sc) {
+          var lbl = sc.querySelector('.sim-sc-label');
+          var scr = sc.querySelector('.sim-sc-score');
+          var desc = sc.querySelector('.sim-sc-desc');
+          if (lbl) lines.push('  Escenario ' + lbl.textContent.trim() + ': '
+            + (scr?scr.textContent.trim():'') + ' — ' + (desc?desc.textContent.trim().substring(0,150):''));
+        });
+      });
+    } catch(e) { lines.push('(error simulacion: ' + e + ')'); }
+
+    // ── 11. TEMPORADA — stats generales y tabla de posiciones ─────────────
+    lines.push('');
+    lines.push('--- TEMPORADA 2025/26 ---');
+    try {
+      var tStats = document.querySelectorAll('.t-stat');
+      var tData = [];
+      tStats.forEach(function(ts) {
+        var num = ts.querySelector('.t-stat-num');
+        var lbl = ts.querySelector('.t-stat-lbl');
+        if (num && lbl) tData.push(lbl.textContent.trim() + ': ' + num.textContent.trim());
+      });
+      if (tData.length) lines.push('Stats IDSC: ' + tData.join(' | '));
+      var standRows = document.querySelectorAll('.standings-row');
+      if (standRows.length) {
+        lines.push('Tabla de posiciones LNB:');
+        standRows.forEach(function(row) {
+          var pos  = row.querySelector('.st-pos-num');
+          var team = row.querySelector('.st-team');
+          var nums = row.querySelectorAll('.st-num');
+          if (pos && team) {
+            var numsArr = Array.from(nums).map(function(n){return n.textContent.trim();});
+            lines.push('  #' + pos.textContent.trim() + ' ' + team.textContent.trim()
+              + (numsArr.length >= 7 ? ' | PJ:'+numsArr[0]+' PG:'+numsArr[1]+' PP:'+numsArr[2]+' %:'+numsArr[6] : ''));
+          }
+        });
+      }
+    } catch(e) { lines.push('(error temporada: ' + e + ')'); }
+
+    // ── 12. COPA ISLAS MALVINAS ───────────────────────────────────────────
+    lines.push('');
+    lines.push('--- COPA ISLAS MALVINAS ---');
+    try {
+      var copaStatus = document.querySelector('.copa-status-badge');
+      if (copaStatus) lines.push('Estado: ' + copaStatus.textContent.trim());
+      document.querySelectorAll('.copa-match').forEach(function(m) {
+        var lbl    = m.querySelector('.copa-match-label');
+        var teams  = m.querySelectorAll('.copa-team-name');
+        var scores = m.querySelectorAll('.copa-team-score');
+        if (lbl) {
+          var tArr = Array.from(teams).map(function(t){return t.textContent.trim();});
+          var sArr = Array.from(scores).map(function(s){return s.textContent.trim();});
+          lines.push('  ' + lbl.textContent.trim() + ': ' + tArr.join(' vs ') + ' | ' + sArr.join('-'));
+        }
+      });
+    } catch(e) { lines.push('(error copa: ' + e + ')'); }
+
+    // ── 13. RIVALS JS array — detalle completo ────────────────────────────
+    lines.push('');
+    lines.push('--- RIVALES COMPLETO (todos los partidos de la temporada) ---');
+    try {
+      if (typeof RIVALS !== 'undefined') {
+        RIVALS.forEach(function(r, idx) {
+          if (!r || !r.name) return;
+          var loc = r.loc === 'local' ? 'Local' : (r.loc === 'visitante' ? 'Visitante' : '');
+          var res = r.result === 'win' ? 'Victoria' : (r.result === 'loss' ? 'Derrota' : 'Pendiente');
+          lines.push('  P' + (idx+1) + ' | ' + r.name
+            + (r.date ? ' | ' + r.date : '')
+            + ' | ' + loc + ' | ' + res
+            + (r.score ? ' ' + r.score : '')
+            + (r.sub ? ' | ' + r.sub.substring(0,80) : '')
+            + (r.pdfs && r.pdfs.length ? ' | '+r.pdfs.length+' PDF' : ''));
+        });
+      }
+    } catch(e) { lines.push('(error rivals array: ' + e + ')'); }
+
+    lines.push('');
+    lines.push('--- FÓRMULA IP10 ---');
+    lines.push('IP10 = (PTS×1.0 + AST×1.3 + ROf×1.3 + RDef×1.1 + REC×1.4 + TAP×1.3 - PERD×1.3 + FREC×0.7 - FCOM×0.6) × (10/minutos)');
+    lines.push('Escala: >10 elite | 7-10 muy bueno | 4-7 correcto | <4 bajo rendimiento');
+
+    return lines.join('\n');
+  }
+
+  function buildSystemPrompt() {
+    var ctx = extractContext();
+    return 'Sos el asistente analítico del dashboard de IDSC Oliva (Independiente de Oliva), equipo de la Liga Nacional de Básquetbol (LNB) de Argentina. El coach es Tincho.\n\n'
+      + 'Tenés acceso en tiempo real a TODOS los datos del dashboard — el contexto se extrae en el momento exacto de cada consulta, siempre está actualizado.\n\n'
+      + 'CAPACIDADES:\n'
+      + '- Resultados de cualquier partido de la temporada\n'
+      + '- IP10 de cualquier jugador en cualquier partido, promedio o últimos N partidos\n'
+      + '- Comparaciones entre partidos, jugadores o períodos\n'
+      + '- Análisis de quintetos y stints con puntos y diferenciales\n'
+      + '- Estado actual de la serie y cuadro de playoff\n'
+      + '- Cálculo paso a paso de IP10 si te dan stats crudas\n'
+      + '- Tendencias: mejoras/caídas de rendimiento, patrones por cuartos\n'
+      + '- Opinión táctica fundamentada en los datos\n\n'
+      + 'REGLAS:\n'
+      + '- Siempre en español, tono directo — analista de cancha, no locutor\n'
+      + '- Si el dato está, respondé con precisión y citá el número\n'
+      + '- Si no está disponible, decilo y sugerí cómo obtenerlo\n'
+      + '- Mostrá cálculos cuando sean relevantes\n'
+      + '- Respuestas cortas (3-5 líneas) para preguntas simples, extendidas solo si se pide\n'
+      + '- Podés inferir tendencias y dar opinión táctica cuando corresponda\n\n'
+      + 'CONTEXTO ACTUAL DEL DASHBOARD (extraído en tiempo real):\n'
+      + ctx;
+  }
+
+  var history = [];
+
+  window.chatSuggest = function(btn) {
+    var input = document.getElementById('chat-input');
+    input.value = btn.textContent;
+    input.focus();
+    // hide suggestions after use
+    document.getElementById('chat-suggestions').style.display = 'none';
+  };
+
+
+
+  // ══════════════════════════════════════════════════════════════════════
+  // MOTOR DE CONSULTAS v2 — con contexto de conversación
+  // ══════════════════════════════════════════════════════════════════════
+
+  // ── UTILIDADES ────────────────────────────────────────────────────────
+  function normalize(str) {
+    return (str||'').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9\s]/g,' ').trim();
+  }
+  function has(hay, needle) {
+    return normalize(hay).indexOf(normalize(needle)) >= 0;
+  }
+  function hasWord(hay, word) {
+    return new RegExp('(^|\\s)' + normalize(word).replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '(\\s|$)', 'i').test(normalize(hay));
+  }
+
+  // ── CONTEXTO DE CONVERSACIÓN ──────────────────────────────────────────
+  // Recuerda el último jugador, partido y tema mencionados
+  var CTX = { player: null, jNum: null, topic: null };
+
+  function updateCtx(player, jNum, topic) {
+    if (player) CTX.player = player;
+    if (jNum !== null) CTX.jNum = jNum;
+    if (topic) CTX.topic = topic;
+  }
+
+  // ── ALIASES DE JUGADORES ──────────────────────────────────────────────
+  var PLAYER_ALIASES = {
+    'CAFFARO':     ['caffaro','agustin caffaro'],
+    'CONRRADI':    ['conrradi','francisco conrradi','francisco'],
+    'FERNANDEZ':   ['fernandez','martin fernandez'],
+    'MARCUCCI':    ['marcucci','nicolas marcucci'],
+    'BARRIONUEVO': ['barrionuevo','felipe barrionuevo','felipe'],
+    'TABAREZ':     ['tabarez','patricio tabarez','pato','pato tabarez'],
+    'ROLFI':       ['rolfi','fortunato rolfi','fortunato'],
+    'PAUTASSO':    ['pautasso','agustin pautasso'],
+    'DUVANCED':    ['duvanced','valentin duvanced','valentin'],
+    'VALLEJOS':    ['vallejos','rolando vallejos','rolando'],
+    'FILIPPETTI':  ['filippetti','enzo filippetti','enzo'],
+    'HURTADO':     ['hurtado'],
+  };
+
+  function detectPlayer(q) {
+    var q2 = normalize(q);
+    // Palabra completa primero
+    for (var name in PLAYER_ALIASES) {
+      var als = PLAYER_ALIASES[name];
+      for (var i=0; i<als.length; i++) {
+        var a = normalize(als[i]);
+        var re = new RegExp('(^|\\s)' + a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '(\\s|$|\\?|,)', 'i');
+        if (re.test(q2)) return name;
+      }
+    }
+    // Subcadena para apellidos >= 5 chars
+    for (var name2 in PLAYER_ALIASES) {
+      var als2 = PLAYER_ALIASES[name2];
+      for (var j=0; j<als2.length; j++) {
+        var a2 = normalize(als2[j]);
+        if (a2.length >= 5 && q2.indexOf(a2) >= 0) return name2;
+      }
+    }
+    return null;
+  }
+
+  // ── IP10 / DATA ───────────────────────────────────────────────────────
+  var IP10 = window.IDSC_DATA || (typeof DATA !== 'undefined' ? DATA : {});
+
+  function ip10Vals(name) { return IP10[name] || null; }
+
+  function ip10Avg(name) {
+    var v = ip10Vals(name); if (!v) return null;
+    var nn = v.filter(function(x){return x!==null;});
+    return nn.length ? (nn.reduce(function(a,b){return a+b;},0)/nn.length).toFixed(2) : null;
+  }
+
+  function ip10Last(name, n) {
+    var v = ip10Vals(name); if (!v) return [];
+    var r = [];
+    for (var i=v.length-1; i>=0 && r.length<n; i--) {
+      if (v[i]!==null) r.unshift({label:gameLabel(i), val:v[i], idx:i});
+    }
+    return r;
+  }
+
+  function gameLabel(idx) {
+    var AG = window.IDSC_ALL_GAMES || (typeof ALL_GAMES!=='undefined'?ALL_GAMES:null);
+    if (!AG) return 'J'+(idx+1);
+    var g = AG[idx];
+    return g ? g.label+(g.sub?' '+g.sub:'') : 'J'+(idx+1);
+  }
+
+  function top5() {
+    var avgs = [];
+    Object.keys(IP10).forEach(function(n) {
+      var nn = IP10[n].filter(function(x){return x!==null;});
+      if (nn.length>=3) avgs.push({name:n, avg:nn.reduce(function(a,b){return a+b;},0)/nn.length, pj:nn.length});
+    });
+    return avgs.sort(function(a,b){return b.avg-a.avg;}).slice(0,5);
+  }
+
+  // Top IP10 de un partido específico (por índice en el array)
+  function topPartido(gIdx) {
+    var result = [];
+    Object.keys(IP10).forEach(function(name) {
+      var v = IP10[name];
+      if (v && v[gIdx] !== null && v[gIdx] !== undefined) {
+        result.push({name:name, val:v[gIdx]});
+      }
+    });
+    return result.sort(function(a,b){return b.val-a.val;});
+  }
+
+  // ── LINEUPS ───────────────────────────────────────────────────────────
+  function getLD() { return window.IDSC_LINEUPS||(typeof LINEUPS_DATA!=='undefined'?LINEUPS_DATA:null); }
+  function getSS() { return window.IDSC_SEASON||(typeof SEASON_STATS!=='undefined'?SEASON_STATS:null); }
+
+  function fmtSeason(name) {
+    var ss = getSS();
+    if(!ss) return fmtPlayer(name);
+    var s = ss[name];
+    if(!s) return fmtPlayer(name);
+    return '📊 **'+name+' — Temporada 2025/26 ('+s.pj+' PJ · '+s.min_pp+'min/pp):**\n'
+      +'**Puntos:** '+s.pts_t+' tot · **'+s.pts_pp+'**/pp\n'
+      +'**Rebotes:** '+s.reb_t+' tot ('+s.rob_pp+' of · '+s.rdef_pp+' def) · **'+s.reb_pp+'**/pp\n'
+      +'**Asistencias:** '+s.ast_t+' tot · **'+s.ast_pp+'**/pp\n'
+      +'**Tapones cometidos:** '+s.tap_c+' · **Recuperaciones:** '+s.rec_t+' ('+s.rec_pp+'/pp)\n'
+      +'**Pérdidas:** '+s.perd_t+' ('+s.perd_pp+'/pp)\n'
+      +'**Tiro libre:** '+s.tl+' ('+s.tl_pct+')\n'
+      +'**Tiro 2P:** '+s.t2+' ('+s.t2_pct+') · **Tiro 3P:** '+s.t3+' ('+s.t3_pct+')\n'
+      +'**Valoración:** '+s.val_t+' tot · **'+s.val_pp+'**/pp';
+  }
+
+  function fmtSeasonStat(name, stat) {
+    var ss = getSS();
+    if(!ss) return fmtPlayer(name);
+    var s = ss[name];
+    if(!s) return fmtPlayer(name);
+    // stat = 'pts','reb','ast','tap','rec','perd','min','tl','t2','t3','val'
+    switch(stat) {
+      case 'pts':  return '🏀 **'+name+' — Puntos:** **'+s.pts_pp+' por partido** · '+s.pts_t+' totales en '+s.pj+' PJ';
+      case 'reb':  return '🏀 **'+name+' — Rebotes:** **'+s.reb_pp+' por partido** · '+s.reb_t+' totales ('+s.rob_pp+' of · '+s.rdef_pp+' def)';
+      case 'ast':  return '🏀 **'+name+' — Asistencias:** **'+s.ast_pp+' por partido** · '+s.ast_t+' totales';
+      case 'tap':  return '🏀 **'+name+' — Tapones:** '+s.tap_c+' cometidos · '+s.tap_r+' recibidos';
+      case 'rec':  return '🏀 **'+name+' — Recuperaciones:** '+s.rec_t+' totales · '+s.rec_pp+'/pp';
+      case 'perd': return '🏀 **'+name+' — Pérdidas:** '+s.perd_t+' totales · '+s.perd_pp+'/pp';
+      case 'min':  return '🏀 **'+name+' — Minutos:** '+s.min_t+' totales · **'+s.min_pp+'**/pp en '+s.pj+' PJ';
+      case 'tl':   return '🏀 **'+name+' — Tiros Libres:** '+s.tl+' ('+s.tl_pct+')';
+      case 't2':   return '🏀 **'+name+' — Tiros 2P:** '+s.t2+' ('+s.t2_pct+')';
+      case 't3':   return '🏀 **'+name+' — Tiros 3P:** '+s.t3+' ('+s.t3_pct+')';
+      case 'val':  return '🏀 **'+name+' — Valoración:** '+s.val_t+' totales · **'+s.val_pp+'**/pp';
+      default:     return fmtSeason(name);
+    }
+  }
+  function getRV() { return window.IDSC_RIVALS||(typeof RIVALS!=='undefined'?RIVALS:null); }
+  function getAG() { return window.IDSC_ALL_GAMES||(typeof ALL_GAMES!=='undefined'?ALL_GAMES:null); }
+
+  function getLineupGame(id) {
+    var ld = getLD(); if (!ld) return null;
+    for (var i=0; i<ld.length; i++) if (ld[i].id===id) return ld[i];
+    return null;
+  }
+
+  function cdfGameId(n) { return ['cdf_j1','cdf_j2','cdf_j3','cdf_j4','cdf_j5'][n-1]||null; }
+
+  function cdfGameIdx(n) {
+    var AG = getAG(); if (!AG) return null;
+    var idx = null;
+    AG.forEach(function(g,i){ if(normalize(g.label)==='cdf j'+n) idx=i; });
+    return idx;
+  }
+
+  function lastLineupGame() {
+    var ld = getLD(); return (ld && ld.length) ? ld[0] : null;
+  }
+
+  function bestStint(gameId) {
+    var g = getLineupGame(gameId); if(!g||!g.quintetos) return null;
+    return g.quintetos.reduce(function(a,b){
+      return (parseInt(b.pts)-parseInt(b.rec))>(parseInt(a.pts)-parseInt(a.rec))?b:a;
+    });
+  }
+  function worstStint(gameId) {
+    var g = getLineupGame(gameId); if(!g||!g.quintetos) return null;
+    return g.quintetos.reduce(function(a,b){
+      return (parseInt(b.pts)-parseInt(b.rec))<(parseInt(a.pts)-parseInt(a.rec))?b:a;
+    });
+  }
+
+  // ── DOM HELPERS ───────────────────────────────────────────────────────
+  function domAll(sel) { return Array.from(document.querySelectorAll(sel)); }
+  function readCuartos() {
+    return domAll('.qt-card').map(function(c) {
+      return {
+        label: (c.querySelector('.qt-q-label')||{}).textContent||'',
+        pts:   (c.querySelector('.qt-pts')||{}).textContent||'',
+        rival: (c.querySelector('.qt-pts-rival')||{}).textContent||'',
+        diff:  (c.querySelector('.qt-diff')||{}).textContent||'',
+        win:   (c.querySelector('.qt-win-pct')||{}).textContent||''
+      };
+    });
+  }
+  function readLocalVis() {
+    var labels=domAll('.lv-label'), pcts=domAll('.lv-pct'), subs=domAll('.lv-pct-sub'), r=[];
+    for (var i=0; i<labels.length; i++) r.push({label:labels[i].textContent.trim(), pct:pcts[i]?pcts[i].textContent.trim():'', sub:subs[i]?subs[i].textContent.trim():''});
+    return r;
+  }
+  function readSerie() {
+    var el=document.querySelector('.po-label'), sub=document.querySelector('.po-sub');
+    return {label:el?el.textContent.trim():'', sub:sub?sub.textContent.trim():''};
+  }
+
+  // ── FORMATEADORES ─────────────────────────────────────────────────────
+  function fmtPlayer(name) {
+    var vals=ip10Vals(name); if(!vals) return '❓ No tengo datos de IP10 para **'+name+'**.';
+    var avg=ip10Avg(name);
+    var last3=ip10Last(name,3);
+    var l3str=last3.map(function(x){return '**'+x.label+'** '+x.val;}).join(' · ');
+    var all=vals.map(function(v,i){return v!==null?gameLabel(i)+' '+v:null;}).filter(Boolean).join(' · ');
+    return '📊 **'+name+' — IP10:**\nPromedio: **'+avg+'** ('+vals.filter(function(v){return v!==null;}).length+'PJ)\nÚltimos 3: '+l3str+'\nTodos: '+all;
+  }
+
+  function fmtGameResult(g) {
+    if (!g) return '❓ Partido no encontrado.';
+    return (g.resultado==='V'?'✅':'❌')+' **'+g.rival+'**\nScore: **IDSC '+g.score+'** | '+g.fecha+' | '+(g.resultado==='V'?'Victoria':'Derrota');
+  }
+
+  // ── EXTRACTOR DE PARÁMETROS ───────────────────────────────────────────
+  function parseQuery(q) {
+    var qn = normalize(q);
+
+    // Jugador — primero buscar en la pregunta, luego en contexto
+    var player = detectPlayer(q) || CTX.player;
+
+    // Número de partido J1..J5
+    var jMatch = qn.match(/\bcdf\s*j(\d)\b|\bj(\d)\b|\bpartido\s*(\d)\b|\b(\d)er?\s*partido\b/);
+    var jNum = jMatch ? parseInt(jMatch[1]||jMatch[2]||jMatch[3]||jMatch[4]) : null;
+    // Si no encontró jNum en la pregunta, usar contexto SOLO si la pregunta hace referencia
+    if (jNum === null && (has(qn,'ese partido') || has(qn,'ese juego') || has(qn,'ahi') || has(qn,'en ese'))) {
+      jNum = CTX.jNum;
+    }
+
+    // Últimos N
+    var lastNMatch = qn.match(/ultim[ao]s?\s*(\d+)/);
+    var lastN = lastNMatch ? parseInt(lastNMatch[1]) : null;
+    if (!lastN && (has(qn,'ultimo partido') || has(qn,'ultimo juego') || has(qn,'ultimo encuentro') || hasWord(qn,'ultimo'))) lastN = 1;
+
+    return { qn:qn, player:player, jNum:jNum, lastN:lastN };
+  }
+
+  // ── MOTOR PRINCIPAL ───────────────────────────────────────────────────
+  function processQuery(q) {
+    var p = parseQuery(q);
+    var qn=p.qn, player=p.player, jNum=p.jNum, lastN=p.lastN;
+
+    // ── AYUDA ─────────────────────────────────────────────────────────
+    if (has(qn,'ayuda') || has(qn,'que podes') || has(qn,'que sabes') ||
+        has(qn,'que consultas') || has(qn,'hola') || has(qn,'como funciona')) {
+      return '👋 **Puedo responder sobre:**\n'
+        +'• **IP10** — *"IP10 de Tabarez"*, *"últimos 3 de Caffaro"*, *"IP10 de Vallejos en J3"*\n'
+        +'• **Stats** — *"puntos de Rolfi"*, *"rebotes de Caffaro"*, *"perfil de Vallejos"*\n'
+        +'• **Resultados** — *"resultado J3"*, *"último partido"*, *"cómo está la serie"*\n'
+        +'• **Cuartos** — *"cuál es nuestro cuarto más débil"*, *"parciales del J2"*\n'
+        +'• **Quintetos** — *"mejor quinteto J3"*, *"peor stint J2"*\n'
+        +'• **Comparar** — *"comparar Tabarez y Caffaro"*, *"quién rinde más"*\n'
+        +'• **Tendencias** — *"quién mejoró en el último partido"*\n'
+        +'• **Simulación** — *"simulación J4"*, *"análisis del próximo partido"*\n'
+        +'• **Tabla** — *"tabla de posiciones"*, *"dónde quedó IDSC"*\n'
+        +'• **Copa** — *"Copa Islas Malvinas"*\n'
+        +'• **Local/Visitante** — *"rendimiento de local"*\n'
+        +'• **Historial** — *"todos los partidos"*\n'
+        +'• **Playoff** — *"cuadro de cuartos de final"*\n\n'
+        +'💡 También podés hacer preguntas de seguimiento: *"¿y en el J2?"*, *"¿y Caffaro?"*';
+    }
+
+    // ── IP10 ──────────────────────────────────────────────────────────
+    if (has(qn,'ip10') || has(qn,'indice de productividad') || has(qn,'indice productividad')) {
+      updateCtx(player, jNum, 'ip10');
+
+      // Sin jugador + sin partido = top 5
+      if (!player && jNum === null && !lastN) {
+        var t5=top5(); if(!t5.length) return '❓ Sin datos de IP10.';
+        var med=['🥇','🥈','🥉','#4','#5'];
+        return '📊 **Top 5 IP10 — Promedio temporada:**\n'+t5.map(function(p2,i){return med[i]+' **'+p2.name+'**: '+p2.avg.toFixed(2)+' ('+p2.pj+'PJ)';}).join('\n');
+      }
+
+      // Sin jugador + partido específico = top de ese partido
+      if (!player && jNum !== null) {
+        var gIdx0 = cdfGameIdx(jNum);
+        if (gIdx0 !== null) {
+          var top = topPartido(gIdx0).slice(0,5);
+          return '📊 **IP10 CDF J'+jNum+' — Top rendimientos:**\n'+top.map(function(x,i){return ['🥇','🥈','🥉','#4','#5'][i]+' **'+x.name+'**: '+x.val;}).join('\n');
+        }
+      }
+
+      // Sin jugador + último partido
+      if (!player && lastN === 1) {
+        var AG2=getAG();
+        var lastIdx = AG2 ? AG2.length-1 : null;
+        if (lastIdx !== null) {
+          var topL = topPartido(lastIdx).slice(0,5);
+          var gl = gameLabel(lastIdx);
+          return '📊 **IP10 '+gl+' — Top rendimientos:**\n'+topL.map(function(x,i){return ['🥇','🥈','🥉','#4','#5'][i]+' **'+x.name+'**: '+x.val;}).join('\n');
+        }
+      }
+
+      if (!player) {
+        var t5b=top5(); if(!t5b.length) return '❓ Sin datos de IP10.';
+        var med2=['🥇','🥈','🥉','#4','#5'];
+        return '📊 **Top 5 IP10 — Promedio temporada:**\n'+t5b.map(function(p2,i){return med2[i]+' **'+p2.name+'**: '+p2.avg.toFixed(2)+' ('+p2.pj+'PJ)';}).join('\n');
+      }
+
+      var vals=ip10Vals(player);
+      if (!vals) return '❓ No tengo datos de IP10 para **'+player+'**.';
+
+      // Últimos N
+      if (lastN) {
+        var last=ip10Last(player,lastN);
+        if (!last.length) return '⚠️ No hay datos suficientes para **'+player+'**.';
+        if (lastN===1) return '📊 **'+player+' — último partido:**\n'+last[0].label+': **'+last[0].val+'**';
+        var avg3=(last.reduce(function(a,b){return a+b.val;},0)/last.length).toFixed(2);
+        return '📊 **'+player+' — últimos '+lastN+' partidos:**\n'+last.map(function(x){return '**'+x.label+'** '+x.val;}).join(' · ')+'\nPromedio: **'+avg3+'**';
+      }
+
+      // Partido específico
+      if (jNum !== null) {
+        var gIdx=cdfGameIdx(jNum);
+        if (gIdx!==null && vals[gIdx]!==null && vals[gIdx]!==undefined) return '📊 **'+player+' en CDF J'+jNum+':** IP10 = **'+vals[gIdx]+'**';
+        if (gIdx!==null && (vals[gIdx]===null||vals[gIdx]===undefined)) return '⚠️ **'+player+'** no tuvo minutos en CDF J'+jNum+'.';
+      }
+
+      return fmtPlayer(player);
+    }
+
+    // ── RESULTADO / MARCADOR ──────────────────────────────────────────
+    if (has(qn,'resultado') || has(qn,'cuanto salio') || has(qn,'cuanto quedo') ||
+        has(qn,'ganamos') || has(qn,'perdimos') || has(qn,'marcador') ||
+        hasWord(qn,'score') || has(qn,'gano') || has(qn,'perdio') ||
+        has(qn,'como salio') || has(qn,'como nos fue')) {
+      updateCtx(null, jNum, 'resultado');
+
+      if (jNum !== null) {
+        var g2=getLineupGame(cdfGameId(jNum));
+        if (g2) return fmtGameResult(g2)+'\n\nParciales: ver *"parciales J'+jNum+'"*';
+      }
+      var lg=lastLineupGame();
+      return lg ? fmtGameResult(lg) : '❓ No encontré resultados.';
+    }
+
+    // ── STATS INDIVIDUALES ────────────────────────────────────────────
+    if (player && (has(qn,'punto') || has(qn,'rebote') || has(qn,'asistencia') ||
+        has(qn,'minuto') || has(qn,'tapon') || has(qn,'perdida') ||
+        has(qn,'recuperacion') || has(qn,'tiro') || has(qn,'falta') ||
+        has(qn,'hizo') || has(qn,'metio') || has(qn,'anoto') ||
+        has(qn,'jugo') || has(qn,'cuanto') || has(qn,'estadistica') ||
+        has(qn,'stats') || has(qn,'perfil') || has(qn,'como viene') ||
+        has(qn,'resumen') || has(qn,'temporada') || has(qn,'promedio'))) {
+      updateCtx(player, jNum, 'stats');
+
+      // Detectar stat específica
+      var statKey=null;
+      if (has(qn,'punto')||has(qn,'anoto')||has(qn,'metio')||has(qn,'hizo')) statKey='pts';
+      else if (has(qn,'rebote')) statKey='reb';
+      else if (has(qn,'asistencia')) statKey='ast';
+      else if (has(qn,'tapon')) statKey='tap';
+      else if (has(qn,'recuperacion')) statKey='rec';
+      else if (has(qn,'perdida')) statKey='perd';
+      else if (has(qn,'minuto')||has(qn,'jugo')||has(qn,'cuanto jugo')) statKey='min';
+      else if (has(qn,'tiro libre')||hasWord(qn,'tl')) statKey='tl';
+      else if (has(qn,'triple')||has(qn,'tiro 3')||has(qn,'triples')) statKey='t3';
+      else if (has(qn,'doble')||has(qn,'tiro 2')||has(qn,'dobles')) statKey='t2';
+      else if (has(qn,'valoracion')||has(qn,'valor')) statKey='val';
+
+      // Partido específico de playoff → buscar en lineups
+      if (jNum !== null) {
+        var ld=getLD();
+        var tG=null;
+        if (ld) for (var si=0;si<ld.length;si++) if(ld[si].id===cdfGameId(jNum)){tG=ld[si];break;}
+        if (tG && tG.notas) {
+          var found=null;
+          for (var ni=0;ni<tG.notas.length;ni++) { var nt=tG.notas[ni].texto||''; if(has(nt,player)){found=nt;break;} }
+          if (found) return '📊 **'+player+' — '+tG.rival+' ('+tG.score+'):**\n'+found.replace(/<[^>]+>/g,'');
+          var pSt=tG.quintetos.filter(function(s){return has(s.jugadores,player);});
+          if (pSt.length) {
+            var gi2=cdfGameIdx(jNum); var iv=(gi2!==null&&ip10Vals(player))?ip10Vals(player)[gi2]:null;
+            return '📊 **'+player+' — '+tG.rival+' ('+tG.score+'):**\nStints: '+pSt.map(function(s){return s.cuartos+' '+s.min+'min';}).join(', ')+(iv?'\nIP10: **'+iv+'**':'');
+          }
+        }
+      }
+
+      // Promedios de temporada completa
+      var ss=getSS();
+      if (ss && ss[player]) {
+        var r = statKey ? fmtSeasonStat(player, statKey) : fmtSeason(player);
+        return r || fmtPlayer(player);
+      }
+      return fmtPlayer(player);
+    }
+
+    // ── SERIE / PLAYOFF ───────────────────────────────────────────────
+    if (has(qn,'serie') || has(qn,'playoff') || (has(qn,'cuartos') && !has(qn,'cuartos de final las otras')) ||
+        has(qn,'gimnasia cr') || has(qn,'como vamos') || has(qn,'eliminacion') ||
+        has(qn,'como esta la serie') || has(qn,'estado')) {
+      updateCtx(null, null, 'serie');
+      var s=readSerie();
+      var resp='🏆 **Estado de la Serie:**\n'+s.label;
+      if (s.sub) resp+='\n'+s.sub;
+      var ld2=getLD();
+      if (ld2) {
+        var cdfG=ld2.filter(function(g){return g.id&&g.id.indexOf('cdf')>=0;});
+        if (cdfG.length) {
+          resp+='\n\n**Resultados CDF:**';
+          cdfG.slice().reverse().forEach(function(g){
+            resp+='\n'+(g.resultado==='V'?'✅':'❌')+' J'+(cdfG.indexOf(g)+1)+' '+g.rival+': **'+g.score+'** ('+g.fecha+')';
+          });
+        }
+      }
+      return resp;
+    }
+
+    // ── CUADRO OTRAS SERIES ───────────────────────────────────────────
+    if (has(qn,'cuadro') || has(qn,'bracket') || has(qn,'otras series') ||
+        has(qn,'boca') || has(qn,'quimsa') || has(qn,'instituto') ||
+        has(qn,'ferro') || has(qn,'regatas') || has(qn,'obera')) {
+      var poSubs=domAll('#page-playoff .po-sub');
+      if (poSubs.length) return '🏆 **Cuartos de Final — todas las series:**\n'+poSubs.map(function(el){return el.textContent.trim();}).join('\n');
+      return '🏆 Ver sección **Playoff** para el cuadro completo.';
+    }
+
+    // ── PARCIALES / ANÁLISIS POR CUARTO ──────────────────────────────
+    if (has(qn,'parcial') || has(qn,'por cuarto') || has(qn,'primer cuarto') ||
+        has(qn,'segundo cuarto') || has(qn,'tercer cuarto') || has(qn,'cuarto cuarto') ||
+        has(qn,'q1') || has(qn,'q2') || has(qn,'q3') || has(qn,'q4') ||
+        (has(qn,'cuarto') && !has(qn,'cuartos de final') && !has(qn,'cuartos final')) ||
+        has(qn,'debil') || has(qn,'punto fuerte') || has(qn,'mejor cuarto') || has(qn,'peor cuarto')) {
+      updateCtx(null, jNum, 'cuartos');
+
+      if (jNum !== null) {
+        var g3=getLineupGame(cdfGameId(jNum));
+        if (g3 && g3.notas) {
+          var pNote=null;
+          g3.notas.forEach(function(n){if(has(n.texto,'Q1')&&has(n.texto,'Q2'))pNote=n;});
+          if (pNote) return '📊 **Parciales CDF J'+jNum+' ('+g3.score+'):**\n'+pNote.texto.replace(/<[^>]+>/g,'');
+          // Fallback: score del partido
+          return '📊 **CDF J'+jNum+' ('+g3.score+')** — parciales detallados en sección Lineups.';
+        }
+      }
+
+      var cuartos=readCuartos();
+      if (!cuartos.length) return '❓ No encontré datos de cuartos.';
+      var diffs=cuartos.map(function(c){var m=c.diff.match(/([\+\-]?[\d\.]+)/);return m?parseFloat(m[1]):0;});
+      var maxI=diffs.indexOf(Math.max.apply(null,diffs));
+      var minI=diffs.indexOf(Math.min.apply(null,diffs));
+      return '📊 **Promedios por cuarto (temporada):**\n'
+        +cuartos.map(function(c){return '**'+c.label.trim()+':** IDSC '+c.pts.trim()+' '+c.rival.trim()+' '+c.diff.trim()+' · '+c.win.trim();}).join('\n')
+        +'\n\n✅ Punto fuerte: **'+(cuartos[maxI]?cuartos[maxI].label.trim():'')+'**'
+        +'\n⚠️ Punto débil: **'+(cuartos[minI]?cuartos[minI].label.trim():'')+'**';
+    }
+
+    // ── QUINTETOS / STINTS ────────────────────────────────────────────
+    if (has(qn,'quinteto') || has(qn,'lineup') || has(qn,'stint') ||
+        has(qn,'cinco titular') || has(qn,'mejor cinco') || has(qn,'peor cinco') ||
+        (has(qn,'mejor') && has(qn,'partido')) || (has(qn,'peor') && has(qn,'partido'))) {
+      updateCtx(null, jNum, 'quintetos');
+
+      var ld3=getLD();
+      var gId3=jNum?cdfGameId(jNum):(ld3&&ld3[0]?ld3[0].id:null);
+      var g4=gId3?getLineupGame(gId3):null;
+      if (!g4) return '❓ No encontré quintetos. Especificá: *"quintetos J3"*.';
+
+      var label4=g4.rival+' ('+g4.score+')';
+      if (has(qn,'mejor') || has(qn,'positiv') || has(qn,'top')) {
+        var bs=bestStint(gId3);
+        return bs?'✅ **Mejor stint — '+label4+':**\n'+bs.jugadores+'\n'+bs.cuartos+' · '+bs.min+'min · **'+bs.pts+'-'+bs.rec+'** ('+bs.dif+') · IP10='+bs.ip10:'❓ Sin datos.';
+      }
+      if (has(qn,'peor') || has(qn,'negativ') || has(qn,'problema')) {
+        var ws=worstStint(gId3);
+        return ws?'⚠️ **Peor stint — '+label4+':**\n'+ws.jugadores+'\n'+ws.cuartos+' · '+ws.min+'min · **'+ws.pts+'-'+ws.rec+'** ('+ws.dif+') · IP10='+ws.ip10:'❓ Sin datos.';
+      }
+      return '📋 **Stints — '+label4+':**\n'
+        +g4.quintetos.map(function(s){return s.cuartos+' **'+s.jugadores.replace(/ · /g,'·')+'** '+s.pts+'-'+s.rec+' ('+s.dif+')';}).join('\n');
+    }
+
+    // ── LOCAL VS VISITANTE ────────────────────────────────────────────
+    if (has(qn,'de local') || has(qn,'como local') || has(qn,'en casa') ||
+        has(qn,'de visitante') || has(qn,'como visitante') || has(qn,'de visita') ||
+        has(qn,'rendimiento local') || has(qn,'rendimiento visitante') ||
+        has(qn,'el gigante') || (has(qn,'local') && has(qn,'visitante'))) {
+      updateCtx(null, null, 'localvis');
+      var lv=readLocalVis();
+      if (lv.length>=2) {
+        var resp2='🏠 **'+lv[0].label+':** '+lv[0].pct+' · '+lv[0].sub;
+        resp2+='\n✈️ **'+lv[1].label+':** '+lv[1].pct+' · '+lv[1].sub;
+        // Agregar insight playoff local
+        var poLocal=domAll('#page-localvis .lv-insight');
+        if (poLocal.length) resp2+='\n\n'+poLocal[0].textContent.trim();
+        return resp2;
+      }
+    }
+
+    // ── COMPARAR JUGADORES ────────────────────────────────────────────
+    if (has(qn,'comparar') || has(qn,'mejor entre') || has(qn,'quien rinde mas') ||
+        has(qn,'diferencia entre') || has(qn,'versus') ||
+        (has(qn,'y') && has(qn,'quien') && player)) {
+      updateCtx(player, null, 'comparar');
+
+      var found2=[];
+      for (var pn in PLAYER_ALIASES) {
+        var als3=PLAYER_ALIASES[pn];
+        for (var ai=0; ai<als3.length; ai++) {
+          if (normalize(q).indexOf(normalize(als3[ai]))>=0 && found2.indexOf(pn)<0) {
+            found2.push(pn); break;
+          }
+        }
+      }
+      if (found2.length>=2) {
+        var p1=found2[0], p2=found2[1];
+        var a1=parseFloat(ip10Avg(p1)||0), a2=parseFloat(ip10Avg(p2)||0);
+        var l1=ip10Last(p1,3), l2=ip10Last(p2,3);
+        return '⚖️ **Comparativa IP10:**\n'
+          +'**'+p1+':** prom '+a1.toFixed(2)+' · últ3: '+l1.map(function(x){return x.val;}).join(', ')+'\n'
+          +'**'+p2+':** prom '+a2.toFixed(2)+' · últ3: '+l2.map(function(x){return x.val;}).join(', ')+'\n'
+          +'→ Mayor promedio: **'+(a1>a2?p1:p2)+'**';
+      }
+      if (player) return fmtPlayer(player);
+    }
+
+    // ── TENDENCIAS ────────────────────────────────────────────────────
+    if (has(qn,'mejoro') || has(qn,'subio') || has(qn,'bajo rendimiento') ||
+        has(qn,'cayo') || has(qn,'tendencia') || has(qn,'en forma') ||
+        has(qn,'quien mejoro') || has(qn,'quien bajo') || has(qn,'mejor momento')) {
+      updateCtx(null, null, 'tendencias');
+
+      if (player) {
+        var v2=ip10Vals(player); if(!v2) return fmtPlayer(player);
+        var nn=v2.filter(function(x){return x!==null;});
+        if (nn.length<2) return '⚠️ No hay suficientes partidos para calcular tendencia de **'+player+'**.';
+        var delta=nn[nn.length-1]-nn[nn.length-2];
+        var arrow=delta>0?'📈':'📉';
+        return arrow+' **'+player+' — tendencia:**\nÚltimo: **'+nn[nn.length-1]+'** | Anterior: '+nn[nn.length-2]+' | Δ '+(delta>0?'+':'')+delta.toFixed(2);
+      }
+
+      var trends=[];
+      Object.keys(IP10).forEach(function(name){
+        var nn2=IP10[name].filter(function(v){return v!==null;});
+        if(nn2.length>=2) trends.push({name:name,last:nn2[nn2.length-1],prev:nn2[nn2.length-2],delta:nn2[nn2.length-1]-nn2[nn2.length-2]});
+      });
+      trends.sort(function(a,b){return b.delta-a.delta;});
+      var up=trends.slice(0,3).map(function(t){return '📈 **'+t.name+'**: '+t.prev.toFixed(1)+' → '+t.last.toFixed(1)+' (+'+t.delta.toFixed(1)+')';});
+      var dn=trends.slice(-3).reverse().map(function(t){return '📉 **'+t.name+'**: '+t.prev.toFixed(1)+' → '+t.last.toFixed(1)+' ('+t.delta.toFixed(1)+')';});
+      return '📊 **Tendencia último partido:**\n\nMejoraron:\n'+up.join('\n')+'\n\nBajaron:\n'+dn.join('\n');
+    }
+
+    // ── SIMULACIÓN / PRÓXIMO PARTIDO ──────────────────────────────────
+    if (has(qn,'simulacion') || has(qn,'proyeccion') || has(qn,'prediccion') ||
+        has(qn,'proximo partido') || has(qn,'siguiente partido') ||
+        has(qn,'j4') || has(qn,'j5') || has(qn,'analisis previo')) {
+      updateCtx(null, jNum, 'simulacion');
+
+      var sCards=domAll('.sim-card'), sLines=[];
+      sCards.forEach(function(card){
+        var r2=card.querySelector('.sim-acc-rival');
+        var s2=card.querySelector('.sim-acc-score');
+        var isJ=card.classList.contains('jugado');
+        if(!r2) return;
+        var rt=r2.textContent.replace(/\s+/g,' ').trim().substring(0,70);
+        var st=s2?s2.textContent.replace(/\s+/g,' ').trim():'—';
+        var line=(isJ?'✅':'⚡')+' '+rt+' | '+st+(isJ?' [jugado]':' [próximo]');
+        var isTarget=(has(qn,'j4')&&has(normalize(rt),'j4'))
+                  || (has(qn,'j5')&&has(normalize(rt),'j5'))
+                  || (!isJ && !has(qn,'todos'));
+        if (isTarget) {
+          var facs=Array.from(card.querySelectorAll('.sim-factor'))
+            .map(function(f){return '  · '+f.textContent.replace(/\s+/g,' ').trim().substring(0,160);}).join('\n');
+          var note=card.querySelector('.sim-note');
+          sLines.push(line+(facs?'\n'+facs:'')+(note?'\n  '+note.textContent.replace(/\s+/g,' ').trim().substring(0,200):''));
+        } else {
+          sLines.push(line);
+        }
+      });
+      return sLines.length?'📊 **Simulación de partidos:**\n'+sLines.join('\n\n'):'❓ Sin datos de simulación.';
+    }
+
+    // ── TABLA DE POSICIONES ───────────────────────────────────────────
+    if (has(qn,'tabla') || has(qn,'posicion') || has(qn,'clasificacion') ||
+        has(qn,'standing') || (has(qn,'temporada') && !has(qn,'esta temporada')) ||
+        has(qn,'puesto') || has(qn,'donde quedo') || has(qn,'como termino la fase')) {
+      updateCtx(null, null, 'tabla');
+      var sR=domAll('.standings-row'), idscR=null, topR=[];
+      sR.forEach(function(row){
+        var p2=row.querySelector('.st-pos-num'), t2=row.querySelector('.st-team'), n2=row.querySelectorAll('.st-num');
+        if(!p2||!t2) return;
+        var na=Array.from(n2).map(function(x){return x.textContent.trim();});
+        var e='#'+p2.textContent.trim()+' '+t2.textContent.trim()+(na.length>=7?' — '+na[1]+'V '+na[2]+'D ('+na[6]+')':'');
+        if(has(t2.textContent,'independiente')||has(t2.textContent,'oliva')) idscR=e;
+        if(topR.length<12) topR.push(e);
+      });
+      if(!topR.length) return '❓ No encontré la tabla de posiciones.';
+      if(has(qn,'idsc')||has(qn,'independiente')||has(qn,'nosotros')||has(qn,'donde'))
+        return '📊 **IDSC en la tabla:**\n'+(idscR||'No encontrado')+'\n\nTop 12:\n'+topR.join('\n');
+      return '📊 **Tabla de posiciones LNB:**\n'+topR.join('\n');
+    }
+
+    // ── COPA ISLAS MALVINAS ───────────────────────────────────────────
+    if (has(qn,'copa') || has(qn,'malvinas') || has(qn,'formosa') || has(qn,'cuadrangular')) {
+      updateCtx(null, null, 'copa');
+      var cS=document.querySelector('.copa-status-badge'), cL=[];
+      if(cS) cL.push(cS.textContent.trim());
+      domAll('.copa-match').forEach(function(m){
+        var lb=m.querySelector('.copa-match-label');
+        var tm=Array.from(m.querySelectorAll('.copa-team-name')).map(function(t){return t.textContent.trim();});
+        var sc=Array.from(m.querySelectorAll('.copa-team-score')).map(function(s){return s.textContent.trim();});
+        if(lb) cL.push(lb.textContent.trim()+': '+tm.join(' vs ')+' | '+sc.join('-'));
+      });
+      return '🏆 **Copa Islas Malvinas:**\n'+(cL.join('\n')||'Sin datos.');
+    }
+
+    // ── HISTORIAL COMPLETO ────────────────────────────────────────────
+    if (has(qn,'todos los partidos') || has(qn,'historial') ||
+        has(qn,'temporada completa') || has(qn,'calendario') || has(qn,'todos los resultados')) {
+      updateCtx(null, null, 'historial');
+      var rv=getRV(); if(!rv) return '❓ No encontré el historial.';
+      var w=0,l=0,hL=[];
+      rv.forEach(function(r){
+        if(!r||!r.name) return;
+        if(r.result==='win') w++; if(r.result==='loss') l++;
+        hL.push((r.result==='win'?'✅':r.result==='loss'?'❌':'⏳')+(r.loc==='local'?'🏠':'✈️')+' '+r.name.substring(0,35)+(r.score?' '+r.score:''));
+      });
+      return '📋 **Historial ('+(w+l)+'PJ · '+w+'V '+l+'D):**\n'+hL.join('\n');
+    }
+
+    // ── MEJOR/PEOR PARTIDO DE UN JUGADOR ─────────────────────────────
+    if (player && (has(qn,'mejor partido') || has(qn,'peor partido') ||
+        has(qn,'maximo') || has(qn,'minimo') || has(qn,'record'))) {
+      updateCtx(player, null, 'ip10');
+      var v3=ip10Vals(player); if(!v3) return fmtPlayer(player);
+      var nn3=v3.map(function(v,i){return v!==null?{val:v,idx:i}:null;}).filter(Boolean);
+      if (!nn3.length) return '❓ Sin datos.';
+      nn3.sort(function(a,b){return b.val-a.val;});
+      var best=nn3[0], worst=nn3[nn3.length-1];
+      if (has(qn,'mejor') || has(qn,'maximo') || has(qn,'record')) {
+        return '🏆 **'+player+' — mejor partido:**\n'+gameLabel(best.idx)+': **'+best.val+'**';
+      }
+      return '⚠️ **'+player+' — peor partido:**\n'+gameLabel(worst.idx)+': **'+worst.val+'**';
+    }
+
+    // ── JUGADOR DETECTADO SIN CATEGORÍA → IP10 por defecto ───────────
+    if (player) {
+      updateCtx(player, jNum, CTX.topic);
+      if (jNum !== null) {
+        var gIdx3=cdfGameIdx(jNum);
+        var vals2=ip10Vals(player);
+        if (gIdx3!==null && vals2 && vals2[gIdx3]!==null) {
+          return '📊 **'+player+' en CDF J'+jNum+':** IP10 = **'+vals2[gIdx3]+'**\n\nPara más detalle: *"stats de '+player.toLowerCase()+' en J'+jNum+'"*';
+        }
+      }
+      if (lastN) {
+        var last2=ip10Last(player,lastN);
+        if (last2.length) {
+          if (lastN===1) return '📊 **'+player+' — último partido:** IP10 = **'+last2[0].val+'** ('+last2[0].label+')';
+          var avg4=(last2.reduce(function(a,b){return a+b.val;},0)/last2.length).toFixed(2);
+          return '📊 **'+player+' — últimos '+lastN+':** '+last2.map(function(x){return x.label+' **'+x.val+'**';}).join(' · ')+'\nPromedio: **'+avg4+'**';
+        }
+      }
+      return fmtPlayer(player);
+    }
+
+    // ── PREGUNTAS DE SEGUIMIENTO (contexto) ───────────────────────────
+    if (has(qn,'y en el j') || has(qn,'en ese') || has(qn,'ese partido') || has(qn,'y el j')) {
+      if (CTX.player && jNum!==null) return processQuery('ip10 de '+CTX.player+' en j'+jNum);
+      if (CTX.player) return fmtPlayer(CTX.player);
+    }
+
+    // ── FALLBACK ─────────────────────────────────────────────────────
+    return '❓ No encontré esa consulta en el dashboard.\n\nEjemplos:\n· *"IP10 de Tabarez en J3"*\n· *"resultado del último partido"*\n· *"mejor quinteto J3"*\n· *"tabla de posiciones"*\n· *"quién mejoró más"*\n\nEscribí **ayuda** para ver todo lo que puedo responder.';
+  }
+
+
+
+    window.chatClear = function() {
+    var box = document.getElementById('chat-messages');
+    box.innerHTML = '';
+    history = [];
+    appendMsg('assistant', '💬 Chat reiniciado. ¿Qué querés consultar?');
+    document.getElementById('chat-suggestions').style.display = 'flex';
+    document.getElementById('chat-input').value = '';
+  };
+
+  window.chatSend = function() {
+    var input = document.getElementById('chat-input');
+    var text = input.value.trim();
+    if (!text) return;
+    var btn = document.getElementById('chat-send-btn');
+
+    // Disable UI
+    input.value = '';
+    btn.disabled = true;
+    btn.textContent = '...';
+    document.getElementById('chat-suggestions').style.display = 'none';
+
+    // Add user message
+    appendMsg('user', text);
+    history.push({role:'user', content: text});
+
+    // Pequeño delay para sensación de respuesta
+    var typingId = 'typing-' + Date.now();
+    appendTyping(typingId);
+    scrollChat();
+
+    setTimeout(function() {
+      var reply = processQuery(text);
+      history.push({role:'assistant', content: reply});
+      removeTyping(typingId);
+      appendMsg('assistant', reply);
+      btn.disabled = false;
+      btn.textContent = 'Enviar ↑';
+      scrollChat();
+    }, 280);
+  };
+
+  function appendMsg(role, text) {
+    var box = document.getElementById('chat-messages');
+    var wrap = document.createElement('div');
+    wrap.className = 'chat-msg chat-msg-' + (role === 'user' ? 'user' : 'assistant');
+
+    var avatar = document.createElement('div');
+    avatar.className = 'chat-avatar ' + (role === 'user' ? 'chat-avatar-user' : 'chat-avatar-ai');
+    avatar.textContent = role === 'user' ? 'T' : '🏀';
+
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    // Simple markdown: bold, newlines
+    bubble.innerHTML = text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n/g,'<br>');
+
+    wrap.appendChild(avatar);
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+    scrollChat();
+  }
+
+  function appendTyping(id) {
+    var box = document.getElementById('chat-messages');
+    var wrap = document.createElement('div');
+    wrap.className = 'chat-msg chat-msg-assistant chat-msg-typing';
+    wrap.id = id;
+    var avatar = document.createElement('div');
+    avatar.className = 'chat-avatar chat-avatar-ai';
+    avatar.textContent = '🏀';
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.innerHTML = '⠋ Analizando...';
+    wrap.appendChild(avatar);
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+  }
+
+  function removeTyping(id) {
+    var el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function scrollChat() {
+    var box = document.getElementById('chat-messages');
+    box.scrollTop = box.scrollHeight;
+  }
+})();
 </script>
 
 </body>
