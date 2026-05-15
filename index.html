@@ -5510,7 +5510,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
     ">
       <div class="chat-msg chat-msg-assistant">
         <div class="chat-bubble">
-          👋 Hola, Tincho. Corro completamente offline — leo los datos del dashboard en tiempo real, sin necesidad de API ni conexión.<br><br>Podés preguntarme sobre IP10, resultados, quintetos, cuartos, serie, tendencias y más. Escribí <strong>ayuda</strong> para ver todo.
+          👋 Hola! Soy <strong>Rojo</strong>, el asistente analítico de IDSC Oliva.<br><br>Podés preguntarme sobre IP10, resultados, stats de jugadores, quintetos, cuartos, serie, tendencias, simulaciones, tabla de posiciones y más. Escribí <strong>ayuda</strong> para ver todo lo que puedo responder.
         </div>
       </div>
     </div>
@@ -6318,8 +6318,10 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
   function parseQuery(q) {
     var qn = normalize(q);
 
-    // Jugador — primero buscar en la pregunta, luego en contexto
-    var player = detectPlayer(q) || CTX.player;
+    // Jugador — buscar en la pregunta; solo heredar contexto si NO es una pregunta de ranking
+    var playerInQuery = detectPlayer(q);
+    var isRankingQuery = /quien|cual jugador|que jugador|mejor promedio|mas puntos|mas rebotes|mas asistencias|mas tapones|lider|mayor promedio|top jugador|ranking|quien tiene|quien fue|quien rinde/.test(normalize(q));
+    var player = playerInQuery || (!isRankingQuery ? CTX.player : null);
 
     // Número de partido J1..J5
     var jMatch = qn.match(/\bcdf\s*j(\d)\b|\bj(\d)\b|\bpartido\s*(\d)\b|\b(\d)er?\s*partido\b/);
@@ -6349,7 +6351,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
         +'• **IP10** — *"IP10 de Tabarez"*, *"últimos 3 de Caffaro"*, *"IP10 de Vallejos en J3"*\n'
         +'• **Stats** — *"puntos de Rolfi"*, *"rebotes de Caffaro"*, *"perfil de Vallejos"*\n'
         +'• **Resultados** — *"resultado J3"*, *"último partido"*, *"cómo está la serie"*\n'
-        +'• **Cuartos** — *"cuál es nuestro cuarto más débil"*, *"parciales del J2"*\n'
+        +'• **Cuartos** — *"cuál es nuestro cuarto más débil"*, *"parciales del J2"*, *"analisis por cuarto"*\n'
         +'• **Quintetos** — *"mejor quinteto J3"*, *"peor stint J2"*\n'
         +'• **Comparar** — *"comparar Tabarez y Caffaro"*, *"quién rinde más"*\n'
         +'• **Tendencias** — *"quién mejoró en el último partido"*\n'
@@ -6366,9 +6368,12 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
     var isRanking = has(qn,'quien') || has(qn,'cual jugador') || has(qn,'que jugador') ||
                     has(qn,'mejor promedio') || has(qn,'mas puntos') || has(qn,'mas rebotes') ||
                     has(qn,'mas asistencias') || has(qn,'mas tapones') || has(qn,'lider') ||
-                    has(qn,'mayor promedio') || has(qn,'top jugador') || has(qn,'ranking');
+                    has(qn,'mayor promedio') || has(qn,'top jugador') || has(qn,'ranking') ||
+                    has(qn,'quien tiene mas') || has(qn,'que jugador tiene') ||
+                    has(qn,'quien promedia') || has(qn,'mas importante');
+    var isRankingQuery = isRanking;
 
-    if (isRanking && !player) {
+    if (isRanking && (!player || isRankingQuery) && !hasTendWords) {
       var ss0 = getSS();
 
       // Detectar qué stat rankear
@@ -6472,6 +6477,137 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
         }
       }
     }
+
+
+    // ── SERIE / PLAYOFF ───────────────────────────────────────────────
+    var hasTendWords = has(qn,'subio') || has(qn,'bajo') || has(qn,'mejoro') || has(qn,'empeoro') ||
+        has(qn,'tendencia') || has(qn,'viene') || has(qn,'subiendo') || has(qn,'bajando') ||
+        has(qn,'creciendo') || has(qn,'cayendo') || has(qn,'rendimiento') || has(qn,'evolucion');
+    if (!hasTendWords && (has(qn,'como esta la serie') || has(qn,'como vamos') || has(qn,'estado serie') ||
+        has(qn,'serie vs gimnasia') || has(qn,'la serie') || has(qn,'playoffs') ||
+        has(qn,'eliminacion') || has(qn,'cuartos de final') || (has(qn,'gimnasia') && !has(qn,'cuartos de final las otras')))) {
+      updateCtx(null, null, 'serie');
+      var s = readSerie();
+      var resp = '🏆 **Estado de la Serie:**\n'+s.label;
+      if (s.sub) resp += '\n'+s.sub;
+      var ld2 = getLD();
+      if (ld2) {
+        var cdfG = ld2.filter(function(g){return g.id && g.id.indexOf('cdf')>=0;});
+        if (cdfG.length) {
+          resp += '\n\n**Resultados CDF:**';
+          cdfG.slice().reverse().forEach(function(g){
+            resp += '\n'+(g.resultado==='V'?'✅':'❌')+' '+g.rival+': **'+g.score+'** ('+g.fecha+')';
+          });
+        }
+      }
+      return resp;
+    }
+
+    // ── CUADRO OTRAS SERIES ───────────────────────────────────────────
+    if (has(qn,'cuadro') || has(qn,'bracket') || has(qn,'otras series') ||
+        has(qn,'boca') || has(qn,'quimsa') || has(qn,'instituto') ||
+        has(qn,'ferro') || has(qn,'regatas') || has(qn,'obera')) {
+      var poSubs = domAll('#page-playoff .po-sub');
+      if (poSubs.length) return '🏆 **Cuartos de Final — todas las series:**\n'
+        +poSubs.map(function(el){return el.textContent.trim();}).join('\n');
+      return '🏆 Ver sección **Playoff** para el cuadro completo.';
+    }
+
+    // ── CUARTOS / PARCIALES ───────────────────────────────────────────
+    if (has(qn,'cuarto mas debil') || has(qn,'cuarto mas fuerte') ||
+        has(qn,'cuarto flojo') || has(qn,'punto debil') || has(qn,'punto fuerte') ||
+        has(qn,'parcial') || has(qn,'por cuarto') || has(qn,'analisis por cuarto') ||
+        has(qn,'q1') || has(qn,'q2') || has(qn,'q3') || has(qn,'q4') ||
+        has(qn,'primer cuarto') || has(qn,'segundo cuarto') ||
+        has(qn,'tercer cuarto') || has(qn,'cuarto cuarto') ||
+        (has(qn,'cuarto') && !has(qn,'cuartos de final') && !has(qn,'cuartos final') && !has(qn,'cuartos cr'))) {
+      updateCtx(null, jNum, 'cuartos');
+
+      // Parciales de partido específico desde dataset
+      if (jNum !== null) {
+        var ds5 = getDS();
+        if (ds5) {
+          var gp = getGame(jNum);
+          if (gp) {
+            var p2 = gp.parciales;
+            var rows = [
+              {q:'Q1', idsc:p2.q1[0], rival:p2.q1[1]},
+              {q:'Q2', idsc:p2.q2[0], rival:p2.q2[1]},
+              {q:'Q3', idsc:p2.q3[0], rival:p2.q3[1]},
+              {q:'Q4', idsc:p2.q4[0], rival:p2.q4[1]},
+            ];
+            var parcStr = rows.map(function(r){
+              var w = r.idsc > r.rival ? '✅' : r.idsc < r.rival ? '❌' : '➖';
+              return w+' '+r.q+': **'+r.idsc+'** — '+r.rival;
+            }).join('\n');
+            return '📊 **Parciales CDF J'+jNum+' (IDSC '+gp.score_idsc+' — GIM '+gp.score_rival+' '+gp.resultado.toUpperCase()+'):**\n'+parcStr;
+          }
+        }
+        // Fallback lineups notas
+        var g3b = getLineupGame(cdfGameId(jNum));
+        if (g3b && g3b.notas) {
+          var pNote = null;
+          g3b.notas.forEach(function(n){if(has(n.texto,'Q1')&&has(n.texto,'Q2'))pNote=n;});
+          if (pNote) return '📊 **Parciales CDF J'+jNum+':**\n'+pNote.texto.replace(/<[^>]+>/g,'');
+        }
+      }
+
+      // Promedios de temporada desde DOM
+      var cuartos = readCuartos();
+      if (!cuartos.length) return '❓ No encontré datos de cuartos.';
+      var diffs = cuartos.map(function(c){
+        var m2 = c.diff.match(/([\+\-]?[\d\.]+)/); return m2 ? parseFloat(m2[1]) : 0;
+      });
+      var maxI = diffs.indexOf(Math.max.apply(null,diffs));
+      var minI = diffs.indexOf(Math.min.apply(null,diffs));
+      return '📊 **Promedios por cuarto (temporada):**\n'
+        +cuartos.map(function(c){
+          return '**'+c.label.trim()+':** IDSC '+c.pts.trim()+' '+c.rival.trim()+' '+c.diff.trim()+' · '+c.win.trim();
+        }).join('\n')
+        +'\n\n✅ **Punto fuerte:** '+(cuartos[maxI]?cuartos[maxI].label.trim():'')
+        +'\n⚠️ **Punto débil:** '+(cuartos[minI]?cuartos[minI].label.trim():'');
+    }
+
+    // ── QUINTETOS / STINTS ────────────────────────────────────────────
+    if (has(qn,'quinteto') || has(qn,'lineup') || has(qn,'stint') ||
+        has(qn,'cinco titular') || has(qn,'mejor cinco') || has(qn,'peor cinco') ||
+        has(qn,'mejor formacion') || has(qn,'peor formacion')) {
+      updateCtx(null, jNum, 'quintetos');
+      var ld3 = getLD();
+      var gId3 = jNum ? cdfGameId(jNum) : (ld3&&ld3[0]?ld3[0].id:null);
+      var g4 = gId3 ? getLineupGame(gId3) : null;
+      if (!g4) return '❓ Especificá el partido: *"quintetos J3"*, *"mejor quinteto J2"*';
+      var label4 = g4.rival+' ('+g4.score+')';
+      if (has(qn,'mejor') || has(qn,'positiv') || has(qn,'top')) {
+        var bs = bestStint(gId3);
+        return bs ? '✅ **Mejor stint — '+label4+':**\n'+bs.jugadores+'\n'+bs.cuartos+' · '+bs.min+'min · **'+bs.pts+'-'+bs.rec+'** ('+bs.dif+') · IP10='+bs.ip10 : '❓ Sin datos.';
+      }
+      if (has(qn,'peor') || has(qn,'negativ') || has(qn,'problema')) {
+        var ws = worstStint(gId3);
+        return ws ? '⚠️ **Peor stint — '+label4+':**\n'+ws.jugadores+'\n'+ws.cuartos+' · '+ws.min+'min · **'+ws.pts+'-'+ws.rec+'** ('+ws.dif+') · IP10='+ws.ip10 : '❓ Sin datos.';
+      }
+      return '📋 **Stints — '+label4+':**\n'
+        +g4.quintetos.map(function(s){
+          return s.cuartos+' **'+s.jugadores.replace(/ · /g,'·')+'** '+s.pts+'-'+s.rec+' ('+s.dif+')';
+        }).join('\n');
+    }
+
+    // ── LOCAL VS VISITANTE ────────────────────────────────────────────
+    if (has(qn,'de local') || has(qn,'como local') || has(qn,'en casa') ||
+        has(qn,'de visitante') || has(qn,'como visitante') || has(qn,'de visita') ||
+        has(qn,'rendimiento local') || has(qn,'local vs visitante') ||
+        has(qn,'el gigante') || (has(qn,'local') && has(qn,'visitante'))) {
+      updateCtx(null, null, 'localvis');
+      var lv = readLocalVis();
+      if (lv.length >= 2) {
+        var resp2 = '🏠 **'+lv[0].label+':** '+lv[0].pct+' · '+lv[0].sub;
+        resp2 += '\n✈️ **'+lv[1].label+':** '+lv[1].pct+' · '+lv[1].sub;
+        var poLocal = domAll('#page-localvis .lv-insight');
+        if (poLocal.length) resp2 += '\n\n'+poLocal[0].textContent.trim();
+        return resp2;
+      }
+    }
+
 
     // ── IP10 ──────────────────────────────────────────────────────────
     if (has(qn,'ip10') || has(qn,'indice de productividad') || has(qn,'indice productividad')) {
@@ -6619,7 +6755,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
     if (has(qn,'tendencia') || has(qn,'viene') || has(qn,'subiendo') ||
         has(qn,'bajando') || has(qn,'creciendo') || has(qn,'en forma') ||
         has(qn,'mejoro') || has(qn,'empeoro') || has(qn,'evolucion') ||
-        has(qn,'partido a partido') || has(qn,'progresion')) {
+        has(qn,'partido a partido') || has(qn,'progresion') ||
+        has(qn,'subio el rendimiento') || has(qn,'bajo el rendimiento') ||
+        has(qn,'quien subio') || has(qn,'quien bajo') || has(qn,'quien mejoro') ||
+        has(qn,'quien empeoro') || has(qn,'quien viene mejor') ||
+        has(qn,'como viene') || has(qn,'en crecimiento') || has(qn,'cayendo')) {
       updateCtx(player, null, 'tendencia');
       var ds1 = getDS();
 
