@@ -6677,7 +6677,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
             'X-Title': 'IDSC Dashboard'
           },
           body: JSON.stringify({
-            model: 'arcee-ai/trinity-large-thinking:free',
+            model: window._orModel || 'arcee-ai/trinity-large-thinking:free',
             messages: [{role:'system', content: buildSystemPrompt()}].concat(
               history.map(function(m){return {role:m.role==='model'?'assistant':m.role, content:m.content};})
             ),
@@ -6691,13 +6691,47 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
 
       if (data.error) {
         removeTyping(typingId);
-        if (data.error.code === 401 || data.error.message && data.error.message.indexOf('auth')>=0) {
+        // Try next free model before giving up
+        var FREE_MODELS = [
+          'arcee-ai/trinity-large-thinking:free',
+          'mistralai/mistral-7b-instruct:free',
+          'qwen/qwen3-8b:free',
+          'nousresearch/hermes-3-llama-3.1-8b:free',
+          'microsoft/phi-3-mini-128k-instruct:free'
+        ];
+        var currentModel = window._orModel || FREE_MODELS[0];
+        var currentIdx = FREE_MODELS.indexOf(currentModel);
+        var nextIdx = currentIdx + 1;
+
+        if (data.error.code === 401 || (data.error.message && data.error.message.indexOf('auth')>=0)) {
           localStorage.removeItem(STORAGE_KEY);
           appendMsg('assistant', '⚠️ API key inválida. Ingresá una nueva.');
           showKeySetup();
-        } else {
-          appendMsg('assistant', '⚠️ Error: ' + (data.error.message||'desconocido'));
+          btn.disabled = false; btn.textContent = 'Enviar ↑';
+          return;
         }
+
+        if (nextIdx < FREE_MODELS.length && data.error.message && (
+            data.error.message.indexOf('endpoint')>=0 ||
+            data.error.message.indexOf('quota')>=0 ||
+            data.error.message.indexOf('rate')>=0 ||
+            data.error.message.indexOf('overloaded')>=0)) {
+          window._orModel = FREE_MODELS[nextIdx];
+          removeTyping(typingId);
+          appendMsg('assistant', '⟳ Modelo saturado, probando alternativa... ('+FREE_MODELS[nextIdx].split('/')[1].split(':')[0]+')');
+          btn.disabled = false; btn.textContent = 'Enviar ↑';
+          // Retry automatically
+          // Re-insert text and auto-send
+          setTimeout(function(){
+            var inp = document.getElementById('chat-input');
+            if (inp) { inp.value = text; window.chatSend(); }
+          }, 1000);
+          return;
+        }
+
+        // Reset to first model for next time
+        window._orModel = FREE_MODELS[0];
+        appendMsg('assistant', '⚠️ Todos los modelos están saturados. Esperá un momento e intentá de nuevo.');
         btn.disabled = false; btn.textContent = 'Enviar ↑';
         return;
       }
