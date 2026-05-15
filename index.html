@@ -6435,143 +6435,110 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
   // ── CONTEXT EXTRACTION (same as before — reads live dashboard data) ─
   function extractContext() {
     var lines = [];
-    lines.push('=== IDSC OLIVA · DASHBOARD ESTADÍSTICO · LNB 2025/26 ===');
 
     // Serie actual
     try {
       var serieEl = document.querySelector('.po-label');
       var poSubEl = document.querySelector('.po-sub');
-      if (serieEl) lines.push('SERIE ACTUAL: ' + serieEl.textContent.trim());
-      if (poSubEl) lines.push('DETALLE: ' + poSubEl.textContent.trim());
+      if (serieEl) lines.push('SERIE: ' + serieEl.textContent.trim());
+      if (poSubEl) lines.push(poSubEl.textContent.trim());
     } catch(e) {}
 
-    // IP10 data
-    lines.push('\n--- IP10 POR JUGADOR ---');
+    // IP10 promedios serie CDF (índices 14,15,16)
+    lines.push('\n--- IP10 SERIE CDF (J1/J2/J3) ---');
     try {
       var IP10 = window.IDSC_DATA || {};
       var AG   = window.IDSC_ALL_GAMES || [];
-      var labels = AG.map(function(g){return g.label+(g.sub?' '+g.sub:'');});
-      lines.push('Partidos: ['+labels.join(' | ')+']');
       Object.keys(IP10).forEach(function(name) {
         var vals = IP10[name];
-        var nn = vals.filter(function(v){return v!==null;});
-        if (!nn.length) return;
-        var avg = (nn.reduce(function(a,b){return a+b;},0)/nn.length).toFixed(2);
-        var last3 = [];
-        for (var i=vals.length-1; i>=0&&last3.length<3; i--) if(vals[i]!==null) last3.unshift(vals[i]);
-        lines.push(name+' | prom='+avg+' ('+nn.length+'PJ) | ult3=['+last3.join(',')+'] | todos=['+vals.map(function(v){return v===null?'—':v;}).join(',')+']');
+        var cdf = [vals[14], vals[15], vals[16]].filter(function(v){return v!==null;});
+        if (!cdf.length) return;
+        var avg = (cdf.reduce(function(a,b){return a+b;},0)/cdf.length).toFixed(2);
+        var nn  = vals.filter(function(v){return v!==null;});
+        var tavg= (nn.reduce(function(a,b){return a+b;},0)/nn.length).toFixed(2);
+        lines.push(name+': serie='+cdf.join('/')+'  prom_serie='+avg+'  prom_temporada='+tavg+'('+nn.length+'PJ)');
       });
-    } catch(e) { lines.push('(error IP10)'); }
+    } catch(e) {}
 
-    // Box scores por partido (dataset)
-    lines.push('\n--- BOX SCORES CDF (IDSC) ---');
+    // Box scores CDF compactos
+    lines.push('\n--- BOX SCORES IDSC CDF ---');
     try {
       var ds = window.IDSC_DATASET;
-      if (ds) {
-        ds.partidos.forEach(function(p) {
-          lines.push('\nJ'+p.juego+' ('+p.fecha+') IDSC '+p.score_idsc+'-'+p.score_rival+' GIM ['+p.condicion+'] '+p.resultado.toUpperCase());
-          var parc = p.parciales;
-          lines.push('Parciales: Q1:'+parc.q1[0]+'-'+parc.q1[1]+' Q2:'+parc.q2[0]+'-'+parc.q2[1]+' Q3:'+parc.q3[0]+'-'+parc.q3[1]+' Q4:'+parc.q4[0]+'-'+parc.q4[1]);
-          p.box_score.forEach(function(b) {
-            if (b.min === '00:00') return;
-            lines.push(b.nombre+': '+b.min+'min '+b.pts+'pts T2:'+b.t2+'('+b.t2_pct+'%) T3:'+b.t3+'('+b.t3_pct+'%) TL:'+b.tl+'('+b.tl_pct+'%) Reb:'+b.reb+'('+b.rof+'of) AST:'+b.ast+' REC:'+b.rec+' TAP:'+b.tap_c+' PERD:'+b.perd+' FC:'+b.fc+' FR:'+b.fr+' Val:'+b.val+' +/-:'+b.pm+(b.ip10?' IP10:'+b.ip10:''));
-          });
-          var t = p.equipo_totales;
-          lines.push('TOTALES: '+t.pts+'pts T2:'+t.t2+'('+t.t2_pct+'%) T3:'+t.t3+'('+t.t3_pct+'%) TL:'+t.tl+'('+t.tl_pct+'%) REB:'+t.reb+' AST:'+t.ast+' REC:'+t.rec+' PERD:'+t.perd);
+      if (ds) ds.partidos.forEach(function(p) {
+        var parc = p.parciales;
+        lines.push('\nJ'+p.juego+'('+p.condicion+','+p.resultado+') IDSC '+p.score_idsc+'-'+p.score_rival+' GIM | Q1:'+parc.q1[0]+'-'+parc.q1[1]+' Q2:'+parc.q2[0]+'-'+parc.q2[1]+' Q3:'+parc.q3[0]+'-'+parc.q3[1]+' Q4:'+parc.q4[0]+'-'+parc.q4[1]);
+        var t = p.equipo_totales;
+        lines.push('Equipo: T2:'+t.t2_pct+'% T3:'+t.t3_pct+'% TL:'+t.tl_pct+'% REB:'+t.reb+' AST:'+t.ast+' PERD:'+t.perd);
+        p.box_score.filter(function(b){return b.min!=='00:00'&&b.pts>0||b.reb>4||b.ip10>7;}).forEach(function(b){
+          lines.push(b.nombre+': '+b.min+'min '+b.pts+'pts T2:'+b.t2_pct+'% T3:'+b.t3_pct+'% Reb:'+b.reb+'('+b.rof+'of) AST:'+b.ast+' PERD:'+b.perd+' IP10:'+(b.ip10||'—'));
         });
-      }
-    } catch(e) { lines.push('(error box scores)'); }
+      });
+    } catch(e) {}
 
-    // Box scores rival (GIM)
-    lines.push('\n--- BOX SCORES CDF (GIMNASIA CR) ---');
+    // Box scores rival compactos
+    lines.push('\n--- BOX SCORES GIMNASIA CR CDF ---');
     try {
       var gim = window.GIM_DATASET;
-      if (gim) {
-        gim.partidos.forEach(function(p) {
-          lines.push('\nJ'+p.juego+' GIM '+p.score+'pts ['+p.resultado.toUpperCase()+']');
-          p.box_score.forEach(function(b) {
-            if (b.min === '00:00') return;
-            lines.push(b.nombre+': '+b.min+'min '+b.pts+'pts T2:'+b.t2+'('+b.t2_pct+'%) T3:'+b.t3+'('+b.t3_pct+'%) TL:'+b.tl+'('+b.tl_pct+'%) Reb:'+b.reb+'('+b.rof+'of) AST:'+b.ast+' REC:'+b.rec+' TAP:'+b.tap_c+' PERD:'+b.perd+' Val:'+b.val+' +/-:'+b.pm+(b.ip10?' IP10:'+b.ip10:''));
-          });
+      if (gim) gim.partidos.forEach(function(p) {
+        lines.push('\nJ'+p.juego+'('+p.resultado+') GIM '+p.score+'pts');
+        p.box_score.filter(function(b){return b.min!=='00:00'&&(b.pts>5||b.reb>5||b.ip10>7);}).forEach(function(b){
+          lines.push(b.nombre+': '+b.min+'min '+b.pts+'pts Reb:'+b.reb+' AST:'+b.ast+' IP10:'+(b.ip10||'—'));
         });
-      }
-    } catch(e) { lines.push('(error GIM box scores)'); }
+      });
+    } catch(e) {}
 
-    // Stats de temporada
-    lines.push('\n--- STATS TEMPORADA COMPLETA (IDSC) ---');
+    // Stats temporada compactas
+    lines.push('\n--- STATS TEMPORADA IDSC (por partido) ---');
     try {
       var ss = window.IDSC_SEASON || {};
       Object.keys(ss).forEach(function(name) {
         var s = ss[name];
-        lines.push(name+': '+s.pj+'PJ '+s.min_pp+'min/pp '+s.pts_pp+'pts/pp '+s.reb_pp+'reb/pp '+s.ast_pp+'ast/pp T2:'+s.t2+'('+s.t2_pct+') T3:'+s.t3+'('+s.t3_pct+') TL:'+s.tl+'('+s.tl_pct+') PERD:'+s.perd_pp+'/pp Val:'+s.val_pp+'/pp');
+        lines.push(name+': '+s.pj+'PJ '+s.min_pp+'min '+s.pts_pp+'pts '+s.reb_pp+'reb '+s.ast_pp+'ast T2:'+s.t2_pct+' T3:'+s.t3_pct+' TL:'+s.tl_pct+' PERD:'+s.perd_pp+'/pp');
       });
-    } catch(e) { lines.push('(error season stats)'); }
+    } catch(e) {}
 
-    // Promedios por cuarto
-    lines.push('\n--- ANÁLISIS POR CUARTOS ---');
+    // Cuartos
+    lines.push('\n--- POR CUARTOS ---');
     try {
       document.querySelectorAll('.qt-card').forEach(function(c) {
-        var lbl = (c.querySelector('.qt-q-label')||{}).textContent||'';
-        var pts = (c.querySelector('.qt-pts')||{}).textContent||'';
-        var riv = (c.querySelector('.qt-pts-rival')||{}).textContent||'';
-        var dif = (c.querySelector('.qt-diff')||{}).textContent||'';
-        var win = (c.querySelector('.qt-win-pct')||{}).textContent||'';
-        if (lbl) lines.push(lbl.trim()+': IDSC '+pts.trim()+' '+riv.trim()+' '+dif.trim()+' '+win.trim());
+        var lbl=(c.querySelector('.qt-q-label')||{}).textContent||'';
+        var pts=(c.querySelector('.qt-pts')||{}).textContent||'';
+        var riv=(c.querySelector('.qt-pts-rival')||{}).textContent||'';
+        var dif=(c.querySelector('.qt-diff')||{}).textContent||'';
+        var win=(c.querySelector('.qt-win-pct')||{}).textContent||'';
+        if(lbl) lines.push(lbl.trim()+': IDSC '+pts.trim()+' '+riv.trim()+' '+dif.trim()+' '+win.trim());
       });
     } catch(e) {}
 
     // Local vs visitante
     lines.push('\n--- LOCAL VS VISITANTE ---');
     try {
-      var lvl = document.querySelectorAll('.lv-label');
-      var lvp = document.querySelectorAll('.lv-pct');
-      var lvs = document.querySelectorAll('.lv-pct-sub');
-      for (var i=0; i<lvl.length; i++) {
-        lines.push((lvl[i]?lvl[i].textContent.trim():'')+': '+(lvp[i]?lvp[i].textContent.trim():'')+' · '+(lvs[i]?lvs[i].textContent.trim():''));
-      }
+      var lv=document.querySelectorAll('.lv-label'), lvp=document.querySelectorAll('.lv-pct'), lvs=document.querySelectorAll('.lv-pct-sub');
+      for(var i=0;i<lv.length;i++) lines.push((lv[i]?lv[i].textContent.trim():'')+': '+(lvp[i]?lvp[i].textContent.trim():'')+' · '+(lvs[i]?lvs[i].textContent.trim():''));
     } catch(e) {}
 
-    // Lineups/quintetos
-    lines.push('\n--- QUINTETOS Y STINTS ---');
+    // Quintetos (solo notas clave)
+    lines.push('\n--- QUINTETOS CDF ---');
     try {
-      var ld = window.IDSC_LINEUPS || [];
-      ld.forEach(function(game) {
-        lines.push('\n'+game.rival+' ('+game.score+') '+game.fecha);
-        if (game.notas) game.notas.forEach(function(n){ lines.push('['+n.tipo+'] '+n.texto.replace(/<[^>]+>/g,'')); });
-        if (game.quintetos) game.quintetos.forEach(function(q){ lines.push('  '+q.cuartos+' '+q.min+'min: '+q.jugadores+' '+q.pts+'-'+q.rec+' ('+q.dif+') IP10='+q.ip10); });
-      });
-    } catch(e) {}
-
-    // Simulacion
-    lines.push('\n--- SIMULACIÓN DE PARTIDOS ---');
-    try {
-      document.querySelectorAll('.sim-card').forEach(function(card) {
-        var r = card.querySelector('.sim-acc-rival');
-        var s = card.querySelector('.sim-acc-score');
-        var isJ = card.classList.contains('jugado');
-        if (r) {
-          lines.push((isJ?'[JUGADO]':'[PRÓXIMO]')+' '+r.textContent.replace(/\s+/g,' ').trim().substring(0,80)+' | '+(s?s.textContent.replace(/\s+/g,' ').trim():'—'));
-          card.querySelectorAll('.sim-factor').forEach(function(f){
-            lines.push('  '+f.textContent.replace(/\s+/g,' ').trim().substring(0,160));
-          });
+      var ld=window.IDSC_LINEUPS||[];
+      ld.forEach(function(g){
+        lines.push(g.rival+' ('+g.score+'):');
+        if(g.notas) g.notas.filter(function(n){return n.tipo==='neu';}).forEach(function(n){
+          lines.push(n.texto.replace(/<[^>]+>/g,'').substring(0,200));
+        });
+        if(g.quintetos) {
+          var best=g.quintetos.reduce(function(a,b){return (parseInt(b.pts)-parseInt(b.rec))>(parseInt(a.pts)-parseInt(a.rec))?b:a;});
+          var worst=g.quintetos.reduce(function(a,b){return (parseInt(b.pts)-parseInt(b.rec))<(parseInt(a.pts)-parseInt(a.rec))?b:a;});
+          lines.push('Mejor stint: '+best.jugadores+' '+best.pts+'-'+best.rec+'('+best.dif+')');
+          lines.push('Peor stint: '+worst.jugadores+' '+worst.pts+'-'+worst.rec+'('+worst.dif+')');
         }
       });
     } catch(e) {}
 
-    // Playoffs
-    lines.push('\n--- CUADRO DE PLAYOFFS ---');
-    try {
-      document.querySelectorAll('#page-playoff .po-sub').forEach(function(el){
-        lines.push(el.textContent.trim());
-      });
-    } catch(e) {}
-
-    lines.push('\n--- FÓRMULA IP10 ---');
-    lines.push('IP10 = (PTS×1.0 + AST×1.3 + ROf×1.3 + RDef×1.1 + REC×1.4 + TAP×1.3 - PERD×1.3 + FREC×0.7 - FCOM×0.6) × (10/min)');
-    lines.push('Escala: >10 elite | 7-10 muy bueno | 4-7 correcto | <4 bajo');
-
+    lines.push('\nFÓRMULA IP10: (PTS×1.0+AST×1.3+ROf×1.3+RDef×1.1+REC×1.4+TAP×1.3-PERD×1.3+FREC×0.7-FCOM×0.6)×(10/min)');
     return lines.join('\n');
   }
+
 
   function buildSystemPrompt() {
     return 'Sos Rojo, el asistente analítico de IDSC Oliva en la Liga Nacional de Básquetbol de Argentina. El coach es Tincho.\n\n'
