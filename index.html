@@ -6318,7 +6318,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
     <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
       <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
         <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-        Gemini AI · datos del dashboard en tiempo real
+        OpenRouter AI · datos del dashboard en tiempo real
       </span>
       <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">Razonamiento natural · análisis táctico · preguntas abiertas</span>
     </div>
@@ -6614,7 +6614,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
       + 'Para activar el Asistente IA necesitás ingresar tu API key de Google Gemini (gratis).<br><br>'
       + '<small>Conseguila en <strong>aistudio.google.com</strong> → Get API key</small><br><br>'
       + '<div style="display:flex;gap:.5rem;margin-top:.5rem;">'
-      + '<input id="key-input" type="password" placeholder="AIzaSy..." style="flex:1;background:var(--navy3);border:1px solid var(--border);border-radius:8px;color:var(--white);font-family:monospace;font-size:.8rem;padding:.5rem .8rem;outline:none;">'
+      + '<input id="key-input" type="password" placeholder="sk-or-v1-..." style="flex:1;background:var(--navy3);border:1px solid var(--border);border-radius:8px;color:var(--white);font-family:monospace;font-size:.8rem;padding:.5rem .8rem;outline:none;">'
       + '<button onclick="activateKey()" style="background:linear-gradient(135deg,#3498DB,#5B9BF0);border:none;border-radius:8px;color:#fff;font-family:\'DM Sans\',sans-serif;font-size:.8rem;font-weight:600;padding:.5rem 1rem;cursor:pointer;">Activar</button>'
       + '</div>'
       + '</div>';
@@ -6630,7 +6630,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
 
   function initChat() {
     var key = getKey();
-    if (!key || !key.startsWith('AIza')) {
+    if (!key || !key.startsWith('sk-or')) {
       showKeySetup();
       return;
     }
@@ -6647,7 +6647,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
   // ── SEND ────────────────────────────────────────────────────────────────
   window.chatSend = async function() {
     var key = getKey();
-    if (!key || !key.startsWith('AIza')) { showKeySetup(); return; }
+    if (!key || !key.startsWith('sk-or')) { showKeySetup(); return; }
 
     var input = document.getElementById('chat-input');
     var text  = input.value.trim();
@@ -6660,21 +6660,29 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
     document.getElementById('chat-suggestions').style.display = 'none';
 
     appendMsg('user', text);
-    history.push({role:'user', parts:[{text:text}]});
+    history.push({role:'user', content:text});
 
     var typingId = 'typing-' + Date.now();
     appendTyping(typingId);
 
     try {
       var res = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + key,
+        'https://openrouter.ai/api/v1/chat/completions',
         {
           method: 'POST',
-          headers: {'Content-Type':'application/json'},
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + key,
+            'HTTP-Referer': 'https://github.com',
+            'X-Title': 'IDSC Dashboard'
+          },
           body: JSON.stringify({
-            system_instruction: {parts:[{text: buildSystemPrompt()}]},
-            contents: history,
-            generationConfig: {maxOutputTokens: 800, temperature: 0.3}
+            model: 'meta-llama/llama-3.1-8b-instruct:free',
+            messages: [{role:'system', content: buildSystemPrompt()}].concat(
+              history.map(function(m){return {role:m.role==='model'?'assistant':m.role, content:m.content};})
+            ),
+            max_tokens: 800,
+            temperature: 0.3
           })
         }
       );
@@ -6683,9 +6691,9 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
 
       if (data.error) {
         removeTyping(typingId);
-        if (data.error.code === 400 || data.error.code === 403) {
+        if (data.error.code === 401 || data.error.message && data.error.message.indexOf('auth')>=0) {
           localStorage.removeItem(STORAGE_KEY);
-          appendMsg('assistant', '⚠️ API key inválida o expirada. Ingresá una nueva.');
+          appendMsg('assistant', '⚠️ API key inválida. Ingresá una nueva.');
           showKeySetup();
         } else {
           appendMsg('assistant', '⚠️ Error: ' + (data.error.message||'desconocido'));
@@ -6694,13 +6702,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
         return;
       }
 
-      var reply = data.candidates && data.candidates[0]
-        && data.candidates[0].content && data.candidates[0].content.parts
-        && data.candidates[0].content.parts[0]
-        ? data.candidates[0].content.parts[0].text
+      var reply = data.choices && data.choices[0] && data.choices[0].message
+        ? data.choices[0].message.content
         : '❓ Sin respuesta.';
 
-      history.push({role:'model', parts:[{text:reply}]});
+      history.push({role:'assistant', content:reply});
       // Keep history manageable (last 10 turns)
       if (history.length > 20) history = history.slice(-20);
 
