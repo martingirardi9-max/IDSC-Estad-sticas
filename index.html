@@ -1481,57 +1481,68 @@ footer em{color:var(--gold);font-style:normal;}
   </div>
   <div class="section">
 
-    <!-- FILA 1: búsqueda + orden -->
-    <div class="scout-filters" style="margin-bottom:.6rem;">
-      <div class="scout-search-box">
-        <input class="scout-filter-input" id="sf-name" placeholder="🔍 Buscar jugador por apellido..." oninput="scoutRender()" onfocus="scoutRender()" onkeydown="if(event.key==='Escape')hideScoutSuggestions()" autocomplete="off">
-        <div id="sf-suggestions" class="scout-suggestions"></div>
-      </div>
-      <select class="scout-filter-select" id="sf-sort" onchange="scoutRender()">
-        <option value="nombre">Jugador A → Z</option>
-        <option value="pts_pp">↓ Puntos/pp</option>
-        <option value="reb_pp">↓ Rebotes/pp</option>
-        <option value="ast_pp">↓ Asistencias/pp</option>
-        <option value="tap_pp">↓ Tapones/pp</option>
-        <option value="rec_pp">↓ Recuperaciones/pp</option>
-        <option value="val_pp">↓ Valoración/pp</option>
-        <option value="min_pp">↓ Minutos/pp</option>
-        <option value="pj">↓ PJ</option>
-        <option value="t2_pct">↓ %T2</option>
-        <option value="t3_pct">↓ %T3</option>
-        <option value="tl_pct">↓ %TL</option>
-      </select>
-      <select class="scout-filter-select" id="sf-dir" onchange="scoutRender()">
-        <option value="desc">Mayor → Menor</option>
-        <option value="asc">Menor → Mayor</option>
-      </select>
-      <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);">
-        <span>PJ≥</span>
-        <input class="scout-filter-input" id="sf-pj" type="number" value="1" min="1" max="36" oninput="scoutRender()" style="width:50px;text-align:center;">
-      </div>
-      <span class="scout-count" id="sf-count"></span>
-    </div>
+    <!-- Campo técnico oculto: la búsqueda principal por jugador se hace desde el modo comparativo -->
+    <input type="hidden" id="sf-name" value="">
 
-    <!-- FILA 2: selector de columnas -->
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem;align-items:center;">
-      <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-right:.2rem;">COLUMNAS:</span>
-      <button class="scout-col-toggle active" data-col="pj" onclick="toggleCol(this)">PJ</button>
-      <button class="scout-col-toggle active" data-col="min_pp" onclick="toggleCol(this)">MIN/PP</button>
-      <button class="scout-col-toggle active" data-col="pts_pp" onclick="toggleCol(this)">PTS/PP</button>
-      <button class="scout-col-toggle active" data-col="reb_pp" onclick="toggleCol(this)">REB/PP</button>
-      <button class="scout-col-toggle active" data-col="ast_pp" onclick="toggleCol(this)">AST/PP</button>
-      <button class="scout-col-toggle" data-col="tap_pp" onclick="toggleCol(this)">TAP/PP</button>
-      <button class="scout-col-toggle" data-col="rec_pp" onclick="toggleCol(this)">REC/PP</button>
-      <button class="scout-col-toggle" data-col="perd_pp" onclick="toggleCol(this)">PERD/PP</button>
-      <button class="scout-col-toggle active" data-col="t2_pct" onclick="toggleCol(this)">%T2</button>
-      <button class="scout-col-toggle active" data-col="t3_pct" onclick="toggleCol(this)">%T3</button>
-      <button class="scout-col-toggle" data-col="tl_pct" onclick="toggleCol(this)">%TL</button>
-      <button class="scout-col-toggle" data-col="falt_pp" onclick="toggleCol(this)">FALT/PP</button>
-      <button class="scout-col-toggle active" data-col="val_pp" onclick="toggleCol(this)">VAL/PP</button>
-    </div>
     <div class="scout-quick-panel">
       <div class="scout-quick-title">BÚSQUEDA RÁPIDA + COMPARATIVA</div>
-      <div class="scout-quick-text">Escribí un apellido y elegí el jugador desde las sugerencias. Seleccioná 2 jugadores para comparar. La tabla completa sigue disponible abajo, pero queda opcional para no cargar visualmente el scouting.</div>
+      <div class="scout-quick-text">Buscá desde los campos de Jugador A y Jugador B. Al escribir un apellido aparecen sugerencias, podés seleccionar 1 jugador para ver su ficha o 2 jugadores para comparar indicadores lado a lado.</div>
+    </div>
+
+    <!-- Modo comparativo visible, independiente de la tabla completa -->
+    <div id="scout-compare-tools-anchor"></div>
+
+    <!-- Configuración de tabla: queda entre comparativa y tabla completa -->
+    <div style="background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;margin:0 0 1rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:var(--gold);line-height:1;">CONFIGURACIÓN DE TABLA COMPLETA</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.18rem;">Estos controles afectan la tabla desplegable de abajo.</div>
+        </div>
+        <span class="scout-count" id="sf-count"></span>
+      </div>
+
+      <div class="scout-filters" style="margin-bottom:.75rem;">
+        <select class="scout-filter-select" id="sf-sort" onchange="scoutRender()">
+          <option value="nombre">Jugador A → Z</option>
+          <option value="pts_pp">↓ Puntos/pp</option>
+          <option value="reb_pp">↓ Rebotes/pp</option>
+          <option value="ast_pp">↓ Asistencias/pp</option>
+          <option value="tap_pp">↓ Tapones/pp</option>
+          <option value="rec_pp">↓ Recuperaciones/pp</option>
+          <option value="val_pp">↓ Valoración/pp</option>
+          <option value="min_pp">↓ Minutos/pp</option>
+          <option value="pj">↓ PJ</option>
+          <option value="t2_pct">↓ %T2</option>
+          <option value="t3_pct">↓ %T3</option>
+          <option value="tl_pct">↓ %TL</option>
+        </select>
+        <select class="scout-filter-select" id="sf-dir" onchange="scoutRender()">
+          <option value="desc">Mayor → Menor</option>
+          <option value="asc">Menor → Mayor</option>
+        </select>
+        <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);">
+          <span>PJ≥</span>
+          <input class="scout-filter-input" id="sf-pj" type="number" value="1" min="1" max="36" oninput="scoutRender()" style="width:50px;text-align:center;">
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;">
+        <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-right:.2rem;">COLUMNAS:</span>
+        <button class="scout-col-toggle active" data-col="pj" onclick="toggleCol(this)">PJ</button>
+        <button class="scout-col-toggle active" data-col="min_pp" onclick="toggleCol(this)">MIN/PP</button>
+        <button class="scout-col-toggle active" data-col="pts_pp" onclick="toggleCol(this)">PTS/PP</button>
+        <button class="scout-col-toggle active" data-col="reb_pp" onclick="toggleCol(this)">REB/PP</button>
+        <button class="scout-col-toggle active" data-col="ast_pp" onclick="toggleCol(this)">AST/PP</button>
+        <button class="scout-col-toggle" data-col="tap_pp" onclick="toggleCol(this)">TAP/PP</button>
+        <button class="scout-col-toggle" data-col="rec_pp" onclick="toggleCol(this)">REC/PP</button>
+        <button class="scout-col-toggle" data-col="perd_pp" onclick="toggleCol(this)">PERD/PP</button>
+        <button class="scout-col-toggle active" data-col="t2_pct" onclick="toggleCol(this)">%T2</button>
+        <button class="scout-col-toggle active" data-col="t3_pct" onclick="toggleCol(this)">%T3</button>
+        <button class="scout-col-toggle" data-col="tl_pct" onclick="toggleCol(this)">%TL</button>
+        <button class="scout-col-toggle" data-col="falt_pp" onclick="toggleCol(this)">FALT/PP</button>
+        <button class="scout-col-toggle active" data-col="val_pp" onclick="toggleCol(this)">VAL/PP</button>
+      </div>
     </div>
 
     <!-- Tabla opcional -->
@@ -7563,6 +7574,7 @@ window.showPage = function(id) {
 
   function ensureCompareTools(){
     var table = document.getElementById('scout-table-container');
+    var anchor = document.getElementById('scout-compare-tools-anchor');
     if (!table || document.getElementById('scout-compare-tools')) return;
 
     var wrap = document.createElement('div');
@@ -7580,7 +7592,11 @@ window.showPage = function(id) {
       '</div>'+
       '<div class="scout-metric-chips" id="scout-metric-chips"></div>'+
       '<div class="scout-compare-summary" id="scout-compare-summary"><span class="scout-pill">Seleccioná un jugador para ver detalle o dos para comparar.</span></div>';
-    table.parentNode.insertBefore(wrap, table);
+    if (anchor) {
+      anchor.appendChild(wrap);
+    } else {
+      table.parentNode.insertBefore(wrap, table);
+    }
     renderCompareControls();
   }
 
