@@ -337,6 +337,27 @@ footer em{color:var(--gold);font-style:normal;}
 .scout-stat-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem;text-align:center;}
 .scout-stat-card.gold{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.25);}
 .scout-stat-card.blue{background:rgba(52,152,219,.08);border-color:rgba(52,152,219,.25);}
+
+.scout-search-box{position:relative;min-width:240px;flex:1;}
+.scout-search-box .scout-filter-input{width:100%;}
+.scout-suggestions{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:90;background:var(--navy2);border:1px solid rgba(46,204,113,.28);border-radius:12px;box-shadow:0 18px 44px rgba(0,0,0,.42);overflow:hidden;max-height:320px;overflow-y:auto;}
+.scout-suggestions.open{display:block;animation:fadeUp .16s ease;}
+.scout-suggestion-item{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.65rem .8rem;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:background .15s;}
+.scout-suggestion-item:hover{background:rgba(46,204,113,.08);}
+.scout-suggestion-name{font-weight:600;font-size:.82rem;color:var(--white);}
+.scout-suggestion-meta{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.12rem;}
+.scout-suggestion-tag{font-family:'DM Mono',monospace;font-size:.56rem;color:#4AE382;background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.35);border-radius:20px;padding:.16rem .48rem;white-space:nowrap;}
+.scout-quick-panel{background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(52,152,219,.04));border:1px solid rgba(46,204,113,.18);border-radius:14px;padding:1rem 1.1rem;margin-bottom:1rem;}
+.scout-quick-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:#4AE382;margin-bottom:.25rem;}
+.scout-quick-text{font-size:.76rem;color:var(--muted);line-height:1.55;}
+.scout-table-accordion{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--navy2);margin-top:.9rem;}
+.scout-table-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:linear-gradient(135deg,var(--navy3),var(--navy2));border:none;border-bottom:1px solid var(--border);color:var(--white);padding:.9rem 1rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;}
+.scout-table-toggle:hover{background:var(--navy3);}
+.scout-table-toggle-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;}
+.scout-table-toggle-sub{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:.1rem;}
+.scout-table-toggle-pill{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:.25rem .65rem;white-space:nowrap;}
+.scout-table-panel{display:none;padding:1rem;background:rgba(255,255,255,.015);}
+.scout-table-panel.open{display:block;animation:fadeUp .2s ease;}
 </style>
 </head>
 <body>
@@ -1462,7 +1483,10 @@ footer em{color:var(--gold);font-style:normal;}
 
     <!-- FILA 1: búsqueda + orden -->
     <div class="scout-filters" style="margin-bottom:.6rem;">
-      <input class="scout-filter-input" id="sf-name" placeholder="🔍 Buscar jugador..." oninput="scoutRender()" style="min-width:200px;flex:1;">
+      <div class="scout-search-box">
+        <input class="scout-filter-input" id="sf-name" placeholder="🔍 Buscar jugador por apellido..." oninput="scoutRender()" onfocus="scoutRender()" onkeydown="if(event.key==='Escape')hideScoutSuggestions()" autocomplete="off">
+        <div id="sf-suggestions" class="scout-suggestions"></div>
+      </div>
       <select class="scout-filter-select" id="sf-sort" onchange="scoutRender()">
         <option value="nombre">Jugador A → Z</option>
         <option value="pts_pp">↓ Puntos/pp</option>
@@ -1505,12 +1529,24 @@ footer em{color:var(--gold);font-style:normal;}
       <button class="scout-col-toggle" data-col="falt_pp" onclick="toggleCol(this)">FALT/PP</button>
       <button class="scout-col-toggle active" data-col="val_pp" onclick="toggleCol(this)">VAL/PP</button>
     </div>
-    <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.8rem;">
-      💡 Clic en una fila para ver el detalle · Clic en dos filas para comparar
+    <div class="scout-quick-panel">
+      <div class="scout-quick-title">BÚSQUEDA RÁPIDA + COMPARATIVA</div>
+      <div class="scout-quick-text">Escribí un apellido y elegí el jugador desde las sugerencias. Seleccioná 2 jugadores para comparar. La tabla completa sigue disponible abajo, pero queda opcional para no cargar visualmente el scouting.</div>
     </div>
 
-    <!-- Tabla -->
-    <div class="scout-table-wrap" id="scout-table-container"></div>
+    <!-- Tabla opcional -->
+    <div class="scout-table-accordion">
+      <button class="scout-table-toggle" onclick="toggleScoutTable()" type="button">
+        <div>
+          <div class="scout-table-toggle-title">📋 Tabla completa de jugadores</div>
+          <div class="scout-table-toggle-sub" id="scout-table-summary">Opcional · usala para explorar rankings, ordenar columnas y seleccionar desde la base completa</div>
+        </div>
+        <span class="scout-table-toggle-pill" id="scout-table-state">Mostrar tabla</span>
+      </button>
+      <div class="scout-table-panel" id="scout-table-panel">
+        <div class="scout-table-wrap" id="scout-table-container"></div>
+      </div>
+    </div>
 
     <!-- Barra de comparación -->
     <div id="scout-compare-bar" style="display:none;margin-top:.8rem;background:rgba(52,152,219,.08);border:1.5px solid rgba(52,152,219,.35);border-radius:12px;padding:.8rem 1.2rem;display:none;align-items:center;gap:1rem;flex-wrap:wrap;">
@@ -7058,6 +7094,20 @@ window.addEventListener('DOMContentLoaded', function() {
 var LNB_PLAYERS = JSON.parse(document.getElementById('lnb-data').textContent);
 var IDSC_NAMES = ["CAFFARO","FILIPPETTI","TABAREZ","VALLEJOS","ROLFI","MARCUCCI","BARRIONUEVO","CONRRADI","FERNANDEZ","PAUTASSO","ACEVEDO"];
 var scoutSelected = [];
+var scoutTableOpen = false;
+
+window.toggleScoutTable = function() {
+  scoutTableOpen = !scoutTableOpen;
+  var panel = document.getElementById('scout-table-panel');
+  var state = document.getElementById('scout-table-state');
+  if (panel) panel.classList.toggle('open', scoutTableOpen);
+  if (state) state.textContent = scoutTableOpen ? 'Ocultar tabla' : 'Mostrar tabla';
+};
+
+window.hideScoutSuggestions = function() {
+  var box = document.getElementById('sf-suggestions');
+  if (box) box.classList.remove('open');
+};
 
 window.clearScoutSelection = function() {
   scoutSelected = [];
@@ -7099,6 +7149,54 @@ function getActiveCols() {
   return active;
 }
 
+
+function updateScoutTableSummary(total, nameFilter) {
+  var summary = document.getElementById('scout-table-summary');
+  if (!summary) return;
+  if (nameFilter) {
+    summary.textContent = total + ' jugadores encontrados con el filtro actual · abrí la tabla para verlos como ranking completo';
+  } else {
+    summary.textContent = 'Opcional · base completa disponible para explorar rankings, ordenar columnas y seleccionar desde la tabla';
+  }
+}
+
+function renderScoutSuggestions(data, nameFilter) {
+  var box = document.getElementById('sf-suggestions');
+  if (!box) return;
+  if (!nameFilter) {
+    box.innerHTML = '';
+    box.classList.remove('open');
+    return;
+  }
+  var shown = data.slice(0, 10);
+  if (shown.length === 0) {
+    box.innerHTML = '<div class="scout-suggestion-item" style="cursor:default;"><div><div class="scout-suggestion-name">Sin resultados</div><div class="scout-suggestion-meta">Probá con otro apellido o bajá el mínimo de PJ</div></div></div>';
+    box.classList.add('open');
+    return;
+  }
+  box.innerHTML = shown.map(function(p) {
+    var idx = LNB_PLAYERS.indexOf(p);
+    var selectedIdx = scoutSelected.findIndex(function(s){ return s.nombre === p.nombre; });
+    var tag = selectedIdx !== -1 ? 'Seleccionado ' + (selectedIdx + 1) : 'Elegir';
+    return '<div class="scout-suggestion-item" onmousedown="scoutPickSuggestion('+idx+');event.preventDefault();">'
+      + '<div><div class="scout-suggestion-name">'+p.nombre+'</div>'
+      + '<div class="scout-suggestion-meta">'+fmtN(p.pj)+' PJ · '+fmtN(p.min_pp)+' min/pp · '+fmtN(p.pts_pp)+' pts · '+fmtN(p.reb_pp)+' reb · '+fmtN(p.ast_pp)+' ast · VAL '+fmtN(p.val_pp)+'</div></div>'
+      + '<span class="scout-suggestion-tag">'+tag+'</span>'
+      + '</div>';
+  }).join('');
+  box.classList.add('open');
+}
+
+window.scoutPickSuggestion = function(idx) {
+  var nameEl = document.getElementById('sf-name');
+  scoutClick(idx);
+  if (nameEl) {
+    nameEl.value = '';
+    setTimeout(function(){ nameEl.focus(); }, 0);
+  }
+  hideScoutSuggestions();
+};
+
 function scoutRender() {
   var nameEl = document.getElementById('sf-name');
   var sortEl = document.getElementById('sf-sort');
@@ -7126,6 +7224,8 @@ function scoutRender() {
 
   var cntEl = document.getElementById('sf-count');
   if (cntEl) cntEl.textContent = data.length + ' jugadores';
+  renderScoutSuggestions(data, nameFilter);
+  updateScoutTableSummary(data.length, nameFilter);
 
   // Update compare bar
   var bar = document.getElementById('scout-compare-bar');
@@ -7291,6 +7391,12 @@ function renderDetail() {
 
 // Column toggles handled via onclick toggleCol()
 
+
+document.addEventListener('click', function(ev) {
+  var searchBox = document.querySelector('.scout-search-box');
+  if (searchBox && !searchBox.contains(ev.target)) hideScoutSuggestions();
+});
+
 var _origShowPage2 = window.showPage;
 window.showPage = function(id) {
   _origShowPage2(id);
@@ -7312,6 +7418,16 @@ window.showPage = function(id) {
 .scout-compare-field label{display:block;font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);letter-spacing:1.2px;margin-bottom:.25rem;}
 .scout-compare-field select{width:100%;background:var(--navy2);border:1px solid var(--border2);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.5rem .7rem;outline:none;}
 .scout-compare-field select:focus{border-color:rgba(52,152,219,.55);}
+.scout-autocomplete{position:relative;}
+.scout-autocomplete input{width:100%;background:var(--navy2);border:1px solid var(--border2);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.5rem .7rem;outline:none;}
+.scout-autocomplete input:focus{border-color:rgba(52,152,219,.55);box-shadow:0 0 0 2px rgba(52,152,219,.08);}
+.scout-autocomplete-list{display:none;position:absolute;z-index:120;left:0;right:0;top:calc(100% + 4px);max-height:260px;overflow-y:auto;background:var(--navy2);border:1px solid rgba(52,152,219,.35);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.42);padding:.25rem;}
+.scout-autocomplete.open .scout-autocomplete-list{display:block;}
+.scout-autocomplete-option{display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.48rem .6rem;border-radius:8px;cursor:pointer;font-size:.76rem;color:var(--white);}
+.scout-autocomplete-option:hover,.scout-autocomplete-option.active{background:rgba(52,152,219,.13);}
+.scout-autocomplete-option .meta{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);white-space:nowrap;}
+.scout-autocomplete-empty{padding:.6rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:.6rem;}
+.scout-autocomplete-hint{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.22rem;}
 .scout-clear-btn{background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.35);border-radius:9px;color:#F1948A;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:600;padding:.52rem .9rem;cursor:pointer;white-space:nowrap;transition:all .18s;}
 .scout-clear-btn:hover{background:rgba(231,76,60,.16);}
 .scout-metric-chips{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;}
@@ -7368,12 +7484,82 @@ window.showPage = function(id) {
   function metricByKey(k){ return SCOUT_METRICS.find(function(m){return m.key===k;}); }
   function activeMetrics(){ return window.scoutCompareMetricKeys.map(metricByKey).filter(Boolean); }
 
-  function playerOptions(selectedName){
-    var sorted = window.LNB_PLAYERS.slice().sort(function(a,b){ return a.nombre.localeCompare(b.nombre, 'es'); });
-    return '<option value="">Seleccionar jugador...</option>' + sorted.map(function(p){
-      return '<option value="'+esc(p.nombre)+'" '+(p.nombre===selectedName?'selected':'')+'>'+esc(p.nombre)+'</option>';
-    }).join('');
+  window.scoutAutocompleteState = window.scoutAutocompleteState || {0:{items:[],active:-1},1:{items:[],active:-1}};
+
+  function sortedPlayers(){
+    return window.LNB_PLAYERS.slice().sort(function(a,b){ return a.nombre.localeCompare(b.nombre, 'es'); });
   }
+
+  function normalizeSearch(s){
+    return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
+  }
+
+  function setAutocompleteInputs(){
+    var selected = window.scoutSelected || [];
+    var ia = document.getElementById('scout-player-a-input');
+    var ib = document.getElementById('scout-player-b-input');
+    if (ia) ia.value = (selected[0] && selected[0].nombre) || '';
+    if (ib) ib.value = (selected[1] && selected[1].nombre) || '';
+  }
+
+  function closeAutocomplete(slot){
+    var box = document.getElementById(slot === 0 ? 'scout-ac-a' : 'scout-ac-b');
+    if (box) box.classList.remove('open');
+  }
+
+  window.scoutAutocompleteInput = function(slot, query){
+    var list = document.getElementById(slot === 0 ? 'scout-player-a-list' : 'scout-player-b-list');
+    var box = document.getElementById(slot === 0 ? 'scout-ac-a' : 'scout-ac-b');
+    if (!list || !box) return;
+    var q = normalizeSearch(query);
+    var selectedOther = (window.scoutSelected || [])[slot === 0 ? 1 : 0];
+    var items = sortedPlayers().filter(function(p){
+      if (selectedOther && selectedOther.nombre === p.nombre) return false;
+      return !q || normalizeSearch(p.nombre).indexOf(q) !== -1;
+    }).slice(0, 12);
+    window.scoutAutocompleteState[slot] = {items:items, active: items.length ? 0 : -1};
+    if (!items.length) {
+      list.innerHTML = '<div class="scout-autocomplete-empty">Sin coincidencias.</div>';
+    } else {
+      list.innerHTML = items.map(function(p,i){
+        return '<div class="scout-autocomplete-option '+(i===0?'active':'')+'" onmousedown="event.preventDefault();selectScoutAutocomplete('+slot+','+i+')"><span>'+esc(p.nombre)+'</span><span class="meta">'+esc(p.pj)+'PJ · '+esc(p.pts_pp)+' pts</span></div>';
+      }).join('');
+    }
+    box.classList.add('open');
+  };
+
+  window.selectScoutAutocomplete = function(slot, index){
+    var state = window.scoutAutocompleteState[slot] || {items:[]};
+    var p = state.items[index];
+    if (!p) return;
+    var selected = (window.scoutSelected || []).slice(0,2);
+    selected[slot] = p;
+    if (selected[0] && selected[1] && selected[0].nombre === selected[1].nombre) selected.splice(slot === 0 ? 1 : 0, 1);
+    window.scoutSelected = selected.filter(Boolean).slice(0,2);
+    closeAutocomplete(slot);
+    scoutRender();
+  };
+
+  window.scoutAutocompleteKey = function(event, slot){
+    var state = window.scoutAutocompleteState[slot];
+    if (!state || !state.items.length) return;
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      var dir = event.key === 'ArrowDown' ? 1 : -1;
+      state.active = (state.active + dir + state.items.length) % state.items.length;
+      var list = document.getElementById(slot === 0 ? 'scout-player-a-list' : 'scout-player-b-list');
+      if (list) Array.prototype.forEach.call(list.children, function(el,i){ el.classList.toggle('active', i === state.active); });
+    }
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      selectScoutAutocomplete(slot, state.active >= 0 ? state.active : 0);
+    }
+    if (event.key === 'Escape') closeAutocomplete(slot);
+  };
+
+  document.addEventListener('click', function(e){
+    if (!e.target.closest || !e.target.closest('.scout-autocomplete')) { closeAutocomplete(0); closeAutocomplete(1); }
+  });
 
   function ensureCompareTools(){
     var table = document.getElementById('scout-table-container');
@@ -7388,8 +7574,8 @@ window.showPage = function(id) {
         '<button class="scout-clear-btn" onclick="clearScoutSelection()">🗑 Borrar selección</button>'+
       '</div>'+
       '<div class="scout-compare-selects">'+
-        '<div class="scout-compare-field"><label>JUGADOR A</label><select id="scout-player-a" onchange="setScoutCompareFromSelects()"></select></div>'+
-        '<div class="scout-compare-field"><label>JUGADOR B</label><select id="scout-player-b" onchange="setScoutCompareFromSelects()"></select></div>'+
+        '<div class="scout-compare-field"><label>JUGADOR A</label><div class="scout-autocomplete" id="scout-ac-a"><input id="scout-player-a-input" placeholder="Escribí el nombre..." autocomplete="off" oninput="scoutAutocompleteInput(0,this.value)" onfocus="scoutAutocompleteInput(0,this.value)" onkeydown="scoutAutocompleteKey(event,0)"><div class="scout-autocomplete-list" id="scout-player-a-list"></div></div><div class="scout-autocomplete-hint">Tip: escribí 2 o 3 letras y seleccioná.</div></div>'+
+        '<div class="scout-compare-field"><label>JUGADOR B</label><div class="scout-autocomplete" id="scout-ac-b"><input id="scout-player-b-input" placeholder="Escribí el nombre..." autocomplete="off" oninput="scoutAutocompleteInput(1,this.value)" onfocus="scoutAutocompleteInput(1,this.value)" onkeydown="scoutAutocompleteKey(event,1)"><div class="scout-autocomplete-list" id="scout-player-b-list"></div></div><div class="scout-autocomplete-hint">También podés elegir desde la tabla.</div></div>'+
         '<button class="scout-clear-btn" onclick="clearScoutSelection()">Limpiar</button>'+
       '</div>'+
       '<div class="scout-metric-chips" id="scout-metric-chips"></div>'+
@@ -7399,12 +7585,7 @@ window.showPage = function(id) {
   }
 
   function renderCompareControls(){
-    var a = document.getElementById('scout-player-a');
-    var b = document.getElementById('scout-player-b');
-    if (a && b) {
-      a.innerHTML = playerOptions((window.scoutSelected && window.scoutSelected[0] && window.scoutSelected[0].nombre) || '');
-      b.innerHTML = playerOptions((window.scoutSelected && window.scoutSelected[1] && window.scoutSelected[1].nombre) || '');
-    }
+    setAutocompleteInputs();
     var chips = document.getElementById('scout-metric-chips');
     if (chips) {
       chips.innerHTML = '<span class="scout-metric-label">INDICADORES:</span>' + SCOUT_METRICS.filter(function(m){return m.key!=='pj';}).map(function(m){
@@ -7436,19 +7617,19 @@ window.showPage = function(id) {
   };
 
   window.setScoutCompareFromSelects = function(){
-    var a = document.getElementById('scout-player-a');
-    var b = document.getElementById('scout-player-b');
-    var names = [];
-    if (a && a.value) names.push(a.value);
-    if (b && b.value && b.value !== (a && a.value)) names.push(b.value);
-    window.scoutSelected = names.map(function(n){
-      return window.LNB_PLAYERS.find(function(p){ return p.nombre === n; });
+    var ia = document.getElementById('scout-player-a-input');
+    var ib = document.getElementById('scout-player-b-input');
+    var vals = [ia && ia.value, ib && ib.value];
+    window.scoutSelected = vals.map(function(v){
+      var q = normalizeSearch(v);
+      return window.LNB_PLAYERS.find(function(p){ return normalizeSearch(p.nombre) === q; });
     }).filter(Boolean).slice(0,2);
     scoutRender();
   };
 
   window.clearScoutSelection = function(){
     window.scoutSelected = [];
+    closeAutocomplete(0); closeAutocomplete(1);
     renderCompareControls();
     scoutRender();
   };
