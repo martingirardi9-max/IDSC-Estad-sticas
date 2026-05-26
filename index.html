@@ -1486,7 +1486,7 @@ footer em{color:var(--gold);font-style:normal;}
 
     <div class="scout-quick-panel">
       <div class="scout-quick-title">BÚSQUEDA RÁPIDA + COMPARATIVA</div>
-      <div class="scout-quick-text">Buscá desde los campos de Jugador A y Jugador B. Al escribir un apellido aparecen sugerencias, podés seleccionar 1 jugador para ver su ficha o 2 jugadores para comparar indicadores lado a lado.</div>
+      <div class="scout-quick-text">Buscá desde los campos de Jugador A y Jugador B. Al escribir un apellido aparecen sugerencias, podés seleccionar 1 jugador para ver su ficha o 2 jugadores para comparar indicadores lado a lado. Ahora también podés comparar y ordenar por IP10: productividad estimada cada 10 minutos según la fórmula IDSC.</div>
     </div>
 
     <!-- Modo comparativo visible, independiente de la tabla completa -->
@@ -1512,6 +1512,7 @@ footer em{color:var(--gold);font-style:normal;}
           <option value="rec_pp">↓ Recuperaciones/pp</option>
           <option value="val_pp">↓ Valoración/pp</option>
           <option value="min_pp">↓ Minutos/pp</option>
+          <option value="ip10">↓ IP10</option>
           <option value="pj">↓ PJ</option>
           <option value="t2_pct">↓ %T2</option>
           <option value="t3_pct">↓ %T3</option>
@@ -1531,6 +1532,7 @@ footer em{color:var(--gold);font-style:normal;}
         <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-right:.2rem;">COLUMNAS:</span>
         <button class="scout-col-toggle active" data-col="pj" onclick="toggleCol(this)">PJ</button>
         <button class="scout-col-toggle active" data-col="min_pp" onclick="toggleCol(this)">MIN/PP</button>
+        <button class="scout-col-toggle active" data-col="ip10" onclick="toggleCol(this)">IP10</button>
         <button class="scout-col-toggle active" data-col="pts_pp" onclick="toggleCol(this)">PTS/PP</button>
         <button class="scout-col-toggle active" data-col="reb_pp" onclick="toggleCol(this)">REB/PP</button>
         <button class="scout-col-toggle active" data-col="ast_pp" onclick="toggleCol(this)">AST/PP</button>
@@ -7103,6 +7105,34 @@ window.addEventListener('DOMContentLoaded', function() {
 <script>
 // ── SCOUTING MODULE ────────────────────────────────────────────────────
 var LNB_PLAYERS = JSON.parse(document.getElementById('lnb-data').textContent);
+
+function scoutNum(v) {
+  var n = parseFloat(String(v == null ? 0 : v).replace(',', '.'));
+  return isNaN(n) ? 0 : n;
+}
+function scoutPickNumber(p, keys) {
+  for (var i = 0; i < keys.length; i++) {
+    if (p[keys[i]] !== undefined && p[keys[i]] !== null && p[keys[i]] !== '') return scoutNum(p[keys[i]]);
+  }
+  return 0;
+}
+function scoutCalcIP10(p) {
+  var mins = scoutNum(p.min_total);
+  if (!mins) return null;
+  var pts  = scoutNum(p.pts_total);
+  var ast  = scoutNum(p.ast_total);
+  var rof  = scoutPickNumber(p, ['reb_of','reb_of_total','reb_ofensivo_total','rof_total']);
+  var rdef = scoutPickNumber(p, ['reb_def','reb_def_total','reb_defensivo_total','rdef_total']);
+  var rec  = scoutNum(p.rec_total);
+  var tap  = scoutNum(p.tap_total);
+  var perd = scoutNum(p.perd_total);
+  var frec = scoutPickNumber(p, ['frec_total','falt_rec_total','faltas_recibidas_total','frec']);
+  var fcom = scoutPickNumber(p, ['fcom_total','falt_total','faltas_cometidas_total','faltas_total']);
+  var prod = (pts * 1.0) + (ast * 1.3) + (rof * 1.3) + (rdef * 1.1) + (rec * 1.4) + (tap * 1.3) - (perd * 1.3) + (frec * 0.7) - (fcom * 0.6);
+  return Math.round((prod * 10 / mins) * 100) / 100;
+}
+LNB_PLAYERS.forEach(function(p){ p.ip10 = scoutCalcIP10(p); });
+
 var IDSC_NAMES = ["CAFFARO","FILIPPETTI","TABAREZ","VALLEJOS","ROLFI","MARCUCCI","BARRIONUEVO","CONRRADI","FERNANDEZ","PAUTASSO","ACEVEDO"];
 var scoutSelected = [];
 var scoutTableOpen = false;
@@ -7130,10 +7160,12 @@ function isIDSC(n) {
 }
 function fmtPct(v) { return (v !== null && v !== undefined) ? Math.round(v*100)+'%' : '—'; }
 function fmtN(v)   { return (v !== null && v !== undefined) ? v : '—'; }
+function fmtIP10(v) { return (v !== null && v !== undefined) ? Number(v).toFixed(2) : '—'; }
 
 var ALL_COLS = [
   {key:'pj',      label:'PJ',      fn:function(p){ return fmtN(p.pj); }},
   {key:'min_pp',  label:'MIN/PP',  fn:function(p){ return fmtN(p.min_pp); }},
+  {key:'ip10',    label:'IP10',    fn:function(p){ return fmtIP10(p.ip10); }},
   {key:'pts_pp',  label:'PTS/PP',  fn:function(p){ return fmtN(p.pts_pp); }},
   {key:'reb_pp',  label:'REB/PP',  fn:function(p){ return fmtN(p.reb_pp); }},
   {key:'ast_pp',  label:'AST/PP',  fn:function(p){ return fmtN(p.ast_pp); }},
@@ -7466,12 +7498,13 @@ window.showPage = function(id) {
 (function(){
   if (!window.LNB_PLAYERS) return;
 
-  var DEFAULT_SCOUT_COMPARE_METRICS = ['min_pp','pts_pp','reb_pp','ast_pp','rec_pp','tap_pp','perd_pp','t2_pct','t3_pct','tl_pct','val_pp'];
+  var DEFAULT_SCOUT_COMPARE_METRICS = ['min_pp','ip10','pts_pp','reb_pp','ast_pp','rec_pp','tap_pp','perd_pp','t2_pct','t3_pct','tl_pct','val_pp'];
   window.scoutCompareMetricKeys = window.scoutCompareMetricKeys || DEFAULT_SCOUT_COMPARE_METRICS.slice();
 
   var SCOUT_METRICS = [
     {key:'pj',label:'PJ',higher:true,value:function(p){return p.pj;},display:function(p){return fmtN(p.pj);},sub:function(p){return 'partidos jugados';}},
     {key:'min_pp',label:'MIN/PP',higher:true,value:function(p){return p.min_pp;},display:function(p){return fmtN(p.min_pp);},sub:function(p){return fmtN(p.min_total)+' min total';}},
+    {key:'ip10',label:'IP10',higher:true,value:function(p){return p.ip10;},display:function(p){return fmtIP10(p.ip10);},sub:function(p){return 'productividad cada 10 min';}},
     {key:'pts_pp',label:'PTS/PP',higher:true,value:function(p){return p.pts_pp;},display:function(p){return fmtN(p.pts_pp);},sub:function(p){return fmtN(p.pts_total)+' pts total';}},
     {key:'reb_pp',label:'REB/PP',higher:true,value:function(p){return p.reb_pp;},display:function(p){return fmtN(p.reb_pp);},sub:function(p){return fmtN(p.reb_total)+' reb total';}},
     {key:'reb_of_pp',label:'ROF/PP',higher:true,value:function(p){return p.reb_of_pp;},display:function(p){return fmtN(p.reb_of_pp);},sub:function(p){return fmtN(p.reb_of)+' reb of total';}},
@@ -7533,7 +7566,7 @@ window.showPage = function(id) {
       list.innerHTML = '<div class="scout-autocomplete-empty">Sin coincidencias.</div>';
     } else {
       list.innerHTML = items.map(function(p,i){
-        return '<div class="scout-autocomplete-option '+(i===0?'active':'')+'" onmousedown="event.preventDefault();selectScoutAutocomplete('+slot+','+i+')"><span>'+esc(p.nombre)+'</span><span class="meta">'+esc(p.pj)+'PJ · '+esc(p.pts_pp)+' pts</span></div>';
+        return '<div class="scout-autocomplete-option '+(i===0?'active':'')+'" onmousedown="event.preventDefault();selectScoutAutocomplete('+slot+','+i+')"><span>'+esc(p.nombre)+'</span><span class="meta">'+esc(p.pj)+'PJ · '+esc(p.pts_pp)+' pts · IP10 '+esc(fmtIP10(p.ip10))+'</span></div>';
       }).join('');
     }
     box.classList.add('open');
@@ -7781,9 +7814,9 @@ window.showPage = function(id) {
       html2 += '<div style="font-family:\'DM Mono\',monospace;font-size:.58rem;color:var(--muted);margin-top:.15rem;">Indicadores preseleccionados · Verde = mejor valor · En pérdidas y faltas, menor es mejor.</div></div>';
       html2 += closeBtn + '</div>';
       html2 += '<div class="scout-detail-grid" style="margin-bottom:.8rem;">';
-      html2 += '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:1.15rem;color:#5B9BF0;text-align:right;">'+esc(p1.nombre)+'<div style="font-family:\'DM Mono\',monospace;font-size:.58rem;color:var(--muted);font-weight:400;">'+esc(p1.pj)+'PJ · '+esc(p1.min_pp)+' min/pp</div></div>';
+      html2 += '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:1.15rem;color:#5B9BF0;text-align:right;">'+esc(p1.nombre)+'<div style="font-family:\'DM Mono\',monospace;font-size:.58rem;color:var(--muted);font-weight:400;">'+esc(p1.pj)+'PJ · '+esc(p1.min_pp)+' min/pp · IP10 '+esc(fmtIP10(p1.ip10))+'</div></div>';
       html2 += '<div class="scout-metric-name" style="font-size:.64rem;">VS</div>';
-      html2 += '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:1.15rem;color:#4AE382;">'+esc(p2.nombre)+'<div style="font-family:\'DM Mono\',monospace;font-size:.58rem;color:var(--muted);font-weight:400;">'+esc(p2.pj)+'PJ · '+esc(p2.min_pp)+' min/pp</div></div>';
+      html2 += '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:1.15rem;color:#4AE382;">'+esc(p2.nombre)+'<div style="font-family:\'DM Mono\',monospace;font-size:.58rem;color:var(--muted);font-weight:400;">'+esc(p2.pj)+'PJ · '+esc(p2.min_pp)+' min/pp · IP10 '+esc(fmtIP10(p2.ip10))+'</div></div>';
       html2 += '</div>';
 
       metrics.forEach(function(m){
