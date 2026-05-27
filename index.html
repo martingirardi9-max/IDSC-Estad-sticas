@@ -1539,6 +1539,15 @@ footer em{color:var(--gold);font-style:normal;}
     <!-- Modo comparativo visible, independiente de la tabla completa -->
     <div id="scout-compare-tools-anchor"></div>
 
+    <!-- Barra de comparación -->
+    <div id="scout-compare-bar" style="display:none;margin-top:.8rem;background:rgba(52,152,219,.08);border:1.5px solid rgba(52,152,219,.35);border-radius:12px;padding:.8rem 1.2rem;display:none;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">⚖️ COMPARANDO:</span>
+      <div id="scout-compare-names" style="display:flex;gap:.5rem;flex:1;flex-wrap:wrap;"></div>
+      <button onclick="clearScoutSelection()" style="background:transparent;border:1px solid rgba(52,152,219,.4);border-radius:8px;color:#5B9BF0;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:.35rem .8rem;cursor:pointer;white-space:nowrap;">🗑 Borrar selección</button>
+    </div>
+    <div id="scout-detail-panel" style="display:none;margin-top:1.2rem;"></div>
+
+
     <!-- Scouting avanzado: filtros de rango, Fit IDSC y matriz de oportunidad -->
     <div class="scout-advanced-panel" id="scout-advanced-panel">
       <div class="scout-advanced-head">
@@ -1674,14 +1683,6 @@ footer em{color:var(--gold);font-style:normal;}
         <div class="scout-table-wrap" id="scout-table-container"></div>
       </div>
     </div>
-
-    <!-- Barra de comparación -->
-    <div id="scout-compare-bar" style="display:none;margin-top:.8rem;background:rgba(52,152,219,.08);border:1.5px solid rgba(52,152,219,.35);border-radius:12px;padding:.8rem 1.2rem;display:none;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">⚖️ COMPARANDO:</span>
-      <div id="scout-compare-names" style="display:flex;gap:.5rem;flex:1;flex-wrap:wrap;"></div>
-      <button onclick="clearScoutSelection()" style="background:transparent;border:1px solid rgba(52,152,219,.4);border-radius:8px;color:#5B9BF0;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:.35rem .8rem;cursor:pointer;white-space:nowrap;">🗑 Borrar selección</button>
-    </div>
-    <div id="scout-detail-panel" style="display:none;margin-top:1.2rem;"></div>
 
     <div style="text-align:center;margin-top:1.5rem;">
       <button onclick="showPage('s2627')" style="background:transparent;border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.5rem 1.2rem;cursor:pointer;">← Volver a 26/27</button>
