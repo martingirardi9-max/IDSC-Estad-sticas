@@ -7958,6 +7958,7 @@ window.showPage = function(id) {
   };
 
   window.scoutRender = function(){
+    if (typeof populateScoutProfileFilter === 'function') populateScoutProfileFilter();
     ensureCompareTools();
     var nameEl = document.getElementById('sf-name');
     var sortEl = document.getElementById('sf-sort');
