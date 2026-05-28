@@ -338,6 +338,15 @@ footer em{color:var(--gold);font-style:normal;}
 .scout-stat-card.gold{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.25);}
 .scout-stat-card.blue{background:rgba(52,152,219,.08);border-color:rgba(52,152,219,.25);}
 
+.scout-fit-badge,.scout-profile-badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:.18rem .56rem;font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.35px;white-space:nowrap;border:1px solid var(--border2);background:rgba(238,242,247,.06);color:var(--muted);}
+.scout-fit-alto{background:rgba(46,204,113,.13);border-color:rgba(46,204,113,.42);color:#4AE382;}
+.scout-fit-medio{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.38);color:var(--gold);}
+.scout-fit-bajo{background:rgba(52,152,219,.10);border-color:rgba(52,152,219,.34);color:#5B9BF0;}
+.scout-fit-seguimiento{background:rgba(122,143,166,.10);border-color:rgba(122,143,166,.30);color:var(--muted);}
+.scout-profile-badge{border-color:rgba(245,166,35,.30);background:rgba(245,166,35,.08);color:var(--gold);}
+.scout-profile-badge.spacing{border-color:rgba(52,152,219,.36);background:rgba(52,152,219,.10);color:#5B9BF0;}
+.scout-profile-badge.follow{border-color:rgba(122,143,166,.30);background:rgba(122,143,166,.09);color:var(--muted);}
+
 .scout-search-box{position:relative;min-width:240px;flex:1;}
 .scout-search-box .scout-filter-input{width:100%;}
 .scout-suggestions{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:90;background:var(--navy2);border:1px solid rgba(46,204,113,.28);border-radius:12px;box-shadow:0 18px 44px rgba(0,0,0,.42);overflow:hidden;max-height:320px;overflow-y:auto;}
@@ -361,50 +370,41 @@ footer em{color:var(--gold);font-style:normal;}
 
 
 /* ── SCOUTING AVANZADO 26/27 ── */
-.scout-advanced-panel{background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(52,152,219,.04));border:1px solid rgba(46,204,113,.22);border-radius:16px;padding:1.05rem 1.15rem;margin:0 0 1rem;}
-.scout-advanced-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.85rem;}
-.scout-advanced-title{font-family:'Bebas Neue',sans-serif;font-size:1.12rem;letter-spacing:.6px;color:#4AE382;line-height:1;}
-.scout-advanced-sub{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.22rem;line-height:1.45;}
-.scout-advanced-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.65rem;align-items:end;}
-.scout-range-box{background:rgba(10,22,40,.36);border:1px solid var(--border);border-radius:12px;padding:.72rem .78rem;}
-.scout-range-label{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);letter-spacing:1px;margin-bottom:.45rem;text-transform:uppercase;display:flex;justify-content:space-between;gap:.4rem;}
-.scout-range-inputs{display:grid;grid-template-columns:1fr 1fr;gap:.42rem;}
-.scout-range-inputs input,.scout-profile-select{width:100%;background:var(--navy2);border:1px solid var(--border2);border-radius:8px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.44rem .58rem;outline:none;}
-.scout-range-inputs input:focus,.scout-profile-select:focus{border-color:rgba(46,204,113,.45);}
-.scout-advanced-actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
-.scout-mini-btn{background:rgba(238,242,247,.06);border:1px solid var(--border2);border-radius:8px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.72rem;padding:.42rem .75rem;cursor:pointer;transition:all .2s;}
-.scout-mini-btn:hover{border-color:rgba(46,204,113,.45);color:#4AE382;background:rgba(46,204,113,.08);}
-.scout-mini-btn.gold{border-color:rgba(245,166,35,.35);color:var(--gold);background:rgba(245,166,35,.08);}
-.scout-advanced-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin-top:.85rem;}
-.scout-kpi-card{background:rgba(10,22,40,.45);border:1px solid var(--border);border-radius:12px;padding:.75rem .85rem;}
-.scout-kpi-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-.scout-kpi-val{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;color:var(--white);margin-top:.22rem;}
-.scout-kpi-note{font-size:.62rem;color:var(--muted);margin-top:.18rem;line-height:1.35;}
-.scout-opportunity-wrap{display:grid;grid-template-columns:1fr;gap:1rem;margin:1rem 0;}
-#scout-opportunity-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.6rem;}
-.scout-opportunity-list{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1.15rem;}
-.scout-matrix-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1rem;}
-.scout-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:var(--gold);margin-bottom:.25rem;}
-.scout-card-sub{font-size:.7rem;color:var(--muted);line-height:1.5;margin-bottom:.75rem;}
-.scout-op-row{display:flex;align-items:center;gap:.65rem;padding:.7rem .75rem;border:1px solid rgba(255,255,255,.06);border-radius:11px;background:rgba(10,22,40,.28);transition:all .15s;}
-.scout-op-row:hover{border-color:rgba(46,204,113,.25);background:rgba(46,204,113,.055);}
-.scout-op-row:last-child{border-bottom:1px solid rgba(255,255,255,.06);}
-.scout-op-rank{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);min-width:1.65rem;}
-.scout-op-main{flex:1;min-width:0;}
-.scout-op-name{font-size:.78rem;font-weight:700;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.scout-op-meta{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.12rem;}
-.scout-op-fit{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#4AE382;min-width:2.5rem;text-align:right;}
-.scout-tag-pill{display:inline-flex;align-items:center;gap:.25rem;border-radius:20px;padding:.14rem .48rem;font-family:'DM Mono',monospace;font-size:.52rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:var(--muted);white-space:nowrap;}
-.scout-tag-green{color:#4AE382;background:rgba(46,204,113,.1);border-color:rgba(46,204,113,.3);}
-.scout-tag-blue{color:#5B9BF0;background:rgba(52,152,219,.1);border-color:rgba(52,152,219,.3);}
-.scout-tag-gold{color:var(--gold);background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.3);}
-.scout-tag-red{color:#F1948A;background:rgba(231,76,60,.1);border-color:rgba(231,76,60,.28);}
-.scout-matrix-card canvas{width:100%;height:330px;display:block;background:rgba(10,22,40,.32);border:1px solid rgba(255,255,255,.06);border-radius:12px;}
-.scout-matrix-legend{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.55rem;font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);}
-.scout-shortlist-btn{background:transparent;border:1px solid rgba(245,166,35,.32);color:var(--gold);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.66rem;padding:.22rem .48rem;cursor:pointer;}
-.scout-shortlist-btn:hover{background:rgba(245,166,35,.1);}
-@media(max-width:780px){.scout-opportunity-wrap{grid-template-columns:1fr}.scout-matrix-card canvas{height:280px}}
-
+.scout-advanced-panel{background:linear-gradient(135deg,rgba(46,204,113,.07),rgba(52,152,219,.035));border:1.5px solid rgba(46,204,113,.24);border-radius:18px;padding:1.35rem 1.45rem;margin:1.15rem 0 1rem;box-shadow:0 18px 54px rgba(0,0,0,.18);}
+.scout-advanced-head,.scout-top-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem;}
+.scout-advanced-title,.scout-top-title{font-family:'Bebas Neue',sans-serif;font-size:1.28rem;letter-spacing:.8px;color:#4AE382;line-height:1;}
+.scout-advanced-sub,.scout-top-sub{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:.35rem;}
+.scout-adv-clear{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.42);border-radius:10px;color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;padding:.62rem 1rem;cursor:pointer;transition:all .18s;}
+.scout-adv-clear:hover{background:rgba(245,166,35,.15);}
+.scout-advanced-grid{display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));gap:.75rem;margin-bottom:.85rem;}
+.scout-adv-card{background:rgba(10,22,40,.48);border:1px solid rgba(238,242,247,.08);border-radius:14px;padding:.82rem .88rem;display:flex;flex-direction:column;gap:.55rem;min-height:92px;}
+.scout-adv-card span{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;display:flex;justify-content:space-between;gap:.8rem;}
+.scout-adv-card span em{font-style:normal;color:var(--muted);opacity:.9;white-space:nowrap;}
+.scout-adv-card div{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.scout-adv-card input,.scout-adv-card select{width:100%;background:#101D2F;border:1px solid rgba(122,143,166,.32);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.86rem;padding:.62rem .7rem;outline:none;}
+.scout-adv-card input:focus,.scout-adv-card select:focus{border-color:rgba(46,204,113,.55);box-shadow:0 0 0 2px rgba(46,204,113,.07);}
+.scout-adv-profile{max-width:240px;}
+.scout-presets{display:flex;gap:.55rem;flex-wrap:wrap;margin:.3rem 0 1rem;}
+.scout-presets button{background:rgba(238,242,247,.07);border:1px solid rgba(238,242,247,.15);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;padding:.5rem .82rem;cursor:pointer;}
+.scout-presets button:hover{border-color:rgba(245,166,35,.38);color:var(--gold);}
+.scout-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;}
+.scout-kpi{background:rgba(15,30,48,.8);border:1px solid rgba(238,242,247,.08);border-radius:14px;padding:1rem 1.05rem;min-height:96px;}
+.scout-kpi span{display:block;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1.5px;margin-bottom:.35rem;}
+.scout-kpi strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.85rem;color:var(--white);line-height:1;}
+.scout-kpi strong.green{color:#4AE382;}.scout-kpi strong.gold{color:var(--gold);font-size:1.25rem;line-height:1.05;}
+.scout-kpi small{display:block;color:var(--muted);font-size:.74rem;line-height:1.45;margin-top:.4rem;}
+.scout-top-panel{background:var(--navy2);border:1px solid var(--border);border-radius:18px;padding:1.35rem 1.45rem;margin:1rem 0 1rem;}
+.scout-top-title{color:var(--gold);}
+.scout-top-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;}
+.scout-top-card{background:rgba(10,22,40,.55);border:1px solid rgba(238,242,247,.08);border-radius:14px;padding:.95rem 1rem;display:grid;grid-template-columns:34px 1fr auto;gap:.75rem;align-items:center;cursor:pointer;transition:all .18s;}
+.scout-top-card:hover{border-color:rgba(245,166,35,.35);background:rgba(22,38,56,.75);transform:translateY(-1px);}
+.scout-top-rank{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);}
+.scout-top-name{font-weight:800;font-size:.86rem;color:var(--white);margin-bottom:.18rem;}
+.scout-top-meta{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);line-height:1.35;}
+.scout-top-score{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;color:#4AE382;line-height:1;}
+.scout-top-empty{grid-column:1/-1;text-align:center;border:1px dashed var(--border2);border-radius:14px;color:var(--muted);font-size:.82rem;padding:1.2rem;}
+@media(max-width:1100px){.scout-advanced-grid{grid-template-columns:repeat(3,1fr)}.scout-top-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.scout-advanced-grid,.scout-kpi-grid,.scout-top-grid{grid-template-columns:1fr}.scout-adv-profile{max-width:none}}
 </style>
 </head>
 <body>
@@ -1209,7 +1209,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
     </div>
-    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 28/05/2026 · P36</div></div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 27/05/2026 · P36</div></div>
     <div class="standings-table">
       <div class="standings-header">
         <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
@@ -1524,7 +1524,7 @@ footer em{color:var(--gold);font-style:normal;}
   <div class="page-header">
     <div class="eyebrow">Liga Nacional · Temporada 2026/27</div>
     <h2>SCOUTING <em style="color:#4AE382;">LNB</em></h2>
-    <p>289 jugadores · Filtrá, elegí columnas, seleccioná 2 jugadores y compará indicadores clave lado a lado.</p>
+    <p>289 jugadores · Comparativa, filtros avanzados, ranking de oportunidades y tabla completa para el armado 26/27.</p>
   </div>
   <div class="section">
 
@@ -1533,144 +1533,69 @@ footer em{color:var(--gold);font-style:normal;}
 
     <div class="scout-quick-panel">
       <div class="scout-quick-title">BÚSQUEDA RÁPIDA + COMPARATIVA</div>
-      <div class="scout-quick-text">Buscá desde los campos de Jugador A y Jugador B. Al escribir un apellido aparecen sugerencias, podés seleccionar 1 jugador para ver su ficha o 2 jugadores para comparar indicadores lado a lado. Ahora también podés comparar y ordenar por IP10: productividad estimada cada 10 minutos según la fórmula IDSC.</div>
+      <div class="scout-quick-text">Buscá desde los campos de Jugador A y Jugador B. Al escribir un apellido aparecen sugerencias; podés seleccionar 1 jugador para ver su ficha o 2 jugadores para comparar indicadores lado a lado. También se puede comparar y ordenar por IP10, FIT IDSC, Nivel FIT y Perfil detectado.</div>
     </div>
 
-    <!-- Modo comparativo visible, independiente de la tabla completa -->
+    <!-- 1) Modo comparativo -->
     <div id="scout-compare-tools-anchor"></div>
 
     <!-- Barra de comparación -->
-    <div id="scout-compare-bar" style="display:none;margin-top:.8rem;background:rgba(52,152,219,.08);border:1.5px solid rgba(52,152,219,.35);border-radius:12px;padding:.8rem 1.2rem;display:none;align-items:center;gap:1rem;flex-wrap:wrap;">
+    <div id="scout-compare-bar" style="display:none;margin-top:.8rem;background:rgba(52,152,219,.08);border:1.5px solid rgba(52,152,219,.35);border-radius:12px;padding:.8rem 1.2rem;align-items:center;gap:1rem;flex-wrap:wrap;">
       <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#5B9BF0;letter-spacing:1px;">⚖️ COMPARANDO:</span>
       <div id="scout-compare-names" style="display:flex;gap:.5rem;flex:1;flex-wrap:wrap;"></div>
       <button onclick="clearScoutSelection()" style="background:transparent;border:1px solid rgba(52,152,219,.4);border-radius:8px;color:#5B9BF0;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:.35rem .8rem;cursor:pointer;white-space:nowrap;">🗑 Borrar selección</button>
     </div>
+
+    <!-- 2) Comparativa de jugadores -->
     <div id="scout-detail-panel" style="display:none;margin-top:1.2rem;"></div>
 
-
-    <!-- Scouting avanzado: filtros de rango, Fit IDSC y matriz de oportunidad -->
+    <!-- 3) Scouting avanzado -->
     <div class="scout-advanced-panel" id="scout-advanced-panel">
       <div class="scout-advanced-head">
         <div>
           <div class="scout-advanced-title">🎯 SCOUTING AVANZADO PARA ARMADO 26/27</div>
-          <div class="scout-advanced-sub">Filtrá por rangos libres, encontrá oportunidades ocultas y medí encaje con el modelo IDSC. Los filtros afectan la tabla, rankings y matriz.</div>
+          <div class="scout-advanced-sub">Filtrá por rangos libres, encontrá oportunidades ocultas y medí encaje con el modelo IDSC. Los filtros afectan la tabla, rankings y oportunidades.</div>
         </div>
-        <button class="scout-mini-btn gold" onclick="scoutResetAdvancedFilters()" type="button">Limpiar filtros avanzados</button>
+        <button class="scout-adv-clear" onclick="resetScoutAdvancedFilters()">Limpiar filtros avanzados</button>
       </div>
+
       <div class="scout-advanced-grid">
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>IP10</span><span>mín / máx</span></div>
-          <div class="scout-range-inputs"><input id="sf-ip10-min" type="number" step="0.1" placeholder="Ej. 4" oninput="scoutRender()"><input id="sf-ip10-max" type="number" step="0.1" placeholder="Ej. 8" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>MIN/PP</span><span>rol / uso</span></div>
-          <div class="scout-range-inputs"><input id="sf-min-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="sf-min-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>PTS/PP</span><span>anotación</span></div>
-          <div class="scout-range-inputs"><input id="sf-pts-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="sf-pts-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>REB/PP</span><span>interioridad</span></div>
-          <div class="scout-range-inputs"><input id="sf-reb-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="sf-reb-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>AST/PP</span><span>creación</span></div>
-          <div class="scout-range-inputs"><input id="sf-ast-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="sf-ast-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>%T3 mínimo</span><span>tiro</span></div>
-          <div class="scout-range-inputs"><input id="sf-t3-min" type="number" step="1" placeholder="Ej. 33" oninput="scoutRender()"><input id="sf-perd-max" type="number" step="0.1" placeholder="PERD máx" oninput="scoutRender()"></div>
-        </div>
-        <div class="scout-range-box">
-          <div class="scout-range-label"><span>Perfil buscado</span><span>rol</span></div>
-          <select class="scout-profile-select" id="sf-profile" onchange="scoutRender()">
-            <option value="all">Todos los perfiles</option>
-            <option value="oportunidad">Oportunidad oculta: IP10 alto + pocos minutos</option>
-            <option value="consolidado">Consolidado: productividad + minutos</option>
-            <option value="creador">Base / generador: AST altas + bajo riesgo</option>
-            <option value="tirador">Tirador / spacing: buen T3 + puntos</option>
-            <option value="interno">Interior: rebote + protección</option>
-            <option value="energia">Energía de rotación: impacto en pocos minutos</option>
-            <option value="bajo_riesgo">Bajo riesgo: pocas pérdidas</option>
-          </select>
-        </div>
+        <label class="scout-adv-card"><span>IP10 <em>MÍN / MÁX</em></span><div><input id="adv-ip10-min" type="number" step="0.1" placeholder="Ej. 4" oninput="scoutRender()"><input id="adv-ip10-max" type="number" step="0.1" placeholder="Ej. 8" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card"><span>MIN/PP <em>ROL / USO</em></span><div><input id="adv-min-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="adv-min-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card"><span>PTS/PP <em>ANOTACIÓN</em></span><div><input id="adv-pts-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="adv-pts-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card"><span>REB/PP <em>INTERIORIDAD</em></span><div><input id="adv-reb-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="adv-reb-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card"><span>AST/PP <em>CREACIÓN</em></span><div><input id="adv-ast-min" type="number" step="0.1" placeholder="mín" oninput="scoutRender()"><input id="adv-ast-max" type="number" step="0.1" placeholder="máx" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card scout-adv-small"><span>%T3 MÍNIMO <em>TIRO</em></span><div><input id="adv-t3-min" type="number" step="1" placeholder="Ej. 33" oninput="scoutRender()"><input id="adv-perd-max" type="number" step="0.1" placeholder="PERD máx" oninput="scoutRender()"></div></label>
+        <label class="scout-adv-card scout-adv-profile"><span>PERFIL BUSCADO <em>ROL</em></span><select id="adv-profile" onchange="scoutRender()"><option value="">Todos los perfiles</option></select></label>
       </div>
-      <div class="scout-advanced-actions">
-        <button class="scout-mini-btn" onclick="scoutPresetOpportunity()" type="button">Preset: oportunidades ocultas</button>
-        <button class="scout-mini-btn" onclick="scoutPresetShooter()" type="button">Preset: tiradores</button>
-        <button class="scout-mini-btn" onclick="scoutPresetCreator()" type="button">Preset: creadores</button>
-        <button class="scout-mini-btn" onclick="scoutPresetInterior()" type="button">Preset: interiores</button>
-      </div>
-      <div class="scout-advanced-summary" id="scout-advanced-summary"></div>
-    </div>
 
-    <div class="scout-opportunity-wrap">
-      <div class="scout-opportunity-list">
-        <div class="scout-card-title">⭐ TOP OPORTUNIDADES SEGÚN FILTROS</div>
-        <div class="scout-card-sub">Ranking dinámico por Fit IDSC, IP10, muestra y rol. Se amplía la lista para priorizar mejor la primera preselección.</div>
-        <div id="scout-opportunity-list"></div>
+      <div class="scout-presets">
+        <button onclick="applyScoutPreset('hidden')">Preset: oportunidades ocultas</button>
+        <button onclick="applyScoutPreset('shooters')">Preset: tiradores</button>
+        <button onclick="applyScoutPreset('creators')">Preset: creadores</button>
+        <button onclick="applyScoutPreset('bigs')">Preset: interiores</button>
+      </div>
+
+      <div class="scout-kpi-grid">
+        <div class="scout-kpi"><span>JUGADORES FILTRADOS</span><strong id="adv-kpi-count">—</strong><small>Base actual según rangos y perfil.</small></div>
+        <div class="scout-kpi"><span>IP10 PROMEDIO</span><strong id="adv-kpi-ip10">—</strong><small>Promedio del universo filtrado.</small></div>
+        <div class="scout-kpi"><span>OPORTUNIDADES OCULTAS</span><strong id="adv-kpi-hidden" class="green">—</strong><small>IP10 ≥ 6 con ≤ 18 min/pp.</small></div>
+        <div class="scout-kpi"><span>MEJOR FIT IDSC</span><strong id="adv-kpi-best" class="gold">—</strong><small id="adv-kpi-best-sub">Score — · Preseleccionados: 0</small></div>
       </div>
     </div>
 
-
-    <!-- Configuración de tabla: queda entre comparativa y tabla completa -->
-    <div style="background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;margin:0 0 1rem;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem;">
+    <!-- 4) Top oportunidades según filtros -->
+    <div class="scout-top-panel">
+      <div class="scout-top-head">
         <div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:var(--gold);line-height:1;">CONFIGURACIÓN DE TABLA COMPLETA</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.18rem;">Estos controles afectan la tabla desplegable de abajo.</div>
-        </div>
-        <span class="scout-count" id="sf-count"></span>
-      </div>
-
-      <div class="scout-filters" style="margin-bottom:.75rem;">
-        <select class="scout-filter-select" id="sf-sort" onchange="scoutRender()">
-          <option value="nombre">Jugador A → Z</option>
-          <option value="pts_pp">↓ Puntos/pp</option>
-          <option value="reb_pp">↓ Rebotes/pp</option>
-          <option value="ast_pp">↓ Asistencias/pp</option>
-          <option value="tap_pp">↓ Tapones/pp</option>
-          <option value="rec_pp">↓ Recuperaciones/pp</option>
-          <option value="val_pp">↓ Valoración/pp</option>
-          <option value="min_pp">↓ Minutos/pp</option>
-          <option value="ip10">↓ IP10</option>
-          <option value="fit_idsc">↓ Fit IDSC</option>
-          <option value="pj">↓ PJ</option>
-          <option value="t2_pct">↓ %T2</option>
-          <option value="t3_pct">↓ %T3</option>
-          <option value="tl_pct">↓ %TL</option>
-        </select>
-        <select class="scout-filter-select" id="sf-dir" onchange="scoutRender()">
-          <option value="desc">Mayor → Menor</option>
-          <option value="asc">Menor → Mayor</option>
-        </select>
-        <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);">
-          <span>PJ≥</span>
-          <input class="scout-filter-input" id="sf-pj" type="number" value="1" min="1" max="36" oninput="scoutRender()" style="width:50px;text-align:center;">
+          <div class="scout-top-title">⭐ TOP OPORTUNIDADES SEGÚN FILTROS</div>
+          <div class="scout-top-sub">Ranking dinámico por Fit IDSC, IP10, muestra y rol. Se amplía la lista para priorizar mejor la primera preselección.</div>
         </div>
       </div>
-
-      <div style="display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;">
-        <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-right:.2rem;">COLUMNAS:</span>
-        <button class="scout-col-toggle active" data-col="pj" onclick="toggleCol(this)">PJ</button>
-        <button class="scout-col-toggle active" data-col="min_pp" onclick="toggleCol(this)">MIN/PP</button>
-        <button class="scout-col-toggle active" data-col="ip10" onclick="toggleCol(this)">IP10</button>
-        <button class="scout-col-toggle active" data-col="pts_pp" onclick="toggleCol(this)">PTS/PP</button>
-        <button class="scout-col-toggle active" data-col="reb_pp" onclick="toggleCol(this)">REB/PP</button>
-        <button class="scout-col-toggle active" data-col="ast_pp" onclick="toggleCol(this)">AST/PP</button>
-        <button class="scout-col-toggle" data-col="tap_pp" onclick="toggleCol(this)">TAP/PP</button>
-        <button class="scout-col-toggle" data-col="rec_pp" onclick="toggleCol(this)">REC/PP</button>
-        <button class="scout-col-toggle" data-col="perd_pp" onclick="toggleCol(this)">PERD/PP</button>
-        <button class="scout-col-toggle active" data-col="t2_pct" onclick="toggleCol(this)">%T2</button>
-        <button class="scout-col-toggle active" data-col="t3_pct" onclick="toggleCol(this)">%T3</button>
-        <button class="scout-col-toggle" data-col="tl_pct" onclick="toggleCol(this)">%TL</button>
-        <button class="scout-col-toggle" data-col="falt_pp" onclick="toggleCol(this)">FALT/PP</button>
-        <button class="scout-col-toggle active" data-col="val_pp" onclick="toggleCol(this)">VAL/PP</button>
-      </div>
+      <div class="scout-top-grid" id="scout-top-grid"></div>
     </div>
 
-    <!-- Tabla opcional -->
+    <!-- 5) Tabla completa -->
     <div class="scout-table-accordion">
       <button class="scout-table-toggle" onclick="toggleScoutTable()" type="button">
         <div>
@@ -1680,6 +1605,49 @@ footer em{color:var(--gold);font-style:normal;}
         <span class="scout-table-toggle-pill" id="scout-table-state">Mostrar tabla</span>
       </button>
       <div class="scout-table-panel" id="scout-table-panel">
+        <div style="background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;margin:0 0 1rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem;">
+            <div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:var(--gold);line-height:1;">CONFIGURACIÓN DE TABLA COMPLETA</div>
+              <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.18rem;">Orden, dirección, PJ mínimo y columnas visibles. También respeta los filtros avanzados de arriba.</div>
+            </div>
+            <span class="scout-count" id="sf-count"></span>
+          </div>
+          <div class="scout-filters" style="margin-bottom:.75rem;">
+            <select class="scout-filter-select" id="sf-sort" onchange="scoutRender()">
+              <option value="fit_idsc">↓ FIT IDSC</option>
+              <option value="ip10">↓ IP10</option>
+              <option value="nombre">Jugador A → Z</option>
+              <option value="pts_pp">↓ Puntos/pp</option>
+              <option value="reb_pp">↓ Rebotes/pp</option>
+              <option value="ast_pp">↓ Asistencias/pp</option>
+              <option value="tap_pp">↓ Tapones/pp</option>
+              <option value="rec_pp">↓ Recuperaciones/pp</option>
+              <option value="val_pp">↓ Valoración/pp</option>
+              <option value="min_pp">↓ Minutos/pp</option>
+              <option value="perfil_detectado">Perfil detectado A → Z</option>
+              <option value="fit_nivel">Nivel FIT A → Z</option>
+              <option value="pj">↓ PJ</option>
+              <option value="t2_pct">↓ %T2</option>
+              <option value="t3_pct">↓ %T3</option>
+              <option value="tl_pct">↓ %TL</option>
+            </select>
+            <select class="scout-filter-select" id="sf-dir" onchange="scoutRender()">
+              <option value="desc">Mayor → Menor</option>
+              <option value="asc">Menor → Mayor</option>
+            </select>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);"><span>PJ≥</span><input class="scout-filter-input" id="sf-pj" type="number" value="1" min="1" max="36" oninput="scoutRender()" style="width:58px;text-align:center;"></div>
+            <select class="scout-filter-select" id="sf-fit-level" onchange="scoutRender()" title="Filtrar por nivel FIT IDSC">
+              <option value="">Todos los FIT</option><option value="Alto">FIT Alto</option><option value="Medio">FIT Medio</option><option value="Bajo">FIT Bajo</option><option value="Seguimiento">FIT Seguimiento</option>
+            </select>
+            <select class="scout-filter-select" id="sf-profile" onchange="scoutRender()" title="Filtrar por perfil detectado"><option value="">Todos los perfiles</option></select>
+            <button type="button" onclick="resetScoutFilters()" style="background:rgba(238,242,247,.06);border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;padding:.45rem .8rem;cursor:pointer;">Limpiar tabla</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;">
+            <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:1px;margin-right:.2rem;">COLUMNAS:</span>
+            <button class="scout-col-toggle active" data-col="perfil_detectado" onclick="toggleCol(this)">PERFIL DET.</button><button class="scout-col-toggle active" data-col="fit_idsc" onclick="toggleCol(this)">FIT IDSC</button><button class="scout-col-toggle active" data-col="fit_nivel" onclick="toggleCol(this)">NIVEL FIT</button><button class="scout-col-toggle active" data-col="pj" onclick="toggleCol(this)">PJ</button><button class="scout-col-toggle active" data-col="min_pp" onclick="toggleCol(this)">MIN/PP</button><button class="scout-col-toggle active" data-col="ip10" onclick="toggleCol(this)">IP10</button><button class="scout-col-toggle active" data-col="pts_pp" onclick="toggleCol(this)">PTS/PP</button><button class="scout-col-toggle active" data-col="reb_pp" onclick="toggleCol(this)">REB/PP</button><button class="scout-col-toggle active" data-col="ast_pp" onclick="toggleCol(this)">AST/PP</button><button class="scout-col-toggle" data-col="tap_pp" onclick="toggleCol(this)">TAP/PP</button><button class="scout-col-toggle" data-col="rec_pp" onclick="toggleCol(this)">REC/PP</button><button class="scout-col-toggle" data-col="perd_pp" onclick="toggleCol(this)">PERD/PP</button><button class="scout-col-toggle active" data-col="t2_pct" onclick="toggleCol(this)">%T2</button><button class="scout-col-toggle active" data-col="t3_pct" onclick="toggleCol(this)">%T3</button><button class="scout-col-toggle" data-col="tl_pct" onclick="toggleCol(this)">%TL</button><button class="scout-col-toggle" data-col="falt_pp" onclick="toggleCol(this)">FALT/PP</button><button class="scout-col-toggle active" data-col="val_pp" onclick="toggleCol(this)">VAL/PP</button>
+          </div>
+        </div>
         <div class="scout-table-wrap" id="scout-table-container"></div>
       </div>
     </div>
@@ -7248,6 +7216,75 @@ function scoutCalcIP10(p) {
 }
 LNB_PLAYERS.forEach(function(p){ p.ip10 = scoutCalcIP10(p); });
 
+function scoutClamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+function scoutRatio(n, d) { n = scoutNum(n); d = scoutNum(d); return d ? n / d : 0; }
+function scoutFitNivel(score) {
+  score = scoutNum(score);
+  if (score >= 76) return 'Alto';
+  if (score >= 51) return 'Medio';
+  if (score >= 26) return 'Bajo';
+  return 'Seguimiento';
+}
+function scoutFitScore(p) {
+  var existing = p.fit_idsc || p.fit_IDSC || p.fit || p.FIT_IDSC;
+  if (existing !== undefined && existing !== null && existing !== '') return Math.round(scoutClamp(scoutNum(existing), 0, 100));
+  var ip10 = scoutNum(p.ip10);
+  var val = scoutNum(p.val_pp);
+  var pts = scoutNum(p.pts_pp);
+  var reb = scoutNum(p.reb_pp);
+  var ast = scoutNum(p.ast_pp);
+  var rec = scoutNum(p.rec_pp);
+  var tap = scoutNum(p.tap_pp);
+  var perd = scoutNum(p.perd_pp);
+  var min = scoutNum(p.min_pp);
+  var pj = scoutNum(p.pj);
+  var t2 = scoutNum(p.t2_pct);
+  var t3 = scoutNum(p.t3_pct);
+  var sample = scoutClamp((pj / 28) * 0.65 + (min / 24) * 0.35, 0, 1);
+  var production = scoutClamp(ip10 / 10.5, 0, 1) * 34 + scoutClamp(val / 16, 0, 1) * 20 + scoutClamp(pts / 16, 0, 1) * 10;
+  var balance = scoutClamp(reb / 6, 0, 1) * 8 + scoutClamp(ast / 4, 0, 1) * 8 + scoutClamp((rec + tap) / 1.8, 0, 1) * 8;
+  var efficiency = scoutClamp(t2 / 0.62, 0, 1) * 5 + scoutClamp(t3 / 0.38, 0, 1) * 5 + scoutClamp((2.2 - perd) / 2.2, 0, 1) * 2;
+  var score = (production + balance + efficiency) * (0.72 + 0.28 * sample);
+  return Math.round(scoutClamp(score, 0, 100));
+}
+function scoutDetectProfile(p) {
+  var pj = scoutNum(p.pj), min = scoutNum(p.min_pp), ip10 = scoutNum(p.ip10), val = scoutNum(p.val_pp);
+  var pts = scoutNum(p.pts_pp), reb = scoutNum(p.reb_pp), rof = scoutNum(p.reb_of_pp), ast = scoutNum(p.ast_pp);
+  var rec = scoutNum(p.rec_pp), tap = scoutNum(p.tap_pp), perd = scoutNum(p.perd_pp), t2 = scoutNum(p.t2_pct), t3 = scoutNum(p.t3_pct);
+  var astPerd = scoutRatio(ast, perd);
+  if (pj < 8 || min < 5) return 'Seguimiento';
+  if (ip10 >= 8 && val >= 10 && min >= 18 && pj >= 18) return 'Producción confiable';
+  if (pts >= 14 && min >= 22) return 'Anotador principal';
+  if ((t3 >= 0.36 && pts >= 7) || (t3 >= 0.34 && min >= 15 && pts >= 6)) return 'Tirador / spacing';
+  if (ast >= 3 || (ast >= 2.4 && astPerd >= 1.4)) return 'Generador';
+  if ((reb >= 5.5 && t2 >= 0.55) || (rof >= 1.5 && reb >= 4.5)) return 'Interior productivo';
+  if (tap >= 0.6) return 'Protector de aro';
+  if (reb >= 5.5) return 'Rebotero';
+  if ((rec >= 1.1 || tap >= 0.35) && perd <= 1.4 && min >= 15) return 'Defensivo / energía';
+  if (min < 18 && ip10 >= 7.5) return 'Rotación eficiente';
+  if (ip10 >= 6.5 && val >= 7) return 'Producción confiable';
+  return 'Seguimiento';
+}
+function scoutProfileClass(label) {
+  label = String(label || '').toLowerCase();
+  if (label.indexOf('spacing') !== -1 || label.indexOf('tirador') !== -1) return ' spacing';
+  if (label.indexOf('seguimiento') !== -1) return ' follow';
+  return '';
+}
+function scoutFitClass(label) { return 'scout-fit-' + String(label || 'seguimiento').toLowerCase().replace(/í/g,'i').replace(/ /g,'-'); }
+function scoutBadge(label, type) {
+  var cls = type === 'fit' ? 'scout-fit-badge ' + scoutFitClass(label) : 'scout-profile-badge' + scoutProfileClass(label);
+  return '<span class="' + cls + '">' + label + '</span>';
+}
+function scoutInitDerivedFields() {
+  LNB_PLAYERS.forEach(function(p){
+    p.fit_idsc = scoutFitScore(p);
+    p.fit_nivel = scoutFitNivel(p.fit_idsc);
+    p.perfil_detectado = scoutDetectProfile(p);
+  });
+}
+scoutInitDerivedFields();
+
 var IDSC_NAMES = ["CAFFARO","FILIPPETTI","TABAREZ","VALLEJOS","ROLFI","MARCUCCI","BARRIONUEVO","CONRRADI","FERNANDEZ","PAUTASSO","ACEVEDO"];
 var scoutSelected = [];
 var scoutTableOpen = false;
@@ -7278,6 +7315,9 @@ function fmtN(v)   { return (v !== null && v !== undefined) ? v : '—'; }
 function fmtIP10(v) { return (v !== null && v !== undefined) ? Number(v).toFixed(2) : '—'; }
 
 var ALL_COLS = [
+  {key:'perfil_detectado', label:'PERFIL DET.', fn:function(p){ return p.perfil_detectado || '—'; }},
+  {key:'fit_idsc', label:'FIT IDSC', fn:function(p){ return fmtN(p.fit_idsc); }},
+  {key:'fit_nivel', label:'NIVEL FIT', fn:function(p){ return p.fit_nivel || '—'; }},
   {key:'pj',      label:'PJ',      fn:function(p){ return fmtN(p.pj); }},
   {key:'min_pp',  label:'MIN/PP',  fn:function(p){ return fmtN(p.min_pp); }},
   {key:'ip10',    label:'IP10',    fn:function(p){ return fmtIP10(p.ip10); }},
@@ -7307,6 +7347,32 @@ function getActiveCols() {
   return active;
 }
 
+
+
+function populateScoutProfileFilter() {
+  var targets = ['sf-profile','adv-profile'];
+  var profiles = Array.from(new Set(LNB_PLAYERS.map(function(p){ return p.perfil_detectado; }).filter(Boolean))).sort(function(a,b){ return a.localeCompare(b,'es'); });
+  targets.forEach(function(id){
+    var el = document.getElementById(id);
+    if (!el || el.getAttribute('data-ready') === '1') return;
+    profiles.forEach(function(profile){
+      var opt = document.createElement('option');
+      opt.value = profile;
+      opt.textContent = profile;
+      el.appendChild(opt);
+    });
+    el.setAttribute('data-ready', '1');
+  });
+}
+window.resetScoutFilters = function(){
+  var sortEl = document.getElementById('sf-sort'), dirEl = document.getElementById('sf-dir'), pjEl = document.getElementById('sf-pj'), fitEl = document.getElementById('sf-fit-level'), profileEl = document.getElementById('sf-profile');
+  if (sortEl) sortEl.value = 'fit_idsc';
+  if (dirEl) dirEl.value = 'desc';
+  if (pjEl) pjEl.value = 1;
+  if (fitEl) fitEl.value = '';
+  if (profileEl) profileEl.value = '';
+  scoutRender();
+};
 
 function updateScoutTableSummary(total, nameFilter) {
   var summary = document.getElementById('scout-table-summary');
@@ -7465,6 +7531,8 @@ window.scoutClick = function(idx) {
 
 function allStats(p) {
   return [
+    {l:'PERFIL',  v:p.perfil_detectado || '—', raw:0, t:'detectado por reglas estadísticas'},
+    {l:'FIT IDSC',v:fmtN(p.fit_idsc), raw:p.fit_idsc, t:(p.fit_nivel || '—')},
     {l:'PTS/PP',  v:fmtN(p.pts_pp),      raw:p.pts_pp,  t:fmtN(p.pts_total)+' tot'},
     {l:'REB/PP',  v:fmtN(p.reb_pp),      raw:p.reb_pp,  t:fmtN(p.reb_total)+' ('+fmtN(p.reb_of)+' of / '+fmtN(p.reb_def)+' def)'},
     {l:'AST/PP',  v:fmtN(p.ast_pp),      raw:p.ast_pp,  t:fmtN(p.ast_total)+' tot'},
@@ -7566,6 +7634,82 @@ window.showPage = function(id) {
 </script>
 
 
+
+<script>
+/* ── SCOUTING AVANZADO HELPERS ───────────────────────────────────────── */
+(function(){
+  function numFrom(id){ var el=document.getElementById(id); if(!el || el.value==='') return null; var n=parseFloat(String(el.value).replace(',','.')); return isNaN(n)?null:n; }
+  function val(p,k){ return Number(p && p[k]) || 0; }
+  function esc2(s){ return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function passRange(v,min,max){ v=Number(v)||0; if(min!==null && v<min) return false; if(max!==null && v>max) return false; return true; }
+  window.getScoutAdvancedFilteredData = function(data){
+    data = (data || window.LNB_PLAYERS || []).slice();
+    var ipMin=numFrom('adv-ip10-min'), ipMax=numFrom('adv-ip10-max');
+    var minMin=numFrom('adv-min-min'), minMax=numFrom('adv-min-max');
+    var ptsMin=numFrom('adv-pts-min'), ptsMax=numFrom('adv-pts-max');
+    var rebMin=numFrom('adv-reb-min'), rebMax=numFrom('adv-reb-max');
+    var astMin=numFrom('adv-ast-min'), astMax=numFrom('adv-ast-max');
+    var t3Min=numFrom('adv-t3-min'); if(t3Min !== null) t3Min = t3Min / 100;
+    var perdMax=numFrom('adv-perd-max');
+    var profileEl=document.getElementById('adv-profile'); var profile=profileEl ? profileEl.value : '';
+    var fitEl=document.getElementById('sf-fit-level'); var fit=fitEl ? fitEl.value : '';
+    var tableProfileEl=document.getElementById('sf-profile'); var tableProfile=tableProfileEl ? tableProfileEl.value : '';
+    return data.filter(function(p){
+      if(profile && p.perfil_detectado !== profile) return false;
+      if(tableProfile && p.perfil_detectado !== tableProfile) return false;
+      if(fit && p.fit_nivel !== fit) return false;
+      if(!passRange(val(p,'ip10'),ipMin,ipMax)) return false;
+      if(!passRange(val(p,'min_pp'),minMin,minMax)) return false;
+      if(!passRange(val(p,'pts_pp'),ptsMin,ptsMax)) return false;
+      if(!passRange(val(p,'reb_pp'),rebMin,rebMax)) return false;
+      if(!passRange(val(p,'ast_pp'),astMin,astMax)) return false;
+      if(t3Min !== null && val(p,'t3_pct') < t3Min) return false;
+      if(perdMax !== null && val(p,'perd_pp') > perdMax) return false;
+      return true;
+    });
+  };
+  window.renderScoutAdvancedBlocks = function(data){
+    data = data || [];
+    var count=document.getElementById('adv-kpi-count'), ip=document.getElementById('adv-kpi-ip10'), hidden=document.getElementById('adv-kpi-hidden'), best=document.getElementById('adv-kpi-best'), bestSub=document.getElementById('adv-kpi-best-sub'), grid=document.getElementById('scout-top-grid');
+    if(count) count.textContent = data.length;
+    var avg = data.length ? data.reduce(function(s,p){return s+val(p,'ip10');},0)/data.length : 0;
+    if(ip) ip.textContent = data.length ? avg.toFixed(2) : '—';
+    var hiddenData = data.filter(function(p){ return val(p,'ip10') >= 6 && val(p,'min_pp') <= 18; });
+    if(hidden) hidden.textContent = hiddenData.length;
+    var sorted = data.slice().sort(function(a,b){ return (val(b,'fit_idsc')-val(a,'fit_idsc')) || (val(b,'ip10')-val(a,'ip10')) || (val(b,'min_pp')-val(a,'min_pp')); });
+    if(best) best.textContent = sorted[0] ? sorted[0].nombre : '—';
+    if(bestSub) bestSub.textContent = sorted[0] ? ('Score: '+val(sorted[0],'fit_idsc')+'/100 · Preseleccionados: '+(window.scoutSelected || []).length) : 'Score — · Preseleccionados: '+(window.scoutSelected || []).length;
+    if(grid){
+      var top = sorted.slice(0,12);
+      if(!top.length){ grid.innerHTML = '<div class="scout-top-empty">Sin jugadores para los filtros aplicados.</div>'; return; }
+      grid.innerHTML = top.map(function(p,i){
+        var idx=(window.LNB_PLAYERS||[]).indexOf(p);
+        return '<div class="scout-top-card" onclick="scoutClick('+idx+')">'+
+          '<div class="scout-top-rank">#'+(i+1)+'</div>'+
+          '<div><div class="scout-top-name">'+esc2(p.nombre)+'</div><div class="scout-top-meta">IP10 '+(window.fmtIP10?fmtIP10(p.ip10):val(p,'ip10').toFixed(2))+' · '+esc2(p.min_pp)+' min · '+esc2(p.pj)+' PJ ·<br>'+ (window.scoutBadge ? scoutBadge(p.perfil_detectado || '—','profile') : esc2(p.perfil_detectado || '—')) +'</div></div>'+
+          '<div class="scout-top-score">'+esc2(p.fit_idsc || 0)+'</div>'+ '</div>';
+      }).join('');
+    }
+  };
+  window.resetScoutAdvancedFilters = function(){
+    ['adv-ip10-min','adv-ip10-max','adv-min-min','adv-min-max','adv-pts-min','adv-pts-max','adv-reb-min','adv-reb-max','adv-ast-min','adv-ast-max','adv-t3-min','adv-perd-max'].forEach(function(id){var el=document.getElementById(id); if(el) el.value='';});
+    var p=document.getElementById('adv-profile'); if(p) p.value='';
+    var sort=document.getElementById('sf-sort'); if(sort) sort.value='fit_idsc';
+    var dir=document.getElementById('sf-dir'); if(dir) dir.value='desc';
+    scoutRender();
+  };
+  window.applyScoutPreset = function(type){
+    resetScoutAdvancedFilters();
+    function set(id,v){var el=document.getElementById(id); if(el) el.value=v;}
+    if(type==='hidden'){ set('adv-ip10-min','6'); set('adv-min-max','18'); }
+    if(type==='shooters'){ set('adv-t3-min','35'); set('adv-pts-min','6'); }
+    if(type==='creators'){ set('adv-ast-min','2.5'); set('adv-perd-max','2.2'); }
+    if(type==='bigs'){ set('adv-reb-min','4.5'); set('adv-min-min','12'); }
+    scoutRender();
+  };
+})();
+</script>
+
 <style>
 /* ── SCOUTING COMPARATIVO 26/27 · HOTFIX ── */
 .scout-compare-tools{background:linear-gradient(135deg,rgba(52,152,219,.09),rgba(46,204,113,.04));border:1.5px solid rgba(52,152,219,.28);border-radius:14px;padding:1rem 1.1rem;margin:.2rem 0 1rem;display:grid;gap:.85rem;}
@@ -7613,10 +7757,11 @@ window.showPage = function(id) {
 (function(){
   if (!window.LNB_PLAYERS) return;
 
-  var DEFAULT_SCOUT_COMPARE_METRICS = ['min_pp','ip10','pts_pp','reb_pp','ast_pp','rec_pp','tap_pp','perd_pp','t2_pct','t3_pct','tl_pct','val_pp'];
+  var DEFAULT_SCOUT_COMPARE_METRICS = ['fit_idsc','min_pp','ip10','pts_pp','reb_pp','ast_pp','rec_pp','tap_pp','perd_pp','t2_pct','t3_pct','tl_pct','val_pp'];
   window.scoutCompareMetricKeys = window.scoutCompareMetricKeys || DEFAULT_SCOUT_COMPARE_METRICS.slice();
 
   var SCOUT_METRICS = [
+    {key:'fit_idsc',label:'FIT IDSC',higher:true,value:function(p){return p.fit_idsc;},display:function(p){return fmtN(p.fit_idsc);},sub:function(p){return 'nivel: '+(p.fit_nivel || '—');}},
     {key:'pj',label:'PJ',higher:true,value:function(p){return p.pj;},display:function(p){return fmtN(p.pj);},sub:function(p){return 'partidos jugados';}},
     {key:'min_pp',label:'MIN/PP',higher:true,value:function(p){return p.min_pp;},display:function(p){return fmtN(p.min_pp);},sub:function(p){return fmtN(p.min_total)+' min total';}},
     {key:'ip10',label:'IP10',higher:true,value:function(p){return p.ip10;},display:function(p){return fmtIP10(p.ip10);},sub:function(p){return 'productividad cada 10 min';}},
@@ -7681,7 +7826,7 @@ window.showPage = function(id) {
       list.innerHTML = '<div class="scout-autocomplete-empty">Sin coincidencias.</div>';
     } else {
       list.innerHTML = items.map(function(p,i){
-        return '<div class="scout-autocomplete-option '+(i===0?'active':'')+'" onmousedown="event.preventDefault();selectScoutAutocomplete('+slot+','+i+')"><span>'+esc(p.nombre)+'</span><span class="meta">'+esc(p.pj)+'PJ · '+esc(p.pts_pp)+' pts · IP10 '+esc(fmtIP10(p.ip10))+'</span></div>';
+        return '<div class="scout-autocomplete-option '+(i===0?'active':'')+'" onmousedown="event.preventDefault();selectScoutAutocomplete('+slot+','+i+')"><span>'+esc(p.nombre)+'</span><span class="meta">'+esc(p.pj)+'PJ · IP10 '+esc(fmtIP10(p.ip10))+' · FIT '+esc(p.fit_idsc)+'</span></div>';
       }).join('');
     }
     box.classList.add('open');
@@ -7812,109 +7957,6 @@ window.showPage = function(id) {
     scoutRender();
   };
 
-  function advNum(id){ var el=document.getElementById(id); if(!el || el.value==='') return null; var n=parseFloat(String(el.value).replace(',','.')); return isNaN(n)?null:n; }
-  function advVal(p,k){ var n=parseFloat(p[k]); return isNaN(n)?0:n; }
-  function advPct(p,k){ var n=advVal(p,k); return n>1 ? n/100 : n; }
-  function within(v,min,max){ if(min!==null && v<min) return false; if(max!==null && v>max) return false; return true; }
-  function fitScore(p){
-    var ip10=advVal(p,'ip10'), t3=advPct(p,'t3_pct'), ast=advVal(p,'ast_pp'), reb=advVal(p,'reb_pp'), rec=advVal(p,'rec_pp'), perd=advVal(p,'perd_pp'), pj=advVal(p,'pj'), min=advVal(p,'min_pp'), val=advVal(p,'val_pp');
-    var score=0;
-    score += Math.min(ip10/10,1)*35;
-    score += Math.min(t3/0.38,1)*13;
-    score += Math.min(ast/4.5,1)*12;
-    score += Math.min(reb/7,1)*10;
-    score += Math.min(rec/1.4,1)*8;
-    score += Math.max(0,1-(perd/3))*8;
-    score += Math.min(pj/24,1)*5;
-    score += Math.min(min/22,1)*4;
-    score += Math.min(val/18,1)*5;
-    return Math.round(Math.max(0,Math.min(100,score)));
-  }
-  window.scoutFitScore = fitScore;
-  function playerTag(p){
-    var ip10=advVal(p,'ip10'), min=advVal(p,'min_pp'), t3=advPct(p,'t3_pct'), ast=advVal(p,'ast_pp'), reb=advVal(p,'reb_pp'), tap=advVal(p,'tap_pp'), perd=advVal(p,'perd_pp');
-    if(ip10>=6 && min<=18) return {txt:'Oportunidad oculta', cls:'scout-tag-green'};
-    if(ip10>=7 && min>22) return {txt:'Consolidado', cls:'scout-tag-gold'};
-    if(t3>=.35 && advVal(p,'pts_pp')>=7) return {txt:'Spacing / tiro', cls:'scout-tag-blue'};
-    if(ast>=3 && perd<=2.2) return {txt:'Creador bajo riesgo', cls:'scout-tag-blue'};
-    if(reb>=5 || tap>=.6) return {txt:'Interior / rebote', cls:'scout-tag-gold'};
-    if(perd>=2.8) return {txt:'Riesgo pérdidas', cls:'scout-tag-red'};
-    return {txt:'Seguimiento', cls:''};
-  }
-  function matchProfile(p, profile){
-    var ip10=advVal(p,'ip10'), min=advVal(p,'min_pp'), pts=advVal(p,'pts_pp'), reb=advVal(p,'reb_pp'), ast=advVal(p,'ast_pp'), rec=advVal(p,'rec_pp'), tap=advVal(p,'tap_pp'), perd=advVal(p,'perd_pp'), t3=advPct(p,'t3_pct');
-    if(profile==='all') return true;
-    if(profile==='oportunidad') return ip10>=6 && min<=18;
-    if(profile==='consolidado') return ip10>=7 && min>=20;
-    if(profile==='creador') return ast>=3 && perd<=2.5;
-    if(profile==='tirador') return t3>=.33 && pts>=7;
-    if(profile==='interno') return reb>=4.5 || tap>=.5;
-    if(profile==='energia') return ip10>=5.5 && min<=15 && (rec>=.5 || reb>=3 || pts>=5);
-    if(profile==='bajo_riesgo') return perd<=1.2 && min>=8;
-    return true;
-  }
-  function matchAdvanced(p){
-    var profileEl=document.getElementById('sf-profile');
-    var profile=profileEl ? profileEl.value : 'all';
-    var ip10=advVal(p,'ip10'), min=advVal(p,'min_pp'), pts=advVal(p,'pts_pp'), reb=advVal(p,'reb_pp'), ast=advVal(p,'ast_pp'), t3=advPct(p,'t3_pct'), perd=advVal(p,'perd_pp');
-    if(!within(ip10, advNum('sf-ip10-min'), advNum('sf-ip10-max'))) return false;
-    if(!within(min, advNum('sf-min-min'), advNum('sf-min-max'))) return false;
-    if(!within(pts, advNum('sf-pts-min'), advNum('sf-pts-max'))) return false;
-    if(!within(reb, advNum('sf-reb-min'), advNum('sf-reb-max'))) return false;
-    if(!within(ast, advNum('sf-ast-min'), advNum('sf-ast-max'))) return false;
-    var t3Min=advNum('sf-t3-min'); if(t3Min!==null && (t3*100)<t3Min) return false;
-    var perdMax=advNum('sf-perd-max'); if(perdMax!==null && perd>perdMax) return false;
-    return matchProfile(p, profile);
-  }
-  function setAdv(id,val){ var el=document.getElementById(id); if(el) el.value = val == null ? '' : val; }
-  window.scoutResetAdvancedFilters=function(){ ['sf-ip10-min','sf-ip10-max','sf-min-min','sf-min-max','sf-pts-min','sf-pts-max','sf-reb-min','sf-reb-max','sf-ast-min','sf-ast-max','sf-t3-min','sf-perd-max'].forEach(function(id){setAdv(id,'');}); setAdv('sf-profile','all'); scoutRender(); };
-  window.scoutPresetOpportunity=function(){ scoutResetAdvancedFilters(); setAdv('sf-profile','oportunidad'); setAdv('sf-ip10-min','6'); setAdv('sf-min-max','18'); scoutRender(); };
-  window.scoutPresetShooter=function(){ scoutResetAdvancedFilters(); setAdv('sf-profile','tirador'); setAdv('sf-t3-min','33'); setAdv('sf-pts-min','7'); scoutRender(); };
-  window.scoutPresetCreator=function(){ scoutResetAdvancedFilters(); setAdv('sf-profile','creador'); setAdv('sf-ast-min','3'); setAdv('sf-perd-max','2.5'); scoutRender(); };
-  window.scoutPresetInterior=function(){ scoutResetAdvancedFilters(); setAdv('sf-profile','interno'); setAdv('sf-reb-min','4.5'); scoutRender(); };
-  function shortlist(){ try{return JSON.parse(localStorage.getItem('idsc_scout_shortlist')||'[]');}catch(e){return [];} }
-  function saveShortlist(arr){ localStorage.setItem('idsc_scout_shortlist', JSON.stringify(arr)); }
-  window.toggleScoutShortlist=function(name){ var arr=shortlist(); var i=arr.indexOf(name); if(i>=0) arr.splice(i,1); else arr.push(name); saveShortlist(arr); scoutRender(); };
-  window.toggleScoutShortlistByEncoded=function(name){ toggleScoutShortlist(decodeURIComponent(name)); };
-  function renderAdvancedScouting(data){
-    var sum=document.getElementById('scout-advanced-summary');
-    var list=document.getElementById('scout-opportunity-list');
-    if(!sum || !list) return;
-    var avgIp=data.length? data.reduce(function(a,p){return a+advVal(p,'ip10');},0)/data.length:0;
-    var opp=data.filter(function(p){return advVal(p,'ip10')>=6 && advVal(p,'min_pp')<=18;}).length;
-    var best=data.slice().sort(function(a,b){return fitScore(b)-fitScore(a);})[0];
-    var sl=shortlist();
-    sum.innerHTML = '<div class="scout-kpi-card"><div class="scout-kpi-lbl">Jugadores filtrados</div><div class="scout-kpi-val">'+data.length+'</div><div class="scout-kpi-note">Base actual según rangos y perfil.</div></div>'+
-      '<div class="scout-kpi-card"><div class="scout-kpi-lbl">IP10 promedio</div><div class="scout-kpi-val">'+(data.length?avgIp.toFixed(2):'—')+'</div><div class="scout-kpi-note">Promedio del universo filtrado.</div></div>'+
-      '<div class="scout-kpi-card"><div class="scout-kpi-lbl">Oportunidades ocultas</div><div class="scout-kpi-val" style="color:#4AE382;">'+opp+'</div><div class="scout-kpi-note">IP10 ≥ 6 con ≤ 18 min/pp.</div></div>'+
-      '<div class="scout-kpi-card"><div class="scout-kpi-lbl">Mejor Fit IDSC</div><div class="scout-kpi-val" style="font-size:1.25rem;color:var(--gold);">'+(best?esc(best.nombre):'—')+'</div><div class="scout-kpi-note">Score: '+(best?fitScore(best)+'/100':'—')+' · Preseleccionados: '+sl.length+'</div></div>';
-    var top=data.slice().sort(function(a,b){ return fitScore(b)-fitScore(a) || advVal(b,'ip10')-advVal(a,'ip10'); }).slice(0,12);
-    if(!top.length){ list.innerHTML='<div style="font-size:.78rem;color:var(--muted);padding:.6rem 0;">Sin jugadores para los filtros actuales.</div>'; }
-    else list.innerHTML=top.map(function(p,i){ var tag=playerTag(p); var marked=sl.indexOf(p.nombre)>=0; var enc=encodeURIComponent(p.nombre); return `<div class="scout-op-row"><div class="scout-op-rank">#${i+1}</div><div class="scout-op-main"><div class="scout-op-name">${esc(p.nombre)}</div><div class="scout-op-meta">IP10 ${fmtIP10(p.ip10)} · ${esc(p.min_pp)} min · ${esc(p.pj)} PJ · <span class="scout-tag-pill ${tag.cls}">${esc(tag.txt)}</span></div></div><div class="scout-op-fit">${fitScore(p)}</div><button class="scout-shortlist-btn" onclick="toggleScoutShortlistByEncoded('${enc}')">${marked?'★':'☆'}</button></div>`; }).join('');
-    drawScoutMatrix(data);
-  }
-  function drawScoutMatrix(data){
-    var canvas=document.getElementById('scoutMatrixCanvas'); if(!canvas || !canvas.getContext) return;
-    var rect=canvas.getBoundingClientRect(); if(rect.width>0){ canvas.width=Math.floor(rect.width*window.devicePixelRatio); canvas.height=Math.floor(330*window.devicePixelRatio); }
-    var ctx=canvas.getContext('2d'), dpr=window.devicePixelRatio||1, W=canvas.width, H=canvas.height;
-    ctx.clearRect(0,0,W,H); ctx.scale(dpr,dpr);
-    var w=W/dpr, h=H/dpr, padL=46, padR=18, padT=20, padB=36;
-    ctx.fillStyle='rgba(238,242,247,.05)'; ctx.fillRect(padL,padT,w-padL-padR,h-padT-padB);
-    var vals=data.filter(function(p){return advVal(p,'min_pp')>0 && advVal(p,'ip10')>0;});
-    var maxMin=Math.max(30, Math.ceil(Math.max.apply(null, vals.map(function(p){return advVal(p,'min_pp');}).concat([30]))));
-    var maxIp=Math.max(10, Math.ceil(Math.max.apply(null, vals.map(function(p){return advVal(p,'ip10');}).concat([10]))));
-    function x(v){return padL+(v/maxMin)*(w-padL-padR);} function y(v){return padT+(1-v/maxIp)*(h-padT-padB);} 
-    ctx.strokeStyle='rgba(238,242,247,.10)'; ctx.lineWidth=1;
-    for(var gx=0;gx<=maxMin;gx+=5){ctx.beginPath();ctx.moveTo(x(gx),padT);ctx.lineTo(x(gx),h-padB);ctx.stroke();}
-    for(var gy=0;gy<=maxIp;gy+=2){ctx.beginPath();ctx.moveTo(padL,y(gy));ctx.lineTo(w-padR,y(gy));ctx.stroke();}
-    ctx.strokeStyle='rgba(46,204,113,.35)'; ctx.setLineDash([5,4]); ctx.beginPath(); ctx.moveTo(x(18),padT); ctx.lineTo(x(18),h-padB); ctx.stroke(); ctx.beginPath(); ctx.moveTo(padL,y(6)); ctx.lineTo(w-padR,y(6)); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle='rgba(46,204,113,.08)'; ctx.fillRect(padL,padT,Math.max(0,x(18)-padL),Math.max(0,y(6)-padT));
-    ctx.font='11px DM Mono, monospace'; ctx.fillStyle='rgba(238,242,247,.55)'; ctx.fillText('MIN/PP',w-62,h-12); ctx.save(); ctx.translate(14,82); ctx.rotate(-Math.PI/2); ctx.fillText('IP10',0,0); ctx.restore();
-    vals.slice().sort(function(a,b){return fitScore(b)-fitScore(a);}).slice(0,90).forEach(function(p){ var px=x(advVal(p,'min_pp')), py=y(advVal(p,'ip10')), tag=playerTag(p); ctx.beginPath(); ctx.arc(px,py,Math.max(3,Math.min(7,fitScore(p)/16)),0,Math.PI*2); ctx.fillStyle=tag.cls==='scout-tag-green'?'rgba(46,204,113,.86)':(tag.cls==='scout-tag-gold'?'rgba(245,166,35,.8)':(tag.cls==='scout-tag-red'?'rgba(231,76,60,.72)':'rgba(91,155,240,.72)')); ctx.fill(); });
-    vals.slice().sort(function(a,b){return fitScore(b)-fitScore(a);}).slice(0,6).forEach(function(p){ ctx.font='10px DM Sans, sans-serif'; ctx.fillStyle='rgba(238,242,247,.78)'; ctx.fillText(String(p.nombre).split(',')[0].slice(0,12), x(advVal(p,'min_pp'))+6, y(advVal(p,'ip10'))-6); });
-  }
-  window.addEventListener('resize', function(){ if(document.getElementById('page-scouting') && document.getElementById('page-scouting').classList.contains('active')) scoutRender(); });
-
   window.scoutRender = function(){
     ensureCompareTools();
     var nameEl = document.getElementById('sf-name');
@@ -7932,16 +7974,16 @@ window.showPage = function(id) {
     var data = window.LNB_PLAYERS.filter(function(p) {
       if (nameFilter && p.nombre.toUpperCase().indexOf(nameFilter) === -1) return false;
       if ((p.pj || 0) < minPJ) return false;
-      if (!matchAdvanced(p)) return false;
       return true;
     });
+    if (typeof window.getScoutAdvancedFilteredData === 'function') data = window.getScoutAdvancedFilteredData(data);
 
     data.sort(function(a, b) {
       if (sortKey === 'nombre') {
         return sortDir === 'desc' ? b.nombre.localeCompare(a.nombre, 'es') : a.nombre.localeCompare(b.nombre, 'es');
       }
-      var av = sortKey === 'fit_idsc' ? fitScore(a) : (parseFloat(a[sortKey]) || 0);
-      var bv = sortKey === 'fit_idsc' ? fitScore(b) : (parseFloat(b[sortKey]) || 0);
+      var av = parseFloat(a[sortKey]) || 0;
+      var bv = parseFloat(b[sortKey]) || 0;
       return sortDir === 'desc' ? bv - av : av - bv;
     });
 
@@ -7966,16 +8008,14 @@ window.showPage = function(id) {
 
     var activeCols = getActiveCols();
     var cols = ALL_COLS.filter(function(c){ return activeCols.indexOf(c.key) !== -1; });
-    var sl = shortlist();
 
     var html = '<table class="scout-table"><thead><tr>';
     html += '<th style="text-align:left;cursor:pointer;" onclick="setSortKey2(\'nombre\')">JUGADOR</th>';
-    html += '<th onclick="setSortKey2(\'fit_idsc\')">FIT</th><th>PERFIL</th>';
     cols.forEach(function(c) {
       var cls = c.key === sortKey ? (sortDir === 'desc' ? ' sort-desc' : ' sort-asc') : '';
       html += '<th class="' + cls + '" onclick="setSortKey2(\'' + c.key + '\')">' + c.label + '</th>';
     });
-    html += '<th>LISTA</th></tr></thead><tbody>';
+    html += '</tr></thead><tbody>';
 
     var shown = data.slice(0, 150);
     shown.forEach(function(p) {
@@ -7985,27 +8025,22 @@ window.showPage = function(id) {
       var idx = window.LNB_PLAYERS.indexOf(p);
       var selNum = selected.findIndex(function(s){ return s.nombre === p.nombre; });
       var badge = selNum !== -1 ? " <span style=\"background:rgba(52,152,219,.3);border:1px solid rgba(52,152,219,.6);border-radius:4px;font-size:.55rem;padding:.1rem .4rem;font-family:'DM Mono',monospace;color:#5B9BF0;\">" + (selNum===0?'A':'B') + "</span>" : '';
-      var tag = playerTag(p);
-      var marked = sl.indexOf(p.nombre) >= 0;
       html += '<tr class="' + rowCls + '" onclick="scoutClick(' + idx + ')" style="cursor:pointer;">';
       html += '<td>' + esc(p.nombre) + badge + '</td>';
-      html += '<td style="font-family:\'Bebas Neue\',sans-serif;font-size:1rem;color:#4AE382;">'+fitScore(p)+'</td>';
-      html += '<td><span class="scout-tag-pill '+tag.cls+'">'+esc(tag.txt)+'</span></td>';
       cols.forEach(function(c) { html += '<td>' + esc(c.fn(p)) + '</td>'; });
-      html += `<td><button class="scout-shortlist-btn" onclick="toggleScoutShortlistByEncoded('${encodeURIComponent(p.nombre)}');event.stopPropagation();">${marked?'★':'☆'}</button></td>`;
       html += '</tr>';
     });
 
     if (shown.length === 0) {
-      html += '<tr><td colspan="' + (cols.length+4) + '" style="text-align:center;color:var(--muted);padding:1.5rem;">Sin resultados. Probá con otro rango de IP10, perfil o bajá el PJ mínimo.</td></tr>';
+      html += '<tr><td colspan="' + (cols.length+1) + '" style="text-align:center;color:var(--muted);padding:1.5rem;">Sin resultados. Probá con otra búsqueda o bajá el PJ mínimo.</td></tr>';
     } else if (data.length > 150) {
-      html += '<tr><td colspan="' + (cols.length+4) + '" style="text-align:center;color:var(--muted);font-style:italic;padding:.7rem;">Mostrando 150 de ' + data.length + ' — filtrá para ver más</td></tr>';
+      html += '<tr><td colspan="' + (cols.length+1) + '" style="text-align:center;color:var(--muted);font-style:italic;padding:.7rem;">Mostrando 150 de ' + data.length + ' — filtrá para ver más</td></tr>';
     }
     html += '</tbody></table>';
     container.innerHTML = html;
-    renderAdvancedScouting(data);
+    if (typeof window.renderScoutAdvancedBlocks === 'function') window.renderScoutAdvancedBlocks(data);
     renderCompareControls();
-    if (window.renderDetail) window.renderDetail(false); else renderDetail(false);
+    renderDetail(false);
   };
 
   window.renderDetail = function(doScroll){
@@ -8076,33 +8111,6 @@ window.showPage = function(id) {
       scoutRender();
     }
   });
-})();
-</script>
-
-
-<script>
-(function(){
-  var tries=0;
-  function enhance(){
-    if(!window.renderDetail || !window.scoutFitScore || !window.LNB_PLAYERS){ if(tries++<20) return setTimeout(enhance,100); return; }
-    var original=window.renderDetail;
-    window.renderDetail=function(doScroll){
-      original(doScroll);
-      var panel=document.getElementById('scout-detail-panel');
-      var selected=window.scoutSelected||[];
-      if(!panel || !selected.length) return;
-      var block=document.createElement('div');
-      block.style.marginTop='.8rem';
-      block.innerHTML=selected.map(function(p){
-        var fit=window.scoutFitScore(p);
-        var nota=fit>=80?'Encaje alto para revisar como prioridad.':fit>=65?'Encaje interesante para lista corta.':fit>=50?'Seguimiento sujeto a rol y contexto.':'Encaje bajo salvo necesidad específica.';
-        var safeName=String(p.nombre).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});
-        return `<div style="background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.18);border-radius:12px;padding:.75rem .9rem;margin-bottom:.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);">Fit IDSC · ${safeName}</div><div style="font-size:.72rem;color:var(--muted);margin-top:.15rem;">${nota}</div></div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.65rem;color:#4AE382;">${fit}/100</div></div>`;
-      }).join('');
-      panel.appendChild(block);
-    };
-  }
-  enhance();
 })();
 </script>
 
