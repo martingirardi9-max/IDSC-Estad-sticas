@@ -1663,7 +1663,7 @@ footer em{color:var(--gold);font-style:normal;}
       <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
         <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
           <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-          Groq · llama-3.3-70b · 289 jugadores LNB
+          Groq · Mixtral-8x7b · 289 jugadores LNB
         </span>
         <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">Stats, comparaciones, oportunidades de mercado, FIT 26/27</span>
       </div>
@@ -1714,7 +1714,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
       <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.5rem;text-align:center;">
-        Enter para enviar · Shift+Enter para nueva línea · Powered by Groq · llama-3.3-70b-versatile
+        Enter para enviar · Shift+Enter para nueva línea · Powered by Groq · Mixtral-8x7b-32768
       </div>
     </div>
 
@@ -1736,11 +1736,11 @@ footer em{color:var(--gold);font-style:normal;}
     var players = window.LNB_PLAYERS;
     if (!players || !players.length) return 'Datos no disponibles aún.';
 
-    var lines = ['TEMPORADA LNB 25/26 — ' + players.length + ' jugadores\n'];
-    lines.push('Columnas: NOMBRE | PJ | MIN/PP | PTS/PP | REB/PP | AST/PP | T2% | T3% | PERD/PP | IP10\n');
+    var lines = ['TEMPORADA LNB 25/26\n'];
+    lines.push('NOMBRE|PJ|MIN/PP|PTS/PP|REB/PP|AST/PP|T2%|T3%|PERD/PP|IP10\n');
 
-    // Sort by IP10 desc, only players with min_pp >= 5
-    var relevant = players.filter(function(p){ return p.min_pp >= 5 && p.ip10 !== null; })
+    // Solo jugadores con >= 15 min/pp (rotacion real)
+    var relevant = players.filter(function(p){ return p.min_pp >= 15 && p.ip10 !== null; })
       .sort(function(a,b){ return (b.ip10||0) - (a.ip10||0); });
 
     relevant.forEach(function(p) {
@@ -1753,14 +1753,6 @@ footer em{color:var(--gold);font-style:normal;}
       );
     });
 
-    // Players with min_pp < 5 (hidden opportunities)
-    var low = players.filter(function(p){ return p.min_pp > 0 && p.min_pp < 5 && p.ip10 !== null; });
-    if (low.length) {
-      lines.push('\nJUGADORES CON POCOS MINUTOS (oportunidades):');
-      low.forEach(function(p){
-        lines.push(p.nombre + '|' + p.pj + 'PJ|' + p.min_pp + 'min/pp|' + p.pts_pp + 'pts|IP10:' + p.ip10);
-      });
-    }
     return lines.join('\n');
   }
 
@@ -1878,7 +1870,7 @@ footer em{color:var(--gold);font-style:normal;}
           'Authorization': 'Bearer ' + GROQ_KEY
         },
         body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
+          model: 'mixtral-8x7b-32768',
           messages: messages,
           max_tokens: 900,
           temperature: 0.4
