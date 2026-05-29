@@ -1652,12 +1652,270 @@ footer em{color:var(--gold);font-style:normal;}
       </div>
     </div>
 
+    <!-- ══════════════ CHAT IA SCOUTING (Groq) ══════════════ -->
+    <div id="scout-chat-section" style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);">
+      <div class="section-title" style="margin-bottom:1rem;">
+        <h3>ASISTENTE DE SCOUTING</h3>
+        <div class="section-line"></div>
+        <span class="section-count" style="color:#4AE382;">🤖 IA · LNB 25/26</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
+          <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+          Groq · llama-3.3-70b · 289 jugadores LNB
+        </span>
+        <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">Stats, comparaciones, oportunidades de mercado, FIT 26/27</span>
+      </div>
+
+      <div id="scout-chat-suggestions" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;">
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Top 5 IP10 de la LNB 25/26</button>
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Mejores tiradores de triple con más de 20 PJ?</button>
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Compará SABIN con ROBINSON en scoring</button>
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Bases con buen AST y pocas pérdidas</button>
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Quién encajaría como complemento de Caffaro?</button>
+        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Interior con IP10 alto y pocos PJ, oportunidad?</button>
+      </div>
+
+      <div id="scout-chat-messages" style="
+        min-height:200px;max-height:420px;overflow-y:auto;
+        background:var(--navy2);border:1px solid rgba(46,204,113,.2);border-radius:14px;
+        padding:1.2rem;margin-bottom:1rem;
+        display:flex;flex-direction:column;gap:.85rem;
+      ">
+        <div class="chat-msg chat-msg-assistant">
+          <div class="chat-avatar chat-avatar-scout">🔍</div>
+          <div class="chat-bubble" style="border-color:rgba(46,204,113,.18);">
+            👋 Hola! Soy el asistente de scouting para el armado 26/27.<br><br>Tengo los stats completos de <strong>289 jugadores</strong> de la LNB 25/26 — puntos, rebotes, asistencias, IP10, porcentajes y más.<br><br>Preguntame sobre jugadores específicos, comparaciones, perfiles de mercado o buscame oportunidades para el plantel.
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:.6rem;align-items:flex-end;">
+        <textarea id="scout-chat-input" placeholder="Ej: ¿Qué alero tiene mejor % de T3 con más de 20 PJ?" rows="2" style="
+          flex:1;background:var(--navy2);border:1.5px solid rgba(46,204,113,.25);border-radius:10px;
+          color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;
+          padding:.75rem 1rem;resize:none;outline:none;line-height:1.5;transition:border-color .2s;
+        " onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();scoutChatSend();}"
+           onfocus="this.style.borderColor='rgba(46,204,113,.6)'"
+           onblur="this.style.borderColor='rgba(46,204,113,.25)'"></textarea>
+        <div style="display:flex;flex-direction:column;gap:.4rem;">
+          <button onclick="scoutChatSend()" id="scout-chat-send-btn" style="
+            background:linear-gradient(135deg,#27AE60,#4AE382);border:none;border-radius:10px;
+            color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;
+            padding:.75rem 1.2rem;cursor:pointer;white-space:nowrap;transition:opacity .2s;min-width:80px;
+          ">Enviar ↑</button>
+          <button onclick="scoutChatClear()" style="
+            background:transparent;border:1px solid var(--border);border-radius:10px;
+            color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;
+            padding:.45rem .8rem;cursor:pointer;white-space:nowrap;transition:all .15s;
+          " onmouseover="this.style.borderColor='rgba(231,76,60,.5)';this.style.color='#F1948A'"
+             onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Limpiar</button>
+        </div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.5rem;text-align:center;">
+        Enter para enviar · Shift+Enter para nueva línea · Powered by Groq · llama-3.3-70b-versatile
+      </div>
+    </div>
+
     <div style="text-align:center;margin-top:1.5rem;">
       <button onclick="showPage('s2627')" style="background:transparent;border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.5rem 1.2rem;cursor:pointer;">← Volver a 26/27</button>
     </div>
 
   </div>
 </div>
+
+<!-- ══════════════ CHAT SCOUTING — GROQ JS ══════════════ -->
+<script>
+(function(){
+  var GROQ_KEY = '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';
+  var scoutHistory = [];
+
+  // ── CONTEXT: build compact player table from LNB_PLAYERS ──────────────
+  function scoutBuildContext() {
+    var players = window.LNB_PLAYERS;
+    if (!players || !players.length) return 'Datos no disponibles aún.';
+
+    var lines = ['TEMPORADA LNB 25/26 — ' + players.length + ' jugadores\n'];
+    lines.push('Columnas: NOMBRE | PJ | MIN/PP | PTS/PP | REB/PP | AST/PP | T2% | T3% | PERD/PP | IP10\n');
+
+    // Sort by IP10 desc, only players with min_pp >= 5
+    var relevant = players.filter(function(p){ return p.min_pp >= 5 && p.ip10 !== null; })
+      .sort(function(a,b){ return (b.ip10||0) - (a.ip10||0); });
+
+    relevant.forEach(function(p) {
+      lines.push(
+        p.nombre + '|' + p.pj + '|' + p.min_pp + '|' +
+        p.pts_pp + '|' + p.reb_pp + '|' + p.ast_pp + '|' +
+        Math.round((p.t2_pct||0)*100) + '%|' +
+        Math.round((p.t3_pct||0)*100) + '%|' +
+        p.perd_pp + '|' + p.ip10
+      );
+    });
+
+    // Players with min_pp < 5 (hidden opportunities)
+    var low = players.filter(function(p){ return p.min_pp > 0 && p.min_pp < 5 && p.ip10 !== null; });
+    if (low.length) {
+      lines.push('\nJUGADORES CON POCOS MINUTOS (oportunidades):');
+      low.forEach(function(p){
+        lines.push(p.nombre + '|' + p.pj + 'PJ|' + p.min_pp + 'min/pp|' + p.pts_pp + 'pts|IP10:' + p.ip10);
+      });
+    }
+    return lines.join('\n');
+  }
+
+  function scoutBuildSystemPrompt() {
+    return 'Sos el asistente de scouting de IDSC Oliva, Liga Nacional de Básquetbol Argentina. El coach es Tincho.\n\n'
+      + 'Tu misión: analizar la base de datos de la LNB 25/26 para ayudar a armar el plantel 26/27.\n\n'
+      + 'CONTEXTO IDSC: el equipo tiene a CAFFARO como referencia interior (6 reb/pp, 9 def/pp, 19 tapones, fuerte en TL). El plantel necesita complementos con movilidad, manos, tiro exterior, y capacidad de creación. Nuestra identidad: defensa intensa, juego de pase, eficiencia ofensiva.\n\n'
+      + 'FÓRMULA IP10: (PTS×1.0 + AST×1.3 + ROf×1.3 + RDef×1.1 + REC×1.4 + TAP×1.3 − PERD×1.3 + FREC×0.7 − FCOM×0.6) × (10/min)\n\n'
+      + 'REGLAS:\n'
+      + '— Respondé en español, tono analítico y directo\n'
+      + '— Citá números exactos cuando compares jugadores\n'
+      + '— Cuando busques perfiles, recomendá candidatos con fundamento estadístico\n'
+      + '— Advertí si la muestra es pequeña (< 10 PJ o < 10 min/pp)\n'
+      + '— Respuestas cortas (3–5 líneas) para consultas simples; más extensas para análisis de mercado\n'
+      + '— No inventes datos: usá solo los que están en el contexto\n\n'
+      + 'DATOS:\n' + scoutBuildContext();
+  }
+
+  // ── UI HELPERS ──────────────────────────────────────────────────────────
+  function scoutAppendMsg(role, text) {
+    var box = document.getElementById('scout-chat-messages');
+    if (!box) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'chat-msg chat-msg-' + (role==='user'?'user':'assistant');
+    var avatar = document.createElement('div');
+    avatar.className = 'chat-avatar ' + (role==='user'?'chat-avatar-user':'chat-avatar-scout');
+    avatar.textContent = role==='user' ? 'T' : '🔍';
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    if (role === 'assistant') bubble.style.borderColor = 'rgba(46,204,113,.18)';
+    bubble.innerHTML = (text||'')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n/g,'<br>');
+    wrap.appendChild(avatar);
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function scoutAppendTyping(id) {
+    var box = document.getElementById('scout-chat-messages');
+    if (!box) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'chat-msg chat-msg-assistant';
+    wrap.id = id;
+    var avatar = document.createElement('div');
+    avatar.className = 'chat-avatar chat-avatar-scout';
+    avatar.textContent = '🔍';
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.style.color = 'var(--muted)';
+    bubble.style.fontStyle = 'italic';
+    bubble.style.borderColor = 'rgba(46,204,113,.12)';
+    bubble.innerHTML = '⠋ Analizando base de datos...';
+    wrap.appendChild(avatar);
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function scoutRemoveTyping(id) {
+    var el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  // ── PUBLIC API ──────────────────────────────────────────────────────────
+  window.scoutChatSuggest = function(btn) {
+    var input = document.getElementById('scout-chat-input');
+    if (!input) return;
+    input.value = btn.textContent.trim();
+    input.focus();
+    document.getElementById('scout-chat-suggestions').style.display = 'none';
+  };
+
+  window.scoutChatClear = function() {
+    scoutHistory = [];
+    var box = document.getElementById('scout-chat-messages');
+    if (box) box.innerHTML = '';
+    scoutAppendMsg('assistant',
+      '🔄 Chat reiniciado. Stats de 289 jugadores LNB 25/26 disponibles. ¿Qué perfil buscamos?');
+    var sug = document.getElementById('scout-chat-suggestions');
+    if (sug) sug.style.display = 'flex';
+    var inp = document.getElementById('scout-chat-input');
+    if (inp) inp.value = '';
+  };
+
+  window.scoutChatSend = async function() {
+    var input  = document.getElementById('scout-chat-input');
+    var btn    = document.getElementById('scout-chat-send-btn');
+    if (!input || !btn) return;
+    var text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    btn.disabled = true;
+    btn.textContent = '...';
+    var sug = document.getElementById('scout-chat-suggestions');
+    if (sug) sug.style.display = 'none';
+
+    scoutAppendMsg('user', text);
+    scoutHistory.push({role:'user', content:text});
+
+    var typingId = 'scout-typing-' + Date.now();
+    scoutAppendTyping(typingId);
+
+    try {
+      var messages = [{role:'system', content: scoutBuildSystemPrompt()}]
+        .concat(scoutHistory);
+
+      var res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + GROQ_KEY
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: messages,
+          max_tokens: 900,
+          temperature: 0.4
+        })
+      });
+
+      var data = await res.json();
+
+      if (!res.ok || data.error) {
+        scoutRemoveTyping(typingId);
+        var errMsg = (data.error && data.error.message) ? data.error.message : 'HTTP ' + res.status;
+        scoutAppendMsg('assistant', '⚠️ Error Groq: ' + errMsg);
+        btn.disabled = false; btn.textContent = 'Enviar ↑';
+        return;
+      }
+
+      var reply = data.choices && data.choices[0] && data.choices[0].message
+        ? data.choices[0].message.content
+        : '❓ Sin respuesta del modelo.';
+
+      scoutHistory.push({role:'assistant', content:reply});
+      if (scoutHistory.length > 20) scoutHistory = scoutHistory.slice(-20);
+
+      scoutRemoveTyping(typingId);
+      scoutAppendMsg('assistant', reply);
+
+    } catch(e) {
+      scoutRemoveTyping(typingId);
+      scoutAppendMsg('assistant', '⚠️ Error de conexión: ' + e.message);
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Enviar ↑';
+  };
+
+})();
+</script>
 
 <footer><em>IDSC Oliva</em> · Análisis Estadístico · Liga Nacional 2025/26 · Uso interno del cuerpo técnico</footer>
 
@@ -6800,6 +7058,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") window.ip10
 }
 .chat-avatar-ai{background:linear-gradient(135deg,#3498DB,#5B9BF0);color:#fff;}
 .chat-avatar-user{background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);color:var(--gold);}
+.chat-avatar-scout{background:linear-gradient(135deg,#27AE60,#4AE382);color:#fff;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 </style>
 
