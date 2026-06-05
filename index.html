@@ -1214,7 +1214,7 @@ footer em{color:var(--gold);font-style:normal;}
         </div>
       </div>
     </div>
-    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 05/06/2026 · P36</div></div>
+    <div class="section-title" style="margin-top:2rem"><h3>TABLA DE POSICIONES</h3><div class="section-line"></div><div class="section-count">Actualizada al 30/05/2026 · P36</div></div>
     <div class="standings-table">
       <div class="standings-header">
         <span class="st-pos">POS</span><span class="st-team">EQUIPO</span>
@@ -1829,74 +1829,83 @@ footer em{color:var(--gold);font-style:normal;}
 
 <div class="page" id="page-scout-chat">
   <div class="page-header">
-    <div class="eyebrow">Scouting · Herramienta 4/4</div>
+    <div class="eyebrow">Scouting · Asistente IA</div>
     <h2>ASISTENTE <em style="color:#4AE382;">IA DE SCOUTING</em></h2>
-    <p>Chat con IA alimentado con los stats completos de los 289 jugadores de la LNB 25/26.</p>
+    <p>Dos modos de consulta — base de datos LNB o contexto externo.</p>
   </div>
   <div class="section">
 
-    <div id="scout-chat-section" style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);">
-      <div class="section-title" style="margin-bottom:1rem;">
-        <h3>ASISTENTE DE SCOUTING</h3>
-        <div class="section-line"></div>
-        <span class="section-count" style="color:#4AE382;">🤖 IA · LNB 25/26</span>
-      </div>
+    <!-- ── TABS ── -->
+    <div style="display:flex;gap:.4rem;margin-bottom:1.5rem;background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:.35rem;">
+      <button id="sct-tab-lnb" onclick="sctSwitchTab('lnb')" style="flex:1;background:linear-gradient(135deg,#27AE60,#4AE382);border:none;border-radius:9px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;padding:.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem;">
+        📊 Base LNB 25/26
+      </button>
+      <button id="sct-tab-ext" onclick="sctSwitchTab('ext')" style="flex:1;background:transparent;border:none;border-radius:9px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;padding:.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem;">
+        🌐 Consulta externa
+      </button>
+    </div>
 
-      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
-        <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
-          <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-          Groq · llama-3.3-70b · LNB 25/26
-        </span>
-        <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">Stats, comparaciones, oportunidades de mercado, FIT 26/27</span>
-      </div>
+    <!-- ── PANEL LNB (activo por defecto) ── -->
+    <div id="sct-panel-lnb">
+      <div id="scout-chat-section" style="margin-top:0;">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.58rem;color:#4AE382;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);padding:.25rem .7rem;border-radius:20px;">
+            <span style="width:6px;height:6px;background:#4AE382;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+            Groq · llama-3.3-70b · LNB 25/26
+          </span>
+          <span style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);">Stats, comparaciones, oportunidades de mercado, FIT 26/27</span>
+        </div>
 
-      <div id="scout-chat-suggestions" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;">
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Top 5 IP10 de la LNB 25/26</button>
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Mejores tiradores de triple con más de 20 PJ?</button>
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Compará SABIN con ROBINSON en scoring</button>
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Bases con buen AST y pocas pérdidas</button>
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Quién encajaría como complemento de Caffaro?</button>
-        <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Interior con IP10 alto y pocos PJ, oportunidad?</button>
-      </div>
+        <div id="scout-chat-suggestions" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;">
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Top 5 IP10 de la LNB 25/26</button>
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Mejores tiradores de triple con más de 20 PJ?</button>
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Compará SABIN con ROBINSON en scoring</button>
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Bases con buen AST y pocas pérdidas</button>
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">¿Quién encajaría como complemento de Caffaro?</button>
+          <button class="chat-sug" style="border-color:rgba(46,204,113,.3);" onclick="scoutChatSuggest(this)">Interior con IP10 alto y pocos PJ, oportunidad?</button>
+        </div>
 
-      <div id="scout-chat-messages" style="
-        min-height:200px;max-height:420px;overflow-y:auto;
-        background:var(--navy2);border:1px solid rgba(46,204,113,.2);border-radius:14px;
-        padding:1.2rem;margin-bottom:1rem;
-        display:flex;flex-direction:column;gap:.85rem;
-      ">
-        <div class="chat-msg chat-msg-assistant">
-          <div class="chat-avatar chat-avatar-scout">🔍</div>
-          <div class="chat-bubble" style="border-color:rgba(46,204,113,.18);">
-            👋 Hola! Soy el asistente de scouting para el armado 26/27.<br><br>Tengo los stats completos de <strong>289 jugadores</strong> de la LNB 25/26 — puntos, rebotes, asistencias, IP10, porcentajes y más.<br><br>Preguntame sobre jugadores específicos, comparaciones, perfiles de mercado o buscame oportunidades para el plantel.
+        <div id="scout-chat-messages" style="min-height:200px;max-height:420px;overflow-y:auto;background:var(--navy2);border:1px solid rgba(46,204,113,.2);border-radius:14px;padding:1.2rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:.85rem;">
+          <div class="chat-msg chat-msg-assistant">
+            <div class="chat-avatar chat-avatar-scout">🔍</div>
+            <div class="chat-bubble" style="border-color:rgba(46,204,113,.18);">
+              👋 Hola! Soy el asistente de scouting para el armado 26/27.<br><br>Tengo los stats completos de <strong>289 jugadores</strong> de la LNB 25/26 — puntos, rebotes, asistencias, IP10, porcentajes y más.<br><br>Preguntame sobre jugadores específicos, comparaciones, perfiles de mercado o buscame oportunidades para el plantel.
+            </div>
           </div>
         </div>
-      </div>
 
-      <div style="display:flex;gap:.6rem;align-items:flex-end;">
-        <textarea id="scout-chat-input" placeholder="Ej: ¿Qué alero tiene mejor % de T3 con más de 20 PJ?" rows="2" style="
-          flex:1;background:var(--navy2);border:1.5px solid rgba(46,204,113,.25);border-radius:10px;
-          color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;
-          padding:.75rem 1rem;resize:none;outline:none;line-height:1.5;transition:border-color .2s;
-        " onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();scoutChatSend();}"
-           onfocus="this.style.borderColor='rgba(46,204,113,.6)'"
-           onblur="this.style.borderColor='rgba(46,204,113,.25)'"></textarea>
-        <div style="display:flex;flex-direction:column;gap:.4rem;">
-          <button onclick="scoutChatSend()" id="scout-chat-send-btn" style="
-            background:linear-gradient(135deg,#27AE60,#4AE382);border:none;border-radius:10px;
-            color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;
-            padding:.75rem 1.2rem;cursor:pointer;white-space:nowrap;transition:opacity .2s;min-width:80px;
-          ">Enviar ↑</button>
-          <button onclick="scoutChatClear()" style="
-            background:transparent;border:1px solid var(--border);border-radius:10px;
-            color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;
-            padding:.45rem .8rem;cursor:pointer;white-space:nowrap;transition:all .15s;
-          " onmouseover="this.style.borderColor='rgba(231,76,60,.5)';this.style.color='#F1948A'"
-             onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Limpiar</button>
+        <div style="display:flex;gap:.6rem;align-items:flex-end;">
+          <textarea id="scout-chat-input" placeholder="Ej: ¿Qué alero tiene mejor % de T3 con más de 20 PJ?" rows="2" style="flex:1;background:var(--navy2);border:1.5px solid rgba(46,204,113,.25);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:.75rem 1rem;resize:none;outline:none;line-height:1.5;transition:border-color .2s;"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();scoutChatSend();}"
+            onfocus="this.style.borderColor='rgba(46,204,113,.6)'"
+            onblur="this.style.borderColor='rgba(46,204,113,.25)'"></textarea>
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <button onclick="scoutChatSend()" id="scout-chat-send-btn" style="background:linear-gradient(135deg,#27AE60,#4AE382);border:none;border-radius:10px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;padding:.75rem 1.2rem;cursor:pointer;white-space:nowrap;min-width:80px;">Enviar ↑</button>
+            <button onclick="scoutChatClear()" style="background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;padding:.45rem .8rem;cursor:pointer;white-space:nowrap;"
+              onmouseover="this.style.borderColor='rgba(231,76,60,.5)';this.style.color='#F1948A'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Limpiar</button>
+          </div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.5rem;text-align:center;">
+          Enter para enviar · Shift+Enter para nueva línea · Powered by Groq · llama-3.3-70b-versatile
         </div>
       </div>
-      <div style="font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.5rem;text-align:center;">
-        Enter para enviar · Shift+Enter para nueva línea · Powered by Groq · llama-3.3-70b-versatile
+    </div>
+
+    <!-- ── PANEL EXTERNO ── -->
+    <div id="sct-panel-ext" style="display:none;">
+      <div style="background:var(--navy2);border:1px solid rgba(91,155,240,.25);border-radius:16px;padding:2rem;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🌐</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.5px;color:#5B9BF0;margin-bottom:.6rem;">CONSULTA EXTERNA</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--muted);max-width:480px;margin:0 auto 1.8rem;line-height:1.6;">
+          Si el jugador que buscás no está en la base, o querés consultar datos de temporadas pasadas, entrá acá.
+        </div>
+        <a href="https://chat.deepseek.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,#1a6ed8,#4A9EE0);border:none;border-radius:12px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;padding:.85rem 2rem;cursor:pointer;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          Ir a DeepSeek <span style="font-size:1rem;">→</span>
+        </a>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:1rem;">
+          Abre en nueva pestaña · No requiere registro para consultas básicas
+        </div>
       </div>
     </div>
 
@@ -1905,6 +1914,26 @@ footer em{color:var(--gold);font-style:normal;}
     </div>
   </div>
 </div>
+
+<script>
+function sctSwitchTab(tab) {
+  var isLNB = tab === 'lnb';
+  document.getElementById('sct-panel-lnb').style.display = isLNB ? 'block' : 'none';
+  document.getElementById('sct-panel-ext').style.display = isLNB ? 'none' : 'block';
+  var btnLNB = document.getElementById('sct-tab-lnb');
+  var btnExt = document.getElementById('sct-tab-ext');
+  if (btnLNB) {
+    btnLNB.style.background = isLNB ? 'linear-gradient(135deg,#27AE60,#4AE382)' : 'transparent';
+    btnLNB.style.color      = isLNB ? '#fff' : 'var(--muted)';
+    btnLNB.style.fontWeight = isLNB ? '700' : '600';
+  }
+  if (btnExt) {
+    btnExt.style.background = !isLNB ? 'linear-gradient(135deg,#1a6ed8,#4A9EE0)' : 'transparent';
+    btnExt.style.color      = !isLNB ? '#fff' : 'var(--muted)';
+    btnExt.style.fontWeight = !isLNB ? '700' : '600';
+  }
+}
+</script>
 
 <!-- ══════════════ CHAT SCOUTING — GROQ JS ══════════════ -->
 <script>
